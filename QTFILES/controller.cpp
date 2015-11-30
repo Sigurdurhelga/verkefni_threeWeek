@@ -18,7 +18,7 @@ vector<scientist> controller::getDB(){
     return dataBase;
 }
 
-void controller::listScientists(vector<scientist>& list){
+void controller::printTheList(vector<scientist>& list){
     QString currName = "";
     QString currSex = "";
 
@@ -34,6 +34,24 @@ void controller::listScientists(vector<scientist>& list){
         currBirth = currGuy.dateofBirthQString();
         currDeath = currGuy.dateofDeathQString();
         cout << currName.toStdString() << " " << currSex.toStdString() << " " << currBirth.toStdString() << " " << currDeath.toStdString() << endl;
+    }
+}
+
+void controller::listScientists(vector<scientist>& list){
+
+    int select = 0;
+
+    cout << "1. List by name in ascending order\n2. List by name in descending order\n3. List by date added" << endl;
+    cin >> select;
+    if (select == 1){
+        vector<scientist>& temp = list;
+
+    }
+    else if(select == 2){
+
+    }
+    else{
+        printTheList(list);
     }
 }
 
@@ -147,14 +165,13 @@ void controller::removeScientist(vector<scientist>& list){
 
     for(unsigned int i = 0; i < list.size(); i++){
         QString temp = list[i].returnName();
+        cout << temp.toStdString() << " "<< rmName <<endl;
         if(temp == name){
-            list.erase (list.begin()+i);
+            list.erase(list.begin()+i);
         }
     }
 
     overwriteDB(list);
-
-    return;
 }
 
 void controller::searchScientist(vector<scientist>& list){
