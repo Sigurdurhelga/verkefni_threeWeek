@@ -11,14 +11,14 @@
 
 using namespace std;
 
-void controller::getDB(){
+vector<scientist> controller::getDB(){
     vector<scientist> dataBase;
     model DB;
     dataBase = DB.retDB();
-    listScientists(dataBase);
+    return dataBase;
 }
 
-void controller::listScientists(vector<scientist> list){
+void controller::listScientists(vector<scientist>& list){
     QString currName = "";
     QString currSex = "";
 
@@ -27,7 +27,7 @@ void controller::listScientists(vector<scientist> list){
     QString currBirth;
     QString currDeath;
 
-    for(unsigned int i = 0; i < sizeof(list); i++){
+    for(unsigned int i = 0; i < list.size(); i++){
         scientist currGuy = list[i];
         currName = currGuy.returnName();
         currSex = currGuy.returnSex();
@@ -144,9 +144,10 @@ void controller::removeScientist(string name){
 }
 
 void controller::functionHandler(int n){
+    vector<scientist> database = getDB();
     switch(n){
         case 1:
-            getDB();
+            listScientists(database);
             break;
         case 2:
             addScientist();
