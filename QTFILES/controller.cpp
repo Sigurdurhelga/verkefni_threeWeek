@@ -157,6 +157,37 @@ void controller::removeScientist(vector<scientist>& list){
     return;
 }
 
+void controller::searchScientist(vector<scientist>& list){
+    string searchName;
+    QString name;
+    cout << "Enter the name of the scientist you want to look for: " << endl;
+
+    while(searchName == ""){
+        getline(cin, searchName);
+    }
+    cout << endl;
+
+    name = QString::fromStdString(searchName);
+    QString currName = "";
+    QString currSex = "";
+    QString currBirth;
+    QString currDeath;
+
+
+    for(unsigned int i = 0; i < list.size(); i++){
+        QString temp = list[i].returnName();
+        if(temp == name){
+            currName = list[i].returnName();
+            currSex = list[i].returnSex();
+            currBirth = list[i].dateofBirthQString();
+            currDeath = list[i].dateofDeathQString();
+            cout << currName.toStdString() << " " << currSex.toStdString() << " " << currBirth.toStdString() << " " << currDeath.toStdString() << endl;
+        }
+    }
+
+
+}
+
 void controller::overwriteDB(vector<scientist>& list){
     QFile file("database.txt");
     QString format = "dd.MM.yyyy";
@@ -183,6 +214,9 @@ void controller::functionHandler(int n){
             break;
         case 3:
             removeScientist(database);
+            break;
+        case 4:
+            searchScientist(database);
             break;
     }
 }

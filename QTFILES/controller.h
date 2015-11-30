@@ -10,7 +10,8 @@ public:
     void functionHandler(int n);
     void addScientist();
     void writeToDB(scientist guy);
-    void overwriteDB(vector <scientist>& list);
+    void searchScientist(vector<scientist>& list);
+    void overwriteDB(vector<scientist>& list);
     void removeScientist(vector<scientist>& list);
     void listScientists(vector<scientist>& list);
 };
