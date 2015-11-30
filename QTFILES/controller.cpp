@@ -27,12 +27,12 @@ void controller::listScientists(vector<scientist> list){
     QString currBirth;
     QString currDeath;
 
-    for(int i = 0; i <= sizeof(list); i++){
+    for(unsigned int i = 0; i < sizeof(list); i++){
         scientist currGuy = list[i];
         currName = currGuy.returnName();
         currSex = currGuy.returnSex();
-        currBirth = currGuy.dateofBirth().toString(format);
-        currDeath = currGuy.dateofDeath().toString(format);
+        currBirth = currGuy.dateofBirthQString();
+        currDeath = currGuy.dateofDeathQString();
         cout << currName.toStdString() << " " << currSex.toStdString() << " " << currBirth.toStdString() << " " << currDeath.toStdString() << endl;
     }
 }
@@ -125,8 +125,8 @@ void controller::writeToDB(scientist guy){
     file.open(QIODevice::Append | QIODevice::Text);
     QString name = guy.returnName();
     QString sex = guy.returnSex();
-    QString birth = guy.dateofBirth().toString(format);
-    QString death = guy.dateofDeath().toString(format);
+    QString birth = guy.dateofBirthQString();
+    QString death = guy.dateofDeathQString();
     QTextStream out(&file);
     out << name << "@" << sex << "@" << birth << "@" << death << endl;
 }

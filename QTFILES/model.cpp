@@ -30,8 +30,8 @@ vector<scientist> model::retDB(){
             currList = line.split("@");
             currName = currList[0];
             currSex = currList[1];
-            currBirth = QDate::fromString(currList[2],"dd:MM:yyyy");
-            currDeath = QDate::fromString(currList[3],"dd:MM:yyyy");
+            currBirth = QDate::fromString(currList[2],"dd.MM.yyyy");
+            currDeath = QDate::fromString(currList[3],"dd.MM.yyyy");
             scientist guy(currName, currSex, currBirth, currDeath);
             ret.push_back(guy);
         }

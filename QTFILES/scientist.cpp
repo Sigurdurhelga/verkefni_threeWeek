@@ -43,4 +43,12 @@ QDate scientist::dateofDeath()
 {
     return doD;
 }
+QString scientist::dateofBirthQString()
+{
+    return doB.toString("dd.MM.yyyy");
+}
+QString scientist::dateofDeathQString()
+{
+    return doD.toString("dd.MM.yyyy");
+}
 

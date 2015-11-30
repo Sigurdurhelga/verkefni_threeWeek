@@ -19,6 +19,8 @@ public:
     QString returnSex();
     QDate dateofBirth();
     QDate dateofDeath();
+    QString dateofBirthQString();
+    QString dateofDeathQString();
 };
 
 #endif // SCIENTIST_H
