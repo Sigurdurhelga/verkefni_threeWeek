@@ -141,8 +141,6 @@ void controller::removeScientist(vector<scientist>& list){
         getline(cin, rmName);
     }
 
-
-
     name = QString::fromStdString(rmName);
 
     cout << endl;
@@ -153,7 +151,22 @@ void controller::removeScientist(vector<scientist>& list){
         if(temp == name){
             list.erase(list.begin()+i);
         }
+        else{
+            overwriteDB(list[i]);
+        }
     }
+}
+
+void controller::overwriteDB(scientist guy){
+    QFile file("database.txt");
+    QString format = "dd.MM.yyyy";
+    file.open(QIODevice::ReadWrite | QIODevice::Truncate | QIODevice::Text);
+    QString name = guy.returnName();
+    QString sex = guy.returnSex();
+    QString birth = guy.dateofBirthQString();
+    QString death = guy.dateofDeathQString();
+    QTextStream out(&file);
+    out << name << "@" << sex << "@" << birth << "@" << death << endl;
 }
 
 void controller::functionHandler(int n){
