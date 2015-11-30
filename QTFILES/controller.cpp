@@ -131,16 +131,30 @@ void controller::writeToDB(scientist guy){
     out << name << "@" << sex << "@" << birth << "@" << death << endl;
 }
 
-void controller::removeScientist(string name){
-    string hello = "";
-    cin >> hello;
-    cout << hello << endl;
-    QString hello2 = QString::fromStdString(hello);
-    QFile file("database.txt");
-    file.open(QIODevice::Append | QIODevice::Text);
-    QTextStream hello3(&file);
-    hello3 << hello2;
+void controller::removeScientist(vector<scientist>& list){
 
+    string rmName;
+    QString name;
+    cout << "Enter the name of the scientist you want to remove: " << endl;
+
+    while(rmName == ""){
+        getline(cin, rmName);
+    }
+
+
+
+    name = QString::fromStdString(rmName);
+
+    cout << endl;
+
+    for(unsigned int i = 0; i < list.size(); i++){
+        QString temp = list[i].returnName();
+        if(temp == name){
+            list.erase (list.begin()+i);
+        }
+    }
+
+    return;
 }
 
 void controller::functionHandler(int n){
@@ -153,7 +167,7 @@ void controller::functionHandler(int n){
             addScientist();
             break;
         case 3:
-            removeScientist("banana");
+            removeScientist(database);
             break;
     }
 }

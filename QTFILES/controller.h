@@ -10,7 +10,7 @@ public:
     void functionHandler(int n);
     void addScientist();
     void writeToDB(scientist guy);
-    void removeScientist(string name);
+    void removeScientist(vector<scientist>& list);
     void listScientists(vector<scientist>& list);
 };
 
