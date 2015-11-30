@@ -37,23 +37,7 @@ void controller::printTheList(vector<scientist>& list){
     }
 }
 
-void controller::listScientists(vector<scientist>& list){
 
-    int select = 0;
-
-    cout << "1. List by name in ascending order\n2. List by name in descending order\n3. List by date added" << endl;
-    cin >> select;
-    if (select == 1){
-        vector<scientist>& temp = list;
-
-    }
-    else if(select == 2){
-
-    }
-    else{
-        printTheList(list);
-    }
-}
 
 void controller::addScientist(){
 
@@ -135,6 +119,7 @@ void controller::addScientist(){
     scientist newScientist = scientist(qName, qSex, doB, doD);
     writeToDB(newScientist);
 
+    return;
 }
 
 void controller::writeToDB(scientist guy){
@@ -146,22 +131,43 @@ void controller::writeToDB(scientist guy){
     QString birth = guy.dateofBirthQString();
     QString death = guy.dateofDeathQString();
     QTextStream out(&file);
+
     out << name << "@" << sex << "@" << birth << "@" << death << endl;
+
+    return;
+}
+
+void controller::listScientists(vector<scientist>& list){
+
+    int select = 0;
+
+    cout << "1. List by name in ascending order\n2. List by name in descending order\n3. List by date added" << endl;
+    cin >> select;
+    if (select == 1){
+        vector<scientist>& temp = list;
+
+    }
+    else if(select == 2){
+
+    }
+    else{
+        printTheList(list);
+    }
+
+    return;
 }
 
 void controller::removeScientist(vector<scientist>& list){
-
     string rmName;
     QString name;
-    cout << "Enter the name of the scientist you want to remove: " << endl;
 
+    cout << "Enter the name of the scientist you want to remove: " << endl;
     while(rmName == ""){
         getline(cin, rmName);
     }
+    cout << endl;
 
     name = QString::fromStdString(rmName);
-
-    cout << endl;
 
     for(unsigned int i = 0; i < list.size(); i++){
         QString temp = list[i].returnName();
@@ -172,6 +178,8 @@ void controller::removeScientist(vector<scientist>& list){
     }
 
     overwriteDB(list);
+
+    return;
 }
 
 void controller::searchScientist(vector<scientist>& list){
@@ -202,13 +210,15 @@ void controller::searchScientist(vector<scientist>& list){
         }
     }
 
-
+    return;
 }
 
 void controller::overwriteDB(vector<scientist>& list){
     QFile file("database.txt");
     QString format = "dd.MM.yyyy";
+
     file.open(QIODevice::ReadWrite | QIODevice::Truncate | QIODevice::Text);
+
     for(unsigned int i = 0; i < list.size(); i++){
         QString name = list[i].returnName();
         QString sex = list[i].returnSex();
@@ -218,6 +228,7 @@ void controller::overwriteDB(vector<scientist>& list){
         out << name << "@" << sex << "@" << birth << "@" << death << endl;
     }
 
+    return;
 }
 
 void controller::functionHandler(int n){
@@ -236,5 +247,7 @@ void controller::functionHandler(int n){
             searchScientist(database);
             break;
     }
+
+    return;
 }
 

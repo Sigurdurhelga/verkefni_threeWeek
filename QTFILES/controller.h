@@ -7,13 +7,13 @@ class controller
 {
 public:
     vector<scientist> getDB();
-    void functionHandler(int n);
     void addScientist();
     void writeToDB(scientist guy);
+    void listScientists(vector<scientist>& list);
+    void removeScientist(vector<scientist>& list);
     void searchScientist(vector<scientist>& list);
     void overwriteDB(vector<scientist>& list);
-    void removeScientist(vector<scientist>& list);
-    void listScientists(vector<scientist>& list);
+    void functionHandler(int n);
 };
 
 #endif // CONTROLLER_H
