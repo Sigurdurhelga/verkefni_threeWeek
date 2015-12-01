@@ -12,7 +12,7 @@
 
 using namespace std;
 
-struct compareNames{                //checks which scientist is printed first in ascending order
+struct compareNamesAscending{    //checks which scientist is printed first in ascending order
 
     bool operator ()(scientist s1, scientist s2) const {
         int comparison = QString::localeAwareCompare((s1.returnName()), (s2.returnName()));
@@ -434,7 +434,7 @@ void controller::functionHandler(int n){                    //function that rece
 vector<scientist> controller::sortByName(vector<scientist>& list, bool comp){       //using sort algorithm from the library to sort every object within the vector
 
     if(comp){
-        sort(list.begin(), list.end(), compareNames());
+        sort(list.begin(), list.end(), compareNamesAscending());
     }
     else{
         sort(list.begin(), list.end(), compareNamesDescending());

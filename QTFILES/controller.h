@@ -1,8 +1,7 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
-#include <vector>
 #include "scientist.h"
-
+#include <vector>
 class controller
 {
 public:
