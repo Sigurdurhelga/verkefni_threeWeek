@@ -12,7 +12,7 @@
 
 using namespace std;
 
-struct compareNames{
+struct compareNames{                //checks which scientist is printed first in ascending order
 
     bool operator ()(scientist s1, scientist s2) const {
         int comparison = QString::localeAwareCompare((s1.returnName()), (s2.returnName()));
@@ -24,7 +24,7 @@ struct compareNames{
     }
 };
 
-struct compareNamesDescending{
+struct compareNamesDescending{          //checks which scientist is printed first in ascending order
 
     bool operator ()(scientist s1, scientist s2) const {
         int comparison = QString::localeAwareCompare((s1.returnName()), (s2.returnName()));
@@ -36,27 +36,27 @@ struct compareNamesDescending{
     }
 };
 
-vector<scientist> controller::getDB(){
+vector<scientist> controller::getDB(){          //returns database to the vector <scientist>
     vector<scientist> dataBase;
     model DB;
     dataBase = DB.retDB();
     return dataBase;
 }
 
-void controller::printTheList(vector<scientist>& list){
+void controller::printTheList(vector<scientist>& list){     //function that prints the database to screen
     QString currName = "";
     QString currSex = "";
 
     QString currBirth;
     QString currDeath;
 
-    for(unsigned int i = 0; i < list.size(); i++){
+    for(unsigned int i = 0; i < list.size(); i++){          //goes through each scientist and prints his information to screen
         scientist currGuy = list[i];
         currName = currGuy.returnName();
         currSex = currGuy.returnSex();
         currBirth = currGuy.dateofBirthQString();
         currDeath = currGuy.dateofDeathQString();
-        if(currGuy.dateofDeath() == QDate(1,1,1)){
+        if(currGuy.dateofDeath() == QDate(1,1,1)){          //checks whether the scientist is alive
             cout << currName.toStdString() << " " << currSex.toStdString() << " " << currBirth.toStdString() << " ALIVE" << endl;
         }
         else{
@@ -64,7 +64,7 @@ void controller::printTheList(vector<scientist>& list){
         }
     }
 }
-void controller::printAlive(vector<scientist>& list){
+void controller::printAlive(vector<scientist>& list){       //goes through each scientist and prints only alive scientist to screen
     QString currName = "";
     QString currSex = "";
 
@@ -77,17 +77,20 @@ void controller::printAlive(vector<scientist>& list){
         currSex = currGuy.returnSex();
         currBirth = currGuy.dateofBirthQString();
         currDeath = currGuy.dateofDeathQString();
-        if(currGuy.dateofDeath() == QDate(1,1,1)){
+        if(currGuy.dateofDeath() == QDate(1,1,1)){          //finds only those scientists that are alive
             cout << currName.toStdString() << " " << currSex.toStdString() << " " << currBirth.toStdString() << endl;
         }
     }
 }
 
 
-void controller::listScientists(vector<scientist>& list){
+void controller::listScientists(vector<scientist>& list){   //function that defines how the list of scientists should be ordered
     int select = 0;
     //int check = 0;
-    cout << "1. List by name in ascending order\n2. List by name in descending order\n3. List all alive\n4. List by date added" << endl;
+    cout << "1. List by name in ascending order\n"
+            "2. List by name in descending order\n"
+            "3. List all alive\n"
+            "4. List by date added" << endl;
     cin >> select;
 
     vector<scientist> temp = list;
@@ -112,7 +115,7 @@ void controller::listScientists(vector<scientist>& list){
     }
 }
 
-void controller::addScientist(){
+void controller::addScientist(){            //function that creates a scientist in the database
 
     string name = "";
     string sex = "";
@@ -137,7 +140,7 @@ void controller::addScientist(){
     while(check == 0){
         cout << "Write 'male' for male and 'female' for female: ";
         cin >> sex;
-        if(sex == "male" || sex == "female"){
+        if(sex == "male" || sex == "female"){           //checks for errors in input
             check = 1;
         }
         else{
@@ -154,7 +157,7 @@ void controller::addScientist(){
         cout << "Write the Year of the date of birth for your Scientist: ";
         cin >> bYear;
         doB = QDate(bYear, bMonth, bDay);
-        if(doB.isValid()){
+        if(doB.isValid()){                              //checks for errors in input
             check = 1;
         }
         else{
@@ -177,7 +180,7 @@ void controller::addScientist(){
         }
 
     doD = QDate(dYear, dMonth, dDay);
-    if(doD.isValid()){
+    if(doD.isValid()){                                  //checks for errors in input
         check = 1;
     }
     else{
@@ -195,7 +198,7 @@ void controller::addScientist(){
     return;
 }
 
-void controller::writeToDB(scientist guy){
+void controller::writeToDB(scientist guy){              //Function that writes a new line at the end of the database
     QFile file("database.txt");
     QString format = "dd.MM.yyyy";
     file.open(QIODevice::Append | QIODevice::Text);
@@ -210,7 +213,7 @@ void controller::writeToDB(scientist guy){
     return;
 }
 
-void controller::removeScientist(vector<scientist>& list){
+void controller::removeScientist(vector<scientist>& list){      //function that finds a scientist to erase
     string rmName;
     QString name;
 
@@ -224,7 +227,6 @@ void controller::removeScientist(vector<scientist>& list){
 
     for(unsigned int i = 0; i < list.size(); i++){
         QString temp = list[i].returnName();
-        cout << temp.toStdString() << " "<< rmName <<endl;
         if(temp == name){
             list.erase(list.begin()+i);
         }
@@ -235,7 +237,7 @@ void controller::removeScientist(vector<scientist>& list){
     return;
 }
 
-void controller::searchScientist(vector<scientist>& list){
+void controller::searchScientist(vector<scientist>& list){              //function that searches the database
     string searchName;
     QString name;
     cout << "Enter the name of the scientist you want to look for: " << endl;
@@ -265,7 +267,7 @@ void controller::searchScientist(vector<scientist>& list){
     return;
 }
 
-void controller::editScientist(vector<scientist>& list){
+void controller::editScientist(vector<scientist>& list){            //function that changes the information in the database
     string editName;
     QString name;
     cout << "Enter the name of the scientist you want to edit: " << endl;
@@ -351,36 +353,35 @@ void controller::editScientist(vector<scientist>& list){
                 int dYear = 0;
                 QDate doD;
                 while(check == 0){
-                cout << "Write the Day of the date of Death for your Scientist (0 if he's alive): ";
-                cin >> dDay;
-                if(dDay != 0){
-                    cout << "Write the Month of the date of Death for your Scientist (0 if he's alive): ";
-                    cin >> dMonth;
-                    cout << "Write the Year of the date of Death for your Scientist (0 if he's alive): ";
-                    cin >> dYear;
+                    cout << "Write the Day of the date of Death for your Scientist (0 if he's alive): ";
+                    cin >> dDay;
+                    if(dDay != 0){
+                        cout << "Write the Month of the date of Death for your Scientist (0 if he's alive): ";
+                        cin >> dMonth;
+                        cout << "Write the Year of the date of Death for your Scientist (0 if he's alive): ";
+                        cin >> dYear;
                     }
                     else{
                         dDay = 1, dMonth = 1, dYear = 1;
                     }
-                doD = QDate(dYear, dMonth, dDay);
-                if(doD.isValid()){
-                    check = 1;
-                }
-                else{
-                    cout << "Invalid date try again." << endl;
-                }
+                    doD = QDate(dYear, dMonth, dDay);
+                    if(doD.isValid()){
+                        check = 1;
+                    }
+                    else{
+                        cout << "Invalid date try again." << endl;
+                    }
                 }
                 doD = QDate(dYear, dMonth, dDay);
                 list[i].setdoD(doD);
             }
         }
     }
-
     overwriteDB(list);
     return;
 }
 
-void controller::overwriteDB(vector<scientist>& list){
+void controller::overwriteDB(vector<scientist>& list){          //function that overwrites the entire database
     QFile file("database.txt");
     QString format = "dd.MM.yyyy";
 
@@ -398,7 +399,7 @@ void controller::overwriteDB(vector<scientist>& list){
     return;
 }
 
-void controller::functionHandler(int n){
+void controller::functionHandler(int n){                    //function that receives the user selection and executes accordingly
     vector<scientist> database = getDB();
     switch(n){
         case 1:
@@ -421,7 +422,7 @@ void controller::functionHandler(int n){
     return;
 }
 
-vector<scientist> controller::sortByName(vector<scientist>& list, bool comp){
+vector<scientist> controller::sortByName(vector<scientist>& list, bool comp){       //using sort algorithm from the library to sort every object within the vector
 
     if(comp){
         sort(list.begin(), list.end(), compareNames());
