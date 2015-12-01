@@ -158,7 +158,7 @@ void controller::addScientist(){            //function that creates a scientist 
             check = 1;
         }
         else{
-            cout << "Invalid input try again." << endl;
+            cout << "Invalid input, please try again." << endl;
         }
     }
     check = 0;
@@ -175,7 +175,7 @@ void controller::addScientist(){            //function that creates a scientist 
             check = 1;
         }
         else{
-            cout << "Invalid date try again." << endl;
+            cout << "Invalid date, please try again." << endl;
         }
     }
     check = 0;
@@ -198,7 +198,7 @@ void controller::addScientist(){            //function that creates a scientist 
         check = 1;
     }
     else{
-        cout << "Invalid date try again." << endl;
+        cout << "Invalid date, please try again." << endl;
     }
     }
 
@@ -242,7 +242,7 @@ void controller::removeScientist(vector<scientist>& list){      //function that 
 void controller::searchScientist(vector<scientist>& list){              //function that searches the database
     string searchName;
     QString name;
-    cout << "Enter the name of the scientist you want to look for: " << endl;
+    cout << "Enter the Name of the Scientist you want to look for: " << endl;
 
     while(searchName == ""){
         getline(cin, searchName);
@@ -256,11 +256,12 @@ void controller::searchScientist(vector<scientist>& list){              //functi
     QString currBirth;
     QString currDeath;
 
-
+    bool check = false;
     for(unsigned int i = 0; i < list.size(); i++){
         QString temp = list[i].returnName();
         temp = temp.toLower();
         if(temp == name){
+            check = true;
             currName = list[i].returnName();
             currSex = list[i].returnSex();
             currBirth = list[i].dateofBirthQString();
@@ -268,14 +269,15 @@ void controller::searchScientist(vector<scientist>& list){              //functi
             cout << currName.toStdString() << " " << currSex.toStdString() << " " << currBirth.toStdString() << " " << currDeath.toStdString() << endl;
         }
     }
-
+    if(!check)
+        cout << "Name was not found in the Database." << endl;
     return;
 }
 
 void controller::editScientist(vector<scientist>& list){            //function that changes the information in the database
     string editName;
     QString name;
-    cout << "Enter the name of the scientist you want to edit: " << endl;
+    cout << "Enter the Name of the Scientist you want to Edit: " << endl;
 
     while(editName == ""){
         getline(cin, editName);
@@ -296,7 +298,7 @@ void controller::editScientist(vector<scientist>& list){            //function t
          << "3. Edit date of birth." << endl
          << "4. Edit date of death." << endl
          << "5. Edit everything." << endl
-         << "0. Cancel"<< endl;
+         << "0. Cancel."<< endl;
     cin >> selection;
 
     for(unsigned int i = 0; i < list.size(); i++){
@@ -336,18 +338,18 @@ void controller::editScientist(vector<scientist>& list){            //function t
                 int bYear = 0;
                 QDate doB;
                 while(check == 0){
-                    cout << "Write the Day of the date of birth for your Scientist: ";
+                    cout << "Write the Day of the Date of Birth for your Scientist: ";
                     cin >> bDay;
-                    cout << "Write the Month of the date of birth for your Scientist: ";
+                    cout << "Write the Month of the Date of Birth for your Scientist: ";
                     cin >> bMonth;
-                    cout << "Write the Year of the date of birth for your Scientist: ";
+                    cout << "Write the Year of the Date of Birth for your Scientist: ";
                     cin >> bYear;
                     doB = QDate(bYear, bMonth, bDay);
                     if(doB.isValid()){
                         check = 1;
                     }
                     else{
-                        cout << "Invalid date try again." << endl;
+                        cout << "Invalid date, please try again." << endl;
                     }
                 }
                 doB = QDate(bYear, bMonth, bDay);
@@ -376,7 +378,7 @@ void controller::editScientist(vector<scientist>& list){            //function t
                         check = 1;
                     }
                     else{
-                        cout << "Invalid date try again." << endl;
+                        cout << "Invalid date, please try again." << endl;
                     }
                 }
                 doD = QDate(dYear, dMonth, dDay);
