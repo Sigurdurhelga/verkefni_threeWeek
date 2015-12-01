@@ -24,6 +24,18 @@ struct compareNames{
     }
 };
 
+struct compareNamesDescending{
+
+    bool operator ()(scientist s1, scientist s2) const {
+        int comparison = QString::localeAwareCompare((s1.returnName()), (s2.returnName()));
+
+        if(comparison > 0)
+            return true;
+        else
+            return false;
+    }
+};
+
 vector<scientist> controller::getDB(){
     vector<scientist> dataBase;
     model DB;
@@ -82,10 +94,12 @@ void controller::listScientists(vector<scientist>& list){
 
     switch(select){
         case 1:
-            temp = sortByName(temp);
+            temp = sortByName(temp, true);
             printTheList(temp);
             break;
         case 2:
+            temp = sortByName(temp, false);
+            printTheList(temp);
             break;
         case 3:
             printAlive(list);
@@ -407,10 +421,14 @@ void controller::functionHandler(int n){
     return;
 }
 
-vector<scientist> controller::sortByName(vector<scientist>& list){
+vector<scientist> controller::sortByName(vector<scientist>& list, bool comp){
 
-    sort(list.begin(), list.end(), compareNames());
-
+    if(comp){
+        sort(list.begin(), list.end(), compareNames());
+    }
+    else{
+        sort(list.begin(), list.end(), compareNamesDescending());
+    }
 
     return list;
 
