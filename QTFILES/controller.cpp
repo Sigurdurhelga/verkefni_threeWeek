@@ -409,7 +409,8 @@ void controller::overwriteDB(vector<scientist>& list){          //function that 
 }
 
 void controller::functionHandler(int n){                    //function that receives the user selection and executes accordingly
-    vector<scientist> database = getDB();
+    model db;
+    vector<scientist> database = db.retDB();
     switch(n){
         case 1:
             listScientists(database);
