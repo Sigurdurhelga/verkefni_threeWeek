@@ -13,6 +13,7 @@ public:
     void printTheList(vector<scientist>& list);
     void removeScientist(vector<scientist>& list);
     void searchScientist(vector<scientist>& list);
+    void editScientist(vector<scientist>& list);
     void overwriteDB(vector<scientist>& list);
     void functionHandler(int n);
 };

@@ -21,6 +21,10 @@ public:
     QDate dateofDeath();
     QString dateofBirthQString();
     QString dateofDeathQString();
+    void setName(QString name);
+    void setGender(QString sex);
+    void setdoB(QDate doB);
+    void setdoD(QDate doB);
 };
 
 #endif // SCIENTIST_H

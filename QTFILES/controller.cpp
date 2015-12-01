@@ -5,7 +5,7 @@
 #include <string>
 #include <QDateTime>
 #include <QString>
-#include <Qfile>
+#include <QFile>
 #include <QTextStream>
 #include <fstream>
 #include <algorithm>
@@ -75,7 +75,7 @@ void controller::addScientist(){
     QDate doD;
 
     int check = 0;
-    cout << "Write a name for the scientist: " << endl;
+    cout << "Write a Name for the scientist: " << endl;
     while(name == ""){
         getline(cin, name);
     }
@@ -87,35 +87,35 @@ void controller::addScientist(){
             check = 1;
         }
         else{
-            cout << "invalid input try again" << endl;
+            cout << "Invalid input try again." << endl;
         }
     }
     check = 0;
 
     while(check == 0){
-        cout << "Write the Day of the date of birth for your scientist: ";
+        cout << "Write the Day of the date of birth for your Scientist: ";
         cin >> bDay;
-        cout << "Write the Month of the date of birth for your scientist: ";
+        cout << "Write the Month of the date of birth for your Scientist: ";
         cin >> bMonth;
-        cout << "Write the Year of the date of birth for your scientist: ";
+        cout << "Write the Year of the date of birth for your Scientist: ";
         cin >> bYear;
         doB = QDate(bYear, bMonth, bDay);
         if(doB.isValid()){
             check = 1;
         }
         else{
-            cout << "invalid date try again" << endl;
+            cout << "Invalid date try again." << endl;
         }
     }
     check = 0;
 
     while(check == 0){
-    cout << "Write the Day of the date of death for your scientist (0 if he's alive): ";
+    cout << "Write the Day of the date of Death for your Scientist (0 if he's alive): ";
     cin >> dDay;
     if(dDay != 0){
-        cout << "Write the Month of the date of death for your scientist (0 if he's alive): ";
+        cout << "Write the Month of the date of Death for your Scientist (0 if he's alive): ";
         cin >> dMonth;
-        cout << "Write the Year of the date of death for your scientist (0 if he's alive): ";
+        cout << "Write the Year of the date of Death for your Scientist (0 if he's alive): ";
         cin >> dYear;
         }
         else{
@@ -127,7 +127,7 @@ void controller::addScientist(){
         check = 1;
     }
     else{
-        cout << "invalid date try again" << endl;
+        cout << "Invalid date try again." << endl;
     }
     }
 
@@ -208,7 +208,121 @@ void controller::searchScientist(vector<scientist>& list){
             cout << currName.toStdString() << " " << currSex.toStdString() << " " << currBirth.toStdString() << " " << currDeath.toStdString() << endl;
         }
     }
+    return;
+}
 
+void controller::editScientist(vector<scientist>& list){
+    string editName;
+    QString name;
+    cout << "Enter the name of the scientist you want to edit: " << endl;
+
+    while(editName == ""){
+        getline(cin, editName);
+    }
+    cout << endl;
+
+    name = QString::fromStdString(editName);
+    QString currName = "";
+    QString currSex = "";
+    QString doB;
+    QString doD;
+
+    int selection = 1;
+    cout << "What would you like to change?" << endl
+         << "1. Edit Name." << endl
+         << "2. Edit gender." << endl
+         << "3. Edit date of birth." << endl
+         << "4. Edit date of death." << endl
+         << "5. Edit everything." << endl
+         << "0. Cancel"<< endl;
+    cin >> selection;
+
+    for(unsigned int i = 0; i < list.size(); i++){
+
+        QString temp = list[i].returnName();
+        if(temp == name){
+            if((selection == 1) | (selection == 5)){
+                string name = "";
+                cout << "Write a Name for the scientist: " << endl;
+                while(name == ""){
+                    getline(cin, name);
+                }
+                QString currName = QString::fromStdString(name);
+                list[i].setName(currName);
+            }
+            int check = 0;
+            if((selection == 2) | (selection == 5)){
+                string sex = "";
+                while(check == 0){
+                    cout << "Write 'male' for male and 'female' for female: ";
+                    cin >> sex;
+                    if(sex == "male" || sex == "female"){
+                        check = 1;
+                    }
+                    else{
+                        cout << "Invalid input try again." << endl;
+                    }
+                }
+                QString currSex = QString::fromStdString(sex);
+                list[i].setGender(currSex);
+            }
+            check = 0;
+            if((selection == 3) | (selection == 5)){
+                int bDay = 0;
+                int bMonth = 0;
+                int bYear = 0;
+                QDate doB;
+                while(check == 0){
+                    cout << "Write the Day of the date of birth for your Scientist: ";
+                    cin >> bDay;
+                    cout << "Write the Month of the date of birth for your Scientist: ";
+                    cin >> bMonth;
+                    cout << "Write the Year of the date of birth for your Scientist: ";
+                    cin >> bYear;
+                    doB = QDate(bYear, bMonth, bDay);
+                    if(doB.isValid()){
+                        check = 1;
+                    }
+                    else{
+                        cout << "Invalid date try again." << endl;
+                    }
+                }
+                doB = QDate(bYear, bMonth, bDay);
+                list[i].setdoB(doB);
+            }
+            check = 0;
+            if((selection == 4) | (selection == 5)){
+                int dDay = 0;
+                int dMonth = 0;
+                int dYear = 0;
+                QDate doD;
+                while(check == 0){
+                cout << "Write the Day of the date of Death for your Scientist (0 if he's alive): ";
+                cin >> dDay;
+                if(dDay != 0){
+                    cout << "Write the Month of the date of Death for your Scientist (0 if he's alive): ";
+                    cin >> dMonth;
+                    cout << "Write the Year of the date of Death for your Scientist (0 if he's alive): ";
+                    cin >> dYear;
+                    }
+                    else{
+                        dDay = 1, dMonth = 1, dYear = 1;
+                    }
+                doD = QDate(dYear, dMonth, dDay);
+                if(doD.isValid()){
+                    check = 1;
+                }
+                else{
+                    cout << "Invalid date try again." << endl;
+                }
+                }
+                doD = QDate(dYear, dMonth, dDay);
+                list[i].setdoD(doD);
+            }
+        }
+    }
+
+    overwriteDB(list);
     return;
 }
 
@@ -244,6 +358,9 @@ void controller::functionHandler(int n){
             break;
         case 4:
             searchScientist(database);
+            break;
+        case 5:
+            editScientist(database);
             break;
     }
 
