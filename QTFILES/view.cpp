@@ -48,10 +48,10 @@ void view::printTheList(const vector<scientist>& list){     //function that prin
         currBirth = currGuy.dateofBirthQString();
         currDeath = currGuy.dateofDeathQString();
         if(currGuy.dateofDeath() == QDate(1,1,1)){          //checks whether the scientist is alive
-            cout << left << "| " << setfill(' ') << setw(25) << currName.toStdString() << setw(15)<< currSex.toStdString() << setw(15) << currBirth.toStdString() << setw(15) << "ALIVE" << "|" << endl;
+            cout << left << "| " << setfill(' ') << setw(25) << currName.toStdString() << setw(13)<< currSex.toStdString() << setw(15) << currBirth.toStdString() << setw(17) << "ALIVE" << "|" << endl;
         }
         else{
-            cout << left << "| " << setfill(' ') << setw(25) << currName.toStdString() << setw(15) << currSex.toStdString() << setw(15) << currBirth.toStdString() << setw(15) << currDeath.toStdString() << right << "|" << endl;
+            cout << left << "| " << setfill(' ') << setw(25) << currName.toStdString() << setw(13) << currSex.toStdString() << setw(15) << currBirth.toStdString() << setw(17) << currDeath.toStdString() << right << "|" << endl;
         }
     }
     cout << setfill('-') << setw(73) << "-" <<  endl;
