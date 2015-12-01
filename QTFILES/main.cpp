@@ -1,10 +1,9 @@
 #include <QCoreApplication>
-#include "scientist.h"
 #include "view.h"
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <vector>
+
+
+
+
 
 using namespace std;
 

@@ -12,7 +12,7 @@
 
 using namespace std;
 
-struct compareNames{
+struct compareNamesAscending{
 
     bool operator ()(scientist s1, scientist s2) const {
         int comparison = QString::localeAwareCompare((s1.returnName()), (s2.returnName()));
@@ -432,7 +432,7 @@ void controller::functionHandler(int n){
 vector<scientist> controller::sortByName(vector<scientist>& list, bool comp){
 
     if(comp){
-        sort(list.begin(), list.end(), compareNames());
+        sort(list.begin(), list.end(), compareNamesAscending());
     }
     else{
         sort(list.begin(), list.end(), compareNamesDescending());
