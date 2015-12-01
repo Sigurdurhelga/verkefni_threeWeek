@@ -1,5 +1,5 @@
 #include <QCoreApplication>
-#include "view.h"
+#include "View.h"
 
 
 
@@ -11,7 +11,7 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-    view newView;
+    View newView;
     newView.displayInterface();
 
     return 0;

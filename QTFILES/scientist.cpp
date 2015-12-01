@@ -1,11 +1,11 @@
-#include "scientist.h"
+#include "Scientist.h"
 #include <iostream>
 #include <QString>
 #include <ctime>
 
 using namespace std;
 
-scientist::scientist()
+Scientist::Scientist()
 {
     name = "John Doe";
     sex = "male";
@@ -15,7 +15,7 @@ scientist::scientist()
 
 
 
-scientist::scientist(QString Sname, QString Ssex, QDate SdoB, QDate SdoD)
+Scientist::Scientist(QString Sname, QString Ssex, QDate SdoB, QDate SdoD)
 
 {
     name = Sname;
@@ -24,46 +24,46 @@ scientist::scientist(QString Sname, QString Ssex, QDate SdoB, QDate SdoD)
     doD = SdoD;
 }
 
-QString scientist::returnName()
+QString Scientist::returnName()
 {
     return name;
 }
 
-void scientist::setName(QString sName){
+void Scientist::setName(QString sName){
     name = sName;
 }
 
-void scientist::setGender(QString sGender){
+void Scientist::setGender(QString sGender){
     sex = sGender;
 }
 
-void scientist::setdoB(QDate SdoB){
+void Scientist::setdoB(QDate SdoB){
     doB = SdoB;
 }
 
-void scientist::setdoD(QDate SdoD){
+void Scientist::setdoD(QDate SdoD){
     doD = SdoD;
 }
 
-QString scientist::returnSex()
+QString Scientist::returnSex()
 {
     return sex;
 }
 
-QDate scientist::dateofBirth()
+QDate Scientist::dateofBirth()
 {
     return doB;
 }
 
-QDate scientist::dateofDeath()
+QDate Scientist::dateofDeath()
 {
     return doD;
 }
-QString scientist::dateofBirthQString()
+QString Scientist::dateofBirthQString()
 {
     return doB.toString("dd.MM.yyyy");
 }
-QString scientist::dateofDeathQString()
+QString Scientist::dateofDeathQString()
 {
     return doD.toString("dd.MM.yyyy");
 }

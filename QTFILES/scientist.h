@@ -5,7 +5,7 @@
 
 using namespace std;
 
-class scientist
+class Scientist
 {
 private:
     QString name;
@@ -13,8 +13,8 @@ private:
     QDate doB;
     QDate doD;
 public:
-    scientist();
-    scientist(QString name, QString sex, QDate doB, QDate doD);
+    Scientist();
+    Scientist(QString name, QString sex, QDate doB, QDate doD);
     QString returnName();
     QString returnSex();
     QDate dateofBirth();

@@ -1,25 +1,25 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
-#include "scientist.h"
+#include "Scientist.h"
 #include <vector>
-class controller
+class Controller
 {
 public:
-    vector<scientist> getDB();
+    vector<Scientist> getDB();
     void addScientist();
-    void writeToDB(scientist guy);
-    void listScientists(vector<scientist>& list);
-    void printTheList(vector<scientist>& list);
-    void printAlive(vector<scientist>& list);
-    void removeScientist(vector<scientist>& list);
-    void searchScientist(vector<scientist>& list);
-    void editScientist(vector<scientist>& list);
-    void overwriteDB(vector<scientist>& list);
+    void writeToDB(Scientist guy);
+    void listScientists(vector<Scientist>& list);
+    void printTheList(vector<Scientist>& list);
+    void printAlive(vector<Scientist>& list);
+    void removeScientist(vector<Scientist>& list);
+    void searchScientist(vector<Scientist>& list);
+    void editScientist(vector<Scientist>& list);
+    void overwriteDB(vector<Scientist>& list);
     void functionHandler(int n);
-    void sortTheList(vector<scientist>& list);
-    vector<scientist> sortByName(vector<scientist>& list, bool comp);
-    vector<scientist> sortByDate(vector<scientist>& list, bool comp);
-    vector<scientist> getAllAlive(vector<scientist>& list);
+    void sortTheList(vector<Scientist>& list);
+    vector<Scientist> sortByName(vector<Scientist>& list, bool comp);
+    vector<Scientist> sortByDate(vector<Scientist>& list, bool comp);
+    vector<Scientist> getAllAlive(vector<Scientist>& list);
 };
 
 #endif // CONTROLLER_H
