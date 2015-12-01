@@ -1,7 +1,6 @@
 #include <iostream>
 #include "view.h"
 #include "controller.h"
-#include <string>
 
 using namespace std;
 
