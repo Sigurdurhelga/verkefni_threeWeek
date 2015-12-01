@@ -224,7 +224,6 @@ void controller::removeScientist(vector<scientist>& list){
 
     for(unsigned int i = 0; i < list.size(); i++){
         QString temp = list[i].returnName();
-        cout << temp.toStdString() << " "<< rmName <<endl;
         if(temp == name){
             list.erase(list.begin()+i);
         }
