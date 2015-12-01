@@ -1,5 +1,5 @@
-#include "model.h"
-#include "scientist.h"
+#include "Model.h"
+#include "Scientist.h"
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -12,8 +12,8 @@
 
 using namespace std;
 
-vector<scientist> model::retDB(){
-    vector<scientist> ret;
+vector<Scientist> Model::retDB(){
+    vector<Scientist> ret;
     QFile inputFile("database.txt");
     QString line = "";
     QStringList currList;
@@ -32,7 +32,7 @@ vector<scientist> model::retDB(){
             currSex = currList[1];
             currBirth = QDate::fromString(currList[2],"dd.MM.yyyy");
             currDeath = QDate::fromString(currList[3],"dd.MM.yyyy");
-            scientist guy(currName, currSex, currBirth, currDeath);
+            Scientist guy(currName, currSex, currBirth, currDeath);
             ret.push_back(guy);
         }
         inputFile.close();
@@ -40,7 +40,7 @@ vector<scientist> model::retDB(){
     return ret;
 }
 
-void model::writeToDB(scientist guy){           //Function that writes a new line at the end of the database
+void Model::writeToDB(Scientist guy){           //Function that writes a new line at the end of the database
     QFile file("database.txt");
     QString format = "dd.MM.yyyy";
     file.open(QIODevice::Append | QIODevice::Text);
@@ -55,7 +55,7 @@ void model::writeToDB(scientist guy){           //Function that writes a new lin
     return;
 }
 
-void model::overwriteDB(vector<scientist>& list){
+void Model::overwriteDB(vector<Scientist>& list){
     QFile file("database.txt");
     QString format = "dd.MM.yyyy";
 

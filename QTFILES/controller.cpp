@@ -1,6 +1,6 @@
-#include "model.h"
-#include "controller.h"
-#include "view.h"
+#include "Model.h"
+#include "Controller.h"
+#include "View.h"
 #include <iostream>
 #include <vector>
 #include <string>
@@ -13,9 +13,9 @@
 
 using namespace std;
 
-struct compareNamesAscending{    //checks which scientist is printed first in ascending order
+struct compareNamesAscending{    //checks which Scientist is printed first in ascending order
 
-    bool operator ()(scientist s1, scientist s2) const {
+    bool operator ()(Scientist s1, Scientist s2) const {
         int comparison = QString::localeAwareCompare((s1.returnName()), (s2.returnName()));
 
         if(comparison < 0)
@@ -25,9 +25,9 @@ struct compareNamesAscending{    //checks which scientist is printed first in as
     }
 };
 
-struct compareNamesDescending{          //checks which scientist is printed first in ascending order
+struct compareNamesDescending{          //checks which Scientist is printed first in ascending order
 
-    bool operator ()(scientist s1, scientist s2) const {
+    bool operator ()(Scientist s1, Scientist s2) const {
         int comparison = QString::localeAwareCompare((s1.returnName()), (s2.returnName()));
 
         if(comparison > 0)
@@ -38,7 +38,7 @@ struct compareNamesDescending{          //checks which scientist is printed firs
 };
 struct compareDateAscending{
 
-    bool operator ()(scientist s1, scientist s2) const {
+    bool operator ()(Scientist s1, Scientist s2) const {
         bool comparison = (s1.dateofBirth() < s2.dateofBirth());
 
         if(comparison)
@@ -51,7 +51,7 @@ struct compareDateAscending{
 
 struct compareDateDescending{
 
-    bool operator ()(scientist s1, scientist s2) const {
+    bool operator ()(Scientist s1, Scientist s2) const {
         bool comparison = (s1.dateofBirth() > s2.dateofBirth());
 
         if(comparison)
@@ -62,10 +62,10 @@ struct compareDateDescending{
 };
 
 
-void controller::listScientists(vector<scientist>& list){   //function that defines how the list of scientists should be ordered
+void Controller::listScientists(vector<Scientist>& list){   //function that defines how the list of Scientists should be ordered
     int select = 0;
 
-    view screen;
+    View screen;
 
     cout << "1. List by name in ascending order\n"
             "2. List by name in descending order\n"
@@ -76,7 +76,7 @@ void controller::listScientists(vector<scientist>& list){   //function that defi
          << endl;
     cin >> select;
 
-    vector<scientist> temp = list;
+    vector<Scientist> temp = list;
 
     switch(select){
         case 1:
@@ -108,7 +108,7 @@ void controller::listScientists(vector<scientist>& list){   //function that defi
     return;
 }
 
-void controller::addScientist(){            //function that creates a scientist in the database
+void Controller::addScientist(){            //function that creates a Scientist in the database
 
     string name = "";
     string sex = "";
@@ -185,14 +185,14 @@ void controller::addScientist(){            //function that creates a scientist 
     QString qSex = QString::fromStdString(sex);
     doB = QDate(bYear, bMonth, bDay);
     doD = QDate(dYear, dMonth, dDay);
-    scientist newScientist = scientist(qName, qSex, doB, doD);
-    model db;
+    Scientist newScientist = Scientist(qName, qSex, doB, doD);
+    Model db;
     db.writeToDB(newScientist);
 
     return;
 }
 
-void controller::removeScientist(vector<scientist>& list){      //function that finds a scientist to erase
+void Controller::removeScientist(vector<Scientist>& list){      //function that finds a Scientist to erase
     string rmName;
     QString name;
 
@@ -212,13 +212,13 @@ void controller::removeScientist(vector<scientist>& list){      //function that 
             list.erase(list.begin()+i);
         }
     }
-    model db;
+    Model db;
     db.overwriteDB(list);
 
     return;
 }
 
-void controller::searchScientist(vector<scientist>& list){              //function that searches the database
+void Controller::searchScientist(vector<Scientist>& list){              //function that searches the database
     string searchName;
     QString name;
     cout << "Enter the Name of the Scientist you want to look for: " << endl;
@@ -253,7 +253,7 @@ void controller::searchScientist(vector<scientist>& list){              //functi
     return;
 }
 
-void controller::editScientist(vector<scientist>& list){            //function that changes the information in the database
+void Controller::editScientist(vector<Scientist>& list){            //function that changes the information in the database
     string editName;
     QString name;
     cout << "Enter the Name of the Scientist you want to Edit: " << endl;
@@ -365,15 +365,15 @@ void controller::editScientist(vector<scientist>& list){            //function t
             }
         }
     }
-    model db;
+    Model db;
     db.overwriteDB(list);
 
     return;
 }
 
-void controller::functionHandler(int n){                    //function that receives the user selection and executes accordingly
-    model db;
-    vector<scientist> database = db.retDB();                //get db as a vector
+void Controller::functionHandler(int n){                    //function that receives the user selection and executes accordingly
+    Model db;
+    vector<Scientist> database = db.retDB();                //get db as a vector
     switch(n){
         case 1:
             listScientists(database);
@@ -395,7 +395,7 @@ void controller::functionHandler(int n){                    //function that rece
     return;
 }
 
-vector<scientist> controller::sortByName(vector<scientist>& list, bool comp){
+vector<Scientist> Controller::sortByName(vector<Scientist>& list, bool comp){
     if(comp){
         sort(list.begin(), list.end(), compareNamesAscending());
     }
@@ -406,7 +406,7 @@ vector<scientist> controller::sortByName(vector<scientist>& list, bool comp){
     return list;
 }
 
-vector<scientist> controller::sortByDate(vector<scientist>& list, bool comp){
+vector<Scientist> Controller::sortByDate(vector<Scientist>& list, bool comp){
     if(comp){
         sort(list.begin(), list.end(), compareDateAscending());
     }

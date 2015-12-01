@@ -1,16 +1,16 @@
 #ifndef VIEW_H
 #define VIEW_H
 
-#include "scientist.h"
+#include "Scientist.h"
 #include <vector>
 
-class view
+class View
 {
 public:
-    view();
+    View();
     static void displayInterface();
-    void printTheList(const vector<scientist>& list);
-    void printAllAlive(const vector<scientist>& list);
+    void printTheList(const vector<Scientist>& list);
+    void printAllAlive(const vector<Scientist>& list);
 };
 
 #endif // VIEW_H

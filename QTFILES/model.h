@@ -1,14 +1,14 @@
 #ifndef MODEL_H
 #define MODEL_H
-#include "scientist.h"
+#include "Scientist.h"
 #include <vector>
 
-class model
+class Model
 {
 public:
-     vector<scientist> retDB();
-     void writeToDB(scientist guy);
-     void overwriteDB(vector<scientist>& list);
+     vector<Scientist> retDB();
+     void writeToDB(Scientist guy);
+     void overwriteDB(vector<Scientist>& list);
 };
 
 #endif // MODEL_H
