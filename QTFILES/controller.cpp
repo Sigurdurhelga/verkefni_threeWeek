@@ -77,11 +77,13 @@ void controller::listScientists(vector<scientist>& list){
     //int check = 0;
     cout << "1. List by name in ascending order\n2. List by name in descending order\n3. List all alive\n4. List by date added" << endl;
     cin >> select;
-    if(select < 4){
-        vector<scientist> temp = list;
-    }
+
+    vector<scientist> temp = list;
+
     switch(select){
         case 1:
+            temp = sortByName(temp);
+            printTheList(temp);
             break;
         case 2:
             break;
@@ -405,10 +407,10 @@ void controller::functionHandler(int n){
     return;
 }
 
-vector<scientist> controller::sortByName(vector<scientist>& list, bool comparison){
-    if(comparison){
-        sort(list.begin(), list.end(), compareNames());
-    }
+vector<scientist> controller::sortByName(vector<scientist>& list){
+
+    sort(list.begin(), list.end(), compareNames());
+
 
     return list;
 
