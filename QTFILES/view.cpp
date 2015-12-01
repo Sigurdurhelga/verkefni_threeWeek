@@ -29,5 +29,7 @@ void view::displayInterface()
             cont.functionHandler(select);
         }
     }
+
+    return;
 }
 
