@@ -36,14 +36,6 @@ struct compareNamesDescending{          //checks which scientist is printed firs
     }
 };
 
-vector<scientist> controller::getDB(){          //returns database to the vector <scientist>
-    vector<scientist> dataBase;
-    model DB;
-    dataBase = DB.retDB();
-
-    return dataBase;
-}
-
 void controller::printTheList(vector<scientist>& list){     //function that prints the database to screen
     QString currName = "";
     QString currSex = "";
@@ -200,22 +192,8 @@ void controller::addScientist(){            //function that creates a scientist 
     doB = QDate(bYear, bMonth, bDay);
     doD = QDate(dYear, dMonth, dDay);
     scientist newScientist = scientist(qName, qSex, doB, doD);
-    writeToDB(newScientist);
-
-    return;
-}
-
-void controller::writeToDB(scientist guy){              //Function that writes a new line at the end of the database
-    QFile file("database.txt");
-    QString format = "dd.MM.yyyy";
-    file.open(QIODevice::Append | QIODevice::Text);
-    QString name = guy.returnName();
-    QString sex = guy.returnSex();
-    QString birth = guy.dateofBirthQString();
-    QString death = guy.dateofDeathQString();
-    QTextStream out(&file);
-
-    out << name << "@" << sex << "@" << birth << "@" << death << endl;
+    model db;
+    db.writeToDB(newScientist);
 
     return;
 }
@@ -238,8 +216,8 @@ void controller::removeScientist(vector<scientist>& list){      //function that 
             list.erase(list.begin()+i);
         }
     }
-
-    overwriteDB(list);
+    model db;
+    db.overwriteDB(list);
 
     return;
 }
@@ -385,32 +363,15 @@ void controller::editScientist(vector<scientist>& list){            //function t
             }
         }
     }
-    overwriteDB(list);
-
-    return;
-}
-
-void controller::overwriteDB(vector<scientist>& list){          //function that overwrites the entire database
-    QFile file("database.txt");
-    QString format = "dd.MM.yyyy";
-
-    file.open(QIODevice::ReadWrite | QIODevice::Truncate | QIODevice::Text);
-
-    for(unsigned int i = 0; i < list.size(); i++){
-        QString name = list[i].returnName();
-        QString sex = list[i].returnSex();
-        QString birth = list[i].dateofBirthQString();
-        QString death = list[i].dateofDeathQString();
-        QTextStream out(&file);
-        out << name << "@" << sex << "@" << birth << "@" << death << endl;
-    }
+    model db;
+    db.overwriteDB(list);
 
     return;
 }
 
 void controller::functionHandler(int n){                    //function that receives the user selection and executes accordingly
     model db;
-    vector<scientist> database = db.retDB();
+    vector<scientist> database = db.retDB();                //get db as a vector
     switch(n){
         case 1:
             listScientists(database);
