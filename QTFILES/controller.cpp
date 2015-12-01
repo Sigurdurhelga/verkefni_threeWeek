@@ -36,6 +36,33 @@ struct compareNamesDescending{          //checks which scientist is printed firs
     }
 };
 
+struct compareDateAscending{
+
+    bool operator ()(scientist s1, scientist s2) const {
+        bool comparison = (s1.dateofBirth() < s2.dateofBirth());
+
+        if(comparison)
+            return true;
+        else
+            return false;
+    }
+};
+
+
+struct compareDateDescending{
+
+    bool operator ()(scientist s1, scientist s2) const {
+        bool comparison = (s1.dateofBirth() > s2.dateofBirth());
+
+        if(comparison)
+            return true;
+        else
+            return false;
+    }
+};
+
+
+
 vector<scientist> controller::getDB(){          //returns database to the vector <scientist>
     vector<scientist> dataBase;
     model DB;
@@ -95,7 +122,10 @@ void controller::listScientists(vector<scientist>& list){   //function that defi
     cout << "1. List by name in ascending order\n"
             "2. List by name in descending order\n"
             "3. List all alive\n"
-            "4. List by date added" << endl;
+            "4. List by date added\n"
+            "5. List by birth date ascending \n"
+            "6. List by birth date descending"
+         << endl;
     cin >> select;
 
     vector<scientist> temp = list;
@@ -114,6 +144,14 @@ void controller::listScientists(vector<scientist>& list){   //function that defi
             break;
         case 4:
             printTheList(list);
+            break;
+        case 5:
+            temp = sortByDate(temp, true);
+            printTheList(temp);
+            break;
+        case 6:
+            temp = sortByDate(temp, false);
+            printTheList(temp);
             break;
         default:
             break;
@@ -431,8 +469,7 @@ void controller::functionHandler(int n){                    //function that rece
     return;
 }
 
-vector<scientist> controller::sortByName(vector<scientist>& list, bool comp){       //using sort algorithm from the library to sort every object within the vector
-
+vector<scientist> controller::sortByName(vector<scientist>& list, bool comp){
     if(comp){
         sort(list.begin(), list.end(), compareNamesAscending());
     }
@@ -443,3 +480,13 @@ vector<scientist> controller::sortByName(vector<scientist>& list, bool comp){   
     return list;
 }
 
+vector<scientist> controller::sortByDate(vector<scientist>& list, bool comp){
+    if(comp){
+        sort(list.begin(), list.end(), compareDateAscending());
+    }
+    else{
+        sort(list.begin(), list.end(), compareDateDescending());
+    }
+
+    return list;
+}
