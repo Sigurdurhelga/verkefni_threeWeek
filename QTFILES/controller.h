@@ -18,6 +18,7 @@ public:
     void functionHandler(int n);
     void sortTheList(vector<scientist>& list);
     vector<scientist> sortByName(vector<scientist>& list, bool comp);
+    vector<scientist> sortByDate(vector<scientist>& list, bool comp);
 };
 
 #endif // CONTROLLER_H

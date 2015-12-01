@@ -7,6 +7,8 @@ class model
 {
 public:
      vector<scientist> retDB();
+     void writeToDB(scientist guy);
+     void overwriteDB(vector<scientist>& list);
 };
 
 #endif // MODEL_H

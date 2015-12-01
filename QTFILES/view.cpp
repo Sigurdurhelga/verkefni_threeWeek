@@ -32,3 +32,27 @@ void view::displayInterface()
     return;
 }
 
+void view::printTheList(const vector<scientist>& list){     //function that prints the database to screen
+    QString currName = "";
+    QString currSex = "";
+
+    QString currBirth;
+    QString currDeath;
+
+    for(unsigned int i = 0; i < list.size(); i++){          //goes through each scientist and prints his information to screen
+        scientist currGuy = list[i];
+        currName = currGuy.returnName();
+        currSex = currGuy.returnSex();
+        currBirth = currGuy.dateofBirthQString();
+        currDeath = currGuy.dateofDeathQString();
+        if(currGuy.dateofDeath() == QDate(1,1,1)){          //checks whether the scientist is alive
+            cout << currName.toStdString() << " " << currSex.toStdString() << " " << currBirth.toStdString() << " ALIVE" << endl;
+        }
+        else{
+            cout << currName.toStdString() << " " << currSex.toStdString() << " " << currBirth.toStdString() << " " << currDeath.toStdString() << endl;
+        }
+    }
+
+    return;
+}
+

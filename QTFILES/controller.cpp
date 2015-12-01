@@ -1,5 +1,6 @@
 #include "model.h"
 #include "controller.h"
+#include "view.h"
 #include <iostream>
 #include <vector>
 #include <string>
@@ -35,30 +36,31 @@ struct compareNamesDescending{          //checks which scientist is printed firs
             return false;
     }
 };
+struct compareDateAscending{
 
-void controller::printTheList(vector<scientist>& list){     //function that prints the database to screen
-    QString currName = "";
-    QString currSex = "";
+    bool operator ()(scientist s1, scientist s2) const {
+        bool comparison = (s1.dateofBirth() < s2.dateofBirth());
 
-    QString currBirth;
-    QString currDeath;
-
-    for(unsigned int i = 0; i < list.size(); i++){          //goes through each scientist and prints his information to screen
-        scientist currGuy = list[i];
-        currName = currGuy.returnName();
-        currSex = currGuy.returnSex();
-        currBirth = currGuy.dateofBirthQString();
-        currDeath = currGuy.dateofDeathQString();
-        if(currGuy.dateofDeath() == QDate(1,1,1)){          //checks whether the scientist is alive
-            cout << currName.toStdString() << " " << currSex.toStdString() << " " << currBirth.toStdString() << " ALIVE" << endl;
-        }
-        else{
-            cout << currName.toStdString() << " " << currSex.toStdString() << " " << currBirth.toStdString() << " " << currDeath.toStdString() << endl;
-        }
+        if(comparison)
+            return true;
+        else
+            return false;
     }
+};
 
-    return;
-}
+
+struct compareDateDescending{
+
+    bool operator ()(scientist s1, scientist s2) const {
+        bool comparison = (s1.dateofBirth() > s2.dateofBirth());
+
+        if(comparison)
+            return true;
+        else
+            return false;
+    }
+};
+
 void controller::printAlive(vector<scientist>& list){       //goes through each scientist and prints only alive scientist to screen
     QString currName = "";
     QString currSex = "";
@@ -83,11 +85,16 @@ void controller::printAlive(vector<scientist>& list){       //goes through each 
 
 void controller::listScientists(vector<scientist>& list){   //function that defines how the list of scientists should be ordered
     int select = 0;
-    //int check = 0;
+
+    view screen;
+
     cout << "1. List by name in ascending order\n"
             "2. List by name in descending order\n"
             "3. List all alive\n"
-            "4. List by date added" << endl;
+            "4. List by date added\n"
+            "5. List by birth date ascending \n"
+            "6. List by birth date descending"
+         << endl;
     cin >> select;
 
     vector<scientist> temp = list;
@@ -95,17 +102,25 @@ void controller::listScientists(vector<scientist>& list){   //function that defi
     switch(select){
         case 1:
             temp = sortByName(temp, true);
-            printTheList(temp);
+            screen.printTheList(temp);
             break;
         case 2:
             temp = sortByName(temp, false);
-            printTheList(temp);
+            screen.printTheList(temp);
             break;
         case 3:
             printAlive(list);
             break;
         case 4:
-            printTheList(list);
+            screen.printTheList(list);
+            break;
+        case 5:
+            temp = sortByDate(temp, true);
+            screen.printTheList(temp);
+            break;
+        case 6:
+            temp = sortByDate(temp, false);
+            screen.printTheList(temp);
             break;
         default:
             break;
@@ -131,13 +146,13 @@ void controller::addScientist(){            //function that creates a scientist 
     QDate doD;
 
     int check = 0;
-    cout << "Write a Name for the scientist: " << endl;
+    cout << "Write a Name for the Scientist: " << endl;
     while(name == ""){
         getline(cin, name);
     }
 
     while(check == 0){
-        cout << "Write 'male' for male and 'female' for female: ";
+        cout << "Write 'male' for Male and 'female' for Female: ";
         cin >> sex;
         if(sex == "male" || sex == "female"){           //checks for errors in input
             check = 1;
@@ -149,11 +164,11 @@ void controller::addScientist(){            //function that creates a scientist 
     check = 0;
 
     while(check == 0){
-        cout << "Write the Day of the date of birth for your Scientist: ";
+        cout << "Write the Day of the Date of Birth for your Scientist: ";
         cin >> bDay;
-        cout << "Write the Month of the date of birth for your Scientist: ";
+        cout << "Write the Month of the Date of Birth for your Scientist: ";
         cin >> bMonth;
-        cout << "Write the Year of the date of birth for your Scientist: ";
+        cout << "Write the Year of the Date of Birth for your Scientist: ";
         cin >> bYear;
         doB = QDate(bYear, bMonth, bDay);
         if(doB.isValid()){                              //checks for errors in input
@@ -166,12 +181,12 @@ void controller::addScientist(){            //function that creates a scientist 
     check = 0;
 
     while(check == 0){
-    cout << "Write the Day of the date of Death for your Scientist (0 if he's alive): ";
+    cout << "Write the Day of the Date of Death for your Scientist (0 if he's alive): ";
     cin >> dDay;
     if(dDay != 0){
-        cout << "Write the Month of the date of Death for your Scientist (0 if he's alive): ";
+        cout << "Write the Month of the Date of Death for your Scientist (0 if he's alive): ";
         cin >> dMonth;
-        cout << "Write the Year of the date of Death for your Scientist (0 if he's alive): ";
+        cout << "Write the Year of the Date of Death for your Scientist (0 if he's alive): ";
         cin >> dYear;
         }
         else{
@@ -202,16 +217,18 @@ void controller::removeScientist(vector<scientist>& list){      //function that 
     string rmName;
     QString name;
 
-    cout << "Enter the name of the scientist you want to remove: " << endl;
+    cout << "Enter the name of the Scientist you want to remove: " << endl;
     while(rmName == ""){
         getline(cin, rmName);
     }
     cout << endl;
 
     name = QString::fromStdString(rmName);
+    name = name.toLower();
 
     for(unsigned int i = 0; i < list.size(); i++){
         QString temp = list[i].returnName();
+        temp = temp.toLower();
         if(temp == name){
             list.erase(list.begin()+i);
         }
@@ -233,6 +250,7 @@ void controller::searchScientist(vector<scientist>& list){              //functi
     cout << endl;
 
     name = QString::fromStdString(searchName);
+    name = name.toLower();
     QString currName = "";
     QString currSex = "";
     QString currBirth;
@@ -241,6 +259,7 @@ void controller::searchScientist(vector<scientist>& list){              //functi
 
     for(unsigned int i = 0; i < list.size(); i++){
         QString temp = list[i].returnName();
+        temp = temp.toLower();
         if(temp == name){
             currName = list[i].returnName();
             currSex = list[i].returnSex();
@@ -264,6 +283,7 @@ void controller::editScientist(vector<scientist>& list){            //function t
     cout << endl;
 
     name = QString::fromStdString(editName);
+    name = name.toLower();
     QString currName = "";
     QString currSex = "";
     QString doB;
@@ -282,10 +302,11 @@ void controller::editScientist(vector<scientist>& list){            //function t
     for(unsigned int i = 0; i < list.size(); i++){
 
         QString temp = list[i].returnName();
+        temp = temp.toLower();
         if(temp == name){
             if((selection == 1) | (selection == 5)){
                 string name = "";
-                cout << "Write a Name for the scientist: " << endl;
+                cout << "Write a Name for the Scientist: " << endl;
                 while(name == ""){
                     getline(cin, name);
                 }
@@ -296,7 +317,7 @@ void controller::editScientist(vector<scientist>& list){            //function t
             if((selection == 2) | (selection == 5)){
                 string sex = "";
                 while(check == 0){
-                    cout << "Write 'male' for male and 'female' for female: ";
+                    cout << "Write 'male' for Male and 'female' for Female: ";
                     cin >> sex;
                     if(sex == "male" || sex == "female"){
                         check = 1;
@@ -393,8 +414,7 @@ void controller::functionHandler(int n){                    //function that rece
     return;
 }
 
-vector<scientist> controller::sortByName(vector<scientist>& list, bool comp){       //using sort algorithm from the library to sort every object within the vector
-
+vector<scientist> controller::sortByName(vector<scientist>& list, bool comp){
     if(comp){
         sort(list.begin(), list.end(), compareNamesAscending());
     }
@@ -405,3 +425,13 @@ vector<scientist> controller::sortByName(vector<scientist>& list, bool comp){   
     return list;
 }
 
+vector<scientist> controller::sortByDate(vector<scientist>& list, bool comp){
+    if(comp){
+        sort(list.begin(), list.end(), compareDateAscending());
+    }
+    else{
+        sort(list.begin(), list.end(), compareDateDescending());
+    }
+
+    return list;
+}
