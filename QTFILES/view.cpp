@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include "view.h"
 #include "controller.h"
 
@@ -38,6 +39,7 @@ void view::printTheList(const vector<scientist>& list){     //function that prin
 
     QString currBirth;
     QString currDeath;
+    cout  << left << setfill(' ') << setw(25) << "Name"  << setw(15)<< "Gender" << setw(15) << "BirthDate" << setw(18) << "Deathdate" << endl << setfill('-') << setw(73) << '-' <<  endl;
 
     for(unsigned int i = 0; i < list.size(); i++){          //goes through each scientist and prints his information to screen
         scientist currGuy = list[i];
@@ -46,13 +48,35 @@ void view::printTheList(const vector<scientist>& list){     //function that prin
         currBirth = currGuy.dateofBirthQString();
         currDeath = currGuy.dateofDeathQString();
         if(currGuy.dateofDeath() == QDate(1,1,1)){          //checks whether the scientist is alive
-            cout << currName.toStdString() << " " << currSex.toStdString() << " " << currBirth.toStdString() << " ALIVE" << endl;
+            cout << left << "| " << setfill(' ') << setw(25) << currName.toStdString() << setw(15)<< currSex.toStdString() << setw(15) << currBirth.toStdString() << setw(15) << "ALIVE" << "|" << endl;
         }
         else{
-            cout << currName.toStdString() << " " << currSex.toStdString() << " " << currBirth.toStdString() << " " << currDeath.toStdString() << endl;
+            cout << left << "| " << setfill(' ') << setw(25) << currName.toStdString() << setw(15) << currSex.toStdString() << setw(15) << currBirth.toStdString() << setw(15) << currDeath.toStdString() << right << "|" << endl;
         }
     }
+    cout << setfill('-') << setw(73) << "-" <<  endl;
+    return;
+}
 
+void view::printAllAlive(const vector<scientist>& list){     //function that prints the database to screen
+    QString currName = "";
+    QString currSex = "";
+
+    QString currBirth;
+    QString currDeath;
+    cout  << left << setfill(' ') << setw(25) << "Name"  << setw(15)<< "Gender" << setw(15) << "BirthDate" << endl << setfill('-') << setw(58) << '-' <<  endl;
+
+    for(unsigned int i = 0; i < list.size(); i++){          //goes through each scientist and prints his information to screen
+        scientist currGuy = list[i];
+        currName = currGuy.returnName();
+        currSex = currGuy.returnSex();
+        currBirth = currGuy.dateofBirthQString();
+        currDeath = currGuy.dateofDeathQString();
+        if(currGuy.dateofDeath() == QDate(1,1,1)){          //checks whether the scientist is alive
+            cout << left << "| " << setfill(' ') << setw(25) << currName.toStdString() << setw(15)<< currSex.toStdString() << setw(15) << currBirth.toStdString() << setw(15) << "|" << endl;
+        }
+    }
+    cout << setfill('-') << setw(58) << "-" <<  endl;
     return;
 }
 

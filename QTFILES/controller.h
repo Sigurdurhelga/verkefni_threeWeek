@@ -19,6 +19,7 @@ public:
     void sortTheList(vector<scientist>& list);
     vector<scientist> sortByName(vector<scientist>& list, bool comp);
     vector<scientist> sortByDate(vector<scientist>& list, bool comp);
+    vector<scientist> getAllAlive(vector<scientist>& list);
 };
 
 #endif // CONTROLLER_H

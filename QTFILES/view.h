@@ -10,6 +10,7 @@ public:
     view();
     static void displayInterface();
     void printTheList(const vector<scientist>& list);
+    void printAllAlive(const vector<scientist>& list);
 };
 
 #endif // VIEW_H

@@ -61,27 +61,6 @@ struct compareDateDescending{
     }
 };
 
-void controller::printAlive(vector<scientist>& list){       //goes through each scientist and prints only alive scientist to screen
-    QString currName = "";
-    QString currSex = "";
-
-    QString currBirth;
-    QString currDeath;
-
-    for(unsigned int i = 0; i < list.size(); i++){
-        scientist currGuy = list[i];
-        currName = currGuy.returnName();
-        currSex = currGuy.returnSex();
-        currBirth = currGuy.dateofBirthQString();
-        currDeath = currGuy.dateofDeathQString();
-        if(currGuy.dateofDeath() == QDate(1,1,1)){          //finds only those scientists that are alive
-            cout << currName.toStdString() << " " << currSex.toStdString() << " " << currBirth.toStdString() << endl;
-        }
-    }
-
-    return;
-}
-
 
 void controller::listScientists(vector<scientist>& list){   //function that defines how the list of scientists should be ordered
     int select = 0;
@@ -109,7 +88,7 @@ void controller::listScientists(vector<scientist>& list){   //function that defi
             screen.printTheList(temp);
             break;
         case 3:
-            printAlive(list);
+            screen.printAllAlive(temp);
             break;
         case 4:
             screen.printTheList(list);
@@ -184,9 +163,9 @@ void controller::addScientist(){            //function that creates a scientist 
     cout << "Write the Day of the Date of Death for your Scientist (0 if he's alive): ";
     cin >> dDay;
     if(dDay != 0){
-        cout << "Write the Month of the Date of Death for your Scientist (0 if he's alive): ";
+        cout << "Write the Month of the Date of Death for your Scientist: ";
         cin >> dMonth;
-        cout << "Write the Year of the Date of Death for your Scientist (0 if he's alive): ";
+        cout << "Write the Year of the Date of Death for your Scientist: ";
         cin >> dYear;
         }
         else{
@@ -363,9 +342,9 @@ void controller::editScientist(vector<scientist>& list){            //function t
                     cout << "Write the Day of the date of Death for your Scientist (0 if he's alive): ";
                     cin >> dDay;
                     if(dDay != 0){
-                        cout << "Write the Month of the date of Death for your Scientist (0 if he's alive): ";
+                        cout << "Write the Month of the date of Death for your Scientist: ";
                         cin >> dMonth;
-                        cout << "Write the Year of the date of Death for your Scientist (0 if he's alive): ";
+                        cout << "Write the Year of the date of Death for your Scientist: ";
                         cin >> dYear;
                     }
                     else{
