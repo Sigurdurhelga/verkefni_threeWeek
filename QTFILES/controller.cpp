@@ -139,13 +139,13 @@ void controller::addScientist(){            //function that creates a scientist 
     QDate doD;
 
     int check = 0;
-    cout << "Write a Name for the scientist: " << endl;
+    cout << "Write a Name for the Scientist: " << endl;
     while(name == ""){
         getline(cin, name);
     }
 
     while(check == 0){
-        cout << "Write 'male' for male and 'female' for female: ";
+        cout << "Write 'male' for Male and 'female' for Female: ";
         cin >> sex;
         if(sex == "male" || sex == "female"){           //checks for errors in input
             check = 1;
@@ -157,11 +157,11 @@ void controller::addScientist(){            //function that creates a scientist 
     check = 0;
 
     while(check == 0){
-        cout << "Write the Day of the date of birth for your Scientist: ";
+        cout << "Write the Day of the Date of Birth for your Scientist: ";
         cin >> bDay;
-        cout << "Write the Month of the date of birth for your Scientist: ";
+        cout << "Write the Month of the Date of Birth for your Scientist: ";
         cin >> bMonth;
-        cout << "Write the Year of the date of birth for your Scientist: ";
+        cout << "Write the Year of the Date of Birth for your Scientist: ";
         cin >> bYear;
         doB = QDate(bYear, bMonth, bDay);
         if(doB.isValid()){                              //checks for errors in input
@@ -174,12 +174,12 @@ void controller::addScientist(){            //function that creates a scientist 
     check = 0;
 
     while(check == 0){
-    cout << "Write the Day of the date of Death for your Scientist (0 if he's alive): ";
+    cout << "Write the Day of the Date of Death for your Scientist (0 if he's alive): ";
     cin >> dDay;
     if(dDay != 0){
-        cout << "Write the Month of the date of Death for your Scientist (0 if he's alive): ";
+        cout << "Write the Month of the Date of Death for your Scientist (0 if he's alive): ";
         cin >> dMonth;
-        cout << "Write the Year of the date of Death for your Scientist (0 if he's alive): ";
+        cout << "Write the Year of the Date of Death for your Scientist (0 if he's alive): ";
         cin >> dYear;
         }
         else{
@@ -224,16 +224,18 @@ void controller::removeScientist(vector<scientist>& list){      //function that 
     string rmName;
     QString name;
 
-    cout << "Enter the name of the scientist you want to remove: " << endl;
+    cout << "Enter the name of the Scientist you want to remove: " << endl;
     while(rmName == ""){
         getline(cin, rmName);
     }
     cout << endl;
 
     name = QString::fromStdString(rmName);
+    name = name.toLower();
 
     for(unsigned int i = 0; i < list.size(); i++){
         QString temp = list[i].returnName();
+        temp = temp.toLower();
         if(temp == name){
             list.erase(list.begin()+i);
         }
@@ -255,6 +257,7 @@ void controller::searchScientist(vector<scientist>& list){              //functi
     cout << endl;
 
     name = QString::fromStdString(searchName);
+    name = name.toLower();
     QString currName = "";
     QString currSex = "";
     QString currBirth;
@@ -263,6 +266,7 @@ void controller::searchScientist(vector<scientist>& list){              //functi
 
     for(unsigned int i = 0; i < list.size(); i++){
         QString temp = list[i].returnName();
+        temp = temp.toLower();
         if(temp == name){
             currName = list[i].returnName();
             currSex = list[i].returnSex();
@@ -286,6 +290,7 @@ void controller::editScientist(vector<scientist>& list){            //function t
     cout << endl;
 
     name = QString::fromStdString(editName);
+    name = name.toLower();
     QString currName = "";
     QString currSex = "";
     QString doB;
@@ -304,10 +309,11 @@ void controller::editScientist(vector<scientist>& list){            //function t
     for(unsigned int i = 0; i < list.size(); i++){
 
         QString temp = list[i].returnName();
+        temp = temp.toLower();
         if(temp == name){
             if((selection == 1) | (selection == 5)){
                 string name = "";
-                cout << "Write a Name for the scientist: " << endl;
+                cout << "Write a Name for the Scientist: " << endl;
                 while(name == ""){
                     getline(cin, name);
                 }
@@ -318,7 +324,7 @@ void controller::editScientist(vector<scientist>& list){            //function t
             if((selection == 2) | (selection == 5)){
                 string sex = "";
                 while(check == 0){
-                    cout << "Write 'male' for male and 'female' for female: ";
+                    cout << "Write 'male' for Male and 'female' for Female: ";
                     cin >> sex;
                     if(sex == "male" || sex == "female"){
                         check = 1;
