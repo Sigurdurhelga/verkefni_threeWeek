@@ -10,6 +10,7 @@ view::view()
     // This should never happen
 }
 
+// This function takes the users input and forwards it to the controller.
 void view::displayInterface()
 {
     controller cont;

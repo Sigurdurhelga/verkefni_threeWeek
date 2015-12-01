@@ -15,6 +15,8 @@ public:
     void searchScientist(vector<scientist>& list);
     void overwriteDB(vector<scientist>& list);
     void functionHandler(int n);
+    void sortTheList(vector<scientist>& list);
+    vector<scientist> sortByName(vector<scientist>& list, bool comparison);
 };
 
 #endif // CONTROLLER_H

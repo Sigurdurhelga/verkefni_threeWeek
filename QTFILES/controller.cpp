@@ -12,6 +12,18 @@
 
 using namespace std;
 
+struct compareNames{
+
+    bool operator ()(scientist s1, scientist s2) const {
+        int comparison = QString::localeAwareCompare((s1.returnName()), (s2.returnName()));
+
+        if(comparison < 0)
+            return true;
+        else
+            return false;
+    }
+};
+
 vector<scientist> controller::getDB(){
     vector<scientist> dataBase;
     model DB;
@@ -253,5 +265,14 @@ void controller::functionHandler(int n){
     }
 
     return;
+}
+
+vector<scientist> controller::sortByName(vector<scientist>& list, bool comparison){
+    if(comparison){
+        sort(list.begin(), list.end(), compareNames());
+    }
+
+    return list;
+
 }
 

@@ -13,6 +13,8 @@ private:
     QDate doB;
     QDate doD;
 public:
+    string property;
+    EntityComp(int property) {this->property = property;}
     scientist();
     scientist(QString name, QString sex, QDate doB, QDate doD);
     QString returnName();
