@@ -40,6 +40,7 @@ vector<scientist> controller::getDB(){
     vector<scientist> dataBase;
     model DB;
     dataBase = DB.retDB();
+
     return dataBase;
 }
 
@@ -63,6 +64,8 @@ void controller::printTheList(vector<scientist>& list){
             cout << currName.toStdString() << " " << currSex.toStdString() << " " << currBirth.toStdString() << " " << currDeath.toStdString() << endl;
         }
     }
+
+    return;
 }
 void controller::printAlive(vector<scientist>& list){
     QString currName = "";
@@ -81,6 +84,8 @@ void controller::printAlive(vector<scientist>& list){
             cout << currName.toStdString() << " " << currSex.toStdString() << " " << currBirth.toStdString() << endl;
         }
     }
+
+    return;
 }
 
 
@@ -110,6 +115,8 @@ void controller::listScientists(vector<scientist>& list){
         default:
             break;
     }
+
+    return;
 }
 
 void controller::addScientist(){
@@ -261,6 +268,7 @@ void controller::searchScientist(vector<scientist>& list){
             cout << currName.toStdString() << " " << currSex.toStdString() << " " << currBirth.toStdString() << " " << currDeath.toStdString() << endl;
         }
     }
+
     return;
 }
 
@@ -376,6 +384,7 @@ void controller::editScientist(vector<scientist>& list){
     }
 
     overwriteDB(list);
+
     return;
 }
 
@@ -430,6 +439,5 @@ vector<scientist> controller::sortByName(vector<scientist>& list, bool comp){
     }
 
     return list;
-
 }
 
