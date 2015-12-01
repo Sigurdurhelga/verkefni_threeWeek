@@ -52,3 +52,8 @@ QString scientist::dateofDeathQString()
     return doD.toString("dd.MM.yyyy");
 }
 
+bool operator < (const scientist& L, const scientist& R)
+{
+    return L.name < R.name;
+}
+

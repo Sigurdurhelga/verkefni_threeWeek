@@ -21,6 +21,7 @@ public:
     QDate dateofDeath();
     QString dateofBirthQString();
     QString dateofDeathQString();
+    friend bool operator < (const scientist& L, const scientist& R);
 };
 
 #endif // SCIENTIST_H
