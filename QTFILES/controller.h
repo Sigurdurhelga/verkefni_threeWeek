@@ -13,6 +13,8 @@ public:
     void overwriteDB(vector <scientist>& list);
     void removeScientist(vector<scientist>& list);
     void listScientists(vector<scientist>& list);
+    void printTheList(vector<scientist>& list);
+    bool sortName(const scientist& s1, const scientist& s2);
 };
 
 #endif // CONTROLLER_H

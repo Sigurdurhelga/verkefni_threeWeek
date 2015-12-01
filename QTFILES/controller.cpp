@@ -8,6 +8,7 @@
 #include <Qfile>
 #include <QTextStream>
 #include <fstream>
+#include <algorithm>
 
 using namespace std;
 
@@ -16,6 +17,11 @@ vector<scientist> controller::getDB(){
     model DB;
     dataBase = DB.retDB();
     return dataBase;
+}
+
+bool sortName(const scientist& s1, const scientist& s2){
+    if(s1.returnName() != s2.returnName()) return s1.returnName() < s2.returnName();
+    else return false;
 }
 
 void controller::printTheList(vector<scientist>& list){
@@ -40,11 +46,12 @@ void controller::printTheList(vector<scientist>& list){
 void controller::listScientists(vector<scientist>& list){
 
     int select = 0;
-
+    int check = 0;
     cout << "1. List by name in ascending order\n2. List by name in descending order\n3. List by date added" << endl;
     cin >> select;
     if (select == 1){
         vector<scientist>& temp = list;
+        sort(list.begin(), list.end(), sortName)
 
     }
     else if(select == 2){
