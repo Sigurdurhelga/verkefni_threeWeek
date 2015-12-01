@@ -19,13 +19,9 @@ vector<scientist> controller::getDB(){
     return dataBase;
 }
 
-
-
 void controller::printTheList(vector<scientist>& list){
     QString currName = "";
     QString currSex = "";
-
-    QString format = "dd.MM.yyyy";
 
     QString currBirth;
     QString currDeath;
@@ -36,7 +32,30 @@ void controller::printTheList(vector<scientist>& list){
         currSex = currGuy.returnSex();
         currBirth = currGuy.dateofBirthQString();
         currDeath = currGuy.dateofDeathQString();
-        cout << currName.toStdString() << " " << currSex.toStdString() << " " << currBirth.toStdString() << " " << currDeath.toStdString() << endl;
+        if(currGuy.dateofDeath() == QDate(1,1,1)){
+            cout << currName.toStdString() << " " << currSex.toStdString() << " " << currBirth.toStdString() << " ALIVE" << endl;
+        }
+        else{
+            cout << currName.toStdString() << " " << currSex.toStdString() << " " << currBirth.toStdString() << " " << currDeath.toStdString() << endl;
+        }
+    }
+}
+void controller::printAlive(vector<scientist>& list){
+    QString currName = "";
+    QString currSex = "";
+
+    QString currBirth;
+    QString currDeath;
+
+    for(unsigned int i = 0; i < list.size(); i++){
+        scientist currGuy = list[i];
+        currName = currGuy.returnName();
+        currSex = currGuy.returnSex();
+        currBirth = currGuy.dateofBirthQString();
+        currDeath = currGuy.dateofDeathQString();
+        if(currGuy.dateofDeath() == QDate(1,1,1)){
+            cout << currName.toStdString() << " " << currSex.toStdString() << " " << currBirth.toStdString() << endl;
+        }
     }
 }
 
@@ -44,17 +63,24 @@ void controller::printTheList(vector<scientist>& list){
 void controller::listScientists(vector<scientist>& list){
     int select = 0;
     //int check = 0;
-    cout << "1. List by name in ascending order\n2. List by name in descending order\n3. List by date added" << endl;
+    cout << "1. List by name in ascending order\n2. List by name in descending order\n3. List all alive\n4. List by date added" << endl;
     cin >> select;
-    if (select == 1){
-        vector<scientist>& temp = list;
-
+    if(select < 4){
+        vector<scientist> temp = list;
     }
-    else if(select == 2){
-
-    }
-    else{
-        printTheList(list);
+    switch(select){
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            printAlive(list);
+            break;
+        case 4:
+            printTheList(list);
+            break;
+        default:
+            break;
     }
 }
 

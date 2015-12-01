@@ -1,8 +1,15 @@
-john mcclain@male@12.12.0012@01.01.0001
-senior king@male@12.12.0012@21.12.0021
-Tagl@male@12.12.0012@12.12.0012
-john homoking@male@12.12.0012@11.11.0111
-banana man@male@12.12.0012@11.11.0111
-Jenkins@male@12.12.0012@12.12.0123
-hello yellow@male@12.12.0012@01.01.0001
-banana boy@male@12.12.0012@19.10.1990
+Charles Babbage@male@26.12.1791@18.10.1871
+Ada Lovelace@female@10.12.1815@27.11.1852
+Blaise Pascal@male@19.06.1623@19.08.1662
+John Vincent Atanasoff@male@04.10.1903@15.06.1995
+Clifford Berry@male@19.04.1918@30.10.1963
+John Backus@male@03.12.1924@17.03.1924
+Tim Berners-Lee@male@08.06.1955@01.01.0001
+J. Presper Eckert@male@09.04.1919@03.06.1995
+Douglas Engelbart@male@30.01.1925@02.07.2013
+Seymour Ginsburg@male@12.12.1927@05.12.2004
+Donald Knuth@male@10.01.1938@01.01.0001
+Peter Naur@male@25.10.1928@01.01.0001
+Saul Rosen@male@08.02.1922@09.06.1991
+Dennis Ritchie@male@09.09.1941@12.10.2011
+Alan M. Turing@male@23.06.1912@07.06.1954

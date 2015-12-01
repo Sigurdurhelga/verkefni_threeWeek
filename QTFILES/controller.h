@@ -11,6 +11,7 @@ public:
     void writeToDB(scientist guy);
     void listScientists(vector<scientist>& list);
     void printTheList(vector<scientist>& list);
+    void printAlive(vector<scientist>& list);
     void removeScientist(vector<scientist>& list);
     void searchScientist(vector<scientist>& list);
     void editScientist(vector<scientist>& list);

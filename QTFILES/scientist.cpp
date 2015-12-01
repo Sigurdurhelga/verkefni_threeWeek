@@ -67,4 +67,3 @@ QString scientist::dateofDeathQString()
 {
     return doD.toString("dd.MM.yyyy");
 }
-
