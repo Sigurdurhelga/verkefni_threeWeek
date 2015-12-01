@@ -36,7 +36,12 @@ void controller::printTheList(vector<scientist>& list){
         currSex = currGuy.returnSex();
         currBirth = currGuy.dateofBirthQString();
         currDeath = currGuy.dateofDeathQString();
-        cout << currName.toStdString() << " " << currSex.toStdString() << " " << currBirth.toStdString() << " " << currDeath.toStdString() << endl;
+        if(currGuy.dateofDeath() == QDate(1,1,1)){
+            cout << currName.toStdString() << " " << currSex.toStdString() << " " << currBirth.toStdString() << " ALIVE" << endl;
+        }
+        else{
+            cout << currName.toStdString() << " " << currSex.toStdString() << " " << currBirth.toStdString() << " " << currDeath.toStdString() << endl;
+        }
     }
 }
 
