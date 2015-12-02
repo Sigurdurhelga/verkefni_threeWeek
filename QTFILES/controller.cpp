@@ -10,6 +10,7 @@
 #include <QTextStream>
 #include <fstream>
 #include <algorithm>
+#include <QtSql>
 
 using namespace std;
 
@@ -373,6 +374,7 @@ void Controller::editScientist(vector<Scientist>& list){            //function t
 
 void Controller::functionHandler(int n){                    //function that receives the user selection and executes accordingly
     Model db;
+    QSqlDatabase dataBase = db.openConnection();
     vector<Scientist> database = db.retDB();                //get db as a vector
     switch(n){
         case 1:

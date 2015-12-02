@@ -1,4 +1,5 @@
 QT += core
+QT += sql
 QT -= gui
 
 TARGET = QTFILES
@@ -8,16 +9,16 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    scientist.cpp \
-    controller.cpp \
-    model.cpp \
-    view.cpp
+    Controller.cpp \
+    Model.cpp \
+    Scientist.cpp \
+    View.cpp
 
 HEADERS += \
-    scientist.h \
-    controller.h \
-    model.h \
-    view.h
+    Controller.h \
+    Model.h \
+    Scientist.h \
+    View.h
 
 DISTFILES +=
 
