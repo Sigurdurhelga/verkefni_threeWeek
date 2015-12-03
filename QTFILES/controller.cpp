@@ -163,11 +163,12 @@ void Controller::searchScientist(vector<Scientist>& list){              //functi
             currSex = list[i].returnSex();
             currBirth = list[i].dateofBirthQString();
             currDeath = list[i].dateofDeathQString();
-            cout << currName.toStdString() << " " << currSex.toStdString() << " " << currBirth.toStdString() << " " << currDeath.toStdString() << endl;
+            screen.printSearchMatch(currName, currSex, currBirth, currDeath);
         }
     }
     if(!check)
        screen.nameNotFound();
+
     return;
 }
 

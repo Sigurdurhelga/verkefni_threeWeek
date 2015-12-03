@@ -221,3 +221,9 @@ void View::nameNotFound(){
 
      return;
 }
+
+void View::printSearchMatch(QString currName, QString currSex, QString currBirth, QString currDeath){
+    cout << currName.toStdString() << " " << currSex.toStdString() << " " << currBirth.toStdString() << " " << currDeath.toStdString() << endl;
+
+    return;
+}

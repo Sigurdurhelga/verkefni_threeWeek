@@ -19,6 +19,7 @@ public:
     void askRemoveName(QString& rmName);
     void askSearchName(QString& searchName);
     void nameNotFound();
+    void printSearchMatch(QString currName, QString currSex, QString currBirth, QString currDeath);
 };
 
 #endif // VIEW_H
