@@ -375,13 +375,19 @@ void Controller::editScientist(vector<Scientist>& list){            //function t
 void Controller::functionHandler(int n){                    //function that receives the user selection and executes accordingly
     Model db;
     QSqlDatabase dataBase = db.openConnection();
+    /*QSqlQuery query;
+    query = dataBase.exec("SELECT * FROM people");
+    while (query.next()) {
+            QString name = query.value(0).toString();
+            cout << name.toStdString();
+        }*/
     vector<Scientist> database = db.retDB();                //get db as a vector
     switch(n){
         case 1:
             listScientists(database);
             break;
         case 2:
-            addScientist();
+            db.addScientistToDatabase(dataBase, "swag123", true, QDate(1995, 12, 12),QDate(1,1,1), "Nothing interesing");
             break;
         case 3:
             removeScientist(database);
