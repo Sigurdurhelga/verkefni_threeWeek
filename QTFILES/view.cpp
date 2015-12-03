@@ -108,6 +108,7 @@ void View::askName(string& name){
 
 void View::askGender(string& sex){
     int check = 0;
+    View screen;
 
     while(check == 0){
         cout << "Write 'male' for Male and 'female' for Female: ";
@@ -116,7 +117,7 @@ void View::askGender(string& sex){
             check = 1;
         }
         else{
-            cout << "Invalid input, please try again." << endl;
+            screen.invalidInput();
         }
     }
 
@@ -128,6 +129,7 @@ QDate View::askDateOfBirth(){
     int bDay = 0;
     int bMonth = 0;
     int bYear = 0;
+    View screen;
 
     QDate doB;
 
@@ -143,7 +145,7 @@ QDate View::askDateOfBirth(){
             check = 1;
         }
         else{
-            cout << "Invalid date, please try again." << endl;
+            screen.invalidDate();
         }
     }
 
@@ -156,6 +158,7 @@ QDate View::askDateOfDeath(){
     int dDay = 0;
     int dMonth = 0;
     int dYear = 0;
+    View screen;
 
     QDate doD;
 
@@ -177,44 +180,13 @@ QDate View::askDateOfDeath(){
             check = 1;
     }
         else{
-            cout << "Invalid date, please try again." << endl;
+           screen.invalidDate();
         }
     }
 
     return doD;
 }
 
-void View::askRemoveName(QString& rmName){
-    string name = "";
-
-    cout << "Enter the name of the Scientist you want to remove: " << endl;
-    while(name == ""){
-        getline(cin, name);
-    }
-    cout << endl;
-
-    rmName = QString::fromStdString(name);
-    rmName = rmName.toLower();
-
-
-    return;
-}
-
-void View::askSearchName(QString& searchName){
-    string name;
-
-    cout << "Enter the Name of the Scientist you want to look for: " << endl;
-
-    while(name == ""){
-        getline(cin, name);
-    }
-    cout << endl;
-
-    searchName = QString::fromStdString(name);
-    searchName = searchName.toLower();
-
-    return;
-}
 
 void View::nameNotFound(){
      cout << "Name was not found in the Database." << endl;
@@ -224,6 +196,31 @@ void View::nameNotFound(){
 
 void View::printSearchMatch(QString currName, QString currSex, QString currBirth, QString currDeath){
     cout << currName.toStdString() << " " << currSex.toStdString() << " " << currBirth.toStdString() << " " << currDeath.toStdString() << endl;
+
+    return;
+}
+
+void View::editSelection(int& select){
+    cout << "What would you like to change?" << endl
+         << "1. Edit Name." << endl
+         << "2. Edit gender." << endl
+         << "3. Edit date of birth." << endl
+         << "4. Edit date of death." << endl
+         << "5. Edit everything." << endl
+         << "0. Cancel."<< endl;
+    cin >> select;
+
+    return;
+}
+
+void View::invalidInput(){
+    cout << "Invalid input try again." << endl;
+
+    return;
+}
+
+void View::invalidDate(){
+    cout << "Invalid date, please try again." << endl;
 
     return;
 }

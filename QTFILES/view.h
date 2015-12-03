@@ -16,10 +16,11 @@ public:
     void askGender(string& sex);
     QDate askDateOfBirth();
     QDate askDateOfDeath();
-    void askRemoveName(QString& rmName);
-    void askSearchName(QString& searchName);
     void nameNotFound();
     void printSearchMatch(QString currName, QString currSex, QString currBirth, QString currDeath);
+    void editSelection(int& select);
+    void invalidInput();
+    void invalidDate();
 };
 
 #endif // VIEW_H

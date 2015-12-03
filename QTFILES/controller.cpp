@@ -125,17 +125,28 @@ void Controller::addScientist(){            //function that creates a Scientist 
 
 void Controller::removeScientist(vector<Scientist>& list){      //function that finds a Scientist to erase
     QString name;
+    string rmName = "";
     View screen;
 
-    screen.askRemoveName(name);
+    screen.askName(rmName);
+
+    name = QString::fromStdString(rmName);
+    name = name.toLower();
+
+    bool check = false;
 
     for(unsigned int i = 0; i < list.size(); i++){
         QString temp = list[i].returnName();
         temp = temp.toLower();
         if(temp == name){
+            check = true;
             list.erase(list.begin()+i);
         }
     }
+
+    if(!check)
+        screen.nameNotFound();
+
     Model db;
     db.overwriteDB(list);
 
@@ -144,9 +155,13 @@ void Controller::removeScientist(vector<Scientist>& list){      //function that 
 
 void Controller::searchScientist(vector<Scientist>& list){              //function that searches the database
     View screen;
+    string searchName = "";
     QString name;
 
-    screen.askSearchName(name);
+    screen.askName(searchName);
+
+    name = QString::fromStdString(searchName);
+    name = name.toLower();
 
     QString currName = "";
     QString currSex = "";
@@ -173,117 +188,60 @@ void Controller::searchScientist(vector<Scientist>& list){              //functi
 }
 
 void Controller::editScientist(vector<Scientist>& list){            //function that changes the information in the database
-    string editName;
+    string editName = "";
     QString name;
-    cout << "Enter the Name of the Scientist you want to Edit: " << endl;
+    View screen;
 
-    while(editName == ""){
-        getline(cin, editName);
-    }
-    cout << endl;
+    screen.askName(editName);
 
     name = QString::fromStdString(editName);
     name = name.toLower();
+
     QString currName = "";
     QString currSex = "";
     QString doB;
     QString doD;
 
     int selection = 1;
-    cout << "What would you like to change?" << endl
-         << "1. Edit Name." << endl
-         << "2. Edit gender." << endl
-         << "3. Edit date of birth." << endl
-         << "4. Edit date of death." << endl
-         << "5. Edit everything." << endl
-         << "0. Cancel."<< endl;
-    cin >> selection;
+
+
+
+    bool check = false;
 
     for(unsigned int i = 0; i < list.size(); i++){
 
         QString temp = list[i].returnName();
         temp = temp.toLower();
         if(temp == name){
+            check = true;
+            screen.editSelection(selection);
             if((selection == 1) | (selection == 5)){
                 string name = "";
-                cout << "Write a Name for the Scientist: " << endl;
-                while(name == ""){
-                    getline(cin, name);
-                }
+                screen.askName(name);
                 QString currName = QString::fromStdString(name);
                 list[i].setName(currName);
             }
-            int check = 0;
             if((selection == 2) | (selection == 5)){
                 string sex = "";
-                while(check == 0){
-                    cout << "Write 'male' for Male and 'female' for Female: ";
-                    cin >> sex;
-                    if(sex == "male" || sex == "female"){
-                        check = 1;
-                    }
-                    else{
-                        cout << "Invalid input try again." << endl;
-                    }
-                }
+                screen.askGender(sex);
                 QString currSex = QString::fromStdString(sex);
                 list[i].setGender(currSex);
             }
-            check = 0;
             if((selection == 3) | (selection == 5)){
-                int bDay = 0;
-                int bMonth = 0;
-                int bYear = 0;
                 QDate doB;
-                while(check == 0){
-                    cout << "Write the Day of the Date of Birth for your Scientist: ";
-                    cin >> bDay;
-                    cout << "Write the Month of the Date of Birth for your Scientist: ";
-                    cin >> bMonth;
-                    cout << "Write the Year of the Date of Birth for your Scientist: ";
-                    cin >> bYear;
-                    doB = QDate(bYear, bMonth, bDay);
-                    if(doB.isValid()){
-                        check = 1;
-                    }
-                    else{
-                        cout << "Invalid date, please try again." << endl;
-                    }
-                }
-                doB = QDate(bYear, bMonth, bDay);
+                doB = screen.askDateOfBirth();
                 list[i].setdoB(doB);
             }
-            check = 0;
             if((selection == 4) | (selection == 5)){
-                int dDay = 0;
-                int dMonth = 0;
-                int dYear = 0;
                 QDate doD;
-                while(check == 0){
-                    cout << "Write the Day of the date of Death for your Scientist (0 if he's alive): ";
-                    cin >> dDay;
-                    if(dDay != 0){
-                        cout << "Write the Month of the date of Death for your Scientist: ";
-                        cin >> dMonth;
-                        cout << "Write the Year of the date of Death for your Scientist: ";
-                        cin >> dYear;
-                    }
-                    else{
-                        dDay = 1, dMonth = 1, dYear = 1;
-                    }
-                    doD = QDate(dYear, dMonth, dDay);
-                    if(doD.isValid()){
-                        check = 1;
-                    }
-                    else{
-                        cout << "Invalid date, please try again." << endl;
-                    }
-                }
-                doD = QDate(dYear, dMonth, dDay);
+                doD = screen.askDateOfDeath();
                 list[i].setdoD(doD);
             }
         }
     }
+    if(!check)
+        screen.nameNotFound();
+
     Model db;
     db.overwriteDB(list);
 
