@@ -80,3 +80,46 @@ void View::printAllAlive(const vector<Scientist>& list){     //function that pri
     return;
 }
 
+void View::howToList(int& selection){
+
+
+    cout << "1. List by name in ascending order\n"
+            "2. List by name in descending order\n"
+            "3. List all alive\n"
+            "4. List by date added\n"
+            "5. List by birth date ascending \n"
+            "6. List by birth date descending"
+         << endl;
+
+    cin >> selection;
+
+    return;
+}
+
+void View::askName(string& name){
+    cout << "Write a Name for the Scientist: " << endl;
+    while(name == ""){
+        getline(cin, name);
+    }
+
+    return;
+}
+
+void View::askGender(string& sex){
+    int check = 0;
+
+    while(check == 0){
+        cout << "Write 'male' for Male and 'female' for Female: ";
+        cin >> sex;
+        if(sex == "male" || sex == "female"){           //checks for errors in input
+            check = 1;
+        }
+        else{
+            cout << "Invalid input, please try again." << endl;
+        }
+    }
+
+
+
+    return;
+}
