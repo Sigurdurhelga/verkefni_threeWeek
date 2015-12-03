@@ -15,10 +15,13 @@ using namespace std;
 QSqlDatabase Model::openConnection(){
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setHostName("localhost");
-    db.setDatabaseName("db.sl3");
+    db.setDatabaseName("C:/sqlite/database.sqlite");
     bool db_ok = db.open();
     if(db_ok){
         return db;
+    }
+    else{
+        cout << "DATABASE CONNECTION FAILED!" << endl;
     }
 }
 
