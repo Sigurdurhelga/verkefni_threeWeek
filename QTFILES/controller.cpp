@@ -143,17 +143,11 @@ void Controller::removeScientist(vector<Scientist>& list){      //function that 
 }
 
 void Controller::searchScientist(vector<Scientist>& list){              //function that searches the database
-    string searchName;
+    View screen;
     QString name;
-    cout << "Enter the Name of the Scientist you want to look for: " << endl;
 
-    while(searchName == ""){
-        getline(cin, searchName);
-    }
-    cout << endl;
+    screen.askSearchName(name);
 
-    name = QString::fromStdString(searchName);
-    name = name.toLower();
     QString currName = "";
     QString currSex = "";
     QString currBirth;
@@ -173,7 +167,7 @@ void Controller::searchScientist(vector<Scientist>& list){              //functi
         }
     }
     if(!check)
-        cout << "Name was not found in the Database." << endl;
+       screen.nameNotFound();
     return;
 }
 

@@ -199,3 +199,25 @@ void View::askRemoveName(QString& rmName){
 
     return;
 }
+
+void View::askSearchName(QString& searchName){
+    string name;
+
+    cout << "Enter the Name of the Scientist you want to look for: " << endl;
+
+    while(name == ""){
+        getline(cin, name);
+    }
+    cout << endl;
+
+    searchName = QString::fromStdString(name);
+    searchName = searchName.toLower();
+
+    return;
+}
+
+void View::nameNotFound(){
+     cout << "Name was not found in the Database." << endl;
+
+     return;
+}

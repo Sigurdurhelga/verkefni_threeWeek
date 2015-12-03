@@ -17,6 +17,8 @@ public:
     QDate askDateOfBirth();
     QDate askDateOfDeath();
     void askRemoveName(QString& rmName);
+    void askSearchName(QString& searchName);
+    void nameNotFound();
 };
 
 #endif // VIEW_H
