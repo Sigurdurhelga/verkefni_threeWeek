@@ -124,17 +124,10 @@ void Controller::addScientist(){            //function that creates a Scientist 
 }
 
 void Controller::removeScientist(vector<Scientist>& list){      //function that finds a Scientist to erase
-    string rmName;
     QString name;
+    View screen;
 
-    cout << "Enter the name of the Scientist you want to remove: " << endl;
-    while(rmName == ""){
-        getline(cin, rmName);
-    }
-    cout << endl;
-
-    name = QString::fromStdString(rmName);
-    name = name.toLower();
+    screen.askRemoveName(name);
 
     for(unsigned int i = 0; i < list.size(); i++){
         QString temp = list[i].returnName();

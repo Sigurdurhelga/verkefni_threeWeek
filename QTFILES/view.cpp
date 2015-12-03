@@ -3,6 +3,7 @@
 #include "View.h"
 #include "Controller.h"
 
+
 using namespace std;
 
 View::View()
@@ -181,4 +182,20 @@ QDate View::askDateOfDeath(){
     }
 
     return doD;
+}
+
+void View::askRemoveName(QString& rmName){
+    string name = "";
+
+    cout << "Enter the name of the Scientist you want to remove: " << endl;
+    while(name == ""){
+        getline(cin, name);
+    }
+    cout << endl;
+
+    rmName = QString::fromStdString(name);
+    rmName = rmName.toLower();
+
+
+    return;
 }

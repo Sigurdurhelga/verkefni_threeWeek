@@ -16,6 +16,7 @@ public:
     void askGender(string& sex);
     QDate askDateOfBirth();
     QDate askDateOfDeath();
+    void askRemoveName(QString& rmName);
 };
 
 #endif // VIEW_H
