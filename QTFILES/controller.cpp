@@ -68,14 +68,7 @@ void Controller::listScientists(vector<Scientist>& list){   //function that defi
 
     View screen;
 
-    cout << "1. List by name in ascending order\n"
-            "2. List by name in descending order\n"
-            "3. List all alive\n"
-            "4. List by date added\n"
-            "5. List by birth date ascending \n"
-            "6. List by birth date descending"
-         << endl;
-    cin >> select;
+    screen.howToList(select);
 
     vector<Scientist> temp = list;
 
@@ -110,82 +103,19 @@ void Controller::listScientists(vector<Scientist>& list){   //function that defi
 }
 
 void Controller::addScientist(){            //function that creates a Scientist in the database
-
+    View screen;
     string name = "";
     string sex = "";
-
-    int bDay = 0;
-    int bMonth = 0;
-    int bYear = 0;
-
-    int dDay = 0;
-    int dMonth = 0;
-    int dYear = 0;
-
     QDate doB;
     QDate doD;
 
-    int check = 0;
-    cout << "Write a Name for the Scientist: " << endl;
-    while(name == ""){
-        getline(cin, name);
-    }
-
-    while(check == 0){
-        cout << "Write 'male' for Male and 'female' for Female: ";
-        cin >> sex;
-        if(sex == "male" || sex == "female"){           //checks for errors in input
-            check = 1;
-        }
-        else{
-            cout << "Invalid input, please try again." << endl;
-        }
-    }
-    check = 0;
-
-    while(check == 0){
-        cout << "Write the Day of the Date of Birth for your Scientist: ";
-        cin >> bDay;
-        cout << "Write the Month of the Date of Birth for your Scientist: ";
-        cin >> bMonth;
-        cout << "Write the Year of the Date of Birth for your Scientist: ";
-        cin >> bYear;
-        doB = QDate(bYear, bMonth, bDay);
-        if(doB.isValid()){                              //checks for errors in input
-            check = 1;
-        }
-        else{
-            cout << "Invalid date, please try again." << endl;
-        }
-    }
-    check = 0;
-
-    while(check == 0){
-    cout << "Write the Day of the Date of Death for your Scientist (0 if he's alive): ";
-    cin >> dDay;
-    if(dDay != 0){
-        cout << "Write the Month of the Date of Death for your Scientist: ";
-        cin >> dMonth;
-        cout << "Write the Year of the Date of Death for your Scientist: ";
-        cin >> dYear;
-        }
-        else{
-            dDay = 1, dMonth = 1, dYear = 1;
-        }
-
-    doD = QDate(dYear, dMonth, dDay);
-    if(doD.isValid()){                                  //checks for errors in input
-        check = 1;
-    }
-    else{
-        cout << "Invalid date, please try again." << endl;
-    }
-    }
+    screen.askName(name);
+    screen.askGender(sex);
+    doB = screen.askDateOfBirth();
+    doD = screen.askDateOfDeath();
 
     QString qName = QString::fromStdString(name);
     QString qSex = QString::fromStdString(sex);
-    doB = QDate(bYear, bMonth, bDay);
-    doD = QDate(dYear, dMonth, dDay);
     Scientist newScientist = Scientist(qName, qSex, doB, doD);
     Model db;
     db.writeToDB(newScientist);
@@ -194,17 +124,10 @@ void Controller::addScientist(){            //function that creates a Scientist 
 }
 
 void Controller::removeScientist(vector<Scientist>& list){      //function that finds a Scientist to erase
-    string rmName;
     QString name;
+    View screen;
 
-    cout << "Enter the name of the Scientist you want to remove: " << endl;
-    while(rmName == ""){
-        getline(cin, rmName);
-    }
-    cout << endl;
-
-    name = QString::fromStdString(rmName);
-    name = name.toLower();
+    screen.askRemoveName(name);
 
     for(unsigned int i = 0; i < list.size(); i++){
         QString temp = list[i].returnName();
@@ -220,17 +143,11 @@ void Controller::removeScientist(vector<Scientist>& list){      //function that 
 }
 
 void Controller::searchScientist(vector<Scientist>& list){              //function that searches the database
-    string searchName;
+    View screen;
     QString name;
-    cout << "Enter the Name of the Scientist you want to look for: " << endl;
 
-    while(searchName == ""){
-        getline(cin, searchName);
-    }
-    cout << endl;
+    screen.askSearchName(name);
 
-    name = QString::fromStdString(searchName);
-    name = name.toLower();
     QString currName = "";
     QString currSex = "";
     QString currBirth;
@@ -246,11 +163,12 @@ void Controller::searchScientist(vector<Scientist>& list){              //functi
             currSex = list[i].returnSex();
             currBirth = list[i].dateofBirthQString();
             currDeath = list[i].dateofDeathQString();
-            cout << currName.toStdString() << " " << currSex.toStdString() << " " << currBirth.toStdString() << " " << currDeath.toStdString() << endl;
+            screen.printSearchMatch(currName, currSex, currBirth, currDeath);
         }
     }
     if(!check)
-        cout << "Name was not found in the Database." << endl;
+       screen.nameNotFound();
+
     return;
 }
 
