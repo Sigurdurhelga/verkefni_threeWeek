@@ -29,12 +29,12 @@ QString Scientist::returnName()
     return name;
 }
 
-void Scientist::setName(QString sName){
-    name = sName;
+void Scientist::setName(QString Sname){
+    name = Sname;
 }
 
-void Scientist::setGender(QString sGender){
-    sex = sGender;
+void Scientist::setGender(QString Sgender){
+    sex = Sgender;
 }
 
 void Scientist::setdoB(QDate SdoB){

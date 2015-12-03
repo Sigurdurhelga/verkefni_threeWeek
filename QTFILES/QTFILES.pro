@@ -9,16 +9,19 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 SOURCES += main.cpp \
+    Scientist.cpp \
     Controller.cpp \
     Model.cpp \
-    Scientist.cpp \
-    View.cpp
+    View.cpp \
+    Computers.cpp
 
 HEADERS += \
-    Controller.h \
-    Model.h \
     Scientist.h \
-    View.h
+    Model.h \
+    View.h \
+    Controller.h \
+    Computers.h
+
 
 DISTFILES +=
 
