@@ -300,11 +300,13 @@ void Controller::functionHandler(int n){                    //function that rece
             cout << name.toStdString();
         }*/
     vector<Scientist> database = db.retDB();                //get db as a vector
+    Scientist currentScientist;
     switch(n){
         case 1:
             listScientists(database);
             break;
         case 2:
+
             db.addScientistToDatabase(dataBase, "swag123", true, QDate(1995, 12, 12),QDate(1,1,1), "Nothing interesing");
             break;
         case 3:
@@ -317,7 +319,7 @@ void Controller::functionHandler(int n){                    //function that rece
             editScientist(database);
             break;
     }
-
+    dataBase.close();
     return;
 }
 
