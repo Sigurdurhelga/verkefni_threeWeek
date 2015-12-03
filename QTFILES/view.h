@@ -14,6 +14,8 @@ public:
     void howToList(int& selection);
     void askName(string& name);
     void askGender(string& sex);
+    QDate askDateOfBirth();
+    QDate askDateOfDeath();
 };
 
 #endif // VIEW_H

@@ -103,75 +103,19 @@ void Controller::listScientists(vector<Scientist>& list){   //function that defi
 }
 
 void Controller::addScientist(){            //function that creates a Scientist in the database
-    int check = 0;
-
     View screen;
-
     string name = "";
     string sex = "";
-
-    int bDay = 0;
-    int bMonth = 0;
-    int bYear = 0;
-
-    int dDay = 0;
-    int dMonth = 0;
-    int dYear = 0;
-
     QDate doB;
     QDate doD;
 
-
-
     screen.askName(name);
     screen.askGender(sex);
-
-
-    check = 0;
-
-    while(check == 0){
-        cout << "Write the Day of the Date of Birth for your Scientist: ";
-        cin >> bDay;
-        cout << "Write the Month of the Date of Birth for your Scientist: ";
-        cin >> bMonth;
-        cout << "Write the Year of the Date of Birth for your Scientist: ";
-        cin >> bYear;
-        doB = QDate(bYear, bMonth, bDay);
-        if(doB.isValid()){                              //checks for errors in input
-            check = 1;
-        }
-        else{
-            cout << "Invalid date, please try again." << endl;
-        }
-    }
-    check = 0;
-
-    while(check == 0){
-    cout << "Write the Day of the Date of Death for your Scientist (0 if he's alive): ";
-    cin >> dDay;
-    if(dDay != 0){
-        cout << "Write the Month of the Date of Death for your Scientist: ";
-        cin >> dMonth;
-        cout << "Write the Year of the Date of Death for your Scientist: ";
-        cin >> dYear;
-        }
-        else{
-            dDay = 1, dMonth = 1, dYear = 1;
-        }
-
-    doD = QDate(dYear, dMonth, dDay);
-    if(doD.isValid()){                                  //checks for errors in input
-        check = 1;
-    }
-    else{
-        cout << "Invalid date, please try again." << endl;
-    }
-    }
+    doB = screen.askDateOfBirth();
+    doD = screen.askDateOfDeath();
 
     QString qName = QString::fromStdString(name);
     QString qSex = QString::fromStdString(sex);
-    doB = QDate(bYear, bMonth, bDay);
-    doD = QDate(dYear, dMonth, dDay);
     Scientist newScientist = Scientist(qName, qSex, doB, doD);
     Model db;
     db.writeToDB(newScientist);

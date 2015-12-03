@@ -119,7 +119,66 @@ void View::askGender(string& sex){
         }
     }
 
-
-
     return;
+}
+
+QDate View::askDateOfBirth(){
+    int check = 0;
+    int bDay = 0;
+    int bMonth = 0;
+    int bYear = 0;
+
+    QDate doB;
+
+    while(check == 0){
+        cout << "Write the Day of the Date of Birth for your Scientist: ";
+        cin >> bDay;
+        cout << "Write the Month of the Date of Birth for your Scientist: ";
+        cin >> bMonth;
+        cout << "Write the Year of the Date of Birth for your Scientist: ";
+        cin >> bYear;
+        doB = QDate(bYear, bMonth, bDay);
+        if(doB.isValid()){                              //checks for errors in input
+            check = 1;
+        }
+        else{
+            cout << "Invalid date, please try again." << endl;
+        }
+    }
+
+
+    return doB;
+}
+
+QDate View::askDateOfDeath(){
+    int check = 0;
+    int dDay = 0;
+    int dMonth = 0;
+    int dYear = 0;
+
+    QDate doD;
+
+    while(check == 0){
+    cout << "Write the Day of the Date of Death for your Scientist (0 if he's alive): ";
+    cin >> dDay;
+    if(dDay != 0){
+        cout << "Write the Month of the Date of Death for your Scientist: ";
+        cin >> dMonth;
+        cout << "Write the Year of the Date of Death for your Scientist: ";
+        cin >> dYear;
+        }
+        else{
+            dDay = 1, dMonth = 1, dYear = 1;
+        }
+
+    doD = QDate(dYear, dMonth, dDay);
+        if(doD.isValid()){                                  //checks for errors in input
+            check = 1;
+    }
+        else{
+            cout << "Invalid date, please try again." << endl;
+        }
+    }
+
+    return doD;
 }
