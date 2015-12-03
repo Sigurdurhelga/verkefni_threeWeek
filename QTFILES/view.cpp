@@ -36,10 +36,12 @@ void View::displayInterface()
 
 void View::printTheList(const vector<Scientist>& list){     //function that prints the database to screen
     QString currName = "";
-    QString currSex = "";
+    bool currSex = false;
 
     QString currBirth;
     QString currDeath;
+
+    QString currFact;
     cout  << left << setfill(' ') << setw(25) << "Name"  << setw(15)<< "Gender" << setw(15) << "BirthDate" << setw(18) << "Deathdate" << endl << setfill('-') << setw(73) << '-' <<  endl;
 
     for(unsigned int i = 0; i < list.size(); i++){          //goes through each Scientist and prints his information to screen
@@ -48,11 +50,12 @@ void View::printTheList(const vector<Scientist>& list){     //function that prin
         currSex = currGuy.returnSex();
         currBirth = currGuy.dateofBirthQString();
         currDeath = currGuy.dateofDeathQString();
+        currFact = currGuy.returnFact();
         if(currGuy.dateofDeath() == QDate(1,1,1)){          //checks whether the scientist is alive
-            cout << left << "| " << setfill(' ') << setw(25) << currName.toStdString() << setw(13)<< currSex.toStdString() << setw(15) << currBirth.toStdString() << setw(17) << "ALIVE" << "|" << endl;
+            cout << left << "| " << setfill(' ') << setw(25) << currName.toStdString() << setw(13)<< getGenderString(currSex) << setw(15) << currBirth.toStdString() << setw(17) << "ALIVE" << currFact.toStdString() << "|" << endl;
         }
         else{
-            cout << left << "| " << setfill(' ') << setw(25) << currName.toStdString() << setw(13) << currSex.toStdString() << setw(15) << currBirth.toStdString() << setw(17) << currDeath.toStdString() << right << "|" << endl;
+            cout << left << "| " << setfill(' ') << setw(25) << currName.toStdString() << setw(13) << getGenderString(currSex) << setw(15) << currBirth.toStdString() << setw(17) << currDeath.toStdString() << currFact.toStdString() << right << "|" << endl;
         }
     }
     cout << setfill('-') << setw(73) << "-" <<  endl;
@@ -61,10 +64,12 @@ void View::printTheList(const vector<Scientist>& list){     //function that prin
 
 void View::printAllAlive(const vector<Scientist>& list){     //function that prints the database to screen
     QString currName = "";
-    QString currSex = "";
+    bool currSex = false;
 
     QString currBirth;
     QString currDeath;
+
+    QString currFact;
     cout  << left << setfill(' ') << setw(25) << "Name"  << setw(15)<< "Gender" << setw(15) << "BirthDate" << endl << setfill('-') << setw(58) << '-' <<  endl;
 
     for(unsigned int i = 0; i < list.size(); i++){          //goes through each Scientist and prints his information to screen
@@ -73,8 +78,9 @@ void View::printAllAlive(const vector<Scientist>& list){     //function that pri
         currSex = currGuy.returnSex();
         currBirth = currGuy.dateofBirthQString();
         currDeath = currGuy.dateofDeathQString();
+        currFact = currGuy.returnFact();
         if(currGuy.dateofDeath() == QDate(1,1,1)){          //checks whether the Scientist is alive
-            cout << left << "| " << setfill(' ') << setw(25) << currName.toStdString() << setw(15)<< currSex.toStdString() << setw(15) << currBirth.toStdString() << setw(15) << "|" << endl;
+            cout << left << "| " << setfill(' ') << setw(25) << currName.toStdString() << setw(15)<< getGenderString(currSex) << setw(15) << currBirth.toStdString() << setw(15) << currFact.toStdString() <<"|" << endl;
         }
     }
     cout << setfill('-') << setw(58) << "-" <<  endl;
@@ -106,14 +112,19 @@ void View::askName(string& name){
     return;
 }
 
-void View::askGender(string& sex){
+void View::askGender(bool& sex){
     int check = 0;
     View screen;
 
     while(check == 0){
-        cout << "Write 'male' for Male and 'female' for Female: ";
+        cout << "Write '0' for Male and '1' for Female: ";
         cin >> sex;
-        if(sex == "male" || sex == "female"){           //checks for errors in input
+        if(sex == 1){           //checks for errors in input
+            sex = true;
+            check = 1;
+        }
+        else if(sex == 0){
+            sex = false;
             check = 1;
         }
         else{
@@ -187,6 +198,16 @@ QDate View::askDateOfDeath(){
     return doD;
 }
 
+void View::askFact(QString& fact){
+    string sFact;
+    cout << "Write a small factoid about the scientist: ";
+    while(sFact == ""){
+        getline(cin, sFact);
+    }
+    fact = QString::fromStdString(sFact);
+
+}
+
 
 void View::nameNotFound(){
      cout << "Name was not found in the Database." << endl;
@@ -194,8 +215,8 @@ void View::nameNotFound(){
      return;
 }
 
-void View::printSearchMatch(QString currName, QString currSex, QString currBirth, QString currDeath){
-    cout << currName.toStdString() << " " << currSex.toStdString() << " " << currBirth.toStdString() << " " << currDeath.toStdString() << endl;
+void View::printSearchMatch(QString currName, bool currSex, QString currBirth, QString currDeath, QString currFact){
+    cout << currName.toStdString() << " " << getGenderString(currSex) << " " << currBirth.toStdString() << " " << currDeath.toStdString() << " " << currFact.toStdString() << endl;
 
     return;
 }
@@ -206,11 +227,21 @@ void View::editSelection(int& select){
          << "2. Edit gender." << endl
          << "3. Edit date of birth." << endl
          << "4. Edit date of death." << endl
-         << "5. Edit everything." << endl
+         << "5. Edit fact." << endl
+         << "6. Edit everything." << endl
          << "0. Cancel."<< endl;
     cin >> select;
 
     return;
+}
+
+string View::getGenderString(bool sex){
+    if(sex){
+        return "Female";
+    }
+    else{
+        return "Male";
+    }
 }
 
 void View::invalidInput(){

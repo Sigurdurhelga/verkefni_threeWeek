@@ -7,15 +7,16 @@ class Computers
 {
     private:
         int ID;
-        bool created;
-        QDate creationDate;
         QString name;
+        bool created;
+        int creationYear;
+        QString inventor;
         QString description;
 
 
     public:
         Computers();
-        Computers(int ID, bool created, QDate creationDate, QString name, QString description);
+        Computers(int SID, QString Sname, bool Screated, int ScreationYear, QString Sinventor, QString Sdescription);
 };
 
 #endif // COMPUTERS_H

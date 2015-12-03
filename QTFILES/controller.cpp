@@ -105,18 +105,19 @@ void Controller::listScientists(vector<Scientist>& list){   //function that defi
 void Controller::addScientist(){            //function that creates a Scientist in the database
     View screen;
     string name = "";
-    string sex = "";
+    bool sex = false;
     QDate doB;
     QDate doD;
+    QString fact;
 
     screen.askName(name);
     screen.askGender(sex);
     doB = screen.askDateOfBirth();
     doD = screen.askDateOfDeath();
+    screen.askFact(fact);
 
     QString qName = QString::fromStdString(name);
-    QString qSex = QString::fromStdString(sex);
-    Scientist newScientist = Scientist(qName, qSex, doB, doD);
+    Scientist newScientist = Scientist(qName, sex, doB, doD, fact);
     Model db;
     db.writeToDB(newScientist);
 
@@ -164,9 +165,10 @@ void Controller::searchScientist(vector<Scientist>& list){              //functi
     name = name.toLower();
 
     QString currName = "";
-    QString currSex = "";
+    bool currSex = false;
     QString currBirth;
     QString currDeath;
+    QString currFact;
 
     bool check = false;
     for(unsigned int i = 0; i < list.size(); i++){
@@ -178,7 +180,8 @@ void Controller::searchScientist(vector<Scientist>& list){              //functi
             currSex = list[i].returnSex();
             currBirth = list[i].dateofBirthQString();
             currDeath = list[i].dateofDeathQString();
-            screen.printSearchMatch(currName, currSex, currBirth, currDeath);
+            currFact = list[i].returnFact();
+            screen.printSearchMatch(currName, currSex, currBirth, currDeath, currFact);
         }
     }
     if(!check)
@@ -198,9 +201,10 @@ void Controller::editScientist(vector<Scientist>& list){            //function t
     name = name.toLower();
 
     QString currName = "";
-    QString currSex = "";
+    bool currSex = "";
     QString doB;
     QString doD;
+    QString fact;
 
     int selection = 1;
 
@@ -215,27 +219,31 @@ void Controller::editScientist(vector<Scientist>& list){            //function t
         if(temp == name){
             check = true;
             screen.editSelection(selection);
-            if((selection == 1) | (selection == 5)){
+            if((selection == 1) | (selection == 6)){
                 string name = "";
                 screen.askName(name);
                 QString currName = QString::fromStdString(name);
                 list[i].setName(currName);
             }
-            if((selection == 2) | (selection == 5)){
-                string sex = "";
+            if((selection == 2) | (selection == 6)){
+                bool sex = false;
                 screen.askGender(sex);
-                QString currSex = QString::fromStdString(sex);
-                list[i].setGender(currSex);
+                list[i].setGender(sex);
             }
-            if((selection == 3) | (selection == 5)){
+            if((selection == 3) | (selection == 6)){
                 QDate doB;
                 doB = screen.askDateOfBirth();
                 list[i].setdoB(doB);
             }
-            if((selection == 4) | (selection == 5)){
+            if((selection == 4) | (selection == 6)){
                 QDate doD;
                 doD = screen.askDateOfDeath();
                 list[i].setdoD(doD);
+            }
+            if((selection == 5) | (selection == 6)){
+                QString fact;
+                screen.askFact(fact);
+                list[i].setFact(fact);
             }
         }
     }

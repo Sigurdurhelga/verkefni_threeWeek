@@ -15,13 +15,14 @@ Scientist::Scientist()
 
 
 
-Scientist::Scientist(QString Sname, QString Ssex, QDate SdoB, QDate SdoD)
+Scientist::Scientist(QString Sname, bool Ssex, QDate SdoB, QDate SdoD, QString Sfact)
 
 {
     name = Sname;
     sex = Ssex;
     doB = SdoB;
     doD = SdoD;
+    fact = Sfact;
 }
 
 QString Scientist::returnName()
@@ -33,7 +34,7 @@ void Scientist::setName(QString Sname){
     name = Sname;
 }
 
-void Scientist::setGender(QString Sgender){
+void Scientist::setGender(bool Sgender){
     sex = Sgender;
 }
 
@@ -45,7 +46,12 @@ void Scientist::setdoD(QDate SdoD){
     doD = SdoD;
 }
 
-QString Scientist::returnSex()
+void Scientist::setFact(QString Sfact)
+{
+    fact = Sfact;
+}
+
+bool Scientist::returnSex()
 {
     return sex;
 }
@@ -66,4 +72,8 @@ QString Scientist::dateofBirthQString()
 QString Scientist::dateofDeathQString()
 {
     return doD.toString("dd.MM.yyyy");
+}
+QString Scientist::returnFact()
+{
+    return fact;
 }
