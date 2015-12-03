@@ -12,16 +12,38 @@
 
 using namespace std;
 
+bool Model::checkConnection(QSqlDatabase db){
+    return db.open();
+}
+
 QSqlDatabase Model::openConnection(){
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setHostName("localhost");
-    db.setDatabaseName("C:/sqlite/database.sqlite");
+    db.setDatabaseName("C:/sqlite/data.dat");
     bool db_ok = db.open();
     if(db_ok){
         return db;
     }
     else{
         cout << "DATABASE CONNECTION FAILED!" << endl;
+    }
+}
+
+void Model::addScientistToDatabase(QSqlDatabase db, QString name, bool gender, QDate birthDate, QDate deathDate, QString fact){
+    if(checkConnection(db)){
+        QString boolToNums = "0";
+        if(gender){
+            boolToNums = "1";
+        }
+        QString format = QString("yyyy-MM-dd");
+        QString command = QString("INSERT INTO people(name, gender, birthDate, deathDate, fact) VALUES(\""+name+"\", "+boolToNums+", \""+
+                         birthDate.toString(format)+"\", \""+
+                         deathDate.toString(format)+"\", \""+
+                         fact+"\") ");
+        QSqlQuery query = db.exec(command);
+    }
+    else{
+        cout << "no connection to database" << endl;
     }
 }
 

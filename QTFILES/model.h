@@ -11,7 +11,8 @@ public:
      QSqlDatabase openConnection();
      void writeToDB(Scientist guy);
      void overwriteDB(vector<Scientist>& list);
-     void addToDatabase(QSqlDatabase);
+     void addScientistToDatabase(QSqlDatabase db, QString name, bool gender, QDate birthDate, QDate deathDate, QString fact);
+     bool checkConnection(QSqlDatabase db);
 };
 
 #endif // MODEL_H
