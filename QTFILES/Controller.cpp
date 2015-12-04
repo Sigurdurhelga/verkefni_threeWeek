@@ -166,12 +166,7 @@ void Controller::functionHandler(int n){                    //function that rece
     Model db;
     View UI;
     QSqlDatabase dataBase = QSqlDatabase::database();
-    QSqlQuery query;
-    query = dataBase.exec("SELECT * FROM people");
-    while (query.next()) {
-            QString name = query.value(0).toString();
-            cout << name.toStdString();
-        }
+
     vector<Scientist> database = db.retDB();                //get db as a vector
     Scientist currentScientist;
     switch(n){
