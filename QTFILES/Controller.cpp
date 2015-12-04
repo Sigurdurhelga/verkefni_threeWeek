@@ -107,7 +107,6 @@ void Controller::editScientist(vector<Scientist>& list){            //function t
     name = name.toLower();
 
     QString currName = "";
-    bool currSex = "";
     QString doB;
     QString doD;
     QString fact;
@@ -165,16 +164,15 @@ void Controller::editScientist(vector<Scientist>& list){            //function t
 void Controller::functionHandler(int n){                    //function that receives the user selection and executes accordingly
     Model db;
     View UI;
-    QSqlDatabase dataBase = QSqlDatabase::database();
     vector<Scientist> database = db.retDB();                //get db as a vector
     Scientist currentScientist;
+    int listSelect;
     switch(n){
         case 1:
-            listScientists();
+            listFunctions();
             break;
         case 2:
-            UI.populateScientist(currentScientist);
-            db.addScientistToDatabase(currentScientist);
+            addFunctions();
             break;
         case 3:
             removeScientist();
@@ -186,8 +184,62 @@ void Controller::functionHandler(int n){                    //function that rece
             editScientist(database);
             break;
     }
-    dataBase.close();
     return;
+}
+
+void Controller::listFunctions(){
+    int which;
+    View UI;
+    QSqlQuery query;
+    UI.listInterface(which);
+    int select = 25;
+    switch(which){
+        case 1:
+            while(select != 7){
+                select = UI.displayListFuncsSci();
+                query = sortByInSci(select);
+                UI.printResult(query);
+            }
+            break;
+        case 2:
+            while(select != 7){
+                select = UI.displayListFuncsComp();
+                query = sortByInComp(select);
+                UI.printResult(query);
+            }
+            break;
+        case 0:
+            break;
+        default:
+            listFunctions();
+            break;
+
+    }
+}
+
+void Controller::addFunctions(){
+    int which = 0;
+    View UI;
+    Model db;
+    QSqlQuery query;
+    Scientist guy;
+    Computers comp;
+    UI.addInterface(which);
+    switch(which){
+        case 1:
+            UI.populateScientist(guy);
+            db.addScientistToDatabase(guy);
+            break;
+        case 2:
+            UI.populateComputer(comp);
+            db.addComputerToDatabase(comp);
+            break;
+        case 0:
+            break;
+        default:
+            addFunctions();
+
+    }
 }
 
 QSqlQuery Controller::sortBy(int comp){
@@ -196,4 +248,15 @@ QSqlQuery Controller::sortBy(int comp){
     ret = db.queryList(comp);
     return ret;
 }
-
+QSqlQuery Controller::sortByInSci(int comp){
+    Model db;
+    QSqlQuery ret;
+    ret = db.queryListSci(comp);
+    return ret;
+}
+QSqlQuery Controller::sortByInComp(int comp){
+    Model db;
+    QSqlQuery ret;
+    ret = db.queryListComp(comp);
+    return ret;
+}

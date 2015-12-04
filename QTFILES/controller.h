@@ -1,6 +1,7 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 #include "Scientist.h"
+#include "Computers.h"
 #include <vector>
 #include <QtSql>
 
@@ -19,8 +20,14 @@ public:
     void editScientist(vector<Scientist>& list);
     void overwriteDB(vector<Scientist>& list);
     void functionHandler(int n);
+    void listFunctions();
+    void addFunctions();
     void sortTheList(vector<Scientist>& list);
     QSqlQuery sortBy(int comp);
+    QSqlQuery sortByInSci(int comp);
+    QSqlQuery sortByInComp(int comp);
+
+
 };
 
 #endif // CONTROLLER_H

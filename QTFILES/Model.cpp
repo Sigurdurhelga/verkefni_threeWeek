@@ -36,8 +36,57 @@ QSqlQuery Model::queryList(int way){
         case 6:
             ret = db.exec("SELECT * FROM people ORDER BY birthDate DESC");
             break;
+    }
+    return ret;
+}
 
-
+QSqlQuery Model::queryListSci(int way){
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery ret;
+    switch(way){
+        case 1:
+            ret = db.exec("SELECT * FROM people ORDER BY id");
+            break;
+        case 2:
+            ret = db.exec("SELECT * FROM people ORDER BY id DESC");
+            break;
+        case 3:
+            ret = db.exec("SELECT * FROM people ORDER BY name");
+            break;
+        case 4:
+            ret = db.exec("SELECT * FROM people ORDER BY name DESC");
+            break;
+        case 5:
+            ret = db.exec("SELECT * FROM people ORDER BY birthDate");
+            break;
+        case 6:
+            ret = db.exec("SELECT * FROM people ORDER BY birthDate DESC");
+            break;
+    }
+    return ret;
+}
+QSqlQuery Model::queryListComp(int way){
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery ret;
+    switch(way){
+        case 1:
+            ret = db.exec("SELECT * FROM computers ORDER BY id");
+            break;
+        case 2:
+            ret = db.exec("SELECT * FROM computers ORDER BY id desc");
+            break;
+        case 3:
+            ret = db.exec("SELECT * FROM computers WHERE created = 1 ORDER BY id");
+            break;
+        case 4:
+            ret = db.exec("SELECT * FROM computers WHERE created = 0 ORDER BY is");
+            break;
+        case 5:
+            ret = db.exec("SELECT * FROM computers ORDER BY creationDate");
+            break;
+        case 6:
+            ret = db.exec("SELECT * FROM computers ORDER BY creationDate");
+            break;
     }
     return ret;
 }
@@ -94,6 +143,29 @@ void Model::addScientistToDatabase(Scientist& guy){
     }
     else{
         cout << "no connection to database" << endl;
+    }
+}
+
+void Model::addComputerToDatabase(Computers& comp){
+    QSqlDatabase db = QSqlDatabase::database();
+    if(checkConnection(db)){
+        QSqlQuery query;
+
+        QString name = comp.returnName();
+        bool created = comp.returnCreated();
+        int creationYear = comp.returnCreationYear();
+        QString desc = comp.returnDescription();
+        QString boolToString = "0";
+        if(created){
+            boolToString = "1";
+        }
+        query.prepare("INSERT INTO computers(name, created, creationDate, description) VALUES (:name, :created, :creationDate, :desc)");
+        query.bindValue(":name", name);
+        query.bindValue(":created", boolToString);
+        query.bindValue(":creationDate", creationYear);
+        query.bindValue(":desc", desc);
+        query.exec();
+
     }
 }
 

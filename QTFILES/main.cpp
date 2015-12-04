@@ -17,6 +17,6 @@ int main(int argc, char *argv[])
     QSqlDatabase dataBase = db.openConnection();
     View newView;
     newView.displayInterface();
-
+    dataBase.close();
     return 0;
 }

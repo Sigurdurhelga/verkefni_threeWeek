@@ -19,9 +19,9 @@ void View::displayInterface()
     int select = 25;
       cout << "This is commandline interface for a CS Scientist program" << endl;
     while (select != 0){
-        cout << "1. List all Scientists" << endl
-             << "2. Add new Scientist" << endl
-             << "3. Remove Scientist" << endl
+        cout << "1. List records" << endl
+             << "2. Add record" << endl
+             << "3. Remove record" << endl
              << "4. Search by Name" << endl
              << "5. Edit a Scientist" << endl
              << "0. Quit the Application" << endl;
@@ -33,6 +33,45 @@ void View::displayInterface()
     }
 
     return;
+}
+
+int View::displayListFuncsSci(){
+    int select = 0;
+    cout << "1. List by ID ascending" << endl
+         << "2. List by ID descending" << endl
+         << "3. List by name ascending" << endl
+         << "4. List by name descing" << endl
+         << "5. List by date of birth ascending" << endl
+         << "6. List by date of birth descending" << endl
+         << "7. Go back" << endl;
+    cin >> select;
+    return select;
+}
+int View::displayListFuncsComp(){
+    int select = 0;
+    cout << "1. List by ID ascending" << endl
+         << "2. List by ID descending" << endl
+         << "3. List those who were created" << endl
+         << "4. List those who were not created" << endl
+         << "5. List by creation date ascending" << endl
+         << "6. List by creation date descending" << endl
+         << "7. Go back" << endl;
+    cin >> select;
+    return select;
+}
+
+void View::listInterface(int& select){
+    cout << "1. List scientists" << endl
+         << "2. List computers" << endl
+         << "0. Go back" << endl;
+    cin >> select;
+}
+
+void View::addInterface(int& select){
+    cout << "1. Add scientists" << endl
+         << "2. Add computers" << endl
+         << "0. Go back" << endl;
+    cin >> select;
 }
 
 void View::printResult(QSqlQuery& result){
@@ -65,6 +104,21 @@ void View::populateScientist(Scientist& guy){
     guy.setdoB(doB);
     guy.setdoD(doD);
     guy.setFact(fact);
+}
+
+void View::populateComputer(Computers& comp){
+    string name;
+    bool created;
+    int year;
+    QString desc;
+    compAskName(name);
+    compAskCreated(created);
+    compAskCreationDate(year);
+    compAskDescription(desc);
+    comp.setName(QString::fromStdString(name));
+    comp.setCreated(created);
+    comp.setCreationYear(year);
+    comp.setDescription(desc);
 }
 
 void View::printTheList(const vector<Scientist>& list){     //function that prints the database to screen
@@ -241,6 +295,56 @@ void View::askFact(QString& fact){
 
 }
 
+void View::compAskName(string& name){
+    cout << "Write a Name for the Computer:" << endl;
+    while(name == ""){
+        getline(cin, name);
+    }
+    return;
+}
+
+void View::compAskCreated(bool& created){
+    int check = 0;
+    View screen;
+
+    while(check == 0){
+        cout << "Write '0' for if your computer was never created or was just a concept"
+             << endl << "and '1' if it was actually made: ";
+        cin >> created;
+        if(created == 1){           //checks for errors in input
+            created = true;
+            check = 1;
+        }
+        else if(created == 0){
+            created = false;
+            check = 1;
+        }
+        else{
+            screen.invalidInput();
+        }
+    }
+
+    return;
+}
+
+void View::compAskCreationDate(int& year){
+    int check = year;
+    while(year == check){
+        cout << "Write the Year of the creation date for your Computer: ";
+        cin >> year;
+    }
+    return;
+}
+
+void View::compAskDescription(QString& description){
+    string sDesc;
+    cout << "Write a small description about the computer:";
+    while(sDesc == ""){
+        getline(cin, sDesc);
+    }
+    description = QString::fromStdString(sDesc);
+    return;
+}
 
 void View::nameNotFound(){
      cout << "Name was not found in the Database." << endl;
