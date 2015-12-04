@@ -13,7 +13,7 @@ public:
      void rmRow(QString name);
      void writeToDB(Scientist guy);
      void overwriteDB(vector<Scientist>& list);
-     void addScientistToDatabase(QSqlDatabase db, QString name, bool gender, QDate birthDate, QDate deathDate, QString fact);
+     void addScientistToDatabase(Scientist& guy);
      bool checkConnection(QSqlDatabase db);
 };
 

@@ -68,18 +68,32 @@ QSqlDatabase Model::openConnection(){
     }
 }
 
-void Model::addScientistToDatabase(QSqlDatabase db, QString name, bool gender, QDate birthDate, QDate deathDate, QString fact){
+
+void Model::addScientistToDatabase(Scientist& guy){
+    QSqlDatabase db = QSqlDatabase::database();
     if(checkConnection(db)){
-        QString boolToNums = "0";
+        QSqlQuery query;
+
+        QString name = guy.returnName();
+        bool gender = guy.returnSex();
+        QString doB = guy.dateofBirthQString();
+        QString doD = guy.dateofDeathQString();
+        QString fact = guy.returnFact();
+        QString boolToString = 0;
         if(gender){
-            boolToNums = "1";
+            boolToString = 1;
         }
-        QString format = QString("yyyy-MM-dd");
-        QString command = QString("INSERT INTO people(name, gender, birthDate, deathDate, fact) VALUES(\""+name+"\", "+boolToNums+", \""+
-                         birthDate.toString(format)+"\", \""+
-                         deathDate.toString(format)+"\", \""+
-                         fact+"\") ");
-        QSqlQuery query = db.exec(command);
+
+        query.prepare("INSERT INTO people(name, gender, birthDate, deathDate, fact) VALUES(:name, :gender, :doB, :doD, :fact)");
+        query.bindValue(":name", name);
+        query.bindValue("gender", boolToString);
+        query.bindValue("doB", doB);
+        query.bindValue(":doD", doD);
+        query.bindValue(":fact", fact);
+        query.exec();
+
+
+
     }
     else{
         cout << "no connection to database" << endl;

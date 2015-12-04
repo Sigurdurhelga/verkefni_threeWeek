@@ -14,55 +14,6 @@
 
 using namespace std;
 
-struct compareNamesAscending{    //checks which Scientist is printed first in ascending order
-
-    bool operator ()(Scientist s1, Scientist s2) const {
-        int comparison = QString::localeAwareCompare((s1.returnName()), (s2.returnName()));
-
-        if(comparison < 0)
-            return true;
-        else
-            return false;
-    }
-};
-
-struct compareNamesDescending{          //checks which Scientist is printed first in ascending order
-
-    bool operator ()(Scientist s1, Scientist s2) const {
-        int comparison = QString::localeAwareCompare((s1.returnName()), (s2.returnName()));
-
-        if(comparison > 0)
-            return true;
-        else
-            return false;
-    }
-};
-struct compareDateAscending{
-
-    bool operator ()(Scientist s1, Scientist s2) const {
-        bool comparison = (s1.dateofBirth() < s2.dateofBirth());
-
-        if(comparison)
-            return true;
-        else
-            return false;
-    }
-};
-
-
-struct compareDateDescending{
-
-    bool operator ()(Scientist s1, Scientist s2) const {
-        bool comparison = (s1.dateofBirth() > s2.dateofBirth());
-
-        if(comparison)
-            return true;
-        else
-            return false;
-    }
-};
-
-
 
 void Controller::listScientists(){   //function that defines how the list of Scientists should be ordered
     int select = 0;
@@ -213,6 +164,7 @@ void Controller::editScientist(vector<Scientist>& list){            //function t
 
 void Controller::functionHandler(int n){                    //function that receives the user selection and executes accordingly
     Model db;
+    View UI;
     QSqlDatabase dataBase = QSqlDatabase::database();
     QSqlQuery query;
     query = dataBase.exec("SELECT * FROM people");
@@ -249,15 +201,4 @@ QSqlQuery Controller::sortBy(int comp){
     QSqlQuery ret;
     ret = db.queryList(comp);
     return ret;
-}
-
-vector<Scientist> Controller::sortByDate(vector<Scientist>& list, bool comp){
-    if(comp){
-        sort(list.begin(), list.end(), compareDateAscending());
-    }
-    else{
-        sort(list.begin(), list.end(), compareDateDescending());
-    }
-
-    return list;
 }

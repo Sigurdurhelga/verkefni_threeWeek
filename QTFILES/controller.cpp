@@ -164,6 +164,7 @@ void Controller::editScientist(vector<Scientist>& list){            //function t
 
 void Controller::functionHandler(int n){                    //function that receives the user selection and executes accordingly
     Model db;
+    View UI;
     QSqlDatabase dataBase = QSqlDatabase::database();
     QSqlQuery query;
     query = dataBase.exec("SELECT * FROM people");
