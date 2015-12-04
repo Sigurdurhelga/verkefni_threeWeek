@@ -21,6 +21,10 @@ public:
     QDate askDateOfBirth();
     QDate askDateOfDeath();
     void askFact(QString& fact);
+    void compAskName(string& name);
+    void compAskCreated(bool& created);
+    QDate askCreationDate();
+    void compAskDescription(QString& description);
     void nameNotFound();
     void printSearchMatch(QString currName, bool currSex, QString currBirth, QString currDeath, QString currFact);
     void editSelection(int& select);

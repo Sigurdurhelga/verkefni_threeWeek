@@ -10,13 +10,20 @@ class Computers
         QString name;
         bool created;
         int creationYear;
-        QString inventor;
         QString description;
 
 
     public:
         Computers();
-        Computers(int SID, QString Sname, bool Screated, int ScreationYear, QString Sinventor, QString Sdescription);
+        Computers(int SID, QString Sname, bool Screated, int ScreationYear, QString Sdescription);
+        QString returnName();
+        bool returnCreated();
+        int returnCreationYear();
+        QString returnDescription();
+        void setName(QString name);
+        void setCreated(bool sCreated);
+        void setCreationYear(int sCreationYear);
+        void setDescription(QString sDescription);
 };
 
 #endif // COMPUTERS_H
