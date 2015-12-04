@@ -35,6 +35,23 @@ void View::displayInterface()
     return;
 }
 
+void View::populateScientist(Scientist& guy){
+    string name;
+    bool gender;
+    QString fact;
+    askName(name);
+    askGender(gender);
+    QDate doB = askDateOfBirth();
+    QDate doD = askDateOfDeath();
+    askFact(fact);
+
+    guy.setName(QString::fromStdString(name));
+    guy.setGender(gender);
+    guy.setdoB(doB);
+    guy.setdoD(doD);
+    guy.setFact(fact);
+}
+
 void View::printResult(QSqlQuery& result){
     int i = 0;
     QString val;
@@ -101,24 +118,6 @@ void View::printAllAlive(const vector<Scientist>& list){     //function that pri
     }
     cout << setfill('-') << setw(58) << "-" <<  endl;
     return;
-}
-
-void View::populateScientist(Scientist& newGuy){
-    string name;
-    bool gender;
-    QDate doB;
-    QDate doD;
-    QString fact;
-    askName(name);
-    askGender(gender);
-    doB = askDateOfBirth();
-    doD = askDateOfDeath();
-    askFact(fact);
-    newGuy.setName(QString::fromStdString(name));
-    newGuy.setGender(gender);
-    newGuy.setdoB(doB);
-    newGuy.setdoD(doD);
-    newGuy.setFact(fact);
 }
 
 void View::howToList(int& selection){

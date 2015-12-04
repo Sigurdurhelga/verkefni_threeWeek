@@ -14,11 +14,29 @@ using namespace std;
 
 
 
-QSqlQuery Model::queryListName(bool way){
+QSqlQuery Model::queryList(int way){
     QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery ret;
-    if(way){
-        ret = db.exec("SELECT * FROM people ORDER BY name");
+    switch(way){
+        case 1:
+            ret = db.exec("SELECT * FROM people ORDER BY name");
+            break;
+        case 2:
+            ret = db.exec("SELECT * FROM people ORDER BY name DESC");
+            break;
+        case 3:
+            ret = db.exec("SELECT * FROM people WHERE deathDate = '0001-01-01'");
+            break;
+        case 4:
+            ret = db.exec("SELECT * FROM people");
+            break;
+        case 5:
+            ret = db.exec("SELECT * FROM people ORDER BY birthDate");
+            break;
+        case 6:
+            ret = db.exec("SELECT * FROM people ORDER BY birthDate DESC");
+            break;
+
 
     }
     return ret;
@@ -44,44 +62,30 @@ QSqlDatabase Model::openConnection(){
     }
 }
 
-void Model::addScientistToDatabase(Scientist guy){
+void Model::addScientistToDatabase(Scientist& guy){
     QSqlDatabase db = QSqlDatabase::database();
     if(checkConnection(db)){
-
         QSqlQuery query;
+
         QString name = guy.returnName();
         bool gender = guy.returnSex();
         QString doB = guy.dateofBirthQString();
         QString doD = guy.dateofDeathQString();
         QString fact = guy.returnFact();
-
-        QString boolToNums = "0";
-
+        QString boolToString = 0;
         if(gender){
-            boolToNums = "1";
-        }
-        if(doD != "0001-01-01"){
-            query.prepare("INSERT INTO people(name, gender, birthDate, deathDate, fact) "
-                          "VALUES(\":name\", :gender, \":birthDate\", \":deathDate\", \":fact\"");
-
-            query.bindValue(":name", name);
-            query.bindValue(":gender", boolToNums);
-            query.bindValue(":birthDate", doB);
-            query.bindValue(":deathDate", doD);
-            query.bindValue(":fact", fact);
-        }
-        else{
-
-            query.prepare("INSERT INTO people(name, gender, birthDate, deathDate, fact) "
-                          "VALUES(\":name\", :gender, \":birthDate\", \":fact\"");
-
-            query.bindValue(":name", guy.returnName());
-            query.bindValue(":gender", boolToNums);
-            query.bindValue(":birthDate", guy.dateofBirthQString());
-            query.bindValue(":fact", guy.returnFact());
+            boolToString = 1;
         }
 
+        query.prepare("INSERT INTO people(name, gender, birthDate, deathDate, fact) VALUES(:name, :gender, :doB, :doD, :fact)");
+        query.bindValue(":name", name);
+        query.bindValue("gender", boolToString);
+        query.bindValue("doB", doB);
+        query.bindValue(":doD", doD);
+        query.bindValue(":fact", fact);
         query.exec();
+
+
     }
     else{
         cout << "no connection to database" << endl;

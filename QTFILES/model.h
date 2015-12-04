@@ -7,12 +7,12 @@
 class Model
 {
 public:
-     QSqlQuery queryListName(bool way);
+     QSqlQuery queryList(int way);
      vector<Scientist> retDB();
      QSqlDatabase openConnection();
      void writeToDB(Scientist guy);
      void overwriteDB(vector<Scientist>& list);
-     void addScientistToDatabase(Scientist guy);
+     void addScientistToDatabase(Scientist& guy);
      bool checkConnection(QSqlDatabase db);
 };
 

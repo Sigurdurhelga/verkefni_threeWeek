@@ -14,10 +14,10 @@ public:
     void printResult(QSqlQuery& result);
     void printTheList(const vector<Scientist>& list);
     void printAllAlive(const vector<Scientist>& list);
+    void populateScientist(Scientist& guy);
     void howToList(int& selection);
     void askName(string& name);
     void askGender(bool& sex);
-    void populateScientist(Scientist& newGuy);
     QDate askDateOfBirth();
     QDate askDateOfDeath();
     void askFact(QString& fact);
