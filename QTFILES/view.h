@@ -17,6 +17,7 @@ public:
     void howToList(int& selection);
     void askName(string& name);
     void askGender(bool& sex);
+    void populateScientist(Scientist& newGuy);
     QDate askDateOfBirth();
     QDate askDateOfDeath();
     void askFact(QString& fact);

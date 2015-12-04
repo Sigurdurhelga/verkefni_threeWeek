@@ -103,15 +103,34 @@ void View::printAllAlive(const vector<Scientist>& list){     //function that pri
     return;
 }
 
+void View::populateScientist(Scientist& newGuy){
+    string name;
+    bool gender;
+    QDate doB;
+    QDate doD;
+    QString fact;
+    askName(name);
+    askGender(gender);
+    doB = askDateOfBirth();
+    doD = askDateOfDeath();
+    askFact(fact);
+    newGuy.setName(QString::fromStdString(name));
+    newGuy.setGender(gender);
+    newGuy.setdoB(doB);
+    newGuy.setdoD(doD);
+    newGuy.setFact(fact);
+}
+
 void View::howToList(int& selection){
 
 
     cout << "1. List by name in ascending order\n"
             "2. List by name in descending order\n"
             "3. List all alive\n"
-            "4. List by date added\n"
-            "5. List by birth date ascending \n"
-            "6. List by birth date descending"
+            "4. List by ID in ascending order\n"
+            "5. List by ID in descending order\n"
+            "6. List by birth date ascending \n"
+            "7. List by birth date descending"
          << endl;
 
     cin >> selection;
