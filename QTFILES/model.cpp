@@ -12,6 +12,21 @@
 
 using namespace std;
 
+
+
+QSqlQuery Model::queryListName(bool way){
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery ret;
+    if(way){
+        ret = db.exec("SELECT * FROM people ORDER BY name");
+
+    }
+    return ret;
+}
+
+
+
+
 bool Model::checkConnection(QSqlDatabase db){
     return db.open();
 }

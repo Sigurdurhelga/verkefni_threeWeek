@@ -2,6 +2,7 @@
 #include <iomanip>
 #include "View.h"
 #include "Controller.h"
+#include <QtSql>
 
 
 using namespace std;
@@ -32,6 +33,21 @@ void View::displayInterface()
     }
 
     return;
+}
+
+void View::printResult(QSqlQuery& result){
+    int i = 0;
+    QString val;
+    while(result.next()){
+        while(!result.value(i).isNull()){
+            val = result.value(i).toString();
+            cout << val.toStdString() << "  |  ";
+            i++;
+        }
+        cout << endl;
+        i = 0;
+    }
+
 }
 
 void View::printTheList(const vector<Scientist>& list){     //function that prints the database to screen

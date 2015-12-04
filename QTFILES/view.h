@@ -4,12 +4,14 @@
 #include "Scientist.h"
 #include <vector>
 #include <string>
+#include <QtSql>
 
 class View
 {
 public:
     View();
     static void displayInterface();
+    void printResult(QSqlQuery& result);
     void printTheList(const vector<Scientist>& list);
     void printAllAlive(const vector<Scientist>& list);
     void howToList(int& selection);

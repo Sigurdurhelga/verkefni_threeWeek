@@ -63,22 +63,26 @@ struct compareDateDescending{
 };
 
 
+
 void Controller::listScientists(vector<Scientist>& list){   //function that defines how the list of Scientists should be ordered
     int select = 0;
 
     View screen;
-
+    Model data;
+    
     screen.howToList(select);
 
     vector<Scientist> temp = list;
 
+    QSqlQuery query;
+
     switch(select){
         case 1:
-            temp = sortByName(temp, true);
-            screen.printTheList(temp);
+            query = sortByName(true);
+            screen.printResult(query);
             break;
         case 2:
-            temp = sortByName(temp, false);
+            //temp = sortByName(false);
             screen.printTheList(temp);
             break;
         case 3:
@@ -258,13 +262,13 @@ void Controller::editScientist(vector<Scientist>& list){            //function t
 
 void Controller::functionHandler(int n){                    //function that receives the user selection and executes accordingly
     Model db;
-    QSqlDatabase dataBase = db.openConnection();
-    /*QSqlQuery query;
+    QSqlDatabase dataBase = QSqlDatabase::database();
+    QSqlQuery query;
     query = dataBase.exec("SELECT * FROM people");
     while (query.next()) {
             QString name = query.value(0).toString();
             cout << name.toStdString();
-        }*/
+        }
     vector<Scientist> database = db.retDB();                //get db as a vector
     Scientist currentScientist;
     switch(n){
@@ -273,7 +277,7 @@ void Controller::functionHandler(int n){                    //function that rece
             break;
         case 2:
 
-            db.addScientistToDatabase(dataBase, "swag123", true, QDate(1995, 12, 12),QDate(1,1,1), "Nothing interesing");
+            //db.addScientistToDatabase(dataBase, "swag123", true, QDate(1995, 12, 12),QDate(1,1,1), "Nothing interesing");
             break;
         case 3:
             removeScientist(database);
@@ -285,19 +289,20 @@ void Controller::functionHandler(int n){                    //function that rece
             editScientist(database);
             break;
     }
-    dataBase.close();
+    //dataBase.close();
     return;
 }
 
-vector<Scientist> Controller::sortByName(vector<Scientist>& list, bool comp){
+QSqlQuery Controller::sortByName(bool comp){
+    Model db;
+    QSqlQuery ret;
     if(comp){
-        sort(list.begin(), list.end(), compareNamesAscending());
+        ret = db.queryListName(true);
     }
     else{
-        sort(list.begin(), list.end(), compareNamesDescending());
-    }
 
-    return list;
+    }
+    return ret;
 }
 
 vector<Scientist> Controller::sortByDate(vector<Scientist>& list, bool comp){
