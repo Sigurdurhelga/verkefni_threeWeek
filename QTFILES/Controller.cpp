@@ -98,33 +98,14 @@ void Controller::addScientist(){            //function that creates a Scientist 
     return;
 }
 
-void Controller::removeScientist(vector<Scientist>& list){      //function that finds a Scientist to erase
+void Controller::removeScientist(){      //function that finds a Scientist to erase
     QString name;
     string rmName = "";
     View screen;
-
-    screen.askName(rmName);
-
-    name = QString::fromStdString(rmName);
-    name = name.toLower();
-
-    bool check = false;
-
-    for(unsigned int i = 0; i < list.size(); i++){
-        QString temp = list[i].returnName();
-        temp = temp.toLower();
-        if(temp == name){
-            check = true;
-            list.erase(list.begin()+i);
-        }
-    }
-
-    if(!check)
-        screen.nameNotFound();
-
     Model db;
-    db.overwriteDB(list);
-
+    screen.askName(rmName);
+    name = QString::fromStdString(rmName);
+    db.rmRow(name);
     return;
 }
 
@@ -250,7 +231,7 @@ void Controller::functionHandler(int n){                    //function that rece
             //db.addScientistToDatabase(dataBase, "swag123", true, QDate(1995, 12, 12),QDate(1,1,1), "Nothing interesing");
             break;
         case 3:
-            removeScientist(database);
+            removeScientist();
             break;
         case 4:
             searchScientist(database);

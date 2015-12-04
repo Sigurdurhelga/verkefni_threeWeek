@@ -43,7 +43,13 @@ QSqlQuery Model::queryList(int way){
 }
 
 
-
+void Model::rmRow(QString name){
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query;
+    query.prepare("DELETE FROM people WHERE name = :name");
+    query.bindValue(":name", name);
+    query.exec();
+}
 
 bool Model::checkConnection(QSqlDatabase db){
     return db.open();
@@ -52,7 +58,7 @@ bool Model::checkConnection(QSqlDatabase db){
 QSqlDatabase Model::openConnection(){
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setHostName("localhost");
-    db.setDatabaseName("/home/egill/sqlite/data.dat");
+    db.setDatabaseName("data.dat");
     bool db_ok = db.open();
     if(db_ok){
         return db;
