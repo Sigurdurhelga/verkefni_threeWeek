@@ -186,7 +186,7 @@ void Controller::functionHandler(int n){                    //function that rece
             editScientist(database);
             break;
     }
-    //dataBase.close();
+    dataBase.close();
     return;
 }
 

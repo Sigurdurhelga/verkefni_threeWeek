@@ -79,20 +79,17 @@ void Model::addScientistToDatabase(Scientist& guy){
         QString doB = guy.dateofBirthQString();
         QString doD = guy.dateofDeathQString();
         QString fact = guy.returnFact();
-        QString boolToString = 0;
+        QString boolToString = "0";
         if(gender){
-            boolToString = 1;
+            boolToString = "1";
         }
-
-        query.prepare("INSERT INTO people(name, gender, birthDate, deathDate, fact) VALUES(:name, :gender, :doB, :doD, :fact)");
+        query.prepare("INSERT INTO people (name, gender, birthDate, deathDate, fact) VALUES (:name, :gender, :doB, :doD, :fact)");
         query.bindValue(":name", name);
-        query.bindValue("gender", boolToString);
-        query.bindValue("doB", doB);
+        query.bindValue(":gender", boolToString);
+        query.bindValue(":doB", doB);
         query.bindValue(":doD", doD);
         query.bindValue(":fact", fact);
         query.exec();
-
-
 
     }
     else{
