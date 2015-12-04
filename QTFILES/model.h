@@ -7,7 +7,7 @@
 class Model
 {
 public:
-     QSqlQuery queryListName(bool way);
+     QSqlQuery queryList(int way);
      vector<Scientist> retDB();
      QSqlDatabase openConnection();
      void writeToDB(Scientist guy);

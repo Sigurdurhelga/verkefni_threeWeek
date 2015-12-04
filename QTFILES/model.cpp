@@ -14,11 +14,32 @@ using namespace std;
 
 
 
-QSqlQuery Model::queryListName(bool way){
+QSqlQuery Model::queryList(int way){
     QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery ret;
-    if(way){
-        ret = db.exec("SELECT * FROM people ORDER BY name");
+    switch(way){
+        case 1:
+            ret = db.exec("SELECT * FROM people ORDER BY name");
+            break;
+        case 2:
+            ret = db.exec("SELECT * FROM people ORDER BY name DESC");
+            break;
+        case 3:
+            ret = db.exec("SELECT * FROM people WHERE deathDate = '0001-01-01'");
+            break;
+        case 4:
+            ret = db.exec("SELECT * FROM people ORDER BY id");
+            break;
+        case 5:
+            ret = db.exec("SELECT * FROM people ORDER BY id DESC");
+            break;
+        case 6:
+            ret = db.exec("SELECT * FROM people ORDER BY birthDate");
+            break;
+        case 7:
+            ret = db.exec("SELECT * FROM people ORDER BY birthDate DESC");
+            break;
+
 
     }
     return ret;
@@ -34,7 +55,7 @@ bool Model::checkConnection(QSqlDatabase db){
 QSqlDatabase Model::openConnection(){
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setHostName("localhost");
-    db.setDatabaseName("C:/sqlite/data.dat");
+    db.setDatabaseName("data.dat");
     bool db_ok = db.open();
     if(db_ok){
         return db;

@@ -64,45 +64,15 @@ struct compareDateDescending{
 
 
 
-void Controller::listScientists(vector<Scientist>& list){   //function that defines how the list of Scientists should be ordered
+void Controller::listScientists(){   //function that defines how the list of Scientists should be ordered
     int select = 0;
 
     View screen;
-    Model data;
-    
     screen.howToList(select);
 
-    vector<Scientist> temp = list;
-
     QSqlQuery query;
-
-    switch(select){
-        case 1:
-            query = sortByName(true);
-            screen.printResult(query);
-            break;
-        case 2:
-            //temp = sortByName(false);
-            screen.printTheList(temp);
-            break;
-        case 3:
-            screen.printAllAlive(temp);
-            break;
-        case 4:
-            screen.printTheList(list);
-            break;
-        case 5:
-            temp = sortByDate(temp, true);
-            screen.printTheList(temp);
-            break;
-        case 6:
-            temp = sortByDate(temp, false);
-            screen.printTheList(temp);
-            break;
-        default:
-            break;
-    }
-
+    query = sortBy(select);
+    screen.printResult(query);
     return;
 }
 
@@ -273,7 +243,7 @@ void Controller::functionHandler(int n){                    //function that rece
     Scientist currentScientist;
     switch(n){
         case 1:
-            listScientists(database);
+            listScientists();
             break;
         case 2:
 
@@ -293,15 +263,10 @@ void Controller::functionHandler(int n){                    //function that rece
     return;
 }
 
-QSqlQuery Controller::sortByName(bool comp){
+QSqlQuery Controller::sortBy(int comp){
     Model db;
     QSqlQuery ret;
-    if(comp){
-        ret = db.queryListName(true);
-    }
-    else{
-
-    }
+    ret = db.queryList(comp);
     return ret;
 }
 
