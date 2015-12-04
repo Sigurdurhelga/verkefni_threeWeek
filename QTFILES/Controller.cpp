@@ -164,6 +164,7 @@ void Controller::editScientist(vector<Scientist>& list){            //function t
 
 void Controller::functionHandler(int n){                    //function that receives the user selection and executes accordingly
     Model db;
+    View UI;
     QSqlDatabase dataBase = QSqlDatabase::database();
     vector<Scientist> database = db.retDB();                //get db as a vector
     Scientist currentScientist;
@@ -172,8 +173,8 @@ void Controller::functionHandler(int n){                    //function that rece
             listScientists();
             break;
         case 2:
-
-            //db.addScientistToDatabase(dataBase, "swag123", true, QDate(1995, 12, 12),QDate(1,1,1), "Nothing interesing");
+            UI.populateScientist(currentScientist);
+            db.addScientistToDatabase(currentScientist);
             break;
         case 3:
             removeScientist();

@@ -50,6 +50,23 @@ void View::printResult(QSqlQuery& result){
 
 }
 
+void View::populateScientist(Scientist& guy){
+    string name;
+    bool gender;
+    QString fact;
+    askName(name);
+    askGender(gender);
+    QDate doB = askDateOfBirth();
+    QDate doD = askDateOfDeath();
+    askFact(fact);
+
+    guy.setName(QString::fromStdString(name));
+    guy.setGender(gender);
+    guy.setdoB(doB);
+    guy.setdoD(doD);
+    guy.setFact(fact);
+}
+
 void View::printTheList(const vector<Scientist>& list){     //function that prints the database to screen
     QString currName = "";
     bool currSex = false;
