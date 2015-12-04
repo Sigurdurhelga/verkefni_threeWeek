@@ -28,17 +28,16 @@ QSqlQuery Model::queryList(int way){
             ret = db.exec("SELECT * FROM people WHERE deathDate = '0001-01-01'");
             break;
         case 4:
-            ret = db.exec("SELECT * FROM people ORDER BY id");
+            ret = db.exec("SELECT * FROM people");
             break;
         case 5:
-            ret = db.exec("SELECT * FROM people ORDER BY id DESC");
-            break;
-        case 6:
             ret = db.exec("SELECT * FROM people ORDER BY birthDate");
             break;
-        case 7:
+        case 6:
             ret = db.exec("SELECT * FROM people ORDER BY birthDate DESC");
             break;
+
+
     }
     return ret;
 }
@@ -53,7 +52,7 @@ bool Model::checkConnection(QSqlDatabase db){
 QSqlDatabase Model::openConnection(){
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setHostName("localhost");
-    db.setDatabaseName("data.dat");
+    db.setDatabaseName("/home/egill/sqlite/data.dat");
     bool db_ok = db.open();
     if(db_ok){
         return db;
@@ -63,28 +62,18 @@ QSqlDatabase Model::openConnection(){
     }
 }
 
-void Model::addScientistToDatabase(Scientist& guy){
-    QSqlDatabase db = QSqlDatabase::database();
+void Model::addScientistToDatabase(QSqlDatabase db, QString name, bool gender, QDate birthDate, QDate deathDate, QString fact){
     if(checkConnection(db)){
-        QSqlQuery query;
-
-        QString name = guy.returnName();
-        bool gender = guy.returnSex();
-        QString doB = guy.dateofBirthQString();
-        QString doD = guy.dateofDeathQString();
-        QString fact = guy.returnFact();
-        QString boolToString = 0;
+        QString boolToNums = "0";
         if(gender){
-            boolToString = 1;
+            boolToNums = "1";
         }
-
-        query.prepare("INSERT INTO people(name, gender, birthDate, deathDate, fact) VALUES(:name, :gender, :doB, :doD, :fact)");
-        query.bindValue(":name", name);
-        query.bindValue("gender", boolToString);
-        query.bindValue("doB", doB);
-        query.bindValue(":doD", doD);
-        query.bindValue(":fact", fact);
-        query.exec();
+        QString format = QString("yyyy-MM-dd");
+        QString command = QString("INSERT INTO people(name, gender, birthDate, deathDate, fact) VALUES(\""+name+"\", "+boolToNums+", \""+
+                         birthDate.toString(format)+"\", \""+
+                         deathDate.toString(format)+"\", \""+
+                         fact+"\") ");
+        QSqlQuery query = db.exec(command);
     }
     else{
         cout << "no connection to database" << endl;

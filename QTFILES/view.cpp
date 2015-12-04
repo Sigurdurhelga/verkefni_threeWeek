@@ -35,23 +35,6 @@ void View::displayInterface()
     return;
 }
 
-void View::populateScientist(Scientist& guy){
-    string name;
-    bool gender;
-    QString fact;
-    askName(name);
-    askGender(gender);
-    QDate doB = askDateOfBirth();
-    QDate doD = askDateOfDeath();
-    askFact(fact);
-
-    guy.setName(QString::fromStdString(name));
-    guy.setGender(gender);
-    guy.setdoB(doB);
-    guy.setdoD(doD);
-    guy.setFact(fact);
-}
-
 void View::printResult(QSqlQuery& result){
     int i = 0;
     QString val;
@@ -126,10 +109,9 @@ void View::howToList(int& selection){
     cout << "1. List by name in ascending order\n"
             "2. List by name in descending order\n"
             "3. List all alive\n"
-            "4. List by ID in ascending order\n"
-            "5. List by ID in descending order\n"
-            "6. List by birth date ascending \n"
-            "7. List by birth date descending"
+            "4. List by date added\n"
+            "5. List by birth date ascending \n"
+            "6. List by birth date descending"
          << endl;
 
     cin >> selection;
