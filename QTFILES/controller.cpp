@@ -14,55 +14,6 @@
 
 using namespace std;
 
-struct compareNamesAscending{    //checks which Scientist is printed first in ascending order
-
-    bool operator ()(Scientist s1, Scientist s2) const {
-        int comparison = QString::localeAwareCompare((s1.returnName()), (s2.returnName()));
-
-        if(comparison < 0)
-            return true;
-        else
-            return false;
-    }
-};
-
-struct compareNamesDescending{          //checks which Scientist is printed first in ascending order
-
-    bool operator ()(Scientist s1, Scientist s2) const {
-        int comparison = QString::localeAwareCompare((s1.returnName()), (s2.returnName()));
-
-        if(comparison > 0)
-            return true;
-        else
-            return false;
-    }
-};
-struct compareDateAscending{
-
-    bool operator ()(Scientist s1, Scientist s2) const {
-        bool comparison = (s1.dateofBirth() < s2.dateofBirth());
-
-        if(comparison)
-            return true;
-        else
-            return false;
-    }
-};
-
-
-struct compareDateDescending{
-
-    bool operator ()(Scientist s1, Scientist s2) const {
-        bool comparison = (s1.dateofBirth() > s2.dateofBirth());
-
-        if(comparison)
-            return true;
-        else
-            return false;
-    }
-};
-
-
 
 void Controller::listScientists(){   //function that defines how the list of Scientists should be ordered
     int select = 0;
@@ -98,33 +49,14 @@ void Controller::addScientist(){            //function that creates a Scientist 
     return;
 }
 
-void Controller::removeScientist(vector<Scientist>& list){      //function that finds a Scientist to erase
+void Controller::removeScientist(){      //function that finds a Scientist to erase
     QString name;
     string rmName = "";
     View screen;
-
-    screen.askName(rmName);
-
-    name = QString::fromStdString(rmName);
-    name = name.toLower();
-
-    bool check = false;
-
-    for(unsigned int i = 0; i < list.size(); i++){
-        QString temp = list[i].returnName();
-        temp = temp.toLower();
-        if(temp == name){
-            check = true;
-            list.erase(list.begin()+i);
-        }
-    }
-
-    if(!check)
-        screen.nameNotFound();
-
     Model db;
-    db.overwriteDB(list);
-
+    screen.askName(rmName);
+    name = QString::fromStdString(rmName);
+    db.rmRow(name);
     return;
 }
 
@@ -234,7 +166,11 @@ void Controller::functionHandler(int n){                    //function that rece
     Model db;
     QSqlDatabase dataBase = QSqlDatabase::database();
     QSqlQuery query;
-    View UI;
+    query = dataBase.exec("SELECT * FROM people");
+    while (query.next()) {
+            QString name = query.value(0).toString();
+            cout << name.toStdString();
+        }
     vector<Scientist> database = db.retDB();                //get db as a vector
     Scientist currentScientist;
     switch(n){
@@ -242,11 +178,11 @@ void Controller::functionHandler(int n){                    //function that rece
             listScientists();
             break;
         case 2:
-            UI.populateScientist(currentScientist);
-            db.addScientistToDatabase(currentScientist);
+
+            //db.addScientistToDatabase(dataBase, "swag123", true, QDate(1995, 12, 12),QDate(1,1,1), "Nothing interesing");
             break;
         case 3:
-            removeScientist(database);
+            removeScientist();
             break;
         case 4:
             searchScientist(database);
@@ -255,7 +191,7 @@ void Controller::functionHandler(int n){                    //function that rece
             editScientist(database);
             break;
     }
-    dataBase.close();
+    //dataBase.close();
     return;
 }
 
