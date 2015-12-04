@@ -234,12 +234,6 @@ void Controller::functionHandler(int n){                    //function that rece
     Model db;
     View UI;
     QSqlDatabase dataBase = QSqlDatabase::database();
-    QSqlQuery query;
-    query = dataBase.exec("SELECT * FROM people");
-    while (query.next()) {
-            QString name = query.value(0).toString();
-            cout << name.toStdString();
-        }
     vector<Scientist> database = db.retDB();                //get db as a vector
     Scientist currentScientist;
     switch(n){
@@ -260,7 +254,7 @@ void Controller::functionHandler(int n){                    //function that rece
             editScientist(database);
             break;
     }
-    //dataBase.close();
+    dataBase.close();
     return;
 }
 
@@ -271,13 +265,3 @@ QSqlQuery Controller::sortBy(int comp){
     return ret;
 }
 
-vector<Scientist> Controller::sortByDate(vector<Scientist>& list, bool comp){
-    if(comp){
-        sort(list.begin(), list.end(), compareDateAscending());
-    }
-    else{
-        sort(list.begin(), list.end(), compareDateDescending());
-    }
-
-    return list;
-}

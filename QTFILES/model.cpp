@@ -39,8 +39,6 @@ QSqlQuery Model::queryList(int way){
         case 7:
             ret = db.exec("SELECT * FROM people ORDER BY birthDate DESC");
             break;
-
-
     }
     return ret;
 }
@@ -87,8 +85,6 @@ void Model::addScientistToDatabase(Scientist& guy){
         query.bindValue(":doD", doD);
         query.bindValue(":fact", fact);
         query.exec();
-
-
     }
     else{
         cout << "no connection to database" << endl;

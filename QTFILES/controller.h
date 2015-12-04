@@ -11,6 +11,7 @@ public:
     void addScientist();
     void writeToDB(Scientist guy);
     void listScientists(vector<Scientist>& list);
+    void listScientists();
     void printTheList(vector<Scientist>& list);
     void printAlive(vector<Scientist>& list);
     void removeScientist(vector<Scientist>& list);
@@ -19,9 +20,7 @@ public:
     void overwriteDB(vector<Scientist>& list);
     void functionHandler(int n);
     void sortTheList(vector<Scientist>& list);
-    QSqlQuery sortByName(bool comp);
-    vector<Scientist> sortByDate(vector<Scientist>& list, bool comp);
-    vector<Scientist> getAllAlive(vector<Scientist>& list);
+    QSqlQuery sortBy(int comp);
 };
 
 #endif // CONTROLLER_H
