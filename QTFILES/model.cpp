@@ -28,12 +28,15 @@ QSqlQuery Model::queryList(int way){
             ret = db.exec("SELECT * FROM people WHERE deathDate = '0001-01-01'");
             break;
         case 4:
-            ret = db.exec("SELECT * FROM people");
+            ret = db.exec("SELECT * FROM people ORDER BY id");
             break;
         case 5:
-            ret = db.exec("SELECT * FROM people ORDER BY birthDate");
+            ret = db.exec("SELECT * FROM people ORDER BY id DESC");
             break;
         case 6:
+            ret = db.exec("SELECT * FROM people ORDER BY birthDate");
+            break;
+        case 7:
             ret = db.exec("SELECT * FROM people ORDER BY birthDate DESC");
             break;
 
