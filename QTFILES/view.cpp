@@ -103,6 +103,24 @@ void View::printAllAlive(const vector<Scientist>& list){     //function that pri
     return;
 }
 
+void View::populateScientist(Scientist& newGuy){
+    string name;
+    bool gender;
+    QDate doB;
+    QDate doD;
+    QString fact;
+    askName(name);
+    askGender(gender);
+    doB = askDateOfBirth();
+    doD = askDateOfDeath();
+    askFact(fact);
+    newGuy.setName(QString::fromStdString(name));
+    newGuy.setGender(gender);
+    newGuy.setdoB(doB);
+    newGuy.setdoD(doD);
+    newGuy.setFact(fact);
+}
+
 void View::howToList(int& selection){
 
 

@@ -34,7 +34,7 @@ bool Model::checkConnection(QSqlDatabase db){
 QSqlDatabase Model::openConnection(){
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setHostName("localhost");
-    db.setDatabaseName("C:/sqlite/data.dat");
+    db.setDatabaseName("data.dat");
     bool db_ok = db.open();
     if(db_ok){
         return db;
@@ -44,18 +44,44 @@ QSqlDatabase Model::openConnection(){
     }
 }
 
-void Model::addScientistToDatabase(QSqlDatabase db, QString name, bool gender, QDate birthDate, QDate deathDate, QString fact){
+void Model::addScientistToDatabase(Scientist guy){
+    QSqlDatabase db = QSqlDatabase::database();
     if(checkConnection(db)){
+
+        QSqlQuery query;
+        QString name = guy.returnName();
+        bool gender = guy.returnSex();
+        QString doB = guy.dateofBirthQString();
+        QString doD = guy.dateofDeathQString();
+        QString fact = guy.returnFact();
+
         QString boolToNums = "0";
+
         if(gender){
             boolToNums = "1";
         }
-        QString format = QString("yyyy-MM-dd");
-        QString command = QString("INSERT INTO people(name, gender, birthDate, deathDate, fact) VALUES(\""+name+"\", "+boolToNums+", \""+
-                         birthDate.toString(format)+"\", \""+
-                         deathDate.toString(format)+"\", \""+
-                         fact+"\") ");
-        QSqlQuery query = db.exec(command);
+        if(doD != "0001-01-01"){
+            query.prepare("INSERT INTO people(name, gender, birthDate, deathDate, fact) "
+                          "VALUES(\":name\", :gender, \":birthDate\", \":deathDate\", \":fact\"");
+
+            query.bindValue(":name", name);
+            query.bindValue(":gender", boolToNums);
+            query.bindValue(":birthDate", doB);
+            query.bindValue(":deathDate", doD);
+            query.bindValue(":fact", fact);
+        }
+        else{
+
+            query.prepare("INSERT INTO people(name, gender, birthDate, deathDate, fact) "
+                          "VALUES(\":name\", :gender, \":birthDate\", \":fact\"");
+
+            query.bindValue(":name", guy.returnName());
+            query.bindValue(":gender", boolToNums);
+            query.bindValue(":birthDate", guy.dateofBirthQString());
+            query.bindValue(":fact", guy.returnFact());
+        }
+
+        query.exec();
     }
     else{
         cout << "no connection to database" << endl;

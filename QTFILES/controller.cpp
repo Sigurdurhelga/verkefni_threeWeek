@@ -264,11 +264,7 @@ void Controller::functionHandler(int n){                    //function that rece
     Model db;
     QSqlDatabase dataBase = QSqlDatabase::database();
     QSqlQuery query;
-    query = dataBase.exec("SELECT * FROM people");
-    while (query.next()) {
-            QString name = query.value(0).toString();
-            cout << name.toStdString();
-        }
+    View UI;
     vector<Scientist> database = db.retDB();                //get db as a vector
     Scientist currentScientist;
     switch(n){
@@ -276,8 +272,8 @@ void Controller::functionHandler(int n){                    //function that rece
             listScientists(database);
             break;
         case 2:
-
-            //db.addScientistToDatabase(dataBase, "swag123", true, QDate(1995, 12, 12),QDate(1,1,1), "Nothing interesing");
+            UI.populateScientist(currentScientist);
+            db.addScientistToDatabase(currentScientist);
             break;
         case 3:
             removeScientist(database);
@@ -289,7 +285,7 @@ void Controller::functionHandler(int n){                    //function that rece
             editScientist(database);
             break;
     }
-    //dataBase.close();
+    dataBase.close();
     return;
 }
 
