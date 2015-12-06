@@ -181,6 +181,9 @@ void Controller::functionHandler(int n){                    //function that rece
         case 5:
             editScientist(database);
             break;
+        case 6:
+            //linkProgram();
+            break;
     }
     return;
 }
@@ -193,14 +196,14 @@ void Controller::listFunctions(){
     int select = 25;
     switch(which){
         case 1:
-            while(select != 7){
+            while(select != 0){
                 select = UI.displayListFuncsSci();
                 query = sortByInSci(select);
                 UI.printResult(query);
             }
             break;
         case 2:
-            while(select != 7){
+            while(select != 0){
                 select = UI.displayListFuncsComp();
                 query = sortByInComp(select);
                 UI.printResult(query);

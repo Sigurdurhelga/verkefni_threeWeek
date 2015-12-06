@@ -23,7 +23,8 @@ void View::displayInterface()
              << "2. Add record" << endl
              << "3. Remove record" << endl
              << "4. Search by Name" << endl
-             << "5. Edit a Scientist" << endl
+             << "5. Link scientists and computers" << endl
+             << "6. Edit a Scientist" << endl
              << "0. Quit the Application" << endl;
         cin >> select;
         if(select != 0)
@@ -43,7 +44,7 @@ int View::displayListFuncsSci(){
          << "4. List by name descing" << endl
          << "5. List by date of birth ascending" << endl
          << "6. List by date of birth descending" << endl
-         << "7. Go back" << endl;
+         << "0. Go back" << endl;
     cin >> select;
     return select;
 }
@@ -55,7 +56,7 @@ int View::displayListFuncsComp(){
          << "4. List those who were not created" << endl
          << "5. List by creation date ascending" << endl
          << "6. List by creation date descending" << endl
-         << "7. Go back" << endl;
+         << "0. Go back" << endl;
     cin >> select;
     return select;
 }
