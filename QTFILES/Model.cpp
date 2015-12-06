@@ -100,6 +100,14 @@ void Model::rmRowSci(int id){
     query.exec();
 }
 
+void Model::rmRowComp(int id){
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query;
+    query.prepare("DELETE FROM computers WHERE id = :id");
+    query.bindValue(":id", id);
+    query.exec();
+}
+
 bool Model::checkConnection(QSqlDatabase db){
     return db.open();
 }
