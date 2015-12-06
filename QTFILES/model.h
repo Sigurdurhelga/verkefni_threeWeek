@@ -8,7 +8,6 @@
 class Model
 {
 public:
-     QSqlQuery queryList(int way);
      QSqlQuery queryListSci(int way);
      QSqlQuery queryListComp(int way);
      vector<Scientist> retDB();

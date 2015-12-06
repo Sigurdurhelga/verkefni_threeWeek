@@ -22,7 +22,7 @@ void Controller::listScientists(){   //function that defines how the list of Sci
     screen.howToList(select);
 
     QSqlQuery query;
-    query = sortBy(select);
+    query = sortByInSci(select);
     screen.printResult(query);
     return;
 }
@@ -179,10 +179,10 @@ void Controller::functionHandler(int n){                    //function that rece
             searchScientist(database);
             break;
         case 5:
-            editScientist(database);
+            linkProgram();
             break;
         case 6:
-            //linkProgram();
+            editScientist(database);
             break;
     }
     return;
@@ -255,12 +255,14 @@ void Controller::removeFunctions(){
     
 }
 
-QSqlQuery Controller::sortBy(int comp){
-    Model db;
-    QSqlQuery ret;
-    ret = db.queryList(comp);
-    return ret;
+void Controller::linkProgram(){
+    int which = 0;
+    View UI;
+    UI.linkInterface(which);
+
+    return;
 }
+
 QSqlQuery Controller::sortByInSci(int comp){
     Model db;
     QSqlQuery ret;

@@ -23,8 +23,7 @@ public:
     void listFunctions();
     void addFunctions();
     void removeFunctions();
-    void sortTheList(vector<Scientist>& list);
-    QSqlQuery sortBy(int comp);
+    void linkProgram();
     QSqlQuery sortByInSci(int comp);
     QSqlQuery sortByInComp(int comp);
 
