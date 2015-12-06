@@ -58,6 +58,15 @@ void Controller::removeScientist(){      //function that finds a Scientist to er
     return;
 }
 
+void Controller::removeComputer(){      //function that finds a Computer to erase
+    View screen;
+    Model db;
+    int id;
+    screen.removePrint(id);
+    db.rmRowComp(id);
+    return;
+}
+
 void Controller::searchScientist(vector<Scientist>& list){              //function that searches the database
     View screen;
     string searchName = "";
@@ -250,6 +259,9 @@ void Controller::removeFunctions(){
     switch(which){
         case 1:
             removeScientist();
+            break;
+        case 2:
+            removeComputer();
             break;
     }
     
