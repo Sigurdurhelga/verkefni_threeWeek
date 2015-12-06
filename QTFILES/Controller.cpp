@@ -259,6 +259,13 @@ void Controller::linkProgram(){
     int which = 0;
     View UI;
     UI.linkInterface(which);
+    //  switch(which){
+    //    case 1:
+
+      //      break;
+       // case 2:
+
+    //}
 
     return;
 }
