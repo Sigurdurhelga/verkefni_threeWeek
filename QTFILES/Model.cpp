@@ -100,6 +100,25 @@ void Model::rmRowSci(int id){
     query.exec();
 }
 
+QSqlQuery Model::searchSci(QString name){
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery ret;
+    QString query = "SELECT * FROM people WHERE name LIKE '%"+name+"%'";
+    ret = db.exec(query);
+    return ret;
+}
+
+QSqlQuery Model::getConnectionsSC(int id){
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query;
+    query.prepare("SELECT computers.name FROM computers "
+                  "INNER JOIN computers.id ON compGroups.id "
+                  "INNER JOIN compGroups.id ON people.id WHERE people.id = :id");
+    query.bindValue(":id", id);
+    query.exec();
+    return query;
+}
+
 bool Model::checkConnection(QSqlDatabase db){
     return db.open();
 }

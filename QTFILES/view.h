@@ -15,6 +15,8 @@ public:
     void listInterface(int&);
     void addInterface(int&);
     void removeInterface(int& select);
+    void searchInterface(int& select);
+    void searchExtended(int& select);
     int displayListFuncsSci();
     int displayListFuncsComp();
     void removePrint(int& id);

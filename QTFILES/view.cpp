@@ -22,7 +22,7 @@ void View::displayInterface()
         cout << "1. List records" << endl
              << "2. Add record" << endl
              << "3. Remove record" << endl
-             << "4. Search by Name" << endl
+             << "4. Search" << endl
              << "5. Link scientists and computers" << endl
              << "6. Edit a Scientist" << endl
              << "0. Quit the Application" << endl;
@@ -81,10 +81,24 @@ void View::removeInterface(int& select){
          << "0. Go back" << endl;
     cin >> select;
 }
+void View::searchInterface(int& select){
+    cout << "1. Search for scientists" << endl
+         << "2. Search for computers" << endl
+         << "0. Go back" << endl;
+    cin >> select;
+}
 
 void View::removePrint(int& id){
     cout << "Write the ID of the item you want to remove: ";
     cin >> id;
+}
+
+void View::searchExtended(int& select){
+    cout << "1. List all computers this scientist has worked on" << endl
+         << "2. List all scientists that have worked with this scientist" << endl
+         << "3. Edit this scientist" << endl
+         << "0. Go back." << endl;
+    cin >> select;
 }
 
 void View::printResult(QSqlQuery& result){

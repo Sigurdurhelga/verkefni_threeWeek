@@ -58,39 +58,31 @@ void Controller::removeScientist(){      //function that finds a Scientist to er
     return;
 }
 
-void Controller::searchScientist(vector<Scientist>& list){              //function that searches the database
+void Controller::searchScientist(){              //function that searches the database
     View screen;
-    string searchName = "";
-    QString name;
-
-    screen.askName(searchName);
-
-    name = QString::fromStdString(searchName);
-    name = name.toLower();
-
-    QString currName = "";
-    bool currSex = false;
-    QString currBirth;
-    QString currDeath;
-    QString currFact;
-
-    bool check = false;
-    for(unsigned int i = 0; i < list.size(); i++){
-        QString temp = list[i].returnName();
-        temp = temp.toLower();
-        if(temp == name){
-            check = true;
-            currName = list[i].returnName();
-            currSex = list[i].returnSex();
-            currBirth = list[i].dateofBirthQString();
-            currDeath = list[i].dateofDeathQString();
-            currFact = list[i].returnFact();
-            screen.printSearchMatch(currName, currSex, currBirth, currDeath, currFact);
+    Model db;
+    string name;
+    screen.askName(name);
+    QSqlQuery query;
+    QSqlQuery query2;
+    QString qName = QString::fromStdString(name);
+    query = db.searchSci(qName);
+    query2 = query;
+    query2.next();
+    int id = query2.value(0).toInt();
+    screen.printResult(query);
+    cout << query.size() << endl;
+    if(query.size() == 2){
+        int select = 25;
+        while(select != 0){
+            screen.searchExtended(select);
+            switch(select){
+                case 1:
+                    query = db.getConnectionsSC(id);
+                    break;
+            }
         }
     }
-    if(!check)
-       screen.nameNotFound();
-
     return;
 }
 
@@ -176,7 +168,7 @@ void Controller::functionHandler(int n){                    //function that rece
             removeFunctions();
             break;
         case 4:
-            searchScientist(database);
+            searchFunctions();
             break;
         case 5:
             editScientist(database);
@@ -251,8 +243,23 @@ void Controller::removeFunctions(){
         case 1:
             removeScientist();
             break;
+
     }
-    
+}
+
+void Controller::searchFunctions(){
+    int which = 0;
+    View UI;
+    UI.searchInterface(which);
+    switch(which){
+        case 1:
+            searchScientist();
+            break;
+        case 2:
+            break;
+
+    }
+
 }
 
 QSqlQuery Controller::sortBy(int comp){

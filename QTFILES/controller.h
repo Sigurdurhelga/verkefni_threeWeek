@@ -16,13 +16,14 @@ public:
     void printTheList(vector<Scientist>& list);
     void printAlive(vector<Scientist>& list);
     void removeScientist();
-    void searchScientist(vector<Scientist>& list);
+    void searchScientist();
     void editScientist(vector<Scientist>& list);
     void overwriteDB(vector<Scientist>& list);
     void functionHandler(int n);
     void listFunctions();
     void addFunctions();
     void removeFunctions();
+    void searchFunctions();
     void sortTheList(vector<Scientist>& list);
     QSqlQuery sortBy(int comp);
     QSqlQuery sortByInSci(int comp);

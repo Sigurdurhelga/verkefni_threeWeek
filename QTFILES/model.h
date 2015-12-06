@@ -11,6 +11,8 @@ public:
      QSqlQuery queryList(int way);
      QSqlQuery queryListSci(int way);
      QSqlQuery queryListComp(int way);
+     QSqlQuery searchSci(QString name);
+     QSqlQuery getConnectionsSC(int id);
      vector<Scientist> retDB();
      QSqlDatabase openConnection();
      void rmRowSci(int);
