@@ -68,10 +68,22 @@ void View::listInterface(int& select){
 }
 
 void View::addInterface(int& select){
-    cout << "1. Add scientists" << endl
-         << "2. Add computers" << endl
+    cout << "1. Add scientist" << endl
+         << "2. Add computer" << endl
          << "0. Go back" << endl;
     cin >> select;
+}
+
+void View::removeInterface(int& select){
+    cout << "1. Remove scientist" << endl
+         << "2. Remove computer" << endl
+         << "0. Go back" << endl;
+    cin >> select;
+}
+
+void View::removePrint(int& id){
+    cout << "Write the ID of the item you want to remove: ";
+    cin >> id;
 }
 
 void View::printResult(QSqlQuery& result){

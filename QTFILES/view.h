@@ -14,8 +14,10 @@ public:
     static void displayInterface();
     void listInterface(int&);
     void addInterface(int&);
+    void removeInterface(int& select);
     int displayListFuncsSci();
     int displayListFuncsComp();
+    void removePrint(int& id);
     void printResult(QSqlQuery& result);
     void printTheList(const vector<Scientist>& list);
     void printAllAlive(const vector<Scientist>& list);

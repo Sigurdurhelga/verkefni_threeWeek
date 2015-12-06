@@ -92,11 +92,11 @@ QSqlQuery Model::queryListComp(int way){
 }
 
 
-void Model::rmRow(QString name){
+void Model::rmRowSci(int id){
     QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery query;
-    query.prepare("DELETE FROM people WHERE name = :name");
-    query.bindValue(":name", name);
+    query.prepare("DELETE FROM people WHERE id = :id");
+    query.bindValue(":id", id);
     query.exec();
 }
 

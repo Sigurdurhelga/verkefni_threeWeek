@@ -50,13 +50,11 @@ void Controller::addScientist(){            //function that creates a Scientist 
 }
 
 void Controller::removeScientist(){      //function that finds a Scientist to erase
-    QString name;
-    string rmName = "";
     View screen;
     Model db;
-    screen.askName(rmName);
-    name = QString::fromStdString(rmName);
-    db.rmRow(name);
+    int id;
+    screen.removePrint(id);
+    db.rmRowSci(id);
     return;
 }
 
@@ -175,7 +173,7 @@ void Controller::functionHandler(int n){                    //function that rece
             addFunctions();
             break;
         case 3:
-            removeScientist();
+            removeFunctions();
             break;
         case 4:
             searchScientist(database);
@@ -240,6 +238,18 @@ void Controller::addFunctions(){
             addFunctions();
 
     }
+}
+
+void Controller::removeFunctions(){
+    int which = 0;
+    View UI;
+    UI.removeInterface(which);
+    switch(which){
+        case 1:
+            removeScientist();
+            break;
+    }
+    
 }
 
 QSqlQuery Controller::sortBy(int comp){

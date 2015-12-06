@@ -13,7 +13,7 @@ public:
      QSqlQuery queryListComp(int way);
      vector<Scientist> retDB();
      QSqlDatabase openConnection();
-     void rmRow(QString name);
+     void rmRowSci(int);
      void writeToDB(Scientist guy);
      void overwriteDB(vector<Scientist>& list);
      void addScientistToDatabase(Scientist& guy);
