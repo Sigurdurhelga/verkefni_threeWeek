@@ -101,7 +101,6 @@ int Controller::searchComputerID(){
 
 
 void Controller::functionHandler(int n){                    //function that receives the user selection and executes accordingly
-    Model db;
     View UI;
     Scientist currentScientist;
     int listSelect;
@@ -262,6 +261,8 @@ void Controller::editFunctions(){
     int which = 0;
     int select = 25;
     int currID;
+
+
     View UI;
     Model db;
     while(which != 0){
@@ -271,7 +272,10 @@ void Controller::editFunctions(){
                 UI.idGet(currID);
                 while(select != 0){
                     UI.editSelectionScientist(select);
-
+                    switch(select){
+                        case 1:
+                            break;
+                    }
                 }
                 break;
             case 2:

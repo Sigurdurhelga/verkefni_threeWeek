@@ -18,8 +18,7 @@ public:
      QSqlQuery searchCompName(QString name);
      QSqlQuery searchCompID(int id);
      QSqlQuery computersConnSci(int id);
-     void modifyRecord(int, bool);
-     QSqlQuery getConnectionsSC(int id);
+     void modSci(int, QString);
      bool checkConnection(QSqlDatabase db);
      QSqlDatabase openConnection();
      void addScientistToDatabase(Scientist& guy);
