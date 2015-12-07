@@ -24,7 +24,7 @@ public:
      void addScientistToDatabase(Scientist& guy);
      void addComputerToDatabase(Computers& comp);
      QSqlQuery linkListSci();
-     QSqlQuery linklistComp();
+     QSqlQuery linkListComp();
 };
 
 #endif // MODEL_H

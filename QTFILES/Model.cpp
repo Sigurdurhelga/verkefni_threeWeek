@@ -231,7 +231,7 @@ QSqlQuery Model::linkListSci(){
     return query;
 }
 
-QSqlQuery Model::linklistComp(){
+QSqlQuery Model::linkListComp(){
     QSqlQuery query;
     query.prepare("SELECT id, name FROM computers");
     query.exec();

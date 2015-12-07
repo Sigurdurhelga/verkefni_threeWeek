@@ -260,7 +260,8 @@ void Controller::searchFunctions(){
 void Controller::linkFunctions(){
     int which = 1;
     int select = 25;
-    int currID;
+    int currSciID;
+    int currCompID;
     View UI;
     Model db;
     QSqlQuery query;
@@ -273,9 +274,12 @@ void Controller::linkFunctions(){
                 UI.printResult(query);
                 break;
             case 2:
-                query = db.linklistComp();
+                query = db.linkListComp();
                 UI.printResult(query);
                 break;
+            case 3:
+                UI.askForSciID(currSciID);
+                UI.askForCompID(currCompID);
         }
     }
 }

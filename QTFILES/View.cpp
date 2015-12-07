@@ -416,3 +416,19 @@ void View::invalidDate(){
 
     return;
 }
+
+void View::askForSciID(int& id){
+    cout << "Enter the ID of the scientist you want to link: ";
+    cin >> id;
+    cout << endl;
+
+    return;
+}
+
+void View::askForCompID(int& id){
+    cout << "Enter the ID of the computer the scientist is connected to: ";
+    cin >> id;
+    cout << endl;
+
+    return;
+}
