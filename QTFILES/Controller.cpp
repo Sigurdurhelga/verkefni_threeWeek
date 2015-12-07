@@ -33,6 +33,7 @@ void Controller::removeScientist(){      //function that finds a Scientist to er
     View screen;
     Model db;
     int id;
+
     screen.idGet(id);
     db.rmRowSci(id);
 
@@ -100,39 +101,45 @@ int Controller::searchComputerID(){
 }
 
 
-void Controller::functionHandler(int n){                    //function that receives the user selection and executes accordingly
+void Controller::functionHandler(){                    //function that receives the user selection and executes accordingly
     View UI;
-    Scientist currentScientist;
-    int listSelect;
-    switch(n){
-        case 1:
-            listFunctions();
-            break;
-        case 2:
-            addFunctions();
-            break;
-        case 3:
-            removeFunctions();
-            break;
-        case 4:
-            searchFunctions();
-            break;
-        case 5:
-            linkFunctions();
-            break;
-        case 6:
-            editFunctions();
-            break;
+    int which = 25;
+    while(which != 0){
+        UI.displayInterface(which);
+        switch(which){
+            case 1:
+                listFunctions();
+                break;
+            case 2:
+                addFunctions();
+                break;
+            case 3:
+                removeFunctions();
+                break;
+            case 4:
+                searchFunctions();
+                break;
+            case 5:
+                linkFunctions();
+                break;
+            case 6:
+                editFunctions();
+                break;
+            default:
+                errorHandling();
+                which = 25;
+                break;
+        }
     }
-
     return;
 }
 
 void Controller::listFunctions(){
     int which = 25;
+    int select = 25;
     View UI;
     QSqlQuery query;
-    int select = 25;
+
 
     while(which != 0){
         UI.listInterface(which);
@@ -151,10 +158,11 @@ void Controller::listFunctions(){
                     UI.printResult(query);
                 }
                 break;
+            case 0:
+                break;
             default:
-                cin.clear();
-                cin.ignore();
-                UI.invalidInput();
+                errorHandling();
+                which = 25;
                 break;
             }
         }
@@ -163,106 +171,138 @@ void Controller::listFunctions(){
 }
 
 void Controller::addFunctions(){
-    int which = 0;
+    int which = 25;
     View UI;
     Model db;
     QSqlQuery query;
     Scientist guy;
     Computers comp;
-    UI.addInterface(which);
-    switch(which){
-        case 1:
-            UI.populateScientist(guy);
-            db.addScientistToDatabase(guy);
-            break;
-        case 2:
-            UI.populateComputer(comp);
-            db.addComputerToDatabase(comp);
-            break;
-        case 0:
-            break;
-        default:
-            addFunctions();
 
+    while(which != 0){
+        UI.addInterface(which);
+        switch(which){
+            case 1:
+                UI.populateScientist(guy);
+                db.addScientistToDatabase(guy);
+                break;
+            case 2:
+                UI.populateComputer(comp);
+                db.addComputerToDatabase(comp);
+                break;
+            case 0:
+                break;
+            default:
+                errorHandling();
+                which = 25;
+                break;
+        }
     }
 
     return;
 }
 
 void Controller::removeFunctions(){
-    int which = 0;
+    int which = 25;
     View UI;
-    UI.removeInterface(which);
-    switch(which){
-        case 1:
-            removeScientist();
-            break;
-        case 2:
-            removeComputer();
-            break;
+
+    while(which != 0){
+        UI.removeInterface(which);
+        switch(which){
+            case 1:
+                removeScientist();
+                break;
+            case 2:
+                removeComputer();
+                break;
+            case 0:
+                break;
+            default:
+                errorHandling();
+                which = 25;
+                break;
+        }
     }
 
     return;
 }
 
 void Controller::searchFunctions(){
-    int which = 0;
+    int which = 25;
     View UI;
     Model db;
     QSqlQuery query;
     int select = 25;
     int secondSelect = 25;
     int currID = 0;
-    UI.searchInterface(which);
-    switch(which){
-        case 1:
-            while(select != 0){
-                UI.searchSecond(select);
-                if(select == 1){
-                    searchScientistName();
-                }
-                else if (select == 2){
-                    currID = searchScientistID();
-                    while(secondSelect != 0){
-                        UI.searchExtended(secondSelect);
-                        switch(secondSelect){
-                            case 1:
-                                query = db.scientistConnComp(currID);
-                                UI.printResult(query);
-                                break;
+    while(which != 0){
+        UI.searchInterface(which);
+        switch(which){
+            case 1:
+                while(select != 0){
+                    UI.searchSecond(select);
+                    if(select == 1){
+                        searchScientistName();
+                    }
+                    else if (select == 2){
+                        currID = searchScientistID();
+                        while(secondSelect != 0){
+                            UI.searchExtended(secondSelect);
+                            switch(secondSelect){
+                                case 1:
+                                    query = db.scientistConnComp(currID);
+                                    UI.printResult(query);
+                                    break;
+                                case 0:
+                                    break;
+                                default:
+                                    errorHandling();
+                                    which = 25;
+                                    break;
+                            }
                         }
                     }
                 }
-            }
-            break;
-        case 2:
-            while(select != 0){
-                UI.searchSecond(select);
-                if(select == 1){
-                    searchComputerName();
-                }
-            else if(select == 2){
-                    currID = searchComputerID();
-                    while(secondSelect != 0){
-                        UI.searchExtended(secondSelect);
-                        switch(secondSelect){
-                            case 1:
-                                query = db.computersConnSci(currID);
-                                UI.printResult(query);
-                                break;
+                break;
+            case 2:
+                while(select != 0){
+                    UI.searchSecond(select);
+                    if(select == 1){
+                        searchComputerName();
+                    }
+                else if(select == 2){
+                        currID = searchComputerID();
+                        while(secondSelect != 0){
+                            UI.searchExtended(secondSelect);
+                            switch(secondSelect){
+                                case 1:
+                                    query = db.computersConnSci(currID);
+                                    UI.printResult(query);
+                                    break;
+                                case 0:
+                                    break;
+                                default:
+                                    errorHandling();
+                                    which = 25;
+                                    break;
+                            }
                         }
                     }
                 }
+                break;
+            case 0:
+                break;
+            default:
+                errorHandling();
+                which = 25;
+                break;
             }
-            break;
-    }
+        }
 
     return;
 }
 
 void Controller::linkFunctions(){
-    int which = 1;
-    int select = 25;
+    int which = 25;
     int currSciID;
     int currCompID;
     View UI;
@@ -284,6 +324,12 @@ void Controller::linkFunctions(){
                 UI.askForSciID(currSciID);
                 UI.askForCompID(currCompID);
                 db.linkSciToComp(currSciID, currCompID);
+            case 0:
+                break;
+            default:
+                errorHandling();
+                which = 25;
+                break;
         }
     }
 
@@ -307,6 +353,7 @@ void Controller::editFunctions(){
     View UI;
     Model db;
 
+    while(which != 0){
     UI.editWhich(which);
     switch(which){
         case 1:
@@ -338,6 +385,12 @@ void Controller::editFunctions(){
                         UI.askFact(fact);
                         db.modSci(select, fact, currID);
                         break;
+                    case 0:
+                        break;
+                    default:
+                        errorHandling();
+                        which = 25;
+                        break;
                 }
             }
             break;
@@ -366,12 +419,36 @@ void Controller::editFunctions(){
                         UI.compAskDescription(fact);
                         db.modSci(select, fact, currID);
                         break;
+                    case 0:
+                        break;
+                    default:
+                        errorHandling();
+                        which = 25;
+                        break;
                 }
             }
             break;
-
+        case 0:
+            break;
+        default:
+            errorHandling();
+            which = 25;
+            break;
+        }
     }
+
+    return;
 }
+
+void Controller::errorHandling(){
+    View UI;
+    cin.clear();
+    cin.ignore();
+    UI.invalidInput();
+
+    return;
+}
+
 
 QSqlQuery Controller::sortByInSci(int comp){
     Model db;

@@ -13,12 +13,10 @@ View::View()
 }
 
 // This function takes the users input and forwards it to the Controller.
-void View::displayInterface()
+void View::displayInterface(int& select)
 {
     Controller cont;
-    int select = 25;
-      cout << "This is commandline interface for a CS Scientist program" << endl;
-    while (select != 0){
+
         cout << "1. List records" << endl
              << "2. Add record" << endl
              << "3. Remove record" << endl
@@ -27,11 +25,6 @@ void View::displayInterface()
              << "6. Edit a Scientist" << endl
              << "0. Quit the Application" << endl;
         cin >> select;
-        if(select != 0)
-        {
-            cont.functionHandler(select);
-        }
-    }
 
     return;
 }
@@ -93,6 +86,12 @@ void View::removeInterface(int& select){
 void View::idGet(int& id){
     cout << "Write the ID of the item: ";
     cin >> id;
+
+    if(cin.fail()){
+        cin.clear();
+        cin.ignore();
+        invalidInput();
+    }
 
     return;
 }

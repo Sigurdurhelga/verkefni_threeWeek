@@ -11,7 +11,7 @@ class View
 {
 public:
     View();
-    static void displayInterface();
+    static void displayInterface(int &select);
     void listInterface(int&);
     void addInterface(int&);
     void removeInterface(int& select);

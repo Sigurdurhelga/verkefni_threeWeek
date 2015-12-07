@@ -1,6 +1,6 @@
 #include <QCoreApplication>
-#include "View.h"
 #include "Model.h"
+#include "Controller.h"
 #include <QtSql>
 
 
@@ -15,8 +15,8 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
     Model db;
     QSqlDatabase dataBase = db.openConnection();
-    View newView;
-    newView.displayInterface();
+    Controller startProgram;
+    startProgram.functionHandler();
     dataBase.close();
     return 0;
 }

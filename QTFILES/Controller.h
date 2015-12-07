@@ -15,13 +15,14 @@ public:
     void searchComputerName();
     int searchScientistID();
     int searchComputerID();
-    void functionHandler(int n);
+    void functionHandler();
     void listFunctions();
     void addFunctions();
     void removeFunctions();
     void searchFunctions();
     void linkFunctions();
     void editFunctions();
+    void errorHandling();
     QSqlQuery sortByInSci(int comp);
     QSqlQuery sortByInComp(int comp);
 };
