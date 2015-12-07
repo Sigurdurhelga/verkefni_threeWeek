@@ -16,6 +16,7 @@ public:
     void printTheList(vector<Scientist>& list);
     void printAlive(vector<Scientist>& list);
     void removeScientist();
+    void removeComputer();
     void searchScientist(vector<Scientist>& list);
     void editScientist(vector<Scientist>& list);
     void overwriteDB(vector<Scientist>& list);
@@ -23,7 +24,8 @@ public:
     void listFunctions();
     void addFunctions();
     void removeFunctions();
-    void linkProgram();
+    void sortTheList(vector<Scientist>& list);
+    QSqlQuery sortBy(int comp);
     QSqlQuery sortByInSci(int comp);
     QSqlQuery sortByInComp(int comp);
 

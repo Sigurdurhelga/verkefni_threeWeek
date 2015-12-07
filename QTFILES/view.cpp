@@ -134,58 +134,7 @@ void View::populateComputer(Computers& comp){
     comp.setDescription(desc);
 }
 
-void View::printTheList(const vector<Scientist>& list){     //function that prints the database to screen
-    QString currName = "";
-    bool currSex = false;
 
-    QString currBirth;
-    QString currDeath;
-
-    QString currFact;
-    cout  << left << setfill(' ') << setw(25) << "Name"  << setw(15)<< "Gender" << setw(15) << "BirthDate" << setw(18) << "Deathdate" << endl << setfill('-') << setw(73) << '-' <<  endl;
-
-    for(unsigned int i = 0; i < list.size(); i++){          //goes through each Scientist and prints his information to screen
-        Scientist currGuy = list[i];
-        currName = currGuy.returnName();
-        currSex = currGuy.returnSex();
-        currBirth = currGuy.dateofBirthQString();
-        currDeath = currGuy.dateofDeathQString();
-        currFact = currGuy.returnFact();
-        if(currGuy.dateofDeath() == QDate(1,1,1)){          //checks whether the scientist is alive
-            cout << left << "| " << setfill(' ') << setw(25) << currName.toStdString() << setw(13)<< getGenderString(currSex) << setw(15) << currBirth.toStdString() << setw(17) << "ALIVE" << currFact.toStdString() << "|" << endl;
-        }
-        else{
-            cout << left << "| " << setfill(' ') << setw(25) << currName.toStdString() << setw(13) << getGenderString(currSex) << setw(15) << currBirth.toStdString() << setw(17) << currDeath.toStdString() << currFact.toStdString() << right << "|" << endl;
-        }
-    }
-    cout << setfill('-') << setw(73) << "-" <<  endl;
-    return;
-}
-
-void View::printAllAlive(const vector<Scientist>& list){     //function that prints the database to screen
-    QString currName = "";
-    bool currSex = false;
-
-    QString currBirth;
-    QString currDeath;
-
-    QString currFact;
-    cout  << left << setfill(' ') << setw(25) << "Name"  << setw(15)<< "Gender" << setw(15) << "BirthDate" << endl << setfill('-') << setw(58) << '-' <<  endl;
-
-    for(unsigned int i = 0; i < list.size(); i++){          //goes through each Scientist and prints his information to screen
-        Scientist currGuy = list[i];
-        currName = currGuy.returnName();
-        currSex = currGuy.returnSex();
-        currBirth = currGuy.dateofBirthQString();
-        currDeath = currGuy.dateofDeathQString();
-        currFact = currGuy.returnFact();
-        if(currGuy.dateofDeath() == QDate(1,1,1)){          //checks whether the Scientist is alive
-            cout << left << "| " << setfill(' ') << setw(25) << currName.toStdString() << setw(15)<< getGenderString(currSex) << setw(15) << currBirth.toStdString() << setw(15) << currFact.toStdString() <<"|" << endl;
-        }
-    }
-    cout << setfill('-') << setw(58) << "-" <<  endl;
-    return;
-}
 
 void View::howToList(int& selection){
 
