@@ -113,7 +113,6 @@ void View::searchSecond(int& select){
 
 void View::searchExtended(int& select){
     cout << "1. List all computers this scientist has worked on" << endl
-         << "2. List all scientists that have worked with this scientist" << endl
          << "3. Edit this scientist" << endl
          << "0. Go back." << endl;
     cin >> select;
