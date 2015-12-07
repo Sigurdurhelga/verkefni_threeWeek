@@ -113,6 +113,35 @@ QSqlQuery Model::scientistConnComp(int id){
     return ret;
 }
 
+QSqlQuery Model::searchCompName(QString name){
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery ret;
+    QString query = "SELECT * FROM computers WHERE name LIKE '%"+name+"%'";
+    ret = db.exec(query);
+    return ret;
+}
+
+QSqlQuery Model::searchCompID(int id){
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery ret;
+    ret.prepare("SELECT * FROM computers WHERE id = :id");
+    ret.bindValue(":id", id);
+    ret.exec();
+    return ret;
+}
+
+QSqlQuery Model::computersConnSci(int id){
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery ret;
+    ret.prepare("SELECT people.name FROM people "
+                "INNER JOIN compGroups ON people.id = compGroups.peopleID "
+                "INNER JOIN people ON compGroups.computerID = computers.id "
+                "WHERE computers.id = :id");
+    ret.bindValue(":id", id);
+    ret.exec();
+    return ret;
+}
+
 QSqlQuery Model::getConnectionsSC(int id){
     QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery query;

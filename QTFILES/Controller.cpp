@@ -62,6 +62,19 @@ void Controller::searchScientistName(){              //function that searches th
     return;
 }
 
+void Controller::searchComputerName(){              //function that searches the database
+    View screen;
+    Model db;
+    string name;
+    screen.askName(name);
+    QSqlQuery query;
+    QString qName = QString::fromStdString(name);
+    query = db.searchCompName(qName);
+    screen.printResult(query);
+
+    return;
+}
+
 int Controller::searchScientistID(){
     View screen;
     Model db;
@@ -70,8 +83,22 @@ int Controller::searchScientistID(){
     QSqlQuery query;
     query = db.searchSciID(id);
     screen.printResult(query);
+
     return id;
 }
+
+int Controller::searchComputerID(){
+    View screen;
+    Model db;
+    int id;
+    screen.idGet(id);
+    QSqlQuery query;
+    query = db.searchCompID(id);
+    screen.printResult(query);
+
+    return id;
+}
+
 
 void Controller::functionHandler(int n){                    //function that receives the user selection and executes accordingly
     Model db;
@@ -201,16 +228,30 @@ void Controller::searchFunctions(){
                                 query = db.scientistConnComp(currID);
                                 UI.printResult(query);
                                 break;
-                            case 2:
-                                break;
-                            case 3:
-                                break;
                         }
                     }
                 }
             }
             break;
         case 2:
+            while(select != 0){
+                UI.searchSecond(select);
+                if(select == 1){
+                    searchComputerName();
+                }
+            else if(select == 2){
+                    currID = searchComputerID();
+                    while(secondSelect != 0){
+                        UI.searchExtended(secondSelect);
+                        switch(secondSelect){
+                            case 1:
+                                query = db.computersConnSci(currID);
+                                UI.printResult(query);
+                                break;
+                        }
+                    }
+                }
+            }
             break;
     }
 
