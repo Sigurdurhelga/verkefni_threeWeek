@@ -129,32 +129,30 @@ void Controller::functionHandler(int n){                    //function that rece
 }
 
 void Controller::listFunctions(){
-    int which;
+    int which = 25;
     View UI;
     QSqlQuery query;
-    UI.listInterface(which);
+
     int select = 25;
-    switch(which){
-        case 1:
-            while(select != 0){
-                select = UI.displayListFuncsSci();
-                query = sortByInSci(select);
-                UI.printResult(query);
+    while(which != 0){
+        UI.listInterface(which);
+        switch(which){
+            case 1:
+                while(select != 0){
+                    select = UI.displayListFuncsSci();
+                    query = sortByInSci(select);
+                    UI.printResult(query);
+                }
+                break;
+            case 2:
+                while(select != 0){
+                    select = UI.displayListFuncsComp();
+                    query = sortByInComp(select);
+                    UI.printResult(query);
+                }
+                break;
             }
-            break;
-        case 2:
-            while(select != 0){
-                select = UI.displayListFuncsComp();
-                query = sortByInComp(select);
-                UI.printResult(query);
-            }
-            break;
-        case 0:
-            break;
-        default:
-            listFunctions();
-            break;
-    }
+        }
 
     return;
 }
