@@ -283,6 +283,8 @@ void Controller::linkFunctions(){
                 db.linkSciToComp(currSciID, currCompID);
         }
     }
+
+    return;
 }
 
 void Controller::editFunctions(){
