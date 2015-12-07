@@ -25,6 +25,7 @@ public:
      void addComputerToDatabase(Computers& comp);
      QSqlQuery linkListSci();
      QSqlQuery linkListComp();
+     void linkSciToComp(int SciID, int CompID);
 };
 
 #endif // MODEL_H

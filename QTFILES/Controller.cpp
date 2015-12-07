@@ -280,6 +280,7 @@ void Controller::linkFunctions(){
             case 3:
                 UI.askForSciID(currSciID);
                 UI.askForCompID(currCompID);
+                db.linkSciToComp(currSciID, currCompID);
         }
     }
 }
