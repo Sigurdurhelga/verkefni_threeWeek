@@ -72,11 +72,32 @@ void Model::rmRowSci(int id){
     query.exec();
 }
 
-QSqlQuery Model::searchSci(QString name){
+QSqlQuery Model::searchSciName(QString name){
     QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery ret;
     QString query = "SELECT * FROM people WHERE name LIKE '%"+name+"%'";
     ret = db.exec(query);
+    return ret;
+}
+
+QSqlQuery Model::searchSciID(int id){
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery ret;
+    ret.prepare("SELECT * FROM people WHERE id = :id");
+    ret.bindValue(":id", id);
+    ret.exec();
+    return ret;
+}
+
+QSqlQuery Model::scientistConnComp(int id){
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery ret;
+    ret.prepare("SELECT computers.name FROM computers "
+                "INNER JOIN compGroups ON computers.id = compGroups.computerID "
+                "INNER JOIN people ON compGroups.peopleID = people.id "
+                "WHERE people.id = :id");
+    ret.bindValue(":id", id);
+    ret.exec();
     return ret;
 }
 

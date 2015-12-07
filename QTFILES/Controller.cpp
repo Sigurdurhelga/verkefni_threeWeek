@@ -45,17 +45,22 @@ void Controller::searchScientistName(){              //function that searches th
     screen.askName(name);
     QSqlQuery query;
     QString qName = QString::fromStdString(name);
-    query = db.searchSci(qName);
+    query = db.searchSciName(qName);
     screen.printResult(query);
     return;
 }
 
-void Controller::searchScientistID(){
+int Controller::searchScientistID(){
     View screen;
     Model db;
     int id;
-
+    screen.idGet(id);
+    QSqlQuery query;
+    query = db.searchSciID(id);
+    screen.printResult(query);
+    return id;
 }
+
 void Controller::functionHandler(int n){                    //function that receives the user selection and executes accordingly
     Model db;
     View UI;
@@ -154,7 +159,11 @@ void Controller::removeFunctions(){
 void Controller::searchFunctions(){
     int which = 0;
     View UI;
+    Model db;
+    QSqlQuery query;
     int select = 25;
+    int secondSelect = 25;
+    int currID = 0;
     UI.searchInterface(which);
     switch(which){
         case 1:
@@ -163,8 +172,21 @@ void Controller::searchFunctions(){
                 if(select == 1){
                     searchScientistName();
                 }
-                else{
-                    searchScientistID();
+                else if (select == 2){
+                    currID = searchScientistID();
+                    while(secondSelect != 0){
+                        UI.searchExtended(secondSelect);
+                        switch(secondSelect){
+                            case 1:
+                                query = db.scientistConnComp(currID);
+                                UI.printResult(query);
+                                break;
+                            case 2:
+                                break;
+                            case 3:
+                                break;
+                        }
+                    }
                 }
             }
             break;
