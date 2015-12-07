@@ -132,8 +132,8 @@ void Controller::listFunctions(){
     int which = 25;
     View UI;
     QSqlQuery query;
-
     int select = 25;
+
     while(which != 0){
         UI.listInterface(which);
         switch(which){
@@ -150,6 +150,11 @@ void Controller::listFunctions(){
                     query = sortByInComp(select);
                     UI.printResult(query);
                 }
+                break;
+            default:
+                cin.clear();
+                cin.ignore();
+                UI.invalidInput();
                 break;
             }
         }
