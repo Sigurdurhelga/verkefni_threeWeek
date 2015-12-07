@@ -10,6 +10,7 @@ class Controller
 public:
     void listScientists();
     void removeScientist();
+    void removeComputer();
     void searchScientistName();
     int searchScientistID();
     void functionHandler(int n);

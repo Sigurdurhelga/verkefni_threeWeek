@@ -70,6 +70,18 @@ void Model::rmRowSci(int id){
     query.prepare("DELETE FROM people WHERE id = :id");
     query.bindValue(":id", id);
     query.exec();
+
+    return;
+}
+
+void Model::rmRowComp(int id){
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query;
+    query.prepare("DELETE FROM people WHERE id = :id");
+    query.bindValue(":id", id);
+    query.exec();
+
+    return;
 }
 
 QSqlQuery Model::searchSciName(QString name){

@@ -11,6 +11,7 @@ public:
      QSqlQuery queryListSci(int way);
      QSqlQuery queryListComp(int way);
      void rmRowSci(int);
+     void rmRowComp(int id);
      QSqlQuery searchSciName(QString name);
      QSqlQuery searchSciID(int id);
      QSqlQuery scientistConnComp(int id);

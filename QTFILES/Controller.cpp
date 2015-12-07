@@ -17,13 +17,13 @@ using namespace std;
 
 void Controller::listScientists(){   //function that defines how the list of Scientists should be ordered
     int select = 0;
-
     View screen;
-    screen.howToList(select);
-
     QSqlQuery query;
+
+    screen.howToList(select);
     query = sortByInSci(select);
     screen.printResult(query);
+
     return;
 }
 
@@ -35,6 +35,17 @@ void Controller::removeScientist(){      //function that finds a Scientist to er
     int id;
     screen.idGet(id);
     db.rmRowSci(id);
+
+    return;
+}
+
+void Controller::removeComputer(){
+    View screen;
+    Model db;
+    int id;
+    screen.idGet(id);
+    db.rmRowComp(id);
+
     return;
 }
 
@@ -47,6 +58,7 @@ void Controller::searchScientistName(){              //function that searches th
     QString qName = QString::fromStdString(name);
     query = db.searchSciName(qName);
     screen.printResult(query);
+
     return;
 }
 
@@ -86,6 +98,7 @@ void Controller::functionHandler(int n){                    //function that rece
             //linkProgram();
             break;
     }
+
     return;
 }
 
@@ -115,8 +128,9 @@ void Controller::listFunctions(){
         default:
             listFunctions();
             break;
-
     }
+
+    return;
 }
 
 void Controller::addFunctions(){
@@ -142,6 +156,8 @@ void Controller::addFunctions(){
             addFunctions();
 
     }
+
+    return;
 }
 
 void Controller::removeFunctions(){
@@ -152,8 +168,12 @@ void Controller::removeFunctions(){
         case 1:
             removeScientist();
             break;
-
+        case 2:
+            removeComputer();
+            break;
     }
+
+    return;
 }
 
 void Controller::searchFunctions(){
@@ -195,17 +215,20 @@ void Controller::searchFunctions(){
 
     }
 
+    return;
 }
 
 QSqlQuery Controller::sortByInSci(int comp){
     Model db;
     QSqlQuery ret;
     ret = db.queryListSci(comp);
+
     return ret;
 }
 QSqlQuery Controller::sortByInComp(int comp){
     Model db;
     QSqlQuery ret;
     ret = db.queryListComp(comp);
+
     return ret;
 }
