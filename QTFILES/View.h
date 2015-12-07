@@ -16,10 +16,11 @@ public:
     void addInterface(int&);
     void removeInterface(int& select);
     void searchInterface(int& select);
+    void searchSecond(int& select);
     void searchExtended(int& select);
     int displayListFuncsSci();
     int displayListFuncsComp();
-    void removePrint(int& id);
+    void idGet(int& id);
     void printResult(QSqlQuery& result);
     void printTheList(const vector<Scientist>& list);
     void printAllAlive(const vector<Scientist>& list);

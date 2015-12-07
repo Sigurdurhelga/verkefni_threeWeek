@@ -16,7 +16,8 @@ public:
     void printTheList(vector<Scientist>& list);
     void printAlive(vector<Scientist>& list);
     void removeScientist();
-    void searchScientist();
+    void searchScientistName();
+    void searchScientistID();
     void editScientist(vector<Scientist>& list);
     void overwriteDB(vector<Scientist>& list);
     void functionHandler(int n);

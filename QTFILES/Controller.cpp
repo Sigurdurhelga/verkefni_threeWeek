@@ -53,37 +53,28 @@ void Controller::removeScientist(){      //function that finds a Scientist to er
     View screen;
     Model db;
     int id;
-    screen.removePrint(id);
+    screen.idGet(id);
     db.rmRowSci(id);
     return;
 }
 
-void Controller::searchScientist(){              //function that searches the database
+void Controller::searchScientistName(){              //function that searches the database
     View screen;
     Model db;
     string name;
     screen.askName(name);
     QSqlQuery query;
-    QSqlQuery query2;
     QString qName = QString::fromStdString(name);
     query = db.searchSci(qName);
-    query2 = query;
-    query2.next();
-    int id = query2.value(0).toInt();
     screen.printResult(query);
-    cout << query.size() << endl;
-    if(query.size() == 2){
-        int select = 25;
-        while(select != 0){
-            screen.searchExtended(select);
-            switch(select){
-                case 1:
-                    query = db.getConnectionsSC(id);
-                    break;
-            }
-        }
-    }
     return;
+}
+
+void Controller::searchScientistID(){
+    View screen;
+    Model db;
+    int id;
+
 }
 
 void Controller::editScientist(vector<Scientist>& list){            //function that changes the information in the database
@@ -250,10 +241,19 @@ void Controller::removeFunctions(){
 void Controller::searchFunctions(){
     int which = 0;
     View UI;
+    int select = 25;
     UI.searchInterface(which);
     switch(which){
         case 1:
-            searchScientist();
+            while(select != 0){
+                UI.searchSecond(select);
+                if(select == 1){
+                    searchScientistName();
+                }
+                else{
+                    searchScientistID();
+                }
+            }
             break;
         case 2:
             break;

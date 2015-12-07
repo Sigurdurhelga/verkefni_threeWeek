@@ -81,6 +81,12 @@ void View::removeInterface(int& select){
          << "0. Go back" << endl;
     cin >> select;
 }
+
+void View::idGet(int& id){
+    cout << "Write the ID of the item you want to remove: ";
+    cin >> id;
+}
+
 void View::searchInterface(int& select){
     cout << "1. Search for scientists" << endl
          << "2. Search for computers" << endl
@@ -88,9 +94,11 @@ void View::searchInterface(int& select){
     cin >> select;
 }
 
-void View::removePrint(int& id){
-    cout << "Write the ID of the item you want to remove: ";
-    cin >> id;
+void View::searchSecond(int& select){
+    cout << "1. Search by name" << endl
+         << "2. Search by id" << endl
+         << "0. Go back" << endl;
+    cin >> select;
 }
 
 void View::searchExtended(int& select){
