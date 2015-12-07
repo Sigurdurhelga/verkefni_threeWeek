@@ -92,10 +92,10 @@ void Controller::functionHandler(int n){                    //function that rece
             searchFunctions();
             break;
         case 5:
-            //editScientist(database);
+            //linkProgram();
             break;
         case 6:
-            //linkProgram();
+            editFunctions();
             break;
     }
 
@@ -215,6 +215,28 @@ void Controller::searchFunctions(){
     }
 
     return;
+}
+
+void Controller::editFunctions(){
+    int which = 0;
+    int select = 25;
+    int currID;
+    View UI;
+    Model db;
+    while(which != 0){
+        UI.editWhich(which);
+        switch(which){
+            case 1:
+                UI.idGet(currID);
+                while(select != 0){
+                    UI.editSelectionScientist(select);
+
+                }
+                break;
+            case 2:
+                break;
+        }
+    }
 }
 
 QSqlQuery Controller::sortByInSci(int comp){
