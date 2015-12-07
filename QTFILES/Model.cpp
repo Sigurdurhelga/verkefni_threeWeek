@@ -166,6 +166,27 @@ void Model::modSci(int select, QString entry, int id){
     db.exec(qQuery);
 }
 
+void Model::modComp(int select, QString entry, int id){
+    QSqlDatabase db = QSqlDatabase::database();
+    QString field;
+    switch(select){
+        case 1:
+            field = "name";
+            break;
+        case 2:
+            field = "created";
+            break;
+        case 3:
+            field = "creationDate";
+            break;
+        case 4:
+            field = "description";
+            break;
+    }
+    QString qQuery = "UPDATE computers SET "+field+" = '"+entry+"' WHERE id = "+QString::number(id);
+    db.exec(qQuery);
+}
+
 bool Model::checkConnection(QSqlDatabase db){
     return db.open();
 }
