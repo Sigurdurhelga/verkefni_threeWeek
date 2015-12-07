@@ -245,7 +245,23 @@ QSqlQuery Model::linkListSci(){
     return query;
 }
 
+QSqlQuery Model::linkListComp(){
+    QSqlQuery query;
+    query.prepare("SELECT id, name FROM computers");
+    query.exec();
 
+    return query;
+}
+
+void Model::linkSciToComp(int SciID, int CompID){
+    QSqlQuery query;
+    query.prepare("INSERT INTO compGroups(peopleID, computerID) VALUES(:SciID, :CompID)");
+    query.bindValue(":SciID", SciID);
+    query.bindValue(":CompID", CompID);
+    query.exec();
+
+    return;
+}
 
 
 

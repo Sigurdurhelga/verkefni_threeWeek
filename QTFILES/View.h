@@ -43,6 +43,8 @@ public:
     string getGenderString(bool sex);
     void invalidInput();
     void invalidDate();
+    void askForSciID(int &id);
+    void askForCompID(int &id);
 };
 
 #endif // VIEW_H
