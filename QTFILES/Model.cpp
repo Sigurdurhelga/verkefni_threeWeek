@@ -142,14 +142,28 @@ QSqlQuery Model::computersConnSci(int id){
     return ret;
 }
 
-void Model::modSci(int select, QString entry){
-
+void Model::modSci(int select, QString entry, int id){
+    QSqlDatabase db = QSqlDatabase::database();
+    QString field;
     switch(select){
         case 1:
-
+            field = "name";
+            break;
+        case 2:
+            field = "gender";
+            break;
+        case 3:
+            field = "birthDate";
+            break;
+        case 4:
+            field = "deathDate";
+            break;
+        case 5:
+            field = "fact";
             break;
     }
-
+    QString qQuery = "UPDATE people SET "+field+" = '"+entry+"' WHERE id = "+QString::number(id);
+    db.exec(qQuery);
 }
 
 bool Model::checkConnection(QSqlDatabase db){

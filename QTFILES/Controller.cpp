@@ -288,10 +288,17 @@ void Controller::linkFunctions(){
 }
 
 void Controller::editFunctions(){
-    int which = 0;
+    int which = 25;
     int select = 25;
     int currID;
 
+    string name;
+    QString qName;
+    bool sex;
+    QString genderStr = "0";
+    QDate doB;
+    QDate doD;
+    QString fact;
 
     View UI;
     Model db;
@@ -304,6 +311,28 @@ void Controller::editFunctions(){
                     UI.editSelectionScientist(select);
                     switch(select){
                         case 1:
+                            UI.askName(name);
+                            qName = QString::fromStdString(name);
+                            db.modSci(select, qName, currID);
+                            break;
+                        case 2:
+                            UI.askGender(sex);
+                            if(sex){
+                                genderStr = "1";
+                            }
+                            db.modSci(select, genderStr, currID);
+                            break;
+                        case 3:
+                            doB = UI.askDateOfBirth();
+                            db.modSci(select, doB.toString("yyyy-MM-dd"), currID);
+                            break;
+                        case 4:
+                            doD = UI.askDateOfDeath();
+                            db.modSci(select,doD.toString("yyyy-MM-dd"), currID);
+                            break;
+                        case 5:
+                            UI.askFact(fact);
+                            db.modSci(select, fact, currID);
                             break;
                     }
                 }
