@@ -15,6 +15,9 @@ public:
      QSqlQuery searchSciName(QString name);
      QSqlQuery searchSciID(int id);
      QSqlQuery scientistConnComp(int id);
+     QSqlQuery searchCompName(QString name);
+     QSqlQuery searchCompID(int id);
+     QSqlQuery computersConnSci(int id);
      void modifyRecord(int, bool);
      QSqlQuery getConnectionsSC(int id);
      bool checkConnection(QSqlDatabase db);

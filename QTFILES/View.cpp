@@ -197,7 +197,7 @@ void View::howToList(int& selection){
 }
 
 void View::askName(string& name){
-    cout << "Write a Name for the Scientist: " << endl;
+    cout << "Write a Name: " << endl;
     while(name == ""){
         getline(cin, name);
     }

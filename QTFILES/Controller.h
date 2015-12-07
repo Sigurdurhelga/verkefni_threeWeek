@@ -12,7 +12,9 @@ public:
     void removeScientist();
     void removeComputer();
     void searchScientistName();
+    void searchComputerName();
     int searchScientistID();
+    int searchComputerID();
     void functionHandler(int n);
     void listFunctions();
     void addFunctions();
@@ -21,8 +23,6 @@ public:
     void editFunctions();
     QSqlQuery sortByInSci(int comp);
     QSqlQuery sortByInComp(int comp);
-
-
 };
 
 #endif // CONTROLLER_H
