@@ -142,15 +142,14 @@ QSqlQuery Model::computersConnSci(int id){
     return ret;
 }
 
-QSqlQuery Model::getConnectionsSC(int id){
-    QSqlDatabase db = QSqlDatabase::database();
-    QSqlQuery query;
-    query.prepare("SELECT computers.name FROM computers "
-                  "INNER JOIN computers.id ON compGroups.id "
-                  "INNER JOIN compGroups.id ON people.id WHERE people.id = :id");
-    query.bindValue(":id", id);
-    query.exec();
-    return query;
+void Model::modSci(int select, QString entry){
+
+    switch(select){
+        case 1:
+
+            break;
+    }
+
 }
 
 bool Model::checkConnection(QSqlDatabase db){
