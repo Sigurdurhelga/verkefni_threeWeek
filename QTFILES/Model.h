@@ -19,6 +19,7 @@ public:
      QSqlQuery searchCompID(int id);
      QSqlQuery computersConnSci(int id);
      void modSci(int, QString, int);
+     void modComp(int, QString, int);
      bool checkConnection(QSqlDatabase db);
      QSqlDatabase openConnection();
      void addScientistToDatabase(Scientist& guy);
