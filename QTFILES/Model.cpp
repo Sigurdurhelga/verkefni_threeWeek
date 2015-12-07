@@ -219,7 +219,19 @@ void Model::addComputerToDatabase(Computers& comp){
         query.exec();
 
     }
+
+    return;
 }
+
+QSqlQuery Model::linkListSci(){
+    QSqlQuery query;
+    query.prepare("SELECT id, name FROM people");
+    query.exec();
+
+    return query;
+}
+
+
 
 
 

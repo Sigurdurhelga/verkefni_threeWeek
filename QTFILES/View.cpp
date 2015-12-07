@@ -93,6 +93,8 @@ void View::removeInterface(int& select){
 void View::idGet(int& id){
     cout << "Write the ID of the item: ";
     cin >> id;
+
+    return;
 }
 
 void View::searchInterface(int& select){
@@ -125,6 +127,18 @@ void View::editWhich(int& select){
          << "2. Edit a computer" << endl
          << "0. Go back" << endl;
     cin >> select;
+
+    return;
+}
+
+void View::linkWhich(int& select){
+    cout << "1. List of scientists" << endl
+         << "2. List of computers" << endl
+         << "3. Link a scientist to a computer" << endl
+         << "0. Go back" << endl;
+    cin >> select;
+
+    return;
 }
 
 void View::printResult(QSqlQuery& result){
@@ -253,7 +267,6 @@ QDate View::askDateOfBirth(){
         }
     }
 
-
     return doB;
 }
 
@@ -299,6 +312,7 @@ void View::askFact(QString& fact){
     }
     fact = QString::fromStdString(sFact);
 
+    return;
 }
 
 void View::compAskName(string& name){
@@ -349,6 +363,7 @@ void View::compAskDescription(QString& description){
         getline(cin, sDesc);
     }
     description = QString::fromStdString(sDesc);
+
     return;
 }
 

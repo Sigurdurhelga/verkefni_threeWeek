@@ -118,7 +118,7 @@ void Controller::functionHandler(int n){                    //function that rece
             searchFunctions();
             break;
         case 5:
-            //linkProgram();
+            linkFunctions();
             break;
         case 6:
             editFunctions();
@@ -255,6 +255,25 @@ void Controller::searchFunctions(){
     }
 
     return;
+}
+
+void Controller::linkFunctions(){
+    int which = 1;
+    int select = 25;
+    int currID;
+    View UI;
+    Model db;
+    QSqlQuery query;
+
+    while(which != 0){
+        UI.linkWhich(which);
+        switch(which){
+            case 1:
+                query = db.linkListSci();
+                UI.printResult(query);
+                break;
+        }
+    }
 }
 
 void Controller::editFunctions(){

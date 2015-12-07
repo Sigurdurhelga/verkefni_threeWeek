@@ -19,6 +19,7 @@ public:
     void searchSecond(int& select);
     void searchExtended(int& select);
     void editWhich(int& select);
+    void linkWhich(int& select);
     void editSelectionScientist(int&);
     void editSelectionComputer(int&);
     int displayListFuncsSci();
