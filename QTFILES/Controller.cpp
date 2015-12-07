@@ -191,7 +191,6 @@ void Controller::searchFunctions(){
             break;
         case 2:
             break;
-
     }
 
     return;
