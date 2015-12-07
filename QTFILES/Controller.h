@@ -20,6 +20,7 @@ public:
     void addFunctions();
     void removeFunctions();
     void searchFunctions();
+    void linkFunctions();
     void editFunctions();
     QSqlQuery sortByInSci(int comp);
     QSqlQuery sortByInComp(int comp);

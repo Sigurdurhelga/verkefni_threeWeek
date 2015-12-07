@@ -127,6 +127,18 @@ void View::editWhich(int& select){
          << "2. Edit a computer" << endl
          << "0. Go back" << endl;
     cin >> select;
+
+    return;
+}
+
+void View::linkWhich(int& select){
+    cout << "1. List of scientists" << endl
+         << "2. List of computers" << endl
+         << "3. Link a scientist to a computer" << endl
+         << "0. Go back" << endl;
+    cin >> select;
+
+    return;
 }
 
 void View::printResult(QSqlQuery& result){
