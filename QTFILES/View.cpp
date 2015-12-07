@@ -91,7 +91,7 @@ void View::removeInterface(int& select){
 }
 
 void View::idGet(int& id){
-    cout << "Write the ID of the item you want to remove: ";
+    cout << "Write the ID of the item: ";
     cin >> id;
 }
 

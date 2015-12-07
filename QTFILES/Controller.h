@@ -12,7 +12,7 @@ public:
     void removeScientist();
     void removeComputer();
     void searchScientistName();
-    void searchScientistID();
+    int searchScientistID();
     void functionHandler(int n);
     void listFunctions();
     void addFunctions();
