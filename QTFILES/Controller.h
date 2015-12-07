@@ -22,8 +22,6 @@ public:
     void searchFunctions();
     QSqlQuery sortByInSci(int comp);
     QSqlQuery sortByInComp(int comp);
-
-
 };
 
 #endif // CONTROLLER_H
