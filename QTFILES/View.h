@@ -22,8 +22,6 @@ public:
     int displayListFuncsComp();
     void idGet(int& id);
     void printResult(QSqlQuery& result);
-    void printTheList(const vector<Scientist>& list);
-    void printAllAlive(const vector<Scientist>& list);
     void populateScientist(Scientist& guy);
     void populateComputer(Computers& comp);
     void howToList(int& selection);
@@ -37,7 +35,6 @@ public:
     void compAskCreationDate(int& year);
     void compAskDescription(QString& description);
     void nameNotFound();
-    void printSearchMatch(QString currName, bool currSex, QString currBirth, QString currDeath, QString currFact);
     void editSelection(int& select);
     string getGenderString(bool sex);
     void invalidInput();

@@ -8,25 +8,15 @@
 class Controller
 {
 public:
-    vector<Scientist> getDB();
-    void addScientist();
-    void writeToDB(Scientist guy);
-    void listScientists(vector<Scientist>& list);
     void listScientists();
-    void printTheList(vector<Scientist>& list);
-    void printAlive(vector<Scientist>& list);
     void removeScientist();
     void searchScientistName();
     void searchScientistID();
-    void editScientist(vector<Scientist>& list);
-    void overwriteDB(vector<Scientist>& list);
     void functionHandler(int n);
     void listFunctions();
     void addFunctions();
     void removeFunctions();
     void searchFunctions();
-    void sortTheList(vector<Scientist>& list);
-    QSqlQuery sortBy(int comp);
     QSqlQuery sortByInSci(int comp);
     QSqlQuery sortByInComp(int comp);
 

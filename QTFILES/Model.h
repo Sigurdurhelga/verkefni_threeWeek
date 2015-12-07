@@ -8,19 +8,15 @@
 class Model
 {
 public:
-     QSqlQuery queryList(int way);
      QSqlQuery queryListSci(int way);
      QSqlQuery queryListComp(int way);
+     void rmRowSci(int);
      QSqlQuery searchSci(QString name);
      QSqlQuery getConnectionsSC(int id);
-     vector<Scientist> retDB();
+     bool checkConnection(QSqlDatabase db);
      QSqlDatabase openConnection();
-     void rmRowSci(int);
-     void writeToDB(Scientist guy);
-     void overwriteDB(vector<Scientist>& list);
      void addScientistToDatabase(Scientist& guy);
      void addComputerToDatabase(Computers& comp);
-     bool checkConnection(QSqlDatabase db);
 };
 
 #endif // MODEL_H

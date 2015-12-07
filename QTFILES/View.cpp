@@ -46,6 +46,7 @@ int View::displayListFuncsSci(){
          << "6. List by date of birth descending" << endl
          << "0. Go back" << endl;
     cin >> select;
+
     return select;
 }
 int View::displayListFuncsComp(){
@@ -58,6 +59,7 @@ int View::displayListFuncsComp(){
          << "6. List by creation date descending" << endl
          << "0. Go back" << endl;
     cin >> select;
+
     return select;
 }
 
@@ -66,6 +68,8 @@ void View::listInterface(int& select){
          << "2. List computers" << endl
          << "0. Go back" << endl;
     cin >> select;
+
+    return;
 }
 
 void View::addInterface(int& select){
@@ -73,6 +77,8 @@ void View::addInterface(int& select){
          << "2. Add computer" << endl
          << "0. Go back" << endl;
     cin >> select;
+
+    return;
 }
 
 void View::removeInterface(int& select){
@@ -80,6 +86,8 @@ void View::removeInterface(int& select){
          << "2. Remove computer" << endl
          << "0. Go back" << endl;
     cin >> select;
+
+    return;
 }
 
 void View::idGet(int& id){
@@ -92,6 +100,8 @@ void View::searchInterface(int& select){
          << "2. Search for computers" << endl
          << "0. Go back" << endl;
     cin >> select;
+
+    return;
 }
 
 void View::searchSecond(int& select){
@@ -107,6 +117,8 @@ void View::searchExtended(int& select){
          << "3. Edit this scientist" << endl
          << "0. Go back." << endl;
     cin >> select;
+
+    return;
 }
 
 void View::printResult(QSqlQuery& result){
@@ -122,6 +134,7 @@ void View::printResult(QSqlQuery& result){
         i = 0;
     }
 
+    return;
 }
 
 void View::populateScientist(Scientist& guy){
@@ -139,6 +152,8 @@ void View::populateScientist(Scientist& guy){
     guy.setdoB(doB);
     guy.setdoD(doD);
     guy.setFact(fact);
+
+    return;
 }
 
 void View::populateComputer(Computers& comp){
@@ -150,62 +165,12 @@ void View::populateComputer(Computers& comp){
     compAskCreated(created);
     compAskCreationDate(year);
     compAskDescription(desc);
+
     comp.setName(QString::fromStdString(name));
     comp.setCreated(created);
     comp.setCreationYear(year);
     comp.setDescription(desc);
-}
 
-void View::printTheList(const vector<Scientist>& list){     //function that prints the database to screen
-    QString currName = "";
-    bool currSex = false;
-
-    QString currBirth;
-    QString currDeath;
-
-    QString currFact;
-    cout  << left << setfill(' ') << setw(25) << "Name"  << setw(15)<< "Gender" << setw(15) << "BirthDate" << setw(18) << "Deathdate" << endl << setfill('-') << setw(73) << '-' <<  endl;
-
-    for(unsigned int i = 0; i < list.size(); i++){          //goes through each Scientist and prints his information to screen
-        Scientist currGuy = list[i];
-        currName = currGuy.returnName();
-        currSex = currGuy.returnSex();
-        currBirth = currGuy.dateofBirthQString();
-        currDeath = currGuy.dateofDeathQString();
-        currFact = currGuy.returnFact();
-        if(currGuy.dateofDeath() == QDate(1,1,1)){          //checks whether the scientist is alive
-            cout << left << "| " << setfill(' ') << setw(25) << currName.toStdString() << setw(13)<< getGenderString(currSex) << setw(15) << currBirth.toStdString() << setw(17) << "ALIVE" << currFact.toStdString() << "|" << endl;
-        }
-        else{
-            cout << left << "| " << setfill(' ') << setw(25) << currName.toStdString() << setw(13) << getGenderString(currSex) << setw(15) << currBirth.toStdString() << setw(17) << currDeath.toStdString() << currFact.toStdString() << right << "|" << endl;
-        }
-    }
-    cout << setfill('-') << setw(73) << "-" <<  endl;
-    return;
-}
-
-void View::printAllAlive(const vector<Scientist>& list){     //function that prints the database to screen
-    QString currName = "";
-    bool currSex = false;
-
-    QString currBirth;
-    QString currDeath;
-
-    QString currFact;
-    cout  << left << setfill(' ') << setw(25) << "Name"  << setw(15)<< "Gender" << setw(15) << "BirthDate" << endl << setfill('-') << setw(58) << '-' <<  endl;
-
-    for(unsigned int i = 0; i < list.size(); i++){          //goes through each Scientist and prints his information to screen
-        Scientist currGuy = list[i];
-        currName = currGuy.returnName();
-        currSex = currGuy.returnSex();
-        currBirth = currGuy.dateofBirthQString();
-        currDeath = currGuy.dateofDeathQString();
-        currFact = currGuy.returnFact();
-        if(currGuy.dateofDeath() == QDate(1,1,1)){          //checks whether the Scientist is alive
-            cout << left << "| " << setfill(' ') << setw(25) << currName.toStdString() << setw(15)<< getGenderString(currSex) << setw(15) << currBirth.toStdString() << setw(15) << currFact.toStdString() <<"|" << endl;
-        }
-    }
-    cout << setfill('-') << setw(58) << "-" <<  endl;
     return;
 }
 
@@ -385,12 +350,6 @@ void View::nameNotFound(){
      cout << "Name was not found in the Database." << endl;
 
      return;
-}
-
-void View::printSearchMatch(QString currName, bool currSex, QString currBirth, QString currDeath, QString currFact){
-    cout << currName.toStdString() << " " << getGenderString(currSex) << " " << currBirth.toStdString() << " " << currDeath.toStdString() << " " << currFact.toStdString() << endl;
-
-    return;
 }
 
 void View::editSelection(int& select){
