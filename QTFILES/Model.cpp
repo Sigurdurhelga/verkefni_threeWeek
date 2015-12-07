@@ -102,7 +102,6 @@ QSqlQuery Model::searchSciID(int id){
 }
 
 QSqlQuery Model::scientistConnComp(int id){
-    QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery ret;
     ret.prepare("SELECT computers.name FROM computers "
                 "INNER JOIN compGroups ON computers.id = compGroups.computerID "
@@ -112,6 +111,7 @@ QSqlQuery Model::scientistConnComp(int id){
     ret.exec();
     return ret;
 }
+
 
 QSqlQuery Model::searchCompName(QString name){
     QSqlDatabase db = QSqlDatabase::database();

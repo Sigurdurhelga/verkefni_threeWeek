@@ -122,6 +122,13 @@ void View::searchExtended(int& select){
     return;
 }
 
+void View::editWhich(int& select){
+    cout << "1. Edit a scientist" << endl
+         << "2. Edit a computer" << endl
+         << "0. Go back" << endl;
+    cin >> select;
+}
+
 void View::printResult(QSqlQuery& result){
     int i = 0;
     QString val;
@@ -354,17 +361,26 @@ void View::nameNotFound(){
      return;
 }
 
-void View::editSelection(int& select){
+void View::editSelectionScientist(int& select){
     cout << "What would you like to change?" << endl
          << "1. Edit Name." << endl
          << "2. Edit gender." << endl
          << "3. Edit date of birth." << endl
          << "4. Edit date of death." << endl
          << "5. Edit fact." << endl
-         << "6. Edit everything." << endl
-         << "0. Cancel."<< endl;
+         << "0. Go back."<< endl;
     cin >> select;
+    return;
+}
 
+void View::editSelectionComputer(int& select){
+    cout << "What would you like to change?" << endl
+         << "1. Edit Name." << endl
+         << "2. Edit was it created." << endl
+         << "3. Edit creation year." << endl
+         << "4. Edit description." << endl
+         << "0. Go back."<< endl;
+    cin >> select;
     return;
 }
 

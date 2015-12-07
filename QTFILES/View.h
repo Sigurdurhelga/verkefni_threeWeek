@@ -18,6 +18,9 @@ public:
     void searchInterface(int& select);
     void searchSecond(int& select);
     void searchExtended(int& select);
+    void editWhich(int& select);
+    void editSelectionScientist(int&);
+    void editSelectionComputer(int&);
     int displayListFuncsSci();
     int displayListFuncsComp();
     void idGet(int& id);
