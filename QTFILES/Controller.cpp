@@ -17,13 +17,13 @@ using namespace std;
 
 void Controller::listScientists(){   //function that defines how the list of Scientists should be ordered
     int select = 0;
-
     View screen;
-    screen.howToList(select);
-
     QSqlQuery query;
+
+    screen.howToList(select);
     query = sortByInSci(select);
     screen.printResult(query);
+
     return;
 }
 
@@ -58,6 +58,7 @@ void Controller::searchScientistName(){              //function that searches th
     QString qName = QString::fromStdString(name);
     query = db.searchSci(qName);
     screen.printResult(query);
+
     return;
 }
 
@@ -66,6 +67,7 @@ void Controller::searchScientistID(){
     Model db;
     int id;
 
+    return;
 }
 void Controller::functionHandler(int n){                    //function that receives the user selection and executes accordingly
     Model db;
@@ -92,6 +94,7 @@ void Controller::functionHandler(int n){                    //function that rece
             //linkProgram();
             break;
     }
+
     return;
 }
 
@@ -121,8 +124,9 @@ void Controller::listFunctions(){
         default:
             listFunctions();
             break;
-
     }
+
+    return;
 }
 
 void Controller::addFunctions(){
@@ -148,6 +152,8 @@ void Controller::addFunctions(){
             addFunctions();
 
     }
+
+    return;
 }
 
 void Controller::removeFunctions(){
@@ -188,17 +194,20 @@ void Controller::searchFunctions(){
 
     }
 
+    return;
 }
 
 QSqlQuery Controller::sortByInSci(int comp){
     Model db;
     QSqlQuery ret;
     ret = db.queryListSci(comp);
+
     return ret;
 }
 QSqlQuery Controller::sortByInComp(int comp){
     Model db;
     QSqlQuery ret;
     ret = db.queryListComp(comp);
+
     return ret;
 }
