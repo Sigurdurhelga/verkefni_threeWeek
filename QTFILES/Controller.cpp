@@ -273,6 +273,10 @@ void Controller::linkFunctions(){
                 query = db.linkListSci();
                 UI.printResult(query);
                 break;
+            case 2:
+                query = db.linklistComp();
+                UI.printResult(query);
+                break;
         }
     }
 }
