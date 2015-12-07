@@ -93,6 +93,8 @@ void View::removeInterface(int& select){
 void View::idGet(int& id){
     cout << "Write the ID of the item: ";
     cin >> id;
+
+    return;
 }
 
 void View::searchInterface(int& select){
@@ -246,7 +248,6 @@ QDate View::askDateOfBirth(){
         }
     }
 
-
     return doB;
 }
 
@@ -292,6 +293,7 @@ void View::askFact(QString& fact){
     }
     fact = QString::fromStdString(sFact);
 
+    return;
 }
 
 void View::compAskName(string& name){
@@ -342,6 +344,7 @@ void View::compAskDescription(QString& description){
         getline(cin, sDesc);
     }
     description = QString::fromStdString(sDesc);
+
     return;
 }
 
