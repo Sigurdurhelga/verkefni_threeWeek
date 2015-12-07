@@ -35,6 +35,17 @@ void Controller::removeScientist(){      //function that finds a Scientist to er
     int id;
     screen.idGet(id);
     db.rmRowSci(id);
+
+    return;
+}
+
+void Controller::removeComputer(){
+    View screen;
+    Model db;
+    int id;
+    screen.idGet(id);
+    db.rmRowComp(id);
+
     return;
 }
 
@@ -147,8 +158,12 @@ void Controller::removeFunctions(){
         case 1:
             removeScientist();
             break;
-
+        case 2:
+            removeComputer();
+            break;
     }
+
+    return;
 }
 
 void Controller::searchFunctions(){

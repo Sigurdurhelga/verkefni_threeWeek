@@ -10,7 +10,8 @@ class Model
 public:
      QSqlQuery queryListSci(int way);
      QSqlQuery queryListComp(int way);
-     void rmRowSci(int);
+     void rmRowSci(int id);
+     void rmRowComp(int id);
      QSqlQuery searchSci(QString name);
      QSqlQuery getConnectionsSC(int id);
      bool checkConnection(QSqlDatabase db);
