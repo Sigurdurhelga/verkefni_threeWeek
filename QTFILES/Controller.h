@@ -8,24 +8,35 @@
 class Controller
 {
 public:
+    // List functions
+    void linkFunctions();
+    void listFunctions();
     void listScientists();
+    QSqlQuery sortByInSci(int comp);
+    QSqlQuery sortByInComp(int comp);
+
+    // Add functions
+    void addFunctions();
+
+    // Remove functions
+    void removeFunctions();
     void removeScientist();
     void removeComputer();
+
+    // Search functions
+    void searchFunctions();
     void searchScientistName();
     void searchComputerName();
     int searchScientistID();
     int searchComputerID();
-    void functionHandler();
-    void listFunctions();
-    void addFunctions();
-    void removeFunctions();
-    void searchFunctions();
-    void linkFunctions();
+
+    // Edit functions
     void editFunctions();
     void editSpecific(int, bool);
+
+    // Misc
     void errorHandling();
-    QSqlQuery sortByInSci(int comp);
-    QSqlQuery sortByInComp(int comp);
+    void functionHandler();
 };
 
 #endif // CONTROLLER_H
