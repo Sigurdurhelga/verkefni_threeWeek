@@ -38,6 +38,7 @@ int View::displayListFuncsSci(){
          << "4. List by name descing" << endl
          << "5. List by date of birth ascending" << endl
          << "6. List by date of birth descending" << endl
+         << "7. List those who are alive" << endl
          << "0. Go back" << endl;
     cin >> select;
 

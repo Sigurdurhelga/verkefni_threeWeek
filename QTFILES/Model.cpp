@@ -33,6 +33,9 @@ QSqlQuery Model::queryListSci(int way){
         case 6:
             ret.exec("SELECT * FROM people ORDER BY birthDate DESC");
             break;
+        case 7:
+            ret.exec("SELECT * FROM people WHERE deathDate = 'ALIVE' ORDER BY id");
+            break;
         default:
             way = 25;
             cin.clear();
