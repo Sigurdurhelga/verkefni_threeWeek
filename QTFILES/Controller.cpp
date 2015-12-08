@@ -231,9 +231,13 @@ void Controller::searchFunctions(){
         UI.searchInterface(which);
         switch(which){
             case 1:
+                which = 25;
+                select = 25;
                 searchScientisthandler(select);
                 break;
             case 2:
+                which = 25;
+                select = 25;
                 searchComputerHandler(select);
                 break;
             case 0:
@@ -241,6 +245,7 @@ void Controller::searchFunctions(){
             default:
                 errorHandling();
                 which = 25;
+                select = 25;
                 break;
             }
         }
@@ -390,6 +395,7 @@ void Controller::linkFunctions(){
                 UI.askForSciID(currSciID);
                 UI.askForCompID(currCompID);
                 db.linkSciToComp(currSciID, currCompID);
+                break;
             case 4:
                 UI.showLinks(select);
                 if(select == 1){
@@ -397,10 +403,14 @@ void Controller::linkFunctions(){
                     query = db.scientistConnComp(currSciID);
                     UI.printResult(query);
                 }
-                if(select == 2){
+                else if(select == 2){
                     UI.idGet(currCompID);
                     query = db.computersConnSci(currCompID);
                     UI.printResult(query);
+                }
+                else{
+                    errorHandling();
+                    UI.invalidInput();
                 }
                 break;
             case 0:
