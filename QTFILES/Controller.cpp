@@ -138,7 +138,9 @@ void Controller::listFunctions(){
                 while(select != 0){
                     select = UI.displayListFuncsSci();
                     query = sortByInSci(select);
-                    UI.printResult(query);
+                    if(select != 0){
+                        UI.printResult(query);
+                    }
                 }
                 select = 25;
                 break;
@@ -146,7 +148,9 @@ void Controller::listFunctions(){
                 while(select != 0){
                     select = UI.displayListFuncsComp();
                     query = sortByInComp(select);
-                    UI.printResult(query);
+                    if(select != 0){
+                        UI.printResult(query);
+                    }
                 }
                 select = 25;
                 break;
