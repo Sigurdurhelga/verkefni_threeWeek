@@ -433,7 +433,7 @@ void Controller::editSpecific(int ID, bool which){
 }
 
 void Controller::linkFunctions(){
-    int which = 25;
+    int which = 25, select = 25;
     int currSciID;
     int currCompID;
     View UI;
@@ -455,6 +455,19 @@ void Controller::linkFunctions(){
                 UI.askForSciID(currSciID);
                 UI.askForCompID(currCompID);
                 db.linkSciToComp(currSciID, currCompID);
+            case 4:
+                UI.showLinks(select);
+                if(select == 1){
+                    UI.idGet(currSciID);
+                    query = db.scientistConnComp(currSciID);
+                    UI.printResult(query);
+                }
+                if(select == 2){
+                    UI.idGet(currCompID);
+                    query = db.computersConnSci(currCompID);
+                    UI.printResult(query);
+                }
+                break;
             case 0:
                 break;
             default:

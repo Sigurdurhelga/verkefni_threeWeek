@@ -145,7 +145,7 @@ QSqlQuery Model::computersConnSci(int id){
     QSqlQuery ret;
     ret.prepare("SELECT people.name FROM people "
                 "INNER JOIN compGroups ON people.id = compGroups.peopleID "
-                "INNER JOIN people ON compGroups.computerID = computers.id "
+                "INNER JOIN computers ON compGroups.computerID = computers.id "
                 "WHERE computers.id = :id");
     ret.bindValue(":id", id);
     ret.exec();
@@ -301,7 +301,6 @@ void Model::linkSciToComp(int SciID, int CompID){
 
     return;
 }
-
 
 
 
