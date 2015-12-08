@@ -16,7 +16,6 @@ View::View()
 // This function takes the users input and forwards it to the Controller.
 void View::displayInterface(int& select)
 {
-    Controller cont;
         cout << "1. List records" << endl
              << "2. Add record" << endl
              << "3. Remove record" << endl
@@ -221,7 +220,12 @@ void View::populateComputer(Computers& comp){
     QString desc;
     compAskName(name);
     compAskCreated(created);
-    compAskCreationDate(year);
+    if(created){
+        compAskCreationDate(year);
+    }
+    else{
+        year = 0;
+    }
     compAskType(type);
     compAskDescription(desc);
 

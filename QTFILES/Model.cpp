@@ -274,8 +274,6 @@ void Model::addComputerToDatabase(Computers& comp){
         if(created){
             boolToString = "1";
         }
-        else{
-        }
         query.prepare("INSERT INTO computers(name, created, creationDate, type, description) "
                       "VALUES (:name, :created, :creationDate, :type, :desc)");
         query.bindValue(":name", name);
