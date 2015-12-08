@@ -125,6 +125,8 @@ void Controller::functionHandler(){                    //function that receives 
             case 6:
                 editFunctions();
                 break;
+            case 0:
+                break;
             default:
                 errorHandling();
                 which = 25;
