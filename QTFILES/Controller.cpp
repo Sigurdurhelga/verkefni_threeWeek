@@ -239,99 +239,16 @@ void Controller::removeFunctions(){
 void Controller::searchFunctions(){
     int which = 25;
     View UI;
-    Model db;
     QSqlQuery query;
     int select = 25;
-    int secondSelect = 25;
-    int currID = 0;
     while(which != 0){
         UI.searchInterface(which);
         switch(which){
             case 1:
-                which = 25;
-                while(select != 0){
-                    UI.searchSecond(select);
-                    if(select == 1){
-                        select = 25;
-                        searchScientistName();
-                    }
-                    else if (select == 2){
-                        select = 25;
-                        secondSelect = 25;
-                        currID = searchScientistID();
-                        while(secondSelect != 0){
-                            UI.searchExtended(secondSelect);
-                            switch(secondSelect){
-                                case 1:
-                                    secondSelect = 25;
-                                    query = db.scientistConnComp(currID);
-                                    UI.printResult(query);
-                                    break;
-                                case 2:
-                                    secondSelect = 25;
-                                    editSpecific(currID, true);
-                                    break;
-                                case 0:
-                                    break;
-                                default:
-                                    errorHandling();
-                                    secondSelect = 25;
-                                    break;
-                            }
-                        }
-                    }
-                    else if (select == 0){
-                        select = 25;
-                        break;
-                    }
-                    else{
-                        errorHandling();
-                        select = 25;
-                        break;
-                    }
-                }
+                searchScientisthandler(select);
                 break;
             case 2:
-                which = 25;
-                while(select != 0){
-                    UI.searchSecond(select);
-                    if(select == 1){
-                        select = 25;
-                        searchComputerName();
-                    }
-                    else if(select == 2){
-                        select = 25;
-                        secondSelect = 25;
-                        currID = searchComputerID();
-                        while(secondSelect != 0){
-                            UI.searchExtended(secondSelect);
-                            switch(secondSelect){
-                                case 1:
-                                    query = db.computersConnSci(currID);
-                                    UI.printResult(query);
-                                    break;
-                                case 2:
-                                    secondSelect = 25;
-                                    editSpecific(currID, false);
-                                    break;
-                                case 0:
-                                    break;
-                                default:
-                                    errorHandling();
-                                    secondSelect = 25;
-                                    break;
-                            }
-                        }
-                    }
-                    else if (select == 0){
-                        select = 25;
-                        break;
-                    }
-                    else{
-                        errorHandling();
-                        select = 25;
-                    }
-                }
+                searchComputerHandler(select);
                 break;
             case 0:
                 break;
@@ -343,6 +260,103 @@ void Controller::searchFunctions(){
         }
 
     return;
+}
+
+void Controller::searchScientisthandler(int& select){
+    View UI;
+    QSqlQuery query;
+    Model db;
+    int secondSelect = 25;
+    int currID = 0;
+    while(select != 0){
+        UI.searchSecond(select);
+        if(select == 1){
+            select = 25;
+            searchScientistName();
+        }
+        else if (select == 2){
+            select = 25;
+            secondSelect = 25;
+            currID = searchScientistID();
+            while(secondSelect != 0){
+                UI.searchExtended(secondSelect);
+                switch(secondSelect){
+                    case 1:
+                        secondSelect = 25;
+                        query = db.scientistConnComp(currID);
+                        UI.printResult(query);
+                        break;
+                    case 2:
+                        secondSelect = 25;
+                        editSpecific(currID, true);
+                        break;
+                    case 0:
+                        break;
+                    default:
+                        errorHandling();
+                        secondSelect = 25;
+                        break;
+                }
+            }
+        }
+        else if (select == 0){
+            select = 25;
+            break;
+        }
+        else{
+            errorHandling();
+            select = 25;
+            break;
+        }
+    }
+}
+
+void Controller::searchComputerHandler(int& select){
+    int secondSelect = 25;
+    int currID = 0;
+    View UI;
+    Model db;
+    QSqlQuery query;
+
+    while(select != 0){
+        UI.searchSecond(select);
+        if(select == 1){
+            select = 25;
+            searchComputerName();
+        }
+        else if(select == 2){
+            select = 25;
+            secondSelect = 25;
+            currID = searchComputerID();
+            while(secondSelect != 0){
+                UI.searchExtended(secondSelect);
+                switch(secondSelect){
+                    case 1:
+                        query = db.computersConnSci(currID);
+                        UI.printResult(query);
+                        break;
+                    case 2:
+                        secondSelect = 25;
+                        editSpecific(currID, false);
+                        break;
+                    case 0:
+                        break;
+                    default:
+                        errorHandling();
+                        secondSelect = 25;
+                        break;
+                }
+            }
+        }
+        else if (select == 0){
+            select = 25;
+            break;
+        }
+        else{
+            errorHandling();
+            select = 25;
+        }
+    }
 }
 
 void Controller::editSpecific(int ID, bool which){

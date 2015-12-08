@@ -26,9 +26,12 @@ public:
     // Search functions
     void searchFunctions();
     void searchScientistName();
+    void searchScientisthandler(int& select);
     void searchComputerName();
+    void searchComputerHandler(int& select);
     int searchScientistID();
     int searchComputerID();
+
 
     // Edit functions
     void editFunctions();
