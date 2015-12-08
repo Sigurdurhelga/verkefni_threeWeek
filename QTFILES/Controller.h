@@ -35,6 +35,10 @@ public:
     // Edit functions
     void editFunctions();
     void editSpecific(int, bool);
+    void editScientistHandler();
+    void editComputerHandler();
+    void editLoopScientist(int id);
+    void editLoopComputer(int id);
 
     // Misc
     void errorHandling();

@@ -346,89 +346,24 @@ void Controller::searchComputerHandler(int& select){
 
 void Controller::editSpecific(int ID, bool which){
     View UI;
-    Model db;
 
-    string name;
-    QString qName;
-    bool sex;
-    QString genderStr = "0";
-    QDate doB;
-    QDate doD;
-    QString fact;
-    int year;
 
     int select = 25;
     if(which){
         while(select != 0){
             UI.editSelectionScientist(select);
-            switch(select){
-                case 1:
-                    UI.askName(name);
-                    qName = QString::fromStdString(name);
-                    db.modSci(select, qName, ID);
-                    break;
-                case 2:
-                    UI.askGender(sex);
-                    if(sex){
-                        genderStr = "1";
-                    }
-                    db.modSci(select, genderStr, ID);
-                    break;
-                case 3:
-                    doB = UI.askDateOfBirth();
-                    db.modSci(select, doB.toString("yyyy-MM-dd"), ID);
-                    break;
-                case 4:
-                    doD = UI.askDateOfDeath();
-                    db.modSci(select,doD.toString("yyyy-MM-dd"), ID);
-                    break;
-                case 5:
-                    UI.askFact(fact);
-                    db.modSci(select, fact, ID);
-                    break;
-                case 0:
-                    break;
-                default:
-                    errorHandling();
-                    select = 25;
-                    break;
-            }
+            editScientistHandler();
+            select = 25;
         }
     }
     else{
         while(select != 0){
-        UI.editSelectionComputer(select);
-        switch(select){
-            case 1:
-                UI.askName(name);
-                qName = QString::fromStdString(name);
-                db.modComp(select, qName, ID);
-                break;
-            case 2:
-                UI.compAskCreated(sex);
-                if(sex){
-                    genderStr = "1";
-                }
-                db.modComp(select, genderStr, ID);
-                break;
-            case 3:
-                UI.compAskCreationDate(year);
-                db.modComp(select, QString::number(year), ID);
-                break;
-            case 4:
-                UI.compAskDescription(fact);
-                db.modSci(select, fact, ID);
-                break;
-            case 0:
-                break;
-            default:
-                errorHandling();
-                select = 25;
-                break;
+            UI.editSelectionComputer(select);
+            editComputerHandler();
             }
-
         }
-    }
+
+    return;
 }
 
 void Controller::linkFunctions(){
@@ -481,6 +416,102 @@ void Controller::linkFunctions(){
 
 void Controller::editFunctions(){
     int which = 25;
+    View UI;
+
+    while(which != 0){
+    UI.editWhich(which);
+    switch(which){
+        case 1:
+            editScientistHandler();
+            break;
+        case 2:
+            editComputerHandler();
+            break;
+        case 0:
+            break;
+        default:
+            errorHandling();
+            which = 25;
+            break;
+        }
+    }
+
+    return;
+}
+
+void Controller::editScientistHandler(){
+    View UI;
+    int currID = 0;
+
+    UI.idGet(currID);
+    editLoopScientist(currID);
+
+    return;
+}
+
+void Controller::editLoopScientist(int id){
+    int select = 25;
+    string name;
+    QString qName;
+    bool sex;
+    QString genderStr = "0";
+    QDate doB;
+    QDate doD;
+    QString type;
+    QString fact;
+
+    View UI;
+    Model db;
+    while(select != 0){
+        UI.editSelectionScientist(select);
+        switch(select){
+            case 1:
+                UI.askName(name);
+                qName = QString::fromStdString(name);
+                db.modSci(select, qName, id);
+                break;
+            case 2:
+                UI.askGender(sex);
+                if(sex){
+                    genderStr = "1";
+                }
+                db.modSci(select, genderStr, id);
+                break;
+            case 3:
+                doB = UI.askDateOfBirth();
+                db.modSci(select, doB.toString("yyyy-MM-dd"), id);
+                break;
+            case 4:
+                doD = UI.askDateOfDeath();
+                db.modSci(select,doD.toString("yyyy-MM-dd"), id);
+                break;
+            case 5:
+                UI.askFact(fact);
+                db.modSci(select, fact, id);
+                break;
+            case 0:
+                break;
+            default:
+                errorHandling();
+                select = 25;
+                break;
+        }
+    }
+
+    return;
+}
+
+void Controller::editComputerHandler(){
+    View UI;
+    int currID = 0;
+
+    UI.idGet(currID);
+    editLoopComputer(currID);
+
+    return;
+}
+
+void Controller::editLoopComputer(int id){
     int select = 25;
     int currID;
 
@@ -497,96 +528,45 @@ void Controller::editFunctions(){
     View UI;
     Model db;
 
-    while(which != 0){
-    UI.editWhich(which);
-    switch(which){
-        case 1:
-            UI.idGet(currID);
-            while(select != 0){
-                UI.editSelectionScientist(select);
-                switch(select){
-                    case 1:
-                        UI.askName(name);
-                        qName = QString::fromStdString(name);
-                        db.modSci(select, qName, currID);
-                        break;
-                    case 2:
-                        UI.askGender(sex);
-                        if(sex){
-                            genderStr = "1";
-                        }
-                        db.modSci(select, genderStr, currID);
-                        break;
-                    case 3:
-                        doB = UI.askDateOfBirth();
-                        db.modSci(select, doB.toString("yyyy-MM-dd"), currID);
-                        break;
-                    case 4:
-                        doD = UI.askDateOfDeath();
-                        db.modSci(select,doD.toString("yyyy-MM-dd"), currID);
-                        break;
-                    case 5:
-                        UI.askFact(fact);
-                        db.modSci(select, fact, currID);
-                        break;
-                    case 0:
-                        break;
-                    default:
-                        errorHandling();
-                        select = 25;
-                        break;
+    while(select != 0){
+        UI.editSelectionComputer(select);
+        switch(select){
+            case 1:
+                UI.askName(name);
+                qName = QString::fromStdString(name);
+                db.modComp(select, qName, currID);
+                break;
+            case 2:
+                UI.compAskCreated(sex);
+                if(sex){
+                    genderStr = "1";
                 }
-            }
-            break;
-        case 2:
-            UI.idGet(currID);
-            while(select != 0){
-                UI.editSelectionComputer(select);
-                switch(select){
-                    case 1:
-                        UI.askName(name);
-                        qName = QString::fromStdString(name);
-                        db.modComp(select, qName, currID);
-                        break;
-                    case 2:
-                        UI.compAskCreated(sex);
-                        if(sex){
-                            genderStr = "1";
-                        }
-                        db.modComp(select, genderStr, currID);
-                        break;
-                    case 3:
-                        UI.compAskCreationDate(year);
-                        db.modComp(select, QString::number(year), currID);
-                        break;
-                    case 4:
-                        UI.compAskType(type);
-                        db.modComp(select, type, currID);
-                        break;
-                    case 5:
-                        UI.compAskDescription(fact);
-                        db.modSci(select, fact, currID);
-                        break;
-                    case 0:
-                        break;
-                    default:
-                        errorHandling();
-                        select = 25;
-                        break;
-                }
-            }
-            break;
-        case 0:
-            break;
-        default:
-            errorHandling();
-            which = 25;
-            break;
+                db.modComp(select, genderStr, currID);
+                break;
+            case 3:
+                UI.compAskCreationDate(year);
+                db.modComp(select, QString::number(year), currID);
+                break;
+            case 4:
+                UI.compAskType(type);
+                db.modComp(select, type, currID);
+                break;
+            case 5:
+                UI.compAskDescription(fact);
+                db.modSci(select, fact, currID);
+                break;
+            case 0:
+                break;
+            default:
+                errorHandling();
+                select = 25;
+                break;
         }
     }
 
     return;
 }
+
 
 void Controller::errorHandling(){
     View UI;
