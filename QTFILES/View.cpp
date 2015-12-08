@@ -146,17 +146,23 @@ void View::linkWhich(int& select){
 void View::printResult(QSqlQuery& result){
     int i = 0;
     QString val;
+    cout << "========================================" << endl;
     while(result.next()){
+        cout << "| ";
         while(!result.value(i).isNull()){
             val = result.value(i).toString();
-
-            cout << val.toStdString() << endl;
+            if(!(val == result.value("fact"))){
+                cout << val.toStdString() << " | ";
+            }
+            else{
+                cout << endl << "| Fun fact: " << val.toStdString() << " |";
+            }
             i++;
         }
         cout << endl;
         i = 0;
     }
-
+    cout << "========================================" << endl;
     return;
 }
 
