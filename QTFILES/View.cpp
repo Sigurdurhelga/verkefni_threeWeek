@@ -16,16 +16,16 @@ View::View()
 // This function takes the users input and forwards it to the Controller.
 void View::displayInterface(int& select)
 {
-        cout << "======================================" << endl
-             << "1. List records" << endl
+        cout << "1. List records" << endl
              << "2. Add record" << endl
              << "3. Remove record" << endl
              << "4. Search" << endl
              << "5. Link scientists and computers" << endl
              << "6. Edit a record" << endl
              << "0. Quit the Application" << endl
-             << "======================================"<< endl;
+             << endl;
         cin >> select;
+        cout << endl;
 
     return;
 }
@@ -41,6 +41,7 @@ int View::displayListFuncsSci(){
          << "7. List those who are alive" << endl
          << "0. Go back" << endl;
     cin >> select;
+    cout << endl;
 
     return select;
 }
@@ -54,8 +55,10 @@ int View::displayListFuncsComp(){
          << "6. List by creation date descending" << endl
          << "7. List by type ascending" << endl
          << "8. List by type descending" << endl
-         << "0. Go back" << endl;
+         << "0. Go back" << endl
+         << endl;
     cin >> select;
+    cout << endl;
 
     return select;
 }
@@ -63,8 +66,10 @@ int View::displayListFuncsComp(){
 void View::listInterface(int& select){
     cout << "1. List scientists" << endl
          << "2. List computers" << endl
-         << "0. Go back" << endl;
+         << "0. Go back" << endl
+         << endl;
     cin >> select;
+    cout << endl;
 
     return;
 }
@@ -72,8 +77,10 @@ void View::listInterface(int& select){
 void View::addInterface(int& select){
     cout << "1. Add scientist" << endl
          << "2. Add computer" << endl
-         << "0. Go back" << endl;
+         << "0. Go back" << endl
+         << endl;
     cin >> select;
+    cout << endl;
 
     return;
 }
@@ -81,8 +88,10 @@ void View::addInterface(int& select){
 void View::removeInterface(int& select){
     cout << "1. Remove scientist" << endl
          << "2. Remove computer" << endl
-         << "0. Go back" << endl;
-    cin >> select;
+         << "0. Go back" << endl
+         << endl;
+     cin >> select;
+     cout << endl;
 
     return;
 }
@@ -103,8 +112,10 @@ void View::idGet(int& id){
 void View::searchInterface(int& select){
     cout << "1. Search for scientists" << endl
          << "2. Search for computers" << endl
-         << "0. Go back" << endl;
+         << "0. Go back" << endl
+         << endl;
     cin >> select;
+    cout << endl;
 
     return;
 }
@@ -112,15 +123,19 @@ void View::searchInterface(int& select){
 void View::searchSecond(int& select){
     cout << "1. Search by name" << endl
          << "2. Search by id" << endl
-         << "0. Go back" << endl;
+         << "0. Go back" << endl
+         << endl;
     cin >> select;
+    cout<< endl;
 }
 
 void View::searchExtended(int& select){
     cout << "1. List all records linked to this record" << endl
          << "2. Edit this record" << endl
-         << "0. Go back." << endl;
+         << "0. Go back." << endl
+         << endl;
     cin >> select;
+    cout << endl;
 
     return;
 }
@@ -128,8 +143,10 @@ void View::searchExtended(int& select){
 void View::editWhich(int& select){
     cout << "1. Edit a scientist" << endl
          << "2. Edit a computer" << endl
-         << "0. Go back" << endl;
+         << "0. Go back" << endl
+         << endl;
     cin >> select;
+    cout << endl;
 
     return;
 }
@@ -150,6 +167,7 @@ void View::showLinks(int& select){
          << "2. Show scientists linked to a specific compuer" << endl
          << "0. Go back" << endl;
     cin >> select;
+    cout << endl;
 
     return;
 }
@@ -157,23 +175,18 @@ void View::showLinks(int& select){
 void View::printResult(QSqlQuery& result){
     int i = 0;
     QString val;
-    cout << "========================================" << endl;
+    cout << "================================================================================" << endl;
     while(result.next()){
         cout << "| ";
         while(!result.value(i).isNull()){
             val = result.value(i).toString();
-            if(!(val == result.value("description"))){
-                cout << val.toStdString() << " | ";
-            }
-            else{
-                cout << endl << "| Description: " << val.toStdString() << " |";
-            }
+            cout << val.toStdString() << " | ";
             i++;
         }
         cout << endl;
         i = 0;
     }
-    cout << "========================================" << endl;
+    cout << "================================================================================" << endl << endl;
     return;
 }
 
@@ -381,6 +394,7 @@ void View::compAskCreationDate(int& year){
         cout << "Write the Year of the creation date for your Computer: ";
         cin >> year;
     }
+
     return;
 }
 
@@ -391,6 +405,7 @@ void View::compAskType(QString& type){
         getline(cin, sType);
     }
     type = QString::fromStdString(sType);
+
     return;
 }
 
@@ -420,6 +435,8 @@ void View::editSelectionScientist(int& select){
          << "5. Edit description." << endl
          << "0. Go back."<< endl;
     cin >> select;
+    cout << endl;
+
     return;
 }
 
@@ -430,8 +447,11 @@ void View::editSelectionComputer(int& select){
          << "3. Edit creation year." << endl
          << "4. Edit type." << endl
          << "5. Edit description." << endl
-         << "0. Go back."<< endl;
+         << "0. Go back."<< endl
+         << endl;
     cin >> select;
+    cout << endl;
+
     return;
 }
 
