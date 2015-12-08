@@ -35,6 +35,8 @@ public:
     // Edit functions
     void editFunctions();
     void editSpecific(int, bool);
+    void editScientistHandler(int& select);
+    void editComputerHandler(int& select);
 
     // Misc
     void errorHandling();
