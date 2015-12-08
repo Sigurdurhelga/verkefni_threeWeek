@@ -53,6 +53,8 @@ int View::displayListFuncsComp(){
          << "4. List those who were not created" << endl
          << "5. List by creation date ascending" << endl
          << "6. List by creation date descending" << endl
+         << "7. List by type ascending" << endl
+         << "8. List by type descending" << endl
          << "0. Go back" << endl
          << endl;
     cin >> select;
@@ -173,23 +175,18 @@ void View::showLinks(int& select){
 void View::printResult(QSqlQuery& result){
     int i = 0;
     QString val;
-    cout << "========================================" << endl;
+    cout << "================================================================================" << endl;
     while(result.next()){
         cout << "| ";
         while(!result.value(i).isNull()){
             val = result.value(i).toString();
-            if(!(val == result.value("description"))){
-                cout << val.toStdString() << " | ";
-            }
-            else{
-                cout << endl << "| Description: " << val.toStdString() << " |";
-            }
+            cout << val.toStdString() << " | ";
             i++;
         }
         cout << endl;
         i = 0;
     }
-    cout << "========================================" << endl;
+    cout << "================================================================================" << endl << endl;
     return;
 }
 
@@ -238,21 +235,6 @@ void View::populateComputer(Computers& comp){
     return;
 }
 
-void View::howToList(int& selection){
-
-
-    cout << "1. List by name in ascending order\n"
-            "2. List by name in descending order\n"
-            "3. List all alive\n"
-            "4. List by date added\n"
-            "5. List by birth date ascending \n"
-            "6. List by birth date descending"
-         << endl;
-
-    cin >> selection;
-
-    return;
-}
 
 void View::askName(string& name){
     cout << "Write a Name: " << endl;

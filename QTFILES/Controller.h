@@ -11,7 +11,6 @@ public:
     // List functions
     void linkFunctions();
     void listFunctions();
-    void listScientists();
     QSqlQuery sortByInSci(int comp);
     QSqlQuery sortByInComp(int comp);
 
