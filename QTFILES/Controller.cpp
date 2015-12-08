@@ -268,13 +268,13 @@ void Controller::searchScientisthandler(int& select){
                 UI.searchExtended(secondSelect);
                 switch(secondSelect){
                     case 1:
-                        secondSelect = 25;
                         query = db.scientistConnComp(currID);
                         UI.printResult(query);
+                        secondSelect = 25;
                         break;
                     case 2:
-                        secondSelect = 25;
                         editSpecific(currID, true);
+                        secondSelect = 25;
                         break;
                     case 0:
                         break;
@@ -357,15 +357,13 @@ void Controller::editSpecific(int ID, bool which){
     if(which){
         while(select != 0){
             UI.editSelectionScientist(select);
-            editScientistHandler();
-            select = 25;
+            extraScientistHandler(ID);
         }
     }
     else{
         while(select != 0){
             UI.editSelectionComputer(select);
-            editComputerHandler();
-            select = 25;
+            extraComputerHandler(ID);
             }
         }
 
@@ -454,6 +452,23 @@ void Controller::editScientistHandler(){
 
     return;
 }
+
+void Controller::extraScientistHandler(int id){
+    View UI;
+
+    editLoopScientist(id);
+
+    return;
+}
+
+void Controller::extraComputerHandler(int id){
+    View UI;
+
+    editLoopComputer(id);
+
+    return;
+}
+
 
 void Controller::editLoopScientist(int id){
     int select = 25;
