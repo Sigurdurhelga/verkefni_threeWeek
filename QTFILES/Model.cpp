@@ -13,26 +13,28 @@
 using namespace std;
 
 QSqlQuery Model::queryListSci(int way){
-    QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery ret;
     switch(way){
         case 1:
-            ret = db.exec("SELECT * FROM people ORDER BY id");
+            ret.exec("SELECT * FROM people ORDER BY id");
             break;
         case 2:
-            ret = db.exec("SELECT * FROM people ORDER BY id DESC");
+            ret.exec("SELECT * FROM people ORDER BY id DESC");
             break;
         case 3:
-            ret = db.exec("SELECT * FROM people ORDER BY name");
+            ret.exec("SELECT * FROM people ORDER BY name");
             break;
         case 4:
-            ret = db.exec("SELECT * FROM people ORDER BY name DESC");
+            ret.exec("SELECT * FROM people ORDER BY name DESC");
             break;
         case 5:
-            ret = db.exec("SELECT * FROM people ORDER BY birthDate");
+            ret.exec("SELECT * FROM people ORDER BY birthDate");
             break;
         case 6:
-            ret = db.exec("SELECT * FROM people ORDER BY birthDate DESC");
+            ret.exec("SELECT * FROM people ORDER BY birthDate DESC");
+            break;
+        case 7:
+            ret.exec("SELECT * FROM people WHERE deathDate = 'ALIVE' ORDER BY id");
             break;
         default:
             way = 25;
