@@ -152,6 +152,7 @@ void Controller::listFunctions(){
                     query = sortByInSci(select);
                     UI.printResult(query);
                 }
+                select = 25;
                 break;
             case 2:
                 while(select != 0){
@@ -159,6 +160,7 @@ void Controller::listFunctions(){
                     query = sortByInComp(select);
                     UI.printResult(query);
                 }
+                select = 25;
                 break;
             case 0:
                 break;
@@ -184,10 +186,12 @@ void Controller::addFunctions(){
         UI.addInterface(which);
         switch(which){
             case 1:
+                which = 25;
                 UI.populateScientist(guy);
                 db.addScientistToDatabase(guy);
                 break;
             case 2:
+                which = 25;
                 UI.populateComputer(comp);
                 db.addComputerToDatabase(comp);
                 break;
@@ -211,9 +215,11 @@ void Controller::removeFunctions(){
         UI.removeInterface(which);
         switch(which){
             case 1:
+                which = 25;
                 removeScientist();
                 break;
             case 2:
+                which = 25;
                 removeComputer();
                 break;
             case 0:
@@ -243,14 +249,17 @@ void Controller::searchFunctions(){
                 while(select != 0){
                     UI.searchSecond(select);
                     if(select == 1){
+                        select = 25;
                         searchScientistName();
                     }
                     else if (select == 2){
+                        select = 25;
                         currID = searchScientistID();
                         while(secondSelect != 0){
                             UI.searchExtended(secondSelect);
                             switch(secondSelect){
                                 case 1:
+                                    secondSelect = 25;
                                     query = db.scientistConnComp(currID);
                                     UI.printResult(query);
                                     break;
@@ -258,10 +267,17 @@ void Controller::searchFunctions(){
                                     break;
                                 default:
                                     errorHandling();
-                                    which = 25;
+                                    secondSelect = 25;
                                     break;
                             }
                         }
+                    }
+                    else if (select == 0){
+                        break;
+                    }
+                    else{
+                        errorHandling();
+                        select = 25;
                     }
                 }
                 break;
@@ -271,7 +287,7 @@ void Controller::searchFunctions(){
                     if(select == 1){
                         searchComputerName();
                     }
-                else if(select == 2){
+                    else if(select == 2){
                         currID = searchComputerID();
                         while(secondSelect != 0){
                             UI.searchExtended(secondSelect);
@@ -284,10 +300,17 @@ void Controller::searchFunctions(){
                                     break;
                                 default:
                                     errorHandling();
-                                    which = 25;
+                                    secondSelect = 25;
                                     break;
                             }
                         }
+                    }
+                    else if (select == 0){
+                        break;
+                    }
+                    else{
+                        errorHandling();
+                        select = 25;
                     }
                 }
                 break;
@@ -333,6 +356,7 @@ void Controller::linkFunctions(){
                 which = 25;
                 break;
         }
+        which = 25;
     }
 
     return;
@@ -391,9 +415,10 @@ void Controller::editFunctions(){
                         break;
                     default:
                         errorHandling();
-                        which = 25;
+                        select = 25;
                         break;
                 }
+            select = 25;
             }
             break;
         case 2:
@@ -425,9 +450,10 @@ void Controller::editFunctions(){
                         break;
                     default:
                         errorHandling();
-                        which = 25;
+                        select = 25;
                         break;
                 }
+            select = 25;
             }
             break;
         case 0:
@@ -437,6 +463,7 @@ void Controller::editFunctions(){
             which = 25;
             break;
         }
+    which = 25;
     }
 
     return;

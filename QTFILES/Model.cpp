@@ -45,19 +45,19 @@ QSqlQuery Model::queryListComp(int way){
             ret = db.exec("SELECT * FROM computers ORDER BY id");
             break;
         case 2:
-            ret = db.exec("SELECT * FROM computers ORDER BY id desc");
+            ret = db.exec("SELECT * FROM computers ORDER BY id DESC");
             break;
         case 3:
             ret = db.exec("SELECT * FROM computers WHERE created = 1 ORDER BY id");
             break;
         case 4:
-            ret = db.exec("SELECT * FROM computers WHERE created = 0 ORDER BY is");
+            ret = db.exec("SELECT * FROM computers WHERE created = 0 ORDER BY id");
             break;
         case 5:
             ret = db.exec("SELECT * FROM computers ORDER BY creationDate");
             break;
         case 6:
-            ret = db.exec("SELECT * FROM computers ORDER BY creationDate");
+            ret = db.exec("SELECT * FROM computers ORDER BY creationDate DESC");
             break;
     }
     return ret;
