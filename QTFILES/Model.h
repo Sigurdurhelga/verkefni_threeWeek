@@ -27,6 +27,8 @@ public:
      QSqlQuery linkListSci();
      QSqlQuery linkListComp();
      void linkSciToComp(int SciID, int CompID);
+     QSqlQuery showLinkedComputers(int id);
+     QSqlQuery showLinkedScientists(int id);
 };
 
 #endif // MODEL_H

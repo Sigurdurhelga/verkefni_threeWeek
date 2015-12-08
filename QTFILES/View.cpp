@@ -134,6 +134,16 @@ void View::linkWhich(int& select){
     cout << "1. List of scientists" << endl
          << "2. List of computers" << endl
          << "3. Link a scientist to a computer" << endl
+         << "4. Show links" << endl
+         << "0. Go back" << endl;
+    cin >> select;
+
+    return;
+}
+
+void View::showLinks(int& select){
+    cout << "1. Show computers linked to a specific scientist" << endl
+         << "2. Show scientists linked to a specific compuer" << endl
          << "0. Go back" << endl;
     cin >> select;
 
