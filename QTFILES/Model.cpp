@@ -172,7 +172,8 @@ void Model::modSci(int select, QString entry, int id){
             field = "fact";
             break;
     }
-    QString qQuery = "UPDATE people SET "+field+" = '"+entry+"' WHERE id = "+QString::number(id);
+    QString qQuery = "UPDATE people SET "+field+" = '"+entry+"' "
+                     "WHERE id = "+QString::number(id);
     db.exec(qQuery);
 }
 
@@ -193,7 +194,8 @@ void Model::modComp(int select, QString entry, int id){
             field = "description";
             break;
     }
-    QString qQuery = "UPDATE computers SET "+field+" = '"+entry+"' WHERE id = "+QString::number(id);
+    QString qQuery = "UPDATE computers SET "+field+" = '"+entry+"' "
+                     "WHERE id = "+QString::number(id);
     db.exec(qQuery);
 }
 
@@ -229,7 +231,8 @@ void Model::addScientistToDatabase(Scientist& guy){
         if(gender){
             boolToString = "1";
         }
-        query.prepare("INSERT INTO people (name, gender, birthDate, deathDate, fact) VALUES (:name, :gender, :doB, :doD, :fact)");
+        query.prepare("INSERT INTO people (name, gender, birthDate, deathDate, fact) "
+                      "VALUES (:name, :gender, :doB, :doD, :fact)");
         query.bindValue(":name", name);
         query.bindValue(":gender", boolToString);
         query.bindValue(":doB", doB);
