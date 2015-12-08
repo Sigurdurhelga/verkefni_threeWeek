@@ -14,21 +14,6 @@
 
 using namespace std;
 
-
-void Controller::listScientists(){   //function that defines how the list of Scientists should be ordered
-    int select = 0;
-    View screen;
-    QSqlQuery query;
-
-    screen.howToList(select);
-    query = sortByInSci(select);
-    screen.printResult(query);
-
-    return;
-}
-
-
-
 void Controller::removeScientist(){      //function that finds a Scientist to erase
     View screen;
     Model db;

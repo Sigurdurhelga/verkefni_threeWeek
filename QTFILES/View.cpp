@@ -235,21 +235,6 @@ void View::populateComputer(Computers& comp){
     return;
 }
 
-void View::howToList(int& selection){
-
-
-    cout << "1. List by name in ascending order\n"
-            "2. List by name in descending order\n"
-            "3. List all alive\n"
-            "4. List by date added\n"
-            "5. List by birth date ascending \n"
-            "6. List by birth date descending"
-         << endl;
-
-    cin >> selection;
-
-    return;
-}
 
 void View::askName(string& name){
     cout << "Write a Name: " << endl;
