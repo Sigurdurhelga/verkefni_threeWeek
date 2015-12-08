@@ -161,11 +161,11 @@ void View::printResult(QSqlQuery& result){
         cout << "| ";
         while(!result.value(i).isNull()){
             val = result.value(i).toString();
-            if(!(val == result.value("fact"))){
+            if(!(val == result.value("description"))){
                 cout << val.toStdString() << " | ";
             }
             else{
-                cout << endl << "| Fun fact: " << val.toStdString() << " |";
+                cout << endl << "| Description: " << val.toStdString() << " |";
             }
             i++;
         }
@@ -328,7 +328,7 @@ QDate View::askDateOfDeath(){
 
 void View::askFact(QString& fact){
     string sFact;
-    cout << "Write a small factoid about the scientist: ";
+    cout << "Write a small description about the scientist: ";
     while(sFact == ""){
         getline(cin, sFact);
     }
@@ -411,7 +411,7 @@ void View::editSelectionScientist(int& select){
          << "2. Edit gender." << endl
          << "3. Edit date of birth." << endl
          << "4. Edit date of death." << endl
-         << "5. Edit fact." << endl
+         << "5. Edit description." << endl
          << "0. Go back."<< endl;
     cin >> select;
     return;
