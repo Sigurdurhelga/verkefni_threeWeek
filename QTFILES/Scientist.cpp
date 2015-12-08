@@ -11,6 +11,7 @@ Scientist::Scientist()
     sex = "male";
     doB = QDate(2012,01,01);
     doD = QDate(2013,01,01);
+    fact = "The lost one";
 }
 
 
@@ -23,11 +24,6 @@ Scientist::Scientist(QString Sname, bool Ssex, QDate SdoB, QDate SdoD, QString S
     doB = SdoB;
     doD = SdoD;
     fact = Sfact;
-}
-
-QString Scientist::returnName()
-{
-    return name;
 }
 
 void Scientist::setName(QString Sname){
@@ -51,6 +47,12 @@ void Scientist::setFact(QString Sfact)
     fact = Sfact;
 }
 
+QString Scientist::returnName()
+{
+    return name;
+}
+
+
 bool Scientist::returnSex()
 {
     return sex;
@@ -65,14 +67,17 @@ QDate Scientist::dateofDeath()
 {
     return doD;
 }
+
 QString Scientist::dateofBirthQString()
 {
     return doB.toString("yyyy-MM-dd");
 }
+
 QString Scientist::dateofDeathQString()
 {
     return doD.toString("yyyy-MM-dd");
 }
+
 QString Scientist::returnFact()
 {
     return fact;
