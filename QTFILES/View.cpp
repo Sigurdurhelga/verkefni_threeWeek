@@ -156,6 +156,7 @@ void View::showLinks(int& select){
 void View::printResult(QSqlQuery& result){
     int i = 0;
     QString val;
+    cout << "========================================" << endl;
     while(result.next()){
         cout << "| ";
         while(!result.value(i).isNull()){
@@ -171,7 +172,7 @@ void View::printResult(QSqlQuery& result){
         cout << endl;
         i = 0;
     }
-
+    cout << "========================================" << endl;
     return;
 }
 
