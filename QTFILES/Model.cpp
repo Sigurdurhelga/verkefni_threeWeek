@@ -246,7 +246,8 @@ void Model::addComputerToDatabase(Computers& comp){
         if(created){
             boolToString = "1";
         }
-        query.prepare("INSERT INTO computers(name, created, creationDate, description) VALUES (:name, :created, :creationDate, :desc)");
+        query.prepare("INSERT INTO computers(name, created, creationDate, description) "
+                      "VALUES (:name, :created, :creationDate, :desc)");
         query.bindValue(":name", name);
         query.bindValue(":created", boolToString);
         query.bindValue(":creationDate", creationYear);
@@ -276,7 +277,8 @@ QSqlQuery Model::linkListComp(){
 
 void Model::linkSciToComp(int SciID, int CompID){
     QSqlQuery query;
-    query.prepare("INSERT INTO compGroups(peopleID, computerID) VALUES(:SciID, :CompID)");
+    query.prepare("INSERT INTO compGroups(peopleID, computerID) "
+                  "VALUES(:SciID, :CompID)");
     query.bindValue(":SciID", SciID);
     query.bindValue(":CompID", CompID);
     query.exec();
