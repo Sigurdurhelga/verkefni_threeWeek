@@ -36,8 +36,6 @@ public:
     // Link functions
     void linkSciToComp(int SciID, int CompID);
     QSqlQuery computersConnSci(int id);
-    QSqlQuery showLinkedComputers(int id);
-    QSqlQuery showLinkedScientists(int id);
 
     // Edit functions
     void modSci(int, QString, int);

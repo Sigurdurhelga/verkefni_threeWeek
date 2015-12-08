@@ -12,6 +12,23 @@
 
 using namespace std;
 
+QSqlDatabase Model::openConnection(){
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setHostName("localhost");
+    db.setDatabaseName("data.dat");
+    bool db_ok = db.open();
+    if(db_ok){
+        return db;
+    }
+    else{
+        cout << "DATABASE CONNECTION FAILED!" << endl;
+    }
+}
+
+bool Model::checkConnection(QSqlDatabase db){
+    return db.open();
+}
+
 QSqlQuery Model::queryListSci(int way){
     QSqlQuery ret;
     switch(way){
@@ -80,25 +97,20 @@ QSqlQuery Model::queryListComp(int way){
     return ret;
 }
 
-
-void Model::rmRowSci(int id){
-    QSqlDatabase db = QSqlDatabase::database();
+QSqlQuery Model::linkListSci(){
     QSqlQuery query;
-    query.prepare("DELETE FROM people WHERE id = :id");
-    query.bindValue(":id", id);
+    query.prepare("SELECT id, name FROM people");
     query.exec();
 
-    return;
+    return query;
 }
 
-void Model::rmRowComp(int id){
-    QSqlDatabase db = QSqlDatabase::database();
+QSqlQuery Model::linkListComp(){
     QSqlQuery query;
-    query.prepare("DELETE FROM computers WHERE id = :id");
-    query.bindValue(":id", id);
+    query.prepare("SELECT id, name FROM computers");
     query.exec();
 
-    return;
+    return query;
 }
 
 QSqlQuery Model::searchSciName(QString name){
@@ -129,7 +141,6 @@ QSqlQuery Model::scientistConnComp(int id){
     return ret;
 }
 
-
 QSqlQuery Model::searchCompName(QString name){
     QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery ret;
@@ -145,6 +156,99 @@ QSqlQuery Model::searchCompID(int id){
     ret.bindValue(":id", id);
     ret.exec();
     return ret;
+}
+
+void Model::addScientistToDatabase(Scientist& guy){
+    QSqlDatabase db = QSqlDatabase::database();
+    if(checkConnection(db)){
+        QSqlQuery query;
+
+        QString name = guy.returnName();
+        bool gender = guy.returnSex();
+        QString doB = guy.dateofBirthQString();
+        QString doD = guy.dateofDeathQString();
+        QString fact = guy.returnFact();
+
+        if(doD == "0001-01-01"){
+            doD = "ALIVE";
+        }
+
+        QString boolToString = "0";
+        if(gender){
+            boolToString = "1";
+        }
+        query.prepare("INSERT INTO people (name, gender, birthDate, deathDate, description) "
+                      "VALUES (:name, :gender, :doB, :doD, :fact)");
+        query.bindValue(":name", name);
+        query.bindValue(":gender", boolToString);
+        query.bindValue(":doB", doB);
+        query.bindValue(":doD", doD);
+        query.bindValue(":fact", fact);
+        query.exec();
+
+    }
+    else{
+        cout << "no connection to database" << endl;
+    }
+}
+
+void Model::addComputerToDatabase(Computers& comp){
+    QSqlDatabase db = QSqlDatabase::database();
+    if(checkConnection(db)){
+        QSqlQuery query;
+
+        QString name = comp.returnName();
+        bool created = comp.returnCreated();
+        int creationYear = comp.returnCreationYear();
+        QString type = comp.returnType();
+        QString desc = comp.returnDescription();
+        QString boolToString = "0";
+        if(created){
+            boolToString = "1";
+        }
+        query.prepare("INSERT INTO computers(name, created, creationDate, type, description) "
+                      "VALUES (:name, :created, :creationDate, :type, :desc)");
+        query.bindValue(":name", name);
+        query.bindValue(":created", boolToString);
+        query.bindValue(":creationDate", creationYear);
+        query.bindValue(":type", type);
+        query.bindValue(":desc", desc);
+        query.exec();
+
+    }
+
+    return;
+}
+
+void Model::rmRowSci(int id){
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query;
+    query.prepare("DELETE FROM people WHERE id = :id");
+    query.bindValue(":id", id);
+    query.exec();
+
+    return;
+}
+
+void Model::rmRowComp(int id){
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query;
+    query.prepare("DELETE FROM computers WHERE id = :id");
+    query.bindValue(":id", id);
+    query.exec();
+
+    return;
+}
+
+void Model::linkSciToComp(int SciID, int CompID){
+    QSqlQuery query;
+    query.prepare("INSERT INTO compGroups(peopleID, computerID) "
+                  "VALUES(:SciID, :CompID)");
+    query.bindValue(":SciID", SciID);
+    query.bindValue(":CompID", CompID);
+    query.exec();
+
+    return;
 }
 
 QSqlQuery Model::computersConnSci(int id){
@@ -209,112 +313,11 @@ void Model::modComp(int select, QString entry, int id){
     db.exec(qQuery);
 }
 
-bool Model::checkConnection(QSqlDatabase db){
-    return db.open();
-}
-
-QSqlDatabase Model::openConnection(){
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setHostName("localhost");
-    db.setDatabaseName("data.dat");
-    bool db_ok = db.open();
-    if(db_ok){
-        return db;
-    }
-    else{
-        cout << "DATABASE CONNECTION FAILED!" << endl;
-    }
-}
 
 
-void Model::addScientistToDatabase(Scientist& guy){
-    QSqlDatabase db = QSqlDatabase::database();
-    if(checkConnection(db)){
-        QSqlQuery query;
 
-        QString name = guy.returnName();
-        bool gender = guy.returnSex();
-        QString doB = guy.dateofBirthQString();
-        QString doD = guy.dateofDeathQString();
-        QString fact = guy.returnFact();
 
-        if(doD == "0001-01-01"){
-            doD = "ALIVE";
-        }
 
-        QString boolToString = "0";
-        if(gender){
-            boolToString = "1";
-        }
-        query.prepare("INSERT INTO people (name, gender, birthDate, deathDate, description) "
-                      "VALUES (:name, :gender, :doB, :doD, :fact)");
-        query.bindValue(":name", name);
-        query.bindValue(":gender", boolToString);
-        query.bindValue(":doB", doB);
-        query.bindValue(":doD", doD);
-        query.bindValue(":fact", fact);
-        query.exec();
-
-    }
-    else{
-        cout << "no connection to database" << endl;
-    }
-}
-
-void Model::addComputerToDatabase(Computers& comp){
-    QSqlDatabase db = QSqlDatabase::database();
-    if(checkConnection(db)){
-        QSqlQuery query;
-
-        QString name = comp.returnName();
-        bool created = comp.returnCreated();
-        int creationYear = comp.returnCreationYear();
-        QString type = comp.returnType();
-        QString desc = comp.returnDescription();
-        QString boolToString = "0";
-        if(created){
-            boolToString = "1";
-        }
-        query.prepare("INSERT INTO computers(name, created, creationDate, type, description) "
-                      "VALUES (:name, :created, :creationDate, :type, :desc)");
-        query.bindValue(":name", name);
-        query.bindValue(":created", boolToString);
-        query.bindValue(":creationDate", creationYear);
-        query.bindValue(":type", type);
-        query.bindValue(":desc", desc);
-        query.exec();
-
-    }
-
-    return;
-}
-
-QSqlQuery Model::linkListSci(){
-    QSqlQuery query;
-    query.prepare("SELECT id, name FROM people");
-    query.exec();
-
-    return query;
-}
-
-QSqlQuery Model::linkListComp(){
-    QSqlQuery query;
-    query.prepare("SELECT id, name FROM computers");
-    query.exec();
-
-    return query;
-}
-
-void Model::linkSciToComp(int SciID, int CompID){
-    QSqlQuery query;
-    query.prepare("INSERT INTO compGroups(peopleID, computerID) "
-                  "VALUES(:SciID, :CompID)");
-    query.bindValue(":SciID", SciID);
-    query.bindValue(":CompID", CompID);
-    query.exec();
-
-    return;
-}
 
 
 
