@@ -14,8 +14,18 @@ private:
     QDate doD;
     QString fact;
 public:
+    // Constructor
     Scientist();
     Scientist(QString name, bool sex, QDate doB, QDate doD, QString fact);
+
+    // Set functions
+    void setName(QString name);
+    void setGender(bool sex);
+    void setdoB(QDate doB);
+    void setdoD(QDate doB);
+    void setFact(QString fact);
+
+    // Get functions
     QString returnName();
     bool returnSex();
     QDate dateofBirth();
@@ -23,11 +33,6 @@ public:
     QString dateofBirthQString();
     QString dateofDeathQString();
     QString returnFact();
-    void setName(QString name);
-    void setGender(bool sex);
-    void setdoB(QDate doB);
-    void setdoD(QDate doB);
-    void setFact(QString fact);
 };
 
 #endif // SCIENTIST_H
