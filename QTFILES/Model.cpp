@@ -191,6 +191,9 @@ void Model::modComp(int select, QString entry, int id){
             field = "creationDate";
             break;
         case 4:
+            field = "type";
+            break;
+        case 5:
             field = "description";
             break;
     }
