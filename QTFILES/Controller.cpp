@@ -14,103 +14,46 @@
 
 using namespace std;
 
-void Controller::removeScientist(){      //function that finds a Scientist to erase
-    View screen;
-    Model db;
-    int id;
-
-    screen.idGet(id);
-    db.rmRowSci(id);
-
-    return;
-}
-
-void Controller::removeComputer(){
-    View screen;
-    Model db;
-    int id;
-    screen.idGet(id);
-    db.rmRowComp(id);
-
-    return;
-}
-
-void Controller::searchScientistName(){              //function that searches the database
-    View screen;
-    Model db;
-    string name;
-    screen.askName(name);
-    QSqlQuery query;
-    QString qName = QString::fromStdString(name);
-    query = db.searchSciName(qName);
-    screen.printResult(query);
-
-    return;
-}
-
-void Controller::searchComputerName(){              //function that searches the database
-    View screen;
-    Model db;
-    string name;
-    screen.askName(name);
-    QSqlQuery query;
-    QString qName = QString::fromStdString(name);
-    query = db.searchCompName(qName);
-    screen.printResult(query);
-
-    return;
-}
-
-int Controller::searchScientistID(){
-    View screen;
-    Model db;
-    int id;
-    screen.idGet(id);
-    QSqlQuery query;
-    QSqlQuery query2;
-    query = db.searchSciID(id);
-
-    screen.printResult(query);
-
-    return id;
-}
-
-int Controller::searchComputerID(){
-    View screen;
-    Model db;
-    int id;
-    screen.idGet(id);
-    QSqlQuery query;
-    query = db.searchCompID(id);
-    screen.printResult(query);
-
-    return id;
-}
-
-
-void Controller::functionHandler(){                    //function that receives the user selection and executes accordingly
+void Controller::linkFunctions(){
+    int which = 25, select = 25;
+    int currSciID;
+    int currCompID;
     View UI;
-    int which = 25;
+    Model db;
+    QSqlQuery query;
+
     while(which != 0){
-        UI.displayInterface(which);
+        UI.linkWhich(which);
         switch(which){
             case 1:
-                listFunctions();
+                query = db.linkListSci();
+                UI.printResult(query);
                 break;
             case 2:
-                addFunctions();
+                query = db.linkListComp();
+                UI.printResult(query);
                 break;
             case 3:
-                removeFunctions();
+                UI.askForSciID(currSciID);
+                UI.askForCompID(currCompID);
+                db.linkSciToComp(currSciID, currCompID);
                 break;
             case 4:
-                searchFunctions();
-                break;
-            case 5:
-                linkFunctions();
-                break;
-            case 6:
-                editFunctions();
+                UI.showLinks(select);
+                if(select == 1){
+                    UI.idGet(currSciID);
+                    query = db.scientistConnComp(currSciID);
+                    UI.printResult(query);
+                }
+                else if(select == 2){
+                    UI.idGet(currCompID);
+                    query = db.computersConnSci(currCompID);
+                    UI.printResult(query);
+                }
+                else{
+                    errorHandling();
+                    UI.invalidInput();
+                }
                 break;
             case 0:
                 break;
@@ -164,6 +107,22 @@ void Controller::listFunctions(){
         }
 
     return;
+}
+
+QSqlQuery Controller::sortByInSci(int comp){
+    Model db;
+    QSqlQuery ret;
+    ret = db.queryListSci(comp);
+
+    return ret;
+}
+
+QSqlQuery Controller::sortByInComp(int comp){
+    Model db;
+    QSqlQuery ret;
+    ret = db.queryListComp(comp);
+
+    return ret;
 }
 
 void Controller::addFunctions(){
@@ -226,6 +185,27 @@ void Controller::removeFunctions(){
     return;
 }
 
+void Controller::removeScientist(){      //function that finds a Scientist to erase
+    View screen;
+    Model db;
+    int id;
+
+    screen.idGet(id);
+    db.rmRowSci(id);
+
+    return;
+}
+
+void Controller::removeComputer(){
+    View screen;
+    Model db;
+    int id;
+    screen.idGet(id);
+    db.rmRowComp(id);
+
+    return;
+}
+
 void Controller::searchFunctions(){
     int which = 25;
     View UI;
@@ -237,7 +217,7 @@ void Controller::searchFunctions(){
             case 1:
                 which = 25;
                 select = 25;
-                searchScientisthandler(select);
+                searchScientistHandler(select);
                 break;
             case 2:
                 which = 25;
@@ -257,7 +237,20 @@ void Controller::searchFunctions(){
     return;
 }
 
-void Controller::searchScientisthandler(int& select){
+void Controller::searchScientistName(){              //function that searches the database
+    View screen;
+    Model db;
+    string name;
+    screen.askName(name);
+    QSqlQuery query;
+    QString qName = QString::fromStdString(name);
+    query = db.searchSciName(qName);
+    screen.printResult(query);
+
+    return;
+}
+
+void Controller::searchScientistHandler(int& select){
     View UI;
     QSqlQuery query;
     Model db;
@@ -302,6 +295,19 @@ void Controller::searchScientisthandler(int& select){
             break;
         }
     }
+
+    return;
+}
+
+void Controller::searchComputerName(){              //function that searches the database
+    View screen;
+    Model db;
+    string name;
+    screen.askName(name);
+    QSqlQuery query;
+    QString qName = QString::fromStdString(name);
+    query = db.searchCompName(qName);
+    screen.printResult(query);
 
     return;
 }
@@ -355,70 +361,30 @@ void Controller::searchComputerHandler(int& select){
     return;
 }
 
-void Controller::editSpecific(int ID, bool which){
-    View UI;
+int Controller::searchScientistID(){
+    View screen;
+    Model db;
+    int id;
+    screen.idGet(id);
+    QSqlQuery query;
+    QSqlQuery query2;
+    query = db.searchSciID(id);
 
-    if(which){
-        extraScientistHandler(ID);
-    }
-    else{
-        extraComputerHandler(ID);
-    }
+    screen.printResult(query);
 
-    return;
+    return id;
 }
 
-void Controller::linkFunctions(){
-    int which = 25, select = 25;
-    int currSciID;
-    int currCompID;
-    View UI;
+int Controller::searchComputerID(){
+    View screen;
     Model db;
+    int id;
+    screen.idGet(id);
     QSqlQuery query;
+    query = db.searchCompID(id);
+    screen.printResult(query);
 
-    while(which != 0){
-        UI.linkWhich(which);
-        switch(which){
-            case 1:
-                query = db.linkListSci();
-                UI.printResult(query);
-                break;
-            case 2:
-                query = db.linkListComp();
-                UI.printResult(query);
-                break;
-            case 3:
-                UI.askForSciID(currSciID);
-                UI.askForCompID(currCompID);
-                db.linkSciToComp(currSciID, currCompID);
-                break;
-            case 4:
-                UI.showLinks(select);
-                if(select == 1){
-                    UI.idGet(currSciID);
-                    query = db.scientistConnComp(currSciID);
-                    UI.printResult(query);
-                }
-                else if(select == 2){
-                    UI.idGet(currCompID);
-                    query = db.computersConnSci(currCompID);
-                    UI.printResult(query);
-                }
-                else{
-                    errorHandling();
-                    UI.invalidInput();
-                }
-                break;
-            case 0:
-                break;
-            default:
-                errorHandling();
-                which = 25;
-                break;
-        }
-    }
-
-    return;
+    return id;
 }
 
 void Controller::editFunctions(){
@@ -446,6 +412,19 @@ void Controller::editFunctions(){
     return;
 }
 
+void Controller::editSpecific(int ID, bool which){
+    View UI;
+
+    if(which){
+        extraScientistHandler(ID);
+    }
+    else{
+        extraComputerHandler(ID);
+    }
+
+    return;
+}
+
 void Controller::editScientistHandler(){
     View UI;
     int currID = 0;
@@ -456,22 +435,15 @@ void Controller::editScientistHandler(){
     return;
 }
 
-void Controller::extraScientistHandler(int id){
+void Controller::editComputerHandler(){
     View UI;
+    int currID = 0;
 
-    editLoopScientist(id);
+    UI.idGet(currID);
+    editLoopComputer(currID);
 
     return;
 }
-
-void Controller::extraComputerHandler(int id){
-    View UI;
-
-    editLoopComputer(id);
-
-    return;
-}
-
 
 void Controller::editLoopScientist(int id){
     int select = 25;
@@ -521,16 +493,6 @@ void Controller::editLoopScientist(int id){
                 break;
         }
     }
-
-    return;
-}
-
-void Controller::editComputerHandler(){
-    View UI;
-    int currID = 0;
-
-    UI.idGet(currID);
-    editLoopComputer(currID);
 
     return;
 }
@@ -590,6 +552,21 @@ void Controller::editLoopComputer(int id){
     return;
 }
 
+void Controller::extraScientistHandler(int id){
+    View UI;
+
+    editLoopScientist(id);
+
+    return;
+}
+
+void Controller::extraComputerHandler(int id){
+    View UI;
+
+    editLoopComputer(id);
+
+    return;
+}
 
 void Controller::errorHandling(){
     View UI;
@@ -600,18 +577,38 @@ void Controller::errorHandling(){
     return;
 }
 
+void Controller::functionHandler(){                    //function that receives the user selection and executes accordingly
+    View UI;
+    int which = 25;
+    while(which != 0){
+        UI.displayInterface(which);
+        switch(which){
+            case 1:
+                listFunctions();
+                break;
+            case 2:
+                addFunctions();
+                break;
+            case 3:
+                removeFunctions();
+                break;
+            case 4:
+                searchFunctions();
+                break;
+            case 5:
+                linkFunctions();
+                break;
+            case 6:
+                editFunctions();
+                break;
+            case 0:
+                break;
+            default:
+                errorHandling();
+                which = 25;
+                break;
+        }
+    }
 
-QSqlQuery Controller::sortByInSci(int comp){
-    Model db;
-    QSqlQuery ret;
-    ret = db.queryListSci(comp);
-
-    return ret;
-}
-QSqlQuery Controller::sortByInComp(int comp){
-    Model db;
-    QSqlQuery ret;
-    ret = db.queryListComp(comp);
-
-    return ret;
+    return;
 }

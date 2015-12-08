@@ -25,7 +25,7 @@ public:
     // Search functions
     void searchFunctions();
     void searchScientistName();
-    void searchScientisthandler(int& select);
+    void searchScientistHandler(int& select);
     void searchComputerName();
     void searchComputerHandler(int& select);
     int searchScientistID();
