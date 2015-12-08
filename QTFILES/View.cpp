@@ -203,7 +203,12 @@ void View::populateComputer(Computers& comp){
     QString desc;
     compAskName(name);
     compAskCreated(created);
-    compAskCreationDate(year);
+    if(created){
+        compAskCreationDate(year);
+    }
+    else{
+        year = 0;
+    }
     compAskType(type);
     compAskDescription(desc);
 
