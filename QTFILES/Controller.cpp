@@ -120,6 +120,7 @@ void Controller::functionHandler(){                    //function that receives 
                 break;
         }
     }
+
     return;
 }
 
@@ -290,6 +291,8 @@ void Controller::searchScientisthandler(int& select){
             break;
         }
     }
+
+    return;
 }
 
 void Controller::searchComputerHandler(int& select){
@@ -337,6 +340,8 @@ void Controller::searchComputerHandler(int& select){
             select = 25;
         }
     }
+
+    return;
 }
 
 void Controller::editSpecific(int ID, bool which){
@@ -355,6 +360,7 @@ void Controller::editSpecific(int ID, bool which){
         while(select != 0){
             UI.editSelectionComputer(select);
             editComputerHandler();
+            select = 25;
             }
         }
 
@@ -508,7 +514,6 @@ void Controller::editComputerHandler(){
 
 void Controller::editLoopComputer(int id){
     int select = 25;
-    int currID;
 
     string name;
     QString qName;
@@ -529,26 +534,26 @@ void Controller::editLoopComputer(int id){
             case 1:
                 UI.askName(name);
                 qName = QString::fromStdString(name);
-                db.modComp(select, qName, currID);
+                db.modComp(select, qName, id);
                 break;
             case 2:
                 UI.compAskCreated(sex);
                 if(sex){
                     genderStr = "1";
                 }
-                db.modComp(select, genderStr, currID);
+                db.modComp(select, genderStr, id);
                 break;
             case 3:
                 UI.compAskCreationDate(year);
-                db.modComp(select, QString::number(year), currID);
+                db.modComp(select, QString::number(year), id);
                 break;
             case 4:
                 UI.compAskType(type);
-                db.modComp(select, type, currID);
+                db.modComp(select, type, id);
                 break;
             case 5:
                 UI.compAskDescription(fact);
-                db.modSci(select, fact, currID);
+                db.modSci(select, fact, id);
                 break;
             case 0:
                 break;
