@@ -37,6 +37,7 @@ public:
     void compAskName(string& name);
     void compAskCreated(bool& created);
     void compAskCreationDate(int& year);
+    void compAskType(QString& type);
     void compAskDescription(QString& description);
     void nameNotFound();
     void editSelection(int& select);

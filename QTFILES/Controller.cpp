@@ -372,6 +372,7 @@ void Controller::editFunctions(){
     QString genderStr = "0";
     QDate doB;
     QDate doD;
+    QString type;
     QString fact;
     int year;
 
@@ -441,6 +442,10 @@ void Controller::editFunctions(){
                         db.modComp(select, QString::number(year), currID);
                         break;
                     case 4:
+                        UI.compAskType(type);
+                        db.modComp(select, type, currID);
+                        break;
+                    case 5:
                         UI.compAskDescription(fact);
                         db.modSci(select, fact, currID);
                         break;
