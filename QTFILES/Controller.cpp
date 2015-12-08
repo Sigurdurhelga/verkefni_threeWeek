@@ -231,9 +231,13 @@ void Controller::searchFunctions(){
         UI.searchInterface(which);
         switch(which){
             case 1:
+                which = 25;
+                select = 25;
                 searchScientisthandler(select);
                 break;
             case 2:
+                which = 25;
+                select = 25;
                 searchComputerHandler(select);
                 break;
             case 0:
@@ -241,6 +245,7 @@ void Controller::searchFunctions(){
             default:
                 errorHandling();
                 which = 25;
+                select = 25;
                 break;
             }
         }
@@ -257,11 +262,9 @@ void Controller::searchScientisthandler(int& select){
     while(select != 0){
         UI.searchSecond(select);
         if(select == 1){
-            select = 25;
             searchScientistName();
         }
         else if (select == 2){
-            select = 25;
             secondSelect = 25;
             currID = searchScientistID();
             while(secondSelect != 0){
@@ -283,10 +286,10 @@ void Controller::searchScientisthandler(int& select){
                         secondSelect = 25;
                         break;
                 }
+                select = 25;
             }
         }
         else if (select == 0){
-            select = 25;
             break;
         }
         else{
@@ -337,7 +340,6 @@ void Controller::searchComputerHandler(int& select){
             }
         }
         else if (select == 0){
-            select = 25;
             break;
         }
         else{
@@ -393,6 +395,7 @@ void Controller::linkFunctions(){
                 UI.askForSciID(currSciID);
                 UI.askForCompID(currCompID);
                 db.linkSciToComp(currSciID, currCompID);
+                break;
             case 4:
                 UI.showLinks(select);
                 if(select == 1){
@@ -400,10 +403,14 @@ void Controller::linkFunctions(){
                     query = db.scientistConnComp(currSciID);
                     UI.printResult(query);
                 }
-                if(select == 2){
+                else if(select == 2){
                     UI.idGet(currCompID);
                     query = db.computersConnSci(currCompID);
                     UI.printResult(query);
+                }
+                else{
+                    errorHandling();
+                    UI.invalidInput();
                 }
                 break;
             case 0:
