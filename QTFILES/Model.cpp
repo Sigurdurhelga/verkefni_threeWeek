@@ -44,7 +44,6 @@ QSqlQuery Model::queryListSci(int way){
     return ret;
 }
 QSqlQuery Model::queryListComp(int way){
-    QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery ret;
 
     switch(way){
@@ -52,25 +51,25 @@ QSqlQuery Model::queryListComp(int way){
             ret.exec("SELECT * FROM computers ORDER BY id");
             break;
         case 2:
-            ret = db.exec("SELECT * FROM computers ORDER BY id DESC");
+            ret.exec("SELECT * FROM computers ORDER BY id DESC");
             break;
         case 3:
-            ret = db.exec("SELECT * FROM computers WHERE created = 1 ORDER BY id");
+            ret.exec("SELECT * FROM computers WHERE created = 1 ORDER BY id");
             break;
         case 4:
-            ret = db.exec("SELECT * FROM computers WHERE created = 0 ORDER BY id");
+            ret.exec("SELECT * FROM computers WHERE created = 0 ORDER BY id");
             break;
         case 5:
-            ret = db.exec("SELECT * FROM computers ORDER BY creationDate");
+            ret.exec("SELECT * FROM computers ORDER BY creationDate");
             break;
         case 6:
-            ret = db.exec("SELECT * FROM computers ORDER BY creationDate DESC");
+            ret.exec("SELECT * FROM computers ORDER BY creationDate DESC");
             break;
         case 7:
-            ret = db.exec("SELECT * FROM computers ORDER BY type");
+            ret.exec("SELECT * FROM computers ORDER BY type");
             break;
         case 8:
-            ret = db.exec("SELECT * FROM computers ORDER BY type DESC");
+            ret.exec("SELECT * FROM computers ORDER BY type DESC");
             break;
         default:
             way = 25;

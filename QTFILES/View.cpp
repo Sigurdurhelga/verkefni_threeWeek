@@ -52,6 +52,8 @@ int View::displayListFuncsComp(){
          << "4. List those who were not created" << endl
          << "5. List by creation date ascending" << endl
          << "6. List by creation date descending" << endl
+         << "7. List by type ascending" << endl
+         << "8. List by type descending" << endl
          << "0. Go back" << endl;
     cin >> select;
 
