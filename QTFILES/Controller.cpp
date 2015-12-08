@@ -356,7 +356,6 @@ void Controller::linkFunctions(){
                 which = 25;
                 break;
         }
-        which = 25;
     }
 
     return;
@@ -418,7 +417,6 @@ void Controller::editFunctions(){
                         select = 25;
                         break;
                 }
-            select = 25;
             }
             break;
         case 2:
@@ -453,7 +451,6 @@ void Controller::editFunctions(){
                         select = 25;
                         break;
                 }
-            select = 25;
             }
             break;
         case 0:
@@ -463,7 +460,6 @@ void Controller::editFunctions(){
             which = 25;
             break;
         }
-    which = 25;
     }
 
     return;

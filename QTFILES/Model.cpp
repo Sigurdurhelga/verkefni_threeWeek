@@ -34,12 +34,17 @@ QSqlQuery Model::queryListSci(int way){
         case 6:
             ret = db.exec("SELECT * FROM people ORDER BY birthDate DESC");
             break;
+        default:
+            way = 25;
+            cin.clear();
+            cin.ignore();
     }
     return ret;
 }
 QSqlQuery Model::queryListComp(int way){
     QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery ret;
+
     switch(way){
         case 1:
             ret = db.exec("SELECT * FROM computers ORDER BY id");
@@ -59,6 +64,11 @@ QSqlQuery Model::queryListComp(int way){
         case 6:
             ret = db.exec("SELECT * FROM computers ORDER BY creationDate DESC");
             break;
+        default:
+            way = 25;
+            cin.clear();
+            cin.ignore();
+
     }
     return ret;
 }
