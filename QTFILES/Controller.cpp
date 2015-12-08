@@ -354,20 +354,12 @@ void Controller::searchComputerHandler(int& select){
 void Controller::editSpecific(int ID, bool which){
     View UI;
 
-
-    int select = 25;
     if(which){
-        while(select != 0){
-            UI.editSelectionScientist(select);
-            extraScientistHandler(ID);
-        }
+        extraScientistHandler(ID);
     }
     else{
-        while(select != 0){
-            UI.editSelectionComputer(select);
-            extraComputerHandler(ID);
-            }
-        }
+        extraComputerHandler(ID);
+    }
 
     return;
 }

@@ -39,6 +39,8 @@ public:
     void editComputerHandler();
     void editLoopScientist(int id);
     void editLoopComputer(int id);
+    void extraScientistHandler(int id);
+    void extraComputerHandler(int id);
 
     // Misc
     void errorHandling();
