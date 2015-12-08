@@ -13,7 +13,6 @@ View::View()
     // This should never happen
 }
 
-// This function takes the users input and forwards it to the Controller.
 void View::displayInterface(int& select)
 {
         cout << "1. List records" << endl
@@ -26,50 +25,6 @@ void View::displayInterface(int& select)
              << endl;
         cin >> select;
         cout << endl;
-
-    return;
-}
-
-int View::displayListFuncsSci(){
-    int select = 0;
-    cout << "1. List by ID ascending" << endl
-         << "2. List by ID descending" << endl
-         << "3. List by name ascending" << endl
-         << "4. List by name descing" << endl
-         << "5. List by date of birth ascending" << endl
-         << "6. List by date of birth descending" << endl
-         << "7. List those who are alive" << endl
-         << "0. Go back" << endl;
-    cin >> select;
-    cout << endl;
-
-    return select;
-}
-int View::displayListFuncsComp(){
-    int select = 0;
-    cout << "1. List by ID ascending" << endl
-         << "2. List by ID descending" << endl
-         << "3. List those who were created" << endl
-         << "4. List those who were not created" << endl
-         << "5. List by creation date ascending" << endl
-         << "6. List by creation date descending" << endl
-         << "7. List by type ascending" << endl
-         << "8. List by type descending" << endl
-         << "0. Go back" << endl
-         << endl;
-    cin >> select;
-    cout << endl;
-
-    return select;
-}
-
-void View::listInterface(int& select){
-    cout << "1. List scientists" << endl
-         << "2. List computers" << endl
-         << "0. Go back" << endl
-         << endl;
-    cin >> select;
-    cout << endl;
 
     return;
 }
@@ -96,19 +51,6 @@ void View::removeInterface(int& select){
     return;
 }
 
-void View::idGet(int& id){
-    cout << "Write the ID of the item: ";
-    cin >> id;
-
-    if(cin.fail()){
-        cin.clear();
-        cin.ignore();
-        invalidInput();
-    }
-
-    return;
-}
-
 void View::searchInterface(int& select){
     cout << "1. Search for scientists" << endl
          << "2. Search for computers" << endl
@@ -120,6 +62,7 @@ void View::searchInterface(int& select){
     return;
 }
 
+
 void View::searchSecond(int& select){
     cout << "1. Search by name" << endl
          << "2. Search by id" << endl
@@ -127,6 +70,8 @@ void View::searchSecond(int& select){
          << endl;
     cin >> select;
     cout<< endl;
+
+    return;
 }
 
 void View::searchExtended(int& select){
@@ -139,6 +84,7 @@ void View::searchExtended(int& select){
 
     return;
 }
+
 
 void View::editWhich(int& select){
     cout << "1. Edit a scientist" << endl
@@ -172,69 +118,79 @@ void View::showLinks(int& select){
     return;
 }
 
-void View::printResult(QSqlQuery& result){
-    int i = 0;
-    QString val;
-    cout << "================================================================================" << endl;
-    while(result.next()){
-        cout << "| ";
-        while(!result.value(i).isNull()){
-            val = result.value(i).toString();
-            cout << val.toStdString() << " | ";
-            i++;
-        }
-        cout << endl;
-        i = 0;
-    }
-    cout << "================================================================================" << endl << endl;
-    return;
-}
-
-void View::populateScientist(Scientist& guy){
-    string name;
-    bool gender;
-    QString fact;
-    askName(name);
-    askGender(gender);
-    QDate doB = askDateOfBirth();
-    QDate doD = askDateOfDeath();
-    askFact(fact);
-
-    guy.setName(QString::fromStdString(name));
-    guy.setGender(gender);
-    guy.setdoB(doB);
-    guy.setdoD(doD);
-    guy.setFact(fact);
+void View::editSelectionScientist(int& select){
+    cout << "What would you like to change?" << endl
+         << "1. Edit Name." << endl
+         << "2. Edit gender." << endl
+         << "3. Edit date of birth." << endl
+         << "4. Edit date of death." << endl
+         << "5. Edit description." << endl
+         << "0. Go back."<< endl;
+    cin >> select;
+    cout << endl;
 
     return;
 }
 
-void View::populateComputer(Computers& comp){
-    string name;
-    bool created;
-    int year;
-    QString type;
-    QString desc;
-    compAskName(name);
-    compAskCreated(created);
-    if(created){
-        compAskCreationDate(year);
-    }
-    else{
-        year = 0;
-    }
-    compAskType(type);
-    compAskDescription(desc);
-
-    comp.setName(QString::fromStdString(name));
-    comp.setCreated(created);
-    comp.setCreationYear(year);
-    comp.setType(type);
-    comp.setDescription(desc);
+void View::editSelectionComputer(int& select){
+    cout << "What would you like to change?" << endl
+         << "1. Edit Name." << endl
+         << "2. Edit was it created." << endl
+         << "3. Edit creation year." << endl
+         << "4. Edit type." << endl
+         << "5. Edit description." << endl
+         << "0. Go back."<< endl
+         << endl;
+    cin >> select;
+    cout << endl;
 
     return;
 }
 
+void View::listInterface(int& select){
+    cout << "1. List scientists" << endl
+         << "2. List computers" << endl
+         << "0. Go back" << endl
+         << endl;
+    cin >> select;
+    cout << endl;
+
+    return;
+}
+
+int View::displayListFuncsSci(){
+    int select = 0;
+    cout << "1. List by ID ascending" << endl
+         << "2. List by ID descending" << endl
+         << "3. List by name ascending" << endl
+         << "4. List by name descing" << endl
+         << "5. List by date of birth ascending" << endl
+         << "6. List by date of birth descending" << endl
+         << "7. List those who are alive" << endl
+         << "0. Go back" << endl;
+    cin >> select;
+    cout << endl;
+
+    return select;
+}
+
+int View::displayListFuncsComp(){
+    int select = 0;
+    cout << "1. List by ID ascending" << endl
+         << "2. List by ID descending" << endl
+         << "3. List those who were created" << endl
+         << "4. List those who were not created" << endl
+         << "5. List by creation date ascending" << endl
+         << "6. List by creation date descending" << endl
+         << "7. List by type ascending" << endl
+         << "8. List by type descending" << endl
+         << "0. Go back" << endl
+         << endl;
+    cin >> select;
+    cout << endl;
+
+    return select;
+}
 
 void View::askName(string& name){
     cout << "Write a Name: " << endl;
@@ -266,68 +222,6 @@ void View::askGender(bool& sex){
     }
 
     return;
-}
-
-QDate View::askDateOfBirth(){
-    int check = 0;
-    int bDay = 0;
-    int bMonth = 0;
-    int bYear = 0;
-    View screen;
-
-    QDate doB;
-
-    while(check == 0){
-        cout << "Write the Day of the Date of Birth for your Scientist: ";
-        cin >> bDay;
-        cout << "Write the Month of the Date of Birth for your Scientist: ";
-        cin >> bMonth;
-        cout << "Write the Year of the Date of Birth for your Scientist: ";
-        cin >> bYear;
-        doB = QDate(bYear, bMonth, bDay);
-        if(doB.isValid()){                              //checks for errors in input
-            check = 1;
-        }
-        else{
-            screen.invalidDate();
-        }
-    }
-
-    return doB;
-}
-
-QDate View::askDateOfDeath(){
-    int check = 0;
-    int dDay = 0;
-    int dMonth = 0;
-    int dYear = 0;
-    View screen;
-
-    QDate doD;
-
-    while(check == 0){
-    cout << "Write the Day of the Date of Death for your Scientist (0 if he's alive): ";
-    cin >> dDay;
-    if(dDay != 0){
-        cout << "Write the Month of the Date of Death for your Scientist: ";
-        cin >> dMonth;
-        cout << "Write the Year of the Date of Death for your Scientist: ";
-        cin >> dYear;
-        }
-        else{
-            dDay = 1, dMonth = 1, dYear = 1;
-        }
-
-    doD = QDate(dYear, dMonth, dDay);
-        if(doD.isValid()){                                  //checks for errors in input
-            check = 1;
-    }
-        else{
-           screen.invalidDate();
-        }
-    }
-
-    return doD;
 }
 
 void View::askFact(QString& fact){
@@ -405,58 +299,60 @@ void View::compAskDescription(QString& description){
     return;
 }
 
-void View::nameNotFound(){
-     cout << "Name was not found in the Database." << endl;
+void View::idGet(int& id){
+    cout << "Write the ID of the item: ";
+    cin >> id;
 
-     return;
-}
-
-void View::editSelectionScientist(int& select){
-    cout << "What would you like to change?" << endl
-         << "1. Edit Name." << endl
-         << "2. Edit gender." << endl
-         << "3. Edit date of birth." << endl
-         << "4. Edit date of death." << endl
-         << "5. Edit description." << endl
-         << "0. Go back."<< endl;
-    cin >> select;
-    cout << endl;
+    if(cin.fail()){
+        cin.clear();
+        cin.ignore();
+        invalidInput();
+    }
 
     return;
 }
 
-void View::editSelectionComputer(int& select){
-    cout << "What would you like to change?" << endl
-         << "1. Edit Name." << endl
-         << "2. Edit was it created." << endl
-         << "3. Edit creation year." << endl
-         << "4. Edit type." << endl
-         << "5. Edit description." << endl
-         << "0. Go back."<< endl
-         << endl;
-    cin >> select;
-    cout << endl;
+void View::populateScientist(Scientist& guy){
+    string name;
+    bool gender;
+    QString fact;
+    askName(name);
+    askGender(gender);
+    QDate doB = askDateOfBirth();
+    QDate doD = askDateOfDeath();
+    askFact(fact);
+
+    guy.setName(QString::fromStdString(name));
+    guy.setGender(gender);
+    guy.setdoB(doB);
+    guy.setdoD(doD);
+    guy.setFact(fact);
 
     return;
 }
 
-string View::getGenderString(bool sex){
-    if(sex){
-        return "Female";
+void View::populateComputer(Computers& comp){
+    string name;
+    bool created;
+    int year;
+    QString type;
+    QString desc;
+    compAskName(name);
+    compAskCreated(created);
+    if(created){
+        compAskCreationDate(year);
     }
     else{
-        return "Male";
+        year = 0;
     }
-}
+    compAskType(type);
+    compAskDescription(desc);
 
-void View::invalidInput(){
-    cout << "Invalid input try again." << endl;
-
-    return;
-}
-
-void View::invalidDate(){
-    cout << "Invalid date, please try again." << endl;
+    comp.setName(QString::fromStdString(name));
+    comp.setCreated(created);
+    comp.setCreationYear(year);
+    comp.setType(type);
+    comp.setDescription(desc);
 
     return;
 }
@@ -476,3 +372,113 @@ void View::askForCompID(int& id){
 
     return;
 }
+
+QDate View::askDateOfBirth(){
+    int check = 0;
+    int bDay = 0;
+    int bMonth = 0;
+    int bYear = 0;
+    View screen;
+
+    QDate doB;
+
+    while(check == 0){
+        cout << "Write the Day of the Date of Birth for your Scientist: ";
+        cin >> bDay;
+        cout << "Write the Month of the Date of Birth for your Scientist: ";
+        cin >> bMonth;
+        cout << "Write the Year of the Date of Birth for your Scientist: ";
+        cin >> bYear;
+        doB = QDate(bYear, bMonth, bDay);
+        if(doB.isValid()){                              //checks for errors in input
+            check = 1;
+        }
+        else{
+            screen.invalidDate();
+        }
+    }
+
+    return doB;
+}
+
+QDate View::askDateOfDeath(){
+    int check = 0;
+    int dDay = 0;
+    int dMonth = 0;
+    int dYear = 0;
+    View screen;
+
+    QDate doD;
+
+    while(check == 0){
+    cout << "Write the Day of the Date of Death for your Scientist (0 if he's alive): ";
+    cin >> dDay;
+    if(dDay != 0){
+        cout << "Write the Month of the Date of Death for your Scientist: ";
+        cin >> dMonth;
+        cout << "Write the Year of the Date of Death for your Scientist: ";
+        cin >> dYear;
+        }
+        else{
+            dDay = 1, dMonth = 1, dYear = 1;
+        }
+
+    doD = QDate(dYear, dMonth, dDay);
+        if(doD.isValid()){                                  //checks for errors in input
+            check = 1;
+    }
+        else{
+           screen.invalidDate();
+        }
+    }
+
+    return doD;
+}
+
+void View::invalidDate(){
+    cout << "Invalid date, please try again." << endl;
+
+    return;
+}
+
+void View::invalidInput(){
+    cout << "Invalid input try again." << endl;
+
+    return;
+}
+
+void View::nameNotFound(){
+     cout << "Name was not found in the Database." << endl;
+
+     return;
+}
+
+void View::printResult(QSqlQuery& result){
+    int i = 0;
+    QString val;
+    cout << "================================================================================" << endl;
+    while(result.next()){
+        cout << "| ";
+        while(!result.value(i).isNull()){
+            val = result.value(i).toString();
+            cout << val.toStdString() << " | ";
+            i++;
+        }
+        cout << endl;
+        i = 0;
+    }
+    cout << "================================================================================" << endl << endl;
+    return;
+}
+
+string View::getGenderString(bool sex){
+    if(sex){
+        return "Female";
+    }
+    else{
+        return "Male";
+    }
+}
+
+
+

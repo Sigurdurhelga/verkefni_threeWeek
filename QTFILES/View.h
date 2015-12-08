@@ -24,7 +24,6 @@ public:
     void showLinks(int &select);
     void editSelectionScientist(int&);
     void editSelectionComputer(int&);
-    void howToList(int& selection);
     void listInterface(int&);
     int displayListFuncsSci();
     int displayListFuncsComp();
