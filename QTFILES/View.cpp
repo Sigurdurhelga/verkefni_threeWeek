@@ -22,7 +22,7 @@ void View::displayInterface(int& select)
              << "3. Remove record" << endl
              << "4. Search" << endl
              << "5. Link scientists and computers" << endl
-             << "6. Edit a Scientist" << endl
+             << "6. Edit record" << endl
              << "0. Quit the Application" << endl;
         cin >> select;
 
@@ -113,8 +113,8 @@ void View::searchSecond(int& select){
 }
 
 void View::searchExtended(int& select){
-    cout << "1. List all computers this scientist has worked on" << endl
-         << "3. Edit this scientist" << endl
+    cout << "1. List all records linked to this record" << endl
+         << "2. Edit this record" << endl
          << "0. Go back." << endl;
     cin >> select;
 
@@ -189,15 +189,18 @@ void View::populateComputer(Computers& comp){
     string name;
     bool created;
     int year;
+    QString type;
     QString desc;
     compAskName(name);
     compAskCreated(created);
     compAskCreationDate(year);
+    compAskType(type);
     compAskDescription(desc);
 
     comp.setName(QString::fromStdString(name));
     comp.setCreated(created);
     comp.setCreationYear(year);
+    comp.setType(type);
     comp.setDescription(desc);
 
     return;
@@ -365,6 +368,16 @@ void View::compAskCreationDate(int& year){
     return;
 }
 
+void View::compAskType(QString& type){
+    string sType;
+    cout << "Write a what type of computer it is: ";
+    while(sType == ""){
+        getline(cin, sType);
+    }
+    type = QString::fromStdString(sType);
+    return;
+}
+
 void View::compAskDescription(QString& description){
     string sDesc;
     cout << "Write a small description about the computer:";
@@ -399,7 +412,8 @@ void View::editSelectionComputer(int& select){
          << "1. Edit Name." << endl
          << "2. Edit was it created." << endl
          << "3. Edit creation year." << endl
-         << "4. Edit description." << endl
+         << "4. Edit type." << endl
+         << "5. Edit description." << endl
          << "0. Go back."<< endl;
     cin >> select;
     return;

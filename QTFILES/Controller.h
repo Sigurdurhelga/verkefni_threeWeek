@@ -22,6 +22,7 @@ public:
     void searchFunctions();
     void linkFunctions();
     void editFunctions();
+    void editSpecific(int, bool);
     void errorHandling();
     QSqlQuery sortByInSci(int comp);
     QSqlQuery sortByInComp(int comp);

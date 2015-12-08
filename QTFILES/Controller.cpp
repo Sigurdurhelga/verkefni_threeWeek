@@ -82,7 +82,9 @@ int Controller::searchScientistID(){
     int id;
     screen.idGet(id);
     QSqlQuery query;
+    QSqlQuery query2;
     query = db.searchSciID(id);
+
     screen.printResult(query);
 
     return id;
@@ -246,6 +248,7 @@ void Controller::searchFunctions(){
         UI.searchInterface(which);
         switch(which){
             case 1:
+                which = 25;
                 while(select != 0){
                     UI.searchSecond(select);
                     if(select == 1){
@@ -254,6 +257,7 @@ void Controller::searchFunctions(){
                     }
                     else if (select == 2){
                         select = 25;
+                        secondSelect = 25;
                         currID = searchScientistID();
                         while(secondSelect != 0){
                             UI.searchExtended(secondSelect);
@@ -263,6 +267,10 @@ void Controller::searchFunctions(){
                                     query = db.scientistConnComp(currID);
                                     UI.printResult(query);
                                     break;
+                                case 2:
+                                    secondSelect = 25;
+                                    editSpecific(currID, true);
+                                    break;
                                 case 0:
                                     break;
                                 default:
@@ -273,21 +281,27 @@ void Controller::searchFunctions(){
                         }
                     }
                     else if (select == 0){
+                        select = 25;
                         break;
                     }
                     else{
                         errorHandling();
                         select = 25;
+                        break;
                     }
                 }
                 break;
             case 2:
+                which = 25;
                 while(select != 0){
                     UI.searchSecond(select);
                     if(select == 1){
+                        select = 25;
                         searchComputerName();
                     }
                     else if(select == 2){
+                        select = 25;
+                        secondSelect = 25;
                         currID = searchComputerID();
                         while(secondSelect != 0){
                             UI.searchExtended(secondSelect);
@@ -296,6 +310,10 @@ void Controller::searchFunctions(){
                                     query = db.computersConnSci(currID);
                                     UI.printResult(query);
                                     break;
+                                case 2:
+                                    secondSelect = 25;
+                                    editSpecific(currID, false);
+                                    break;
                                 case 0:
                                     break;
                                 default:
@@ -306,6 +324,7 @@ void Controller::searchFunctions(){
                         }
                     }
                     else if (select == 0){
+                        select = 25;
                         break;
                     }
                     else{
@@ -324,6 +343,93 @@ void Controller::searchFunctions(){
         }
 
     return;
+}
+
+void Controller::editSpecific(int ID, bool which){
+    View UI;
+    Model db;
+
+    string name;
+    QString qName;
+    bool sex;
+    QString genderStr = "0";
+    QDate doB;
+    QDate doD;
+    QString fact;
+    int year;
+
+    int select = 25;
+    if(which){
+        while(select != 0){
+            UI.editSelectionScientist(select);
+            switch(select){
+                case 1:
+                    UI.askName(name);
+                    qName = QString::fromStdString(name);
+                    db.modSci(select, qName, ID);
+                    break;
+                case 2:
+                    UI.askGender(sex);
+                    if(sex){
+                        genderStr = "1";
+                    }
+                    db.modSci(select, genderStr, ID);
+                    break;
+                case 3:
+                    doB = UI.askDateOfBirth();
+                    db.modSci(select, doB.toString("yyyy-MM-dd"), ID);
+                    break;
+                case 4:
+                    doD = UI.askDateOfDeath();
+                    db.modSci(select,doD.toString("yyyy-MM-dd"), ID);
+                    break;
+                case 5:
+                    UI.askFact(fact);
+                    db.modSci(select, fact, ID);
+                    break;
+                case 0:
+                    break;
+                default:
+                    errorHandling();
+                    select = 25;
+                    break;
+            }
+        }
+    }
+    else{
+        while(select != 0){
+        UI.editSelectionComputer(select);
+        switch(select){
+            case 1:
+                UI.askName(name);
+                qName = QString::fromStdString(name);
+                db.modComp(select, qName, ID);
+                break;
+            case 2:
+                UI.compAskCreated(sex);
+                if(sex){
+                    genderStr = "1";
+                }
+                db.modComp(select, genderStr, ID);
+                break;
+            case 3:
+                UI.compAskCreationDate(year);
+                db.modComp(select, QString::number(year), ID);
+                break;
+            case 4:
+                UI.compAskDescription(fact);
+                db.modSci(select, fact, ID);
+                break;
+            case 0:
+                break;
+            default:
+                errorHandling();
+                select = 25;
+                break;
+            }
+
+        }
+    }
 }
 
 void Controller::linkFunctions(){
@@ -385,6 +491,7 @@ void Controller::editFunctions(){
     QString genderStr = "0";
     QDate doB;
     QDate doD;
+    QString type;
     QString fact;
     int year;
 
@@ -454,6 +561,10 @@ void Controller::editFunctions(){
                         db.modComp(select, QString::number(year), currID);
                         break;
                     case 4:
+                        UI.compAskType(type);
+                        db.modComp(select, type, currID);
+                        break;
+                    case 5:
                         UI.compAskDescription(fact);
                         db.modSci(select, fact, currID);
                         break;
