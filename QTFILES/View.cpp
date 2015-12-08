@@ -17,15 +17,13 @@ View::View()
 void View::displayInterface(int& select)
 {
     Controller cont;
-        cout <<"======================================" << endl
-             << "1. List records" << endl
+        cout << "1. List records" << endl
              << "2. Add record" << endl
              << "3. Remove record" << endl
              << "4. Search" << endl
              << "5. Link scientists and computers" << endl
              << "6. Edit a record" << endl
              << "0. Quit the Application" << endl
-             <<"======================================" << endl
              << endl;
         cin >> select;
         cout << endl;
@@ -156,8 +154,17 @@ void View::linkWhich(int& select){
     cout << "1. List of scientists" << endl
          << "2. List of computers" << endl
          << "3. Link a scientist to a computer" << endl
-         << "0. Go back" << endl
-         << endl;
+         << "4. Show links" << endl
+         << "0. Go back" << endl;
+    cin >> select;
+
+    return;
+}
+
+void View::showLinks(int& select){
+    cout << "1. Show computers linked to a specific scientist" << endl
+         << "2. Show scientists linked to a specific compuer" << endl
+         << "0. Go back" << endl;
     cin >> select;
     cout << endl;
 
@@ -167,17 +174,23 @@ void View::linkWhich(int& select){
 void View::printResult(QSqlQuery& result){
     int i = 0;
     QString val;
+    cout << "========================================" << endl;
     while(result.next()){
+        cout << "| ";
         while(!result.value(i).isNull()){
             val = result.value(i).toString();
-
-            cout << val.toStdString() << endl;
+            if(!(val == result.value("description"))){
+                cout << val.toStdString() << " | ";
+            }
+            else{
+                cout << endl << "| Description: " << val.toStdString() << " |";
+            }
             i++;
         }
         cout << endl;
         i = 0;
     }
-
+    cout << "========================================" << endl;
     return;
 }
 
@@ -333,7 +346,7 @@ QDate View::askDateOfDeath(){
 
 void View::askFact(QString& fact){
     string sFact;
-    cout << "Write a small factoid about the scientist: ";
+    cout << "Write a small description about the scientist: ";
     while(sFact == ""){
         getline(cin, sFact);
     }
@@ -380,6 +393,7 @@ void View::compAskCreationDate(int& year){
         cout << "Write the Year of the creation date for your Computer: ";
         cin >> year;
     }
+
     return;
 }
 
@@ -390,6 +404,7 @@ void View::compAskType(QString& type){
         getline(cin, sType);
     }
     type = QString::fromStdString(sType);
+
     return;
 }
 
@@ -416,9 +431,8 @@ void View::editSelectionScientist(int& select){
          << "2. Edit gender." << endl
          << "3. Edit date of birth." << endl
          << "4. Edit date of death." << endl
-         << "5. Edit fact." << endl
-         << "0. Go back."<< endl
-         << endl;
+         << "5. Edit description." << endl
+         << "0. Go back."<< endl;
     cin >> select;
     cout << endl;
 

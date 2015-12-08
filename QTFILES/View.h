@@ -11,8 +11,9 @@ class View
 {
 public:
     View();
+
+    // Interface
     static void displayInterface(int &select);
-    void listInterface(int&);
     void addInterface(int&);
     void removeInterface(int& select);
     void searchInterface(int& select);
@@ -20,32 +21,39 @@ public:
     void searchExtended(int& select);
     void editWhich(int& select);
     void linkWhich(int& select);
+    void showLinks(int &select);
     void editSelectionScientist(int&);
     void editSelectionComputer(int&);
+    void howToList(int& selection);
+    void listInterface(int&);
     int displayListFuncsSci();
     int displayListFuncsComp();
-    void idGet(int& id);
-    void printResult(QSqlQuery& result);
-    void populateScientist(Scientist& guy);
-    void populateComputer(Computers& comp);
-    void howToList(int& selection);
+
+    // Functions that add or edit information
     void askName(string& name);
     void askGender(bool& sex);
-    QDate askDateOfBirth();
-    QDate askDateOfDeath();
     void askFact(QString& fact);
     void compAskName(string& name);
     void compAskCreated(bool& created);
     void compAskCreationDate(int& year);
     void compAskType(QString& type);
     void compAskDescription(QString& description);
-    void nameNotFound();
-    void editSelection(int& select);
-    string getGenderString(bool sex);
-    void invalidInput();
-    void invalidDate();
+    void idGet(int& id);
+    void populateScientist(Scientist& guy);
+    void populateComputer(Computers& comp);
     void askForSciID(int &id);
     void askForCompID(int &id);
+    QDate askDateOfBirth();
+    QDate askDateOfDeath();
+
+    // Error handling functions
+    void invalidDate();
+    void invalidInput();
+    void nameNotFound();
+
+    // Misc
+    void printResult(QSqlQuery& result);
+    string getGenderString(bool sex);
 };
 
 #endif // VIEW_H

@@ -8,25 +8,40 @@
 class Model
 {
 public:
-     QSqlQuery queryListSci(int way);
-     QSqlQuery queryListComp(int way);
-     void rmRowSci(int);
-     void rmRowComp(int id);
-     QSqlQuery searchSciName(QString name);
-     QSqlQuery searchSciID(int id);
-     QSqlQuery scientistConnComp(int id);
-     QSqlQuery searchCompName(QString name);
-     QSqlQuery searchCompID(int id);
-     QSqlQuery computersConnSci(int id);
-     void modSci(int, QString, int);
-     void modComp(int, QString, int);
-     bool checkConnection(QSqlDatabase db);
-     QSqlDatabase openConnection();
-     void addScientistToDatabase(Scientist& guy);
-     void addComputerToDatabase(Computers& comp);
-     QSqlQuery linkListSci();
-     QSqlQuery linkListComp();
-     void linkSciToComp(int SciID, int CompID);
+    // Database connection functions
+    QSqlDatabase openConnection();
+    bool checkConnection(QSqlDatabase db);
+
+    // List functions
+    QSqlQuery queryListSci(int way);
+    QSqlQuery queryListComp(int way);
+    QSqlQuery linkListSci();
+    QSqlQuery linkListComp();
+
+    // Search functions
+    QSqlQuery searchSciName(QString name);
+    QSqlQuery searchSciID(int id);
+    QSqlQuery scientistConnComp(int id);
+    QSqlQuery searchCompName(QString name);
+    QSqlQuery searchCompID(int id);
+
+    // Add functions
+    void addScientistToDatabase(Scientist& guy);
+    void addComputerToDatabase(Computers& comp);
+
+    // Reomve functions
+    void rmRowSci(int);
+    void rmRowComp(int id);
+
+    // Link functions
+    void linkSciToComp(int SciID, int CompID);
+    QSqlQuery computersConnSci(int id);
+    QSqlQuery showLinkedComputers(int id);
+    QSqlQuery showLinkedScientists(int id);
+
+    // Edit functions
+    void modSci(int, QString, int);
+    void modComp(int, QString, int);
 };
 
 #endif // MODEL_H

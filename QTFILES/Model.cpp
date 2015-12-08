@@ -47,7 +47,7 @@ QSqlQuery Model::queryListComp(int way){
 
     switch(way){
         case 1:
-            ret = db.exec("SELECT * FROM computers ORDER BY id");
+            ret.exec("SELECT * FROM computers ORDER BY id");
             break;
         case 2:
             ret = db.exec("SELECT * FROM computers ORDER BY id DESC");
@@ -64,11 +64,17 @@ QSqlQuery Model::queryListComp(int way){
         case 6:
             ret = db.exec("SELECT * FROM computers ORDER BY creationDate DESC");
             break;
+        case 7:
+            ret = db.exec("SELECT * FROM computers ORDER BY type");
+            break;
+        case 8:
+            ret = db.exec("SELECT * FROM computers ORDER BY type DESC");
+            break;
         default:
             way = 25;
             cin.clear();
             cin.ignore();
-
+            break;
     }
     return ret;
 }
@@ -145,7 +151,7 @@ QSqlQuery Model::computersConnSci(int id){
     QSqlQuery ret;
     ret.prepare("SELECT people.name FROM people "
                 "INNER JOIN compGroups ON people.id = compGroups.peopleID "
-                "INNER JOIN people ON compGroups.computerID = computers.id "
+                "INNER JOIN computers ON compGroups.computerID = computers.id "
                 "WHERE computers.id = :id");
     ret.bindValue(":id", id);
     ret.exec();
@@ -169,7 +175,7 @@ void Model::modSci(int select, QString entry, int id){
             field = "deathDate";
             break;
         case 5:
-            field = "fact";
+            field = "description";
             break;
     }
     QString qQuery = "UPDATE people SET "+field+" = '"+entry+"' "
@@ -230,11 +236,16 @@ void Model::addScientistToDatabase(Scientist& guy){
         QString doB = guy.dateofBirthQString();
         QString doD = guy.dateofDeathQString();
         QString fact = guy.returnFact();
+
+        if(doD == "0001-01-01"){
+            doD = "ALIVE";
+        }
+
         QString boolToString = "0";
         if(gender){
             boolToString = "1";
         }
-        query.prepare("INSERT INTO people (name, gender, birthDate, deathDate, fact) "
+        query.prepare("INSERT INTO people (name, gender, birthDate, deathDate, description) "
                       "VALUES (:name, :gender, :doB, :doD, :fact)");
         query.bindValue(":name", name);
         query.bindValue(":gender", boolToString);
@@ -257,16 +268,20 @@ void Model::addComputerToDatabase(Computers& comp){
         QString name = comp.returnName();
         bool created = comp.returnCreated();
         int creationYear = comp.returnCreationYear();
+        QString type = comp.returnType();
         QString desc = comp.returnDescription();
         QString boolToString = "0";
         if(created){
             boolToString = "1";
         }
-        query.prepare("INSERT INTO computers(name, created, creationDate, description) "
-                      "VALUES (:name, :created, :creationDate, :desc)");
+        else{
+        }
+        query.prepare("INSERT INTO computers(name, created, creationDate, type, description) "
+                      "VALUES (:name, :created, :creationDate, :type, :desc)");
         query.bindValue(":name", name);
         query.bindValue(":created", boolToString);
         query.bindValue(":creationDate", creationYear);
+        query.bindValue(":type", type);
         query.bindValue(":desc", desc);
         query.exec();
 
@@ -301,7 +316,6 @@ void Model::linkSciToComp(int SciID, int CompID){
 
     return;
 }
-
 
 
 
