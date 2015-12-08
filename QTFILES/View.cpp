@@ -5,6 +5,7 @@
 #include <QtSql>
 
 
+
 using namespace std;
 
 View::View()
@@ -17,13 +18,15 @@ void View::displayInterface(int& select)
 {
     Controller cont;
 
-        cout << "1. List records" << endl
+        cout << "======================================" << endl
+             << "1. List records" << endl
              << "2. Add record" << endl
              << "3. Remove record" << endl
              << "4. Search" << endl
              << "5. Link scientists and computers" << endl
-             << "6. Edit record" << endl
-             << "0. Quit the Application" << endl;
+             << "6. Edit a record" << endl
+             << "0. Quit the Application" << endl
+             << "======================================"<< endl;
         cin >> select;
 
     return;
@@ -156,7 +159,8 @@ void View::printResult(QSqlQuery& result){
     while(result.next()){
         while(!result.value(i).isNull()){
             val = result.value(i).toString();
-            cout << val.toStdString() << "  |  ";
+
+            cout << val.toStdString() << endl;
             i++;
         }
         cout << endl;
