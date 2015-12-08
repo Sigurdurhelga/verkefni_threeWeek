@@ -22,7 +22,7 @@ void View::displayInterface(int& select)
              << "3. Remove record" << endl
              << "4. Search" << endl
              << "5. Link scientists and computers" << endl
-             << "6. Edit a Scientist" << endl
+             << "6. Edit record" << endl
              << "0. Quit the Application" << endl;
         cin >> select;
 
@@ -113,8 +113,8 @@ void View::searchSecond(int& select){
 }
 
 void View::searchExtended(int& select){
-    cout << "1. List all computers this scientist has worked on" << endl
-         << "3. Edit this scientist" << endl
+    cout << "1. List all records linked to this record" << endl
+         << "2. Edit this record" << endl
          << "0. Go back." << endl;
     cin >> select;
 
