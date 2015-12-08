@@ -256,23 +256,19 @@ void Controller::searchScientisthandler(int& select){
     while(select != 0){
         UI.searchSecond(select);
         if(select == 1){
-            select = 25;
             searchScientistName();
         }
         else if (select == 2){
-            select = 25;
             secondSelect = 25;
             currID = searchScientistID();
             while(secondSelect != 0){
                 UI.searchExtended(secondSelect);
                 switch(secondSelect){
                     case 1:
-                        secondSelect = 25;
                         query = db.scientistConnComp(currID);
                         UI.printResult(query);
                         break;
                     case 2:
-                        secondSelect = 25;
                         editSpecific(currID, true);
                         break;
                     case 0:
@@ -282,10 +278,10 @@ void Controller::searchScientisthandler(int& select){
                         secondSelect = 25;
                         break;
                 }
+                select = 25;
             }
         }
         else if (select == 0){
-            select = 25;
             break;
         }
         else{
@@ -334,7 +330,6 @@ void Controller::searchComputerHandler(int& select){
             }
         }
         else if (select == 0){
-            select = 25;
             break;
         }
         else{
