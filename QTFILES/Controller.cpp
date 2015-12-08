@@ -576,7 +576,7 @@ void Controller::editLoopComputer(int id){
                 break;
             case 5:
                 UI.compAskDescription(fact);
-                db.modSci(select, fact, id);
+                db.modComp(select, fact, id);
                 break;
             case 0:
                 break;
