@@ -16,8 +16,6 @@ View::View()
 // This function takes the users input and forwards it to the Controller.
 void View::displayInterface(int& select)
 {
-    Controller cont;
-
         cout << "======================================" << endl
              << "1. List records" << endl
              << "2. Add record" << endl
