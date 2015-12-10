@@ -7,7 +7,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->addSciFrame->setHidden(1);
     ui->addCompFrame->setHidden(1);
 }
 
