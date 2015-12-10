@@ -161,7 +161,6 @@ void Controller::removeFunctions(){
 }
 
 
-//function that finds a Scientist to erase
 void Controller::removeScientist(){
     Model db;
     int id;
@@ -210,7 +209,6 @@ void Controller::searchFunctions(){
 
 //function that searches the database
 void Controller::searchScientistName(){
-    Model db;
     string name;
     QSqlQuery query;
     QString qName = QString::fromStdString(name);

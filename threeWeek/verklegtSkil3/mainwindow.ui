@@ -37,9 +37,9 @@
    <widget class="QPushButton" name="linkButton">
     <property name="geometry">
      <rect>
-      <x>400</x>
+      <x>394</x>
       <y>150</y>
-      <width>75</width>
+      <width>81</width>
       <height>23</height>
      </rect>
     </property>
@@ -50,9 +50,9 @@
    <widget class="QPushButton" name="addSciButton">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>24</x>
       <y>450</y>
-      <width>75</width>
+      <width>81</width>
       <height>23</height>
      </rect>
     </property>
@@ -236,7 +236,7 @@
      <rect>
       <x>540</x>
       <y>450</y>
-      <width>75</width>
+      <width>91</width>
       <height>23</height>
      </rect>
     </property>
@@ -380,7 +380,7 @@
      <x>0</x>
      <y>0</y>
      <width>882</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>

@@ -13,7 +13,6 @@ class Computers
         QString type;
         QString description;
 
-
     public:
         // Constructors
         Computers();
