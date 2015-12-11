@@ -55,15 +55,13 @@ QVector<Computers> Model::queryComputers(){
     QVector<Computers> computers;
     QSqlQuery query = QSqlQuery();
     query = queryListComp(1);
-    query.exec("CREATE TABLE computers(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,name VARCHAR(40),created TEXT,creationDate INTEGER, type TEXT, description TEXT(400))");
-    query.exec("INSERT INTO computers (name, created, creationYear, type, description) VALUES('ax', 'Yes', '1999', 'electropop', 'stuff')");
 
     while(query.next()){
         QString id = query.value("id").toString();
         QString name = query.value("name").toString();
-        QString created = query.value("gender").toString();
-        QString creationYear = query.value("birthDate").toString();
-        QString type = query.value("deathDate").toString();
+        QString created = query.value("created").toString();
+        QString creationYear = query.value("creationDate").toString();
+        QString type = query.value("type").toString();
         QString description = query.value("description").toString();
 
         computers.push_back(Computers(id, name, created, creationYear, type, description));
