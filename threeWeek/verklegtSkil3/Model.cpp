@@ -50,7 +50,6 @@ QVector<Scientist> Model::queryScientists(){
     return scientists;
 }
 
-<<<<<<< HEAD
 void Model::remove(int ID, bool which){
     QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery query;
@@ -65,17 +64,6 @@ void Model::remove(int ID, bool which){
     query.exec();
 }
 
-QVector<Scientist> Model::listOfScientists(){
-    stringstream query;
-
-    query << ("SELECT * FROM people ORDER BY id");
-
-
-    //return queryScientists(query.str());
-}
-
-=======
->>>>>>> 5bd2da89125701c103ed4f20c87a46018a897ec6
 QSqlQuery Model::queryListSci(int way){
     QSqlQuery ret(QSqlDatabase::database());
 
