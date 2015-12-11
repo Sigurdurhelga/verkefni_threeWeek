@@ -50,6 +50,29 @@ QVector<Scientist> Model::queryScientists(){
     return scientists;
 }
 
+QVector<Computers> Model::queryComputers(){
+    QSqlDatabase db = QSqlDatabase::database();
+    QVector<Computers> computers;
+    QSqlQuery query = QSqlQuery();
+    query = queryListComp(1);
+    query.exec("CREATE TABLE computers(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,name VARCHAR(40),created TEXT,creationDate INTEGER, type TEXT, description TEXT(400))");
+    query.exec("INSERT INTO computers (name, created, creationYear, type, description) VALUES('ax', 'Yes', '1999', 'electropop', 'stuff')");
+
+    while(query.next()){
+        QString id = query.value("id").toString();
+        QString name = query.value("name").toString();
+        QString created = query.value("gender").toString();
+        QString creationYear = query.value("birthDate").toString();
+        QString type = query.value("deathDate").toString();
+        QString description = query.value("description").toString();
+
+        computers.push_back(Computers(id, name, created, creationYear, type, description));
+
+    }
+
+    return computers;
+}
+
 void Model::remove(int ID, bool which){
     QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery query;
@@ -234,14 +257,14 @@ void Model::addComputerToDatabase(Computers& comp){
         QSqlQuery query;
 
         QString name = comp.returnName();
-        bool created = comp.returnCreated();
-        int creationYear = comp.returnCreationYear();
+        QString created = comp.returnCreated();
+        QString creationYear = comp.returnCreationYear();
         QString type = comp.returnType();
         QString desc = comp.returnDescription();
         QString boolToString = "0";
-        if(created){
-            boolToString = "1";
-        }
+
+        boolToString = "1";
+
         query.prepare("INSERT INTO computers(name, created, creationDate, type, description) "
                       "VALUES (:name, :created, :creationDate, :type, :desc)");
         query.bindValue(":name", name);

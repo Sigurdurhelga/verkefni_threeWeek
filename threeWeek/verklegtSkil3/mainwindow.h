@@ -15,6 +15,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     void displayAllScientists();
+    void displayAllComputers();
 
 private slots:
     void on_addSciDone_clicked();
@@ -24,6 +25,8 @@ private slots:
 
     void on_listOfSci_clicked(const QModelIndex &index);
 
+
+    void on_showComps_clicked();
 
 private:
     Ui::MainWindow *ui;

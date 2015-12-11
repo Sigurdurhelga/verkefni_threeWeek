@@ -14,15 +14,24 @@
 using namespace std;
 
 
-QVector<Scientist> Controller::testfunc(){
+QVector<Scientist> Controller::getScientists(){
     Model db;
     QVector<Scientist> listSci;
 
     listSci = db.queryScientists();
 
-
     return listSci;
 
+}
+
+QVector<Computers> Controller::getComputers(){
+    Model db;
+    QVector<Computers> listComp;
+    QSqlQuery query = QSqlQuery();
+
+    listComp = db.queryComputers();
+
+    return listComp;
 }
 
 void Controller::linkFunctions(){

@@ -6,28 +6,29 @@
 class Computers
 {
     private:
-        int ID;
+        QString id;
         QString name;
-        bool created;
-        int creationYear;
+        QString created;
+        QString creationYear;
         QString type;
         QString description;
 
     public:
         // Constructors
         Computers();
-        Computers(int SID, QString Sname, bool Screated, int ScreationYear, QString type, QString Sdescription);
+        Computers(QString SID, QString Sname, QString Screated, QString ScreationYear, QString type, QString Sdescription);
 
         // Set functions
         void setName(QString name);
-        void setCreated(bool sCreated);
-        void setCreationYear(int sCreationYear);
+        void setCreated(QString sCreated);
+        void setCreationYear(QString sCreationYear);
         void setType(QString sType);
         void setDescription(QString sDescription);
 
         // Get functions
-        bool returnCreated();
-        int returnCreationYear();
+        QString returnID();
+        QString returnCreated();
+        QString returnCreationYear();
         QString returnName();
         QString returnType();
         QString returnDescription();

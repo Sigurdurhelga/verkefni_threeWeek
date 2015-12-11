@@ -9,7 +9,9 @@ class Controller
 {
 public:
 
-    QVector<Scientist> testfunc();
+    QVector<Scientist> getScientists();
+    QVector<Computers> getComputers();
+
     // List functions
     void linkFunctions();
     void listFunctions();

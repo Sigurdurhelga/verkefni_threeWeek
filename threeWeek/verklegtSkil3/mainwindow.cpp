@@ -45,7 +45,7 @@ void MainWindow::on_addSciDone_clicked()
 
     }
     Controller cont;
-    cont.testfunc();
+    cont.getScientists();
 }
 
 void MainWindow::on_removeCompRad_clicked(bool checked)
@@ -56,7 +56,7 @@ void MainWindow::on_removeCompRad_clicked(bool checked)
 void MainWindow::displayAllScientists()
 {
     Controller cont;
-    QVector<Scientist> scientists = cont.testfunc();
+    QVector<Scientist> scientists = cont.getScientists();
     ui->listOfSci->clearContents();
 
     ui->listOfSci->setRowCount(scientists.size());
@@ -81,4 +81,36 @@ void MainWindow::displayAllScientists()
     }
 
     return;
+}
+
+void MainWindow::displayAllComputers()
+{
+    Controller cont;
+    QVector<Computers> computers = cont.getComputers();
+    ui->listOfComps->clearContents();
+    ui->listOfComps->setRowCount(computers.size());
+
+    for (unsigned int row = 0; row < computers.size(); row++)
+    {
+        Computers currentComputer = computers.at(row);
+
+        QString id = currentComputer.returnID();
+        QString name = currentComputer.returnName();
+        QString created = currentComputer.returnCreated();
+        QString creationDate = currentComputer.returnCreationYear();
+        QString description = currentComputer.returnDescription();
+
+        ui->listOfComps->setItem(row, 0, new QTableWidgetItem(id));
+        ui->listOfComps->setItem(row, 1, new QTableWidgetItem(name));
+        ui->listOfComps->setItem(row, 2, new QTableWidgetItem(created));
+        ui->listOfComps->setItem(row, 3, new QTableWidgetItem(creationDate));
+        ui->listOfComps->setItem(row, 4, new QTableWidgetItem(description));
+    }
+
+    return;
+}
+
+void MainWindow::on_showComps_clicked()
+{
+    displayAllComputers();
 }

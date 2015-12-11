@@ -7,9 +7,9 @@ Computers::Computers()
 
 
 
-Computers::Computers(int SID, QString Sname, bool Screated, int ScreationYear, QString Stype, QString Sdescription)
+Computers::Computers(QString Sid, QString Sname, QString Screated, QString ScreationYear, QString Stype, QString Sdescription)
 {
-    ID = SID;
+    id = Sid;
     name = Sname;
     created = Screated;
     creationYear = ScreationYear;
@@ -21,11 +21,11 @@ void Computers::setName(QString Sname){
     name = Sname;
 }
 
-void Computers::setCreated(bool sCreated){
+void Computers::setCreated(QString sCreated){
     created = sCreated;
 }
 
-void Computers::setCreationYear(int sCreationYear){
+void Computers::setCreationYear(QString sCreationYear){
     creationYear = sCreationYear;
 }
 
@@ -37,11 +37,15 @@ void Computers::setDescription(QString sDescription){
     description = sDescription;
 }
 
-bool Computers::returnCreated(){
+QString Computers::returnID(){
+    return id;
+}
+
+QString Computers::returnCreated(){
     return created;
 }
 
-int Computers::returnCreationYear(){
+QString Computers::returnCreationYear(){
     return creationYear;
 }
 
