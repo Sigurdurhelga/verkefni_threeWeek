@@ -3,7 +3,10 @@
 #include "Controller.h"
 #include "Scientist.h"
 #include "Computers.h"
-#include "QMessageBox"
+#include "comboBoxItemDelegate.h"
+#include <QMessageBox>
+#include <QDebug>
+#include <QTableWidget>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -108,18 +111,15 @@ void MainWindow::on_addCompDone_clicked()
     }
 }
 
-void MainWindow::on_removeCompRad_clicked(bool checked)
-{
-
-}
-
 void MainWindow::displayAllScientists()
 {
+    canEdit = false;
     Controller cont;
     QVector<Scientist> scientists = cont.getScientists();
     ui->listOfSci->clearContents();
 
     ui->listOfSci->setRowCount(scientists.size());
+
 
     for (unsigned int row = 0; row < scientists.size(); row++)
     {
@@ -132,6 +132,8 @@ void MainWindow::displayAllScientists()
         QString dateDeath = currentScientist.dateofDeath();
         QString description = currentScientist.returnDescription();
 
+
+
         ui->listOfSci->setItem(row, 0, new QTableWidgetItem(id));
         ui->listOfSci->setItem(row, 1, new QTableWidgetItem(name));
         ui->listOfSci->setItem(row, 2, new QTableWidgetItem(gender));
@@ -139,13 +141,14 @@ void MainWindow::displayAllScientists()
         ui->listOfSci->setItem(row, 4, new QTableWidgetItem(dateDeath));
         ui->listOfSci->setItem(row, 5, new QTableWidgetItem(description));
     }
-
+    canEdit = true;
     return;
 }
 
 
 void MainWindow::displayAllComputers()
 {
+    canEdit = false;
     Controller cont;
     QVector<Computers> computers = cont.getComputers();
     ui->listOfComps->clearContents();
@@ -162,6 +165,7 @@ void MainWindow::displayAllComputers()
         QString type = currentComputer.returnType();
         QString description = currentComputer.returnDescription();
 
+
         ui->listOfComps->setItem(row, 0, new QTableWidgetItem(id));
         ui->listOfComps->setItem(row, 1, new QTableWidgetItem(name));
         ui->listOfComps->setItem(row, 2, new QTableWidgetItem(created));
@@ -169,7 +173,7 @@ void MainWindow::displayAllComputers()
         ui->listOfComps->setItem(row, 4, new QTableWidgetItem(type));
         ui->listOfComps->setItem(row, 5, new QTableWidgetItem(description));
     }
-
+    canEdit = true;
     return;
 }
 
@@ -177,7 +181,6 @@ void MainWindow::config(){
     ui->addCompFrame->setHidden(1);
     ui->editCompFrame->setHidden(1);
     ui->listOfComps->setHidden(1);
-    displayAllScientists();
     ui->listOfSci->setColumnHidden(0, true);
     ui->listOfComps->setColumnHidden(0,true);
     ui->listOfSci->setColumnWidth(1, 120);
@@ -190,6 +193,20 @@ void MainWindow::config(){
     ui->listOfComps->setColumnWidth(3, 100);
     ui->listOfComps->setColumnWidth(4, 85);
     ui->listOfComps->setColumnWidth(5,440);
+    ComboBoxItemDelegate* sexDelegate = new ComboBoxItemDelegate(ui->listOfSci);
+    sexDelegate->setColumnIndex(2);
+    sexDelegate->addOption("Male");
+    sexDelegate->addOption("Female");
+    ui->listOfSci->setItemDelegate(sexDelegate);
+    ComboBoxItemDelegate* typeDelegate = new ComboBoxItemDelegate(ui->listOfComps);
+    typeDelegate->setColumnIndex(4);
+    typeDelegate->addOption("Electronical");
+    typeDelegate->addOption("Transistor");
+    typeDelegate->addOption("Mechanical");
+    typeDelegate->addOption("Electromechanical");
+    ui->listOfComps->setItemDelegate(typeDelegate);
+
+
 }
 
 
@@ -203,4 +220,24 @@ void MainWindow::on_showSci_clicked()
     displayAllScientists();
 }
 
+void MainWindow::on_listOfSci_cellChanged(int row, int column)
+{
+    Controller cont;
+    if(canEdit){
+        QString id = ui->listOfSci->item(row, 0)->text();
+        QString newThing = ui->listOfSci->item(row, column)->text();
+        cont.edit(id, newThing, column, true);
+    }
+}
 
+
+
+void MainWindow::on_listOfComps_cellChanged(int row, int column)
+{
+    Controller cont;
+    if(canEdit){
+        QString id = ui->listOfComps->item(row, 0)->text();
+        QString newThing = ui->listOfComps->item(row, column)->text();
+        cont.edit(id, newThing, column, false);
+    }
+}

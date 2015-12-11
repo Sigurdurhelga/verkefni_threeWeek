@@ -106,6 +106,60 @@ void Model::remove(int ID, bool which){
     query.exec();
 }
 
+void Model::edit(QString ID, QString newThing, int column, bool which){
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query;
+    QString queryString = "UPDATE ";
+
+    if(which){
+        queryString += "people SET ";
+        switch(column){
+            case 1:
+                queryString += "name = ";
+                break;
+            case 2:
+                queryString += "gender = ";
+                break;
+            case 3:
+                queryString += "birthDate = ";
+                break;
+            case 4:
+                queryString += "deathDate = ";
+                break;
+            case 5:
+                queryString += "description = ";
+                break;
+        }
+    }
+    else{
+        queryString += "computers SET ";
+        switch(column){
+            case 1:
+                queryString += "name = ";
+                break;
+            case 2:
+                queryString += "created = ";
+                break;
+            case 3:
+                queryString += "creationDate = ";
+                break;
+            case 4:
+                queryString += "type = ";
+                break;
+            case 5:
+                queryString += "description = ";
+                break;
+        }
+    }
+    queryString += ":new WHERE id = :id ";
+    query.prepare(queryString);
+    query.bindValue(":new", newThing);
+    query.bindValue(":id", ID);
+    query.exec();
+
+
+}
+
 QSqlQuery Model::queryListSci(int way){
     QSqlQuery ret(QSqlDatabase::database());
 

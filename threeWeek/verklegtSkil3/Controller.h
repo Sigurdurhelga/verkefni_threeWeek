@@ -38,6 +38,7 @@ public:
 
 
     // Edit functions
+    void edit(QString id, QString newThing, int column, bool which);
     void editFunctions();
     void editSpecific(int, bool);
     void editScientistHandler();

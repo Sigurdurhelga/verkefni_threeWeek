@@ -43,6 +43,7 @@ public:
     QSqlQuery computersConnSci(int id);
 
     // Edit functions
+    void edit(QString ID, QString newThing, int column, bool which);
     void modSci(int, QString, int);
     void modComp(int, QString, int);
 

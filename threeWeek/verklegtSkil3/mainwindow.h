@@ -20,20 +20,21 @@ public:
 private slots:
     void on_addSciDone_clicked();
 
-    void on_removeCompRad_clicked(bool checked);
-
-
-    void on_listOfSci_clicked(const QModelIndex &index);
+    void on_addCompDone_clicked();
 
     void on_showComps_clicked();
 
     void on_showSci_clicked();
 
-    void on_addCompDone_clicked();
+
+    void on_listOfSci_cellChanged(int row, int column);
+
+    void on_listOfComps_cellChanged(int row, int column);
 
 private:
     Ui::MainWindow *ui;
     void config();
+    bool canEdit;
 };
 
 #endif // MAINWINDOW_H
