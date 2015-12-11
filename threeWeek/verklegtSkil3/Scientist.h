@@ -8,28 +8,29 @@ using namespace std;
 class Scientist
 {
 private:
+    int id;
     QString name;
-    bool sex;
-    QDate doB;
-    QDate doD;
+    QString sex;
+    QString doB;
+    QString doD;
     QString fact;
 public:
     // Constructor
     Scientist();
-    Scientist(QString name, bool sex, QDate doB, QDate doD, QString fact);
+    Scientist(int sID, QString name, QString sex, QString doB, QString doD, QString fact);
 
     // Set functions
     void setName(QString name);
-    void setGender(bool sex);
-    void setdoB(QDate doB);
-    void setdoD(QDate doB);
+    void setGender(QString sex);
+    void setdoB(QString doB);
+    void setdoD(QString doB);
     void setFact(QString fact);
 
     // Get functions
     QString returnName();
-    bool returnSex();
-    QDate dateofBirth();
-    QDate dateofDeath();
+    QString returnSex();
+    QString dateofBirth();
+    QString dateofDeath();
     QString dateofBirthQString();
     QString dateofDeathQString();
     QString returnFact();

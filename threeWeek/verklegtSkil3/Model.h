@@ -13,6 +13,9 @@ public:
     bool checkConnection(QSqlDatabase db);
 
     // List functions
+    QVector<Scientist> listOfScientists();
+    QVector<Scientist> queryScientists();
+
     QSqlQuery queryListSci(int way);
     QSqlQuery queryListComp(int way);
     QSqlQuery linkListSci();

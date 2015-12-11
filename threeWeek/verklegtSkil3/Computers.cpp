@@ -5,6 +5,8 @@ Computers::Computers()
 
 }
 
+
+
 Computers::Computers(int SID, QString Sname, bool Screated, int ScreationYear, QString Stype, QString Sdescription)
 {
     ID = SID;

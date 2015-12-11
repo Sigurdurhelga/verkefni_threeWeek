@@ -8,6 +8,8 @@
 class Controller
 {
 public:
+
+    void testfunc();
     // List functions
     void linkFunctions();
     void listFunctions();

@@ -13,6 +13,17 @@
 
 using namespace std;
 
+
+void Controller::testfunc(){
+    Model db;
+    QVector<Scientist> listSci;
+
+    listSci = db.queryScientists();
+
+    return;
+
+}
+
 void Controller::linkFunctions(){
     int which = 25, select = 25;
     int currSciID;

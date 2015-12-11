@@ -21,10 +21,16 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_addSciDone_clicked()
 {
-
+    Controller cont;
+    cont.testfunc();
 }
 
 void MainWindow::on_removeCompRad_clicked(bool checked)
+{
+
+}
+
+void MainWindow::on_listOfSci_clicked(const QModelIndex &index)
 {
 
 }

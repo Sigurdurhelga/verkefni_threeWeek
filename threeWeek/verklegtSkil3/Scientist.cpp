@@ -7,18 +7,15 @@ using namespace std;
 
 Scientist::Scientist()
 {
-    name = "John Doe";
-    sex = "male";
-    doB = QDate(2012,01,01);
-    doD = QDate(2013,01,01);
-    fact = "The lost one";
+    // empty
 }
 
 
 
-Scientist::Scientist(QString Sname, bool Ssex, QDate SdoB, QDate SdoD, QString Sfact)
+Scientist::Scientist(int sID, QString Sname, QString Ssex, QString SdoB, QString SdoD, QString Sfact)
 
 {
+    id = sID;
     name = Sname;
     sex = Ssex;
     doB = SdoB;
@@ -30,15 +27,15 @@ void Scientist::setName(QString Sname){
     name = Sname;
 }
 
-void Scientist::setGender(bool Sgender){
+void Scientist::setGender(QString Sgender){
     sex = Sgender;
 }
 
-void Scientist::setdoB(QDate SdoB){
+void Scientist::setdoB(QString SdoB){
     doB = SdoB;
 }
 
-void Scientist::setdoD(QDate SdoD){
+void Scientist::setdoD(QString SdoD){
     doD = SdoD;
 }
 
@@ -53,29 +50,29 @@ QString Scientist::returnName()
 }
 
 
-bool Scientist::returnSex()
+QString Scientist::returnSex()
 {
     return sex;
 }
 
-QDate Scientist::dateofBirth()
+QString Scientist::dateofBirth()
 {
     return doB;
 }
 
-QDate Scientist::dateofDeath()
+QString Scientist::dateofDeath()
 {
     return doD;
 }
 
 QString Scientist::dateofBirthQString()
 {
-    return doB.toString("yyyy-MM-dd");
+    return doB;
 }
 
 QString Scientist::dateofDeathQString()
 {
-    return doD.toString("yyyy-MM-dd");
+    return doD;
 }
 
 QString Scientist::returnFact()

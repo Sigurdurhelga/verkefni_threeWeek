@@ -1,6 +1,6 @@
 #include "Model.h"
 #include "Scientist.h"
-#include <fstream>
+#include <sstream>
 #include <iostream>
 #include <string>
 #include <QFile>
@@ -27,6 +27,37 @@ QSqlDatabase Model::openConnection(){
 
 bool Model::checkConnection(QSqlDatabase db){
     return db.open();
+}
+
+QVector<Scientist> Model::queryScientists(){
+    Model db;
+
+    QVector<Scientist> scientists;
+    QSqlQuery query;
+    query = queryListSci(1);
+
+    while(query.next()){
+        int id = query.value("id").toInt();
+        QString name = query.value("name").toString();
+        QString sex = query.value("gender").toString();
+        QString doB = query.value("birthDate").toString();
+        QString doD = query.value("deathDate").toString();
+        QString description = query.value("description").toString();
+
+        scientists.push_back(Scientist(id, name, sex, doB, doD, description));
+
+    }
+
+    return scientists;
+}
+
+QVector<Scientist> Model::listOfScientists(){
+    stringstream query;
+
+    query << ("SELECT * FROM people ORDER BY id");
+
+
+    //return queryScientists(query.str());
 }
 
 QSqlQuery Model::queryListSci(int way){
@@ -164,7 +195,7 @@ void Model::addScientistToDatabase(Scientist& guy){
         QSqlQuery query;
 
         QString name = guy.returnName();
-        bool gender = guy.returnSex();
+        QString gender = guy.returnSex();
         QString doB = guy.dateofBirthQString();
         QString doD = guy.dateofDeathQString();
         QString fact = guy.returnFact();
@@ -174,9 +205,9 @@ void Model::addScientistToDatabase(Scientist& guy){
         }
 
         QString boolToString = "0";
-        if(gender){
+
             boolToString = "1";
-        }
+
         query.prepare("INSERT INTO people (name, gender, birthDate, deathDate, description) "
                       "VALUES (:name, :gender, :doB, :doD, :fact)");
         query.bindValue(":name", name);
