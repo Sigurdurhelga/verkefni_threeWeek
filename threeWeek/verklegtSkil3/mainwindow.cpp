@@ -82,3 +82,8 @@ void MainWindow::displayAllScientists()
 
     return;
 }
+
+void MainWindow::on_showSci_clicked()
+{
+    displayAllScientists();
+}

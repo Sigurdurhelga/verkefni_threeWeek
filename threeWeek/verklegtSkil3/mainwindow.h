@@ -25,6 +25,8 @@ private slots:
     void on_listOfSci_clicked(const QModelIndex &index);
 
 
+    void on_showSci_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
