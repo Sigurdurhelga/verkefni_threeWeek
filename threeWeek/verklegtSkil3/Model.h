@@ -29,6 +29,7 @@ public:
     QSqlQuery searchCompID(int id);
 
     // Add functions
+    void add(QString one, QString two, QString three, QString four, QString five, bool which);
     void addScientistToDatabase(Scientist& guy);
     void addComputerToDatabase(Computers& comp);
 

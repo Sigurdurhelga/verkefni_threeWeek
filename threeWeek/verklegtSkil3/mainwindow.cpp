@@ -10,10 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->addCompFrame->setHidden(1);
-    ui->editCompFrame->setHidden(1);
-    ui->listOfComps->setHidden(1);
-    displayAllScientists();
+    config();
 
 }
 
@@ -26,8 +23,14 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_addSciDone_clicked()
 {
+    Controller cont;
     bool check = true;
     QMessageBox box;
+    QString name;
+    QString gender = "Male";
+    QString birth;
+    QString death = "Alive";
+    QString desc;
 
     if(ui->inSciName->text() == ""){
         box.information(0,"Warning", "Name can't be empty!");
@@ -42,10 +45,67 @@ void MainWindow::on_addSciDone_clicked()
         check = false;
     }
     if(check){
+        name = ui->inSciName->text();
+        if(ui->inSciFemale->isChecked()){
+            gender = "Female";
+        }
+        birth = ui->inSciBirth->date().toString("yyyy-MM-dd");
+        if(!ui->inSciAlive->isChecked()){
+            death = ui->inSciDeath->date().toString("yyyy-MM-dd");
+        }
+        desc = ui->inSciDesc->toPlainText();
+
+        cont.add(name, gender, birth, death, desc, true);
+        displayAllScientists();
+        ui->inSciName->clear();
+        ui->inSciAlive->setChecked(true);
+        ui->inSciDesc->clear();
 
     }
+}
+
+void MainWindow::on_addCompDone_clicked()
+{
     Controller cont;
-    cont.getScientists();
+    bool check = true;
+    QMessageBox warning;
+    QString name;
+    QString created = "No";
+    QString creationYear = "Never";
+    QString type;
+    QString description;
+
+
+    if(ui->inCompName->text() == ""){
+        check = false;
+        warning.information(0, "Warning", "Computer name can't be empty");
+    }
+    else if(ui->inCompYear->text() == ""){
+        check = false;
+        warning.information(0, "Warning", "Creation year invalid");
+    }
+    else if(ui->inCompType->currentText() == "Computer type"){
+        check = false;
+        warning.information(0, "Warning", "Computer type invalid");
+    }
+    else if(ui->inCompDesc->toPlainText() == ""){
+        check = false;
+        warning.information(0, "Warning", "Description can't be empty");
+    }
+    if(check){
+        name = ui->inCompName->text();
+        if(ui->inCompCreated->isChecked()){
+            created = "Yes";
+            creationYear = ui->inCompYear->text();
+        }
+        type = ui->inCompType->currentText();
+        description = ui->inCompDesc->toPlainText();
+        cont.add(name, created, creationYear, type, description, false);
+        displayAllComputers();
+        ui->inCompDesc->clear();
+        ui->inCompName->clear();
+        ui->inCompCreated->setChecked(false);
+    }
 }
 
 void MainWindow::on_removeCompRad_clicked(bool checked)
@@ -99,17 +159,39 @@ void MainWindow::displayAllComputers()
         QString name = currentComputer.returnName();
         QString created = currentComputer.returnCreated();
         QString creationDate = currentComputer.returnCreationYear();
+        QString type = currentComputer.returnType();
         QString description = currentComputer.returnDescription();
 
         ui->listOfComps->setItem(row, 0, new QTableWidgetItem(id));
         ui->listOfComps->setItem(row, 1, new QTableWidgetItem(name));
         ui->listOfComps->setItem(row, 2, new QTableWidgetItem(created));
         ui->listOfComps->setItem(row, 3, new QTableWidgetItem(creationDate));
-        ui->listOfComps->setItem(row, 4, new QTableWidgetItem(description));
+        ui->listOfComps->setItem(row, 4, new QTableWidgetItem(type));
+        ui->listOfComps->setItem(row, 5, new QTableWidgetItem(description));
     }
 
     return;
 }
+
+void MainWindow::config(){
+    ui->addCompFrame->setHidden(1);
+    ui->editCompFrame->setHidden(1);
+    ui->listOfComps->setHidden(1);
+    displayAllScientists();
+    ui->listOfSci->setColumnHidden(0, true);
+    ui->listOfComps->setColumnHidden(0,true);
+    ui->listOfSci->setColumnWidth(1, 120);
+    ui->listOfSci->setColumnWidth(2, 70);
+    ui->listOfSci->setColumnWidth(3, 100);
+    ui->listOfSci->setColumnWidth(4, 100);
+    ui->listOfSci->setColumnWidth(5, 410);
+    ui->listOfComps->setColumnWidth(1,120);
+    ui->listOfComps->setColumnWidth(2,60);
+    ui->listOfComps->setColumnWidth(3, 100);
+    ui->listOfComps->setColumnWidth(4, 85);
+    ui->listOfComps->setColumnWidth(5,440);
+}
+
 
 void MainWindow::on_showComps_clicked()
 {
@@ -120,3 +202,5 @@ void MainWindow::on_showSci_clicked()
 {
     displayAllScientists();
 }
+
+

@@ -17,7 +17,7 @@
    <widget class="QPushButton" name="showSci">
     <property name="geometry">
      <rect>
-      <x>450</x>
+      <x>290</x>
       <y>500</y>
       <width>101</width>
       <height>23</height>
@@ -30,9 +30,9 @@
    <widget class="QToolBox" name="mainCont">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>10</y>
-      <width>421</width>
+      <width>271</width>
       <height>521</height>
      </rect>
     </property>
@@ -47,7 +47,7 @@
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>421</width>
+       <width>271</width>
        <height>440</height>
       </rect>
      </property>
@@ -76,7 +76,7 @@
      <widget class="QRadioButton" name="addCompRad">
       <property name="geometry">
        <rect>
-        <x>190</x>
+        <x>140</x>
         <y>10</y>
         <width>111</width>
         <height>20</height>
@@ -94,7 +94,7 @@
        <rect>
         <x>30</x>
         <y>30</y>
-        <width>274</width>
+        <width>231</width>
         <height>340</height>
        </rect>
       </property>
@@ -127,6 +127,9 @@
         <widget class="QSpinBox" name="inCompYear">
          <property name="enabled">
           <bool>false</bool>
+         </property>
+         <property name="maximum">
+          <number>9999</number>
          </property>
         </widget>
        </item>
@@ -184,9 +187,9 @@
       </property>
       <property name="geometry">
        <rect>
-        <x>20</x>
+        <x>3</x>
         <y>30</y>
-        <width>274</width>
+        <width>261</width>
         <height>340</height>
        </rect>
       </property>
@@ -297,7 +300,7 @@
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>421</width>
+       <width>311</width>
        <height>440</height>
       </rect>
      </property>
@@ -375,7 +378,7 @@
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>421</width>
+       <width>271</width>
        <height>440</height>
       </rect>
      </property>
@@ -630,9 +633,9 @@
    <widget class="QTableWidget" name="listOfSci">
     <property name="geometry">
      <rect>
-      <x>450</x>
+      <x>290</x>
       <y>10</y>
-      <width>671</width>
+      <width>831</width>
       <height>481</height>
      </rect>
     </property>
@@ -673,9 +676,9 @@
    <widget class="QTableWidget" name="listOfComps">
     <property name="geometry">
      <rect>
-      <x>450</x>
+      <x>290</x>
       <y>10</y>
-      <width>671</width>
+      <width>831</width>
       <height>481</height>
      </rect>
     </property>
@@ -719,7 +722,7 @@
    <widget class="QPushButton" name="showComps">
     <property name="geometry">
      <rect>
-      <x>560</x>
+      <x>400</x>
       <y>500</y>
       <width>101</width>
       <height>23</height>
@@ -736,7 +739,7 @@
      <x>0</x>
      <y>0</y>
      <width>1131</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

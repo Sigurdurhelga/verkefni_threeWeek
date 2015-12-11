@@ -29,8 +29,11 @@ private slots:
 
     void on_showSci_clicked();
 
+    void on_addCompDone_clicked();
+
 private:
     Ui::MainWindow *ui;
+    void config();
 };
 
 #endif // MAINWINDOW_H

@@ -19,6 +19,7 @@ public:
     QSqlQuery sortByInComp(int comp);
 
     // Add functions
+    void add(QString, QString, QString, QString, QString, bool);
     void addFunctions();
 
     // Remove functions

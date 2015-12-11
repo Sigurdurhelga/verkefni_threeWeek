@@ -34,6 +34,11 @@ QVector<Computers> Controller::getComputers(){
     return listComp;
 }
 
+void Controller::add(QString one, QString two, QString three, QString four, QString five, bool which){
+    Model db;
+    db.add(one, two, three, four, five, which);
+}
+
 void Controller::linkFunctions(){
     int which = 25, select = 25;
     int currSciID;

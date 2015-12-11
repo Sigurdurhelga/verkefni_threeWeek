@@ -71,6 +71,27 @@ QVector<Computers> Model::queryComputers(){
     return computers;
 }
 
+void Model::add(QString one, QString two, QString three, QString four, QString five, bool which){
+    QSqlDatabase db = QSqlDatabase::database();
+    QString queryString;
+    QSqlQuery query;
+    queryString += "INSERT INTO ";
+    if(which){
+        queryString += "people (name, gender, birthDate, deathDate, description) ";
+    }
+    else{
+        queryString += "computers (name, created, creationDate, type, description) ";
+    }
+    queryString += "VALUES (:one, :two, :three, :four, :five)";
+    query.prepare(queryString);
+    query.bindValue(":one", one);
+    query.bindValue(":two", two);
+    query.bindValue(":three", three);
+    query.bindValue(":four", four);
+    query.bindValue(":five", five);
+    query.exec();
+}
+
 void Model::remove(int ID, bool which){
     QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery query;
