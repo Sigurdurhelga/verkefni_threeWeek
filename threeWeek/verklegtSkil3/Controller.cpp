@@ -19,7 +19,7 @@ void Controller::testfunc(){
     QVector<Scientist> listSci;
 
     listSci = db.queryScientists();
-
+    QDir::current();
     return;
 
 }

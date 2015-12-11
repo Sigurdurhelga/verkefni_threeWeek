@@ -7,24 +7,24 @@
     <x>0</x>
     <y>0</y>
     <width>1131</width>
-    <height>723</height>
+    <height>595</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="linkButton">
+   <widget class="QPushButton" name="showSci">
     <property name="geometry">
      <rect>
-      <x>550</x>
+      <x>450</x>
       <y>500</y>
-      <width>81</width>
+      <width>101</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>Link selected</string>
+     <string>Show scientists</string>
     </property>
    </widget>
    <widget class="QToolBox" name="mainCont">
@@ -33,14 +33,14 @@
       <x>20</x>
       <y>10</y>
       <width>421</width>
-      <height>851</height>
+      <height>521</height>
      </rect>
     </property>
     <property name="acceptDrops">
      <bool>false</bool>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page">
      <property name="geometry">
@@ -48,7 +48,7 @@
        <x>0</x>
        <y>0</y>
        <width>421</width>
-       <height>770</height>
+       <height>440</height>
       </rect>
      </property>
      <attribute name="label">
@@ -298,7 +298,7 @@
        <x>0</x>
        <y>0</y>
        <width>421</width>
-       <height>770</height>
+       <height>440</height>
       </rect>
      </property>
      <attribute name="label">
@@ -371,6 +371,14 @@
      </widget>
     </widget>
     <widget class="QWidget" name="page_3">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>421</width>
+       <height>440</height>
+      </rect>
+     </property>
      <attribute name="label">
       <string>Edit record</string>
      </attribute>
@@ -628,6 +636,9 @@
       <height>481</height>
      </rect>
     </property>
+    <property name="sortingEnabled">
+     <bool>true</bool>
+    </property>
     <column>
      <property name="text">
       <string>ID</string>
@@ -662,11 +673,17 @@
    <widget class="QTableWidget" name="listOfComps">
     <property name="geometry">
      <rect>
-      <x>480</x>
-      <y>200</y>
-      <width>403</width>
-      <height>271</height>
+      <x>450</x>
+      <y>10</y>
+      <width>671</width>
+      <height>481</height>
      </rect>
+    </property>
+    <property name="sortingEnabled">
+     <bool>true</bool>
+    </property>
+    <property name="columnCount">
+     <number>6</number>
     </property>
     <column>
      <property name="text">
@@ -693,6 +710,24 @@
       <string>Type</string>
      </property>
     </column>
+    <column>
+     <property name="text">
+      <string>Description</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QPushButton" name="showComps">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>500</y>
+      <width>101</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Show computers</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -875,6 +910,70 @@
     <hint type="destinationlabel">
      <x>311</x>
      <y>269</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>showSci</sender>
+   <signal>clicked()</signal>
+   <receiver>listOfSci</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>509</x>
+     <y>540</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>546</x>
+     <y>52</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>showSci</sender>
+   <signal>clicked()</signal>
+   <receiver>listOfComps</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>471</x>
+     <y>543</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>481</x>
+     <y>460</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>showComps</sender>
+   <signal>clicked()</signal>
+   <receiver>listOfComps</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>633</x>
+     <y>542</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>650</x>
+     <y>441</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>showComps</sender>
+   <signal>clicked()</signal>
+   <receiver>listOfSci</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>597</x>
+     <y>542</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>561</x>
+     <y>53</y>
     </hint>
    </hints>
   </connection>

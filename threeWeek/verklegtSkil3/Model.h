@@ -33,6 +33,7 @@ public:
     void addComputerToDatabase(Computers& comp);
 
     // Reomve functions
+    void remove(int ID, bool which);
     void rmRowSci(int);
     void rmRowComp(int id);
 

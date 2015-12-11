@@ -31,10 +31,14 @@ bool Model::checkConnection(QSqlDatabase db){
 
 QVector<Scientist> Model::queryScientists(){
     Model db;
+    QSqlDatabase dataBase = QSqlDatabase::database();
+    dataBase.exec("CREATE TABLE people(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, name VARCHAR(40), gender BOOLEAN NOT NULL, birthDate DATE, deathDate DATE, description TEXT)");
 
+    dataBase.exec("INSERT INTO people(name, gender, birthDate, deathDate, description) VALUES('fukk', 1, '12-12-12', '12-12-12', 'please work')");
     QVector<Scientist> scientists;
     QSqlQuery query;
     query = queryListSci(1);
+
 
     while(query.next()){
         int id = query.value("id").toInt();
@@ -51,6 +55,20 @@ QVector<Scientist> Model::queryScientists(){
     return scientists;
 }
 
+void Model::remove(int ID, bool which){
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query;
+    query.prepare("DELETE FROM :which WHERE id = :ID");
+    if(which){
+        query.bindValue(":which", "people");
+    }
+    else{
+        query.bindValue(":which", "computers");
+    }
+    query.bindValue(":ID", ID);
+    query.exec();
+}
+
 QVector<Scientist> Model::listOfScientists(){
     stringstream query;
 
@@ -64,7 +82,7 @@ QSqlQuery Model::queryListSci(int way){
     QSqlQuery ret;
     switch(way){
         case 1:
-            ret.exec("SELECT * FROM people ORDER BY id");
+            ret.exec("SELECT * FROM people");
             break;
         case 2:
             ret.exec("SELECT * FROM people ORDER BY id DESC");
