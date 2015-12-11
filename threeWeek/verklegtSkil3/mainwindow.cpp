@@ -83,6 +83,7 @@ void MainWindow::displayAllScientists()
     return;
 }
 
+
 void MainWindow::displayAllComputers()
 {
     Controller cont;
@@ -113,4 +114,9 @@ void MainWindow::displayAllComputers()
 void MainWindow::on_showComps_clicked()
 {
     displayAllComputers();
+}
+
+void MainWindow::on_showSci_clicked()
+{
+    displayAllScientists();
 }
