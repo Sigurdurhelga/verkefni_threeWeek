@@ -13,27 +13,28 @@ private:
     QString sex;
     QString doB;
     QString doD;
-    QString fact;
+    QString description;
 public:
     // Constructor
     Scientist();
-    Scientist(int sID, QString name, QString sex, QString doB, QString doD, QString fact);
+    Scientist(int sID, QString name, QString sex, QString doB, QString doD, QString description);
 
     // Set functions
     void setName(QString name);
     void setGender(QString sex);
     void setdoB(QString doB);
     void setdoD(QString doB);
-    void setFact(QString fact);
+    void setDescription(QString Sdescription);
 
     // Get functions
+    int returnID();
     QString returnName();
     QString returnSex();
     QString dateofBirth();
     QString dateofDeath();
     QString dateofBirthQString();
     QString dateofDeathQString();
-    QString returnFact();
+    QString returnDescription();
 };
 
 #endif // SCIENTIST_H

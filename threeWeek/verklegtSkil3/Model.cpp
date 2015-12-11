@@ -30,10 +30,8 @@ bool Model::checkConnection(QSqlDatabase db){
 }
 
 QVector<Scientist> Model::queryScientists(){
-    Model db;
-
     QVector<Scientist> scientists;
-    QSqlQuery query;
+    QSqlQuery query = QSqlQuery();
     query = queryListSci(1);
 
     while(query.next()){
@@ -44,24 +42,16 @@ QVector<Scientist> Model::queryScientists(){
         QString doD = query.value("deathDate").toString();
         QString description = query.value("description").toString();
 
-        scientists.push_back(Scientist(id, name, sex, doB, doD, description));
+        scientists.push_back(Scientist(id, name, sex, doB, doD, ""));
 
     }
 
     return scientists;
 }
 
-QVector<Scientist> Model::listOfScientists(){
-    stringstream query;
-
-    query << ("SELECT * FROM people ORDER BY id");
-
-
-    //return queryScientists(query.str());
-}
-
 QSqlQuery Model::queryListSci(int way){
-    QSqlQuery ret;
+    QSqlQuery ret(QSqlDatabase::database());
+
     switch(way){
         case 1:
             ret.exec("SELECT * FROM people ORDER BY id");
@@ -198,7 +188,7 @@ void Model::addScientistToDatabase(Scientist& guy){
         QString gender = guy.returnSex();
         QString doB = guy.dateofBirthQString();
         QString doD = guy.dateofDeathQString();
-        QString fact = guy.returnFact();
+        QString description = guy.returnDescription();
 
         if(doD == "0001-01-01"){
             doD = "ALIVE";
@@ -209,12 +199,12 @@ void Model::addScientistToDatabase(Scientist& guy){
             boolToString = "1";
 
         query.prepare("INSERT INTO people (name, gender, birthDate, deathDate, description) "
-                      "VALUES (:name, :gender, :doB, :doD, :fact)");
+                      "VALUES (:name, :gender, :doB, :doD, :description)");
         query.bindValue(":name", name);
         query.bindValue(":gender", boolToString);
         query.bindValue(":doB", doB);
         query.bindValue(":doD", doD);
-        query.bindValue(":fact", fact);
+        query.bindValue(":description", description);
         query.exec();
 
     }

@@ -20,8 +20,10 @@ Scientist::Scientist(int sID, QString Sname, QString Ssex, QString SdoB, QString
     sex = Ssex;
     doB = SdoB;
     doD = SdoD;
-    fact = Sfact;
+    description = Sfact;
 }
+
+
 
 void Scientist::setName(QString Sname){
     name = Sname;
@@ -39,9 +41,13 @@ void Scientist::setdoD(QString SdoD){
     doD = SdoD;
 }
 
-void Scientist::setFact(QString Sfact)
+void Scientist::setDescription(QString Sdescription)
 {
-    fact = Sfact;
+    description = Sdescription;
+}
+
+int Scientist::returnID(){
+    return id;
 }
 
 QString Scientist::returnName()
@@ -75,7 +81,7 @@ QString Scientist::dateofDeathQString()
     return doD;
 }
 
-QString Scientist::returnFact()
+QString Scientist::returnDescription()
 {
-    return fact;
+    return description;
 }

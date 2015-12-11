@@ -9,7 +9,7 @@ class Controller
 {
 public:
 
-    void testfunc();
+    QVector<Scientist> testfunc();
     // List functions
     void linkFunctions();
     void listFunctions();

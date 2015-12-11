@@ -14,13 +14,13 @@
 using namespace std;
 
 
-void Controller::testfunc(){
+QVector<Scientist> Controller::testfunc(){
     Model db;
     QVector<Scientist> listSci;
 
     listSci = db.queryScientists();
 
-    return;
+    return listSci;
 
 }
 
