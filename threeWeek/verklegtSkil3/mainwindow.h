@@ -20,7 +20,9 @@ private slots:
 
     void on_removeCompRad_clicked(bool checked);
 
+
     void on_listOfSci_clicked(const QModelIndex &index);
+
 
 private:
     Ui::MainWindow *ui;

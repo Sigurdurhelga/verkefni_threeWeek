@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->addCompFrame->setHidden(1);
+    ui->editCompFrame->setHidden(1);
 }
 
 
@@ -30,7 +31,4 @@ void MainWindow::on_removeCompRad_clicked(bool checked)
 
 }
 
-void MainWindow::on_listOfSci_clicked(const QModelIndex &index)
-{
 
-}
