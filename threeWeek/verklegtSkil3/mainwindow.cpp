@@ -65,7 +65,7 @@ void MainWindow::displayAllScientists()
     {
         Scientist currentScientist = scientists.at(row);
 
-        int id = currentScientist.returnID();
+        QString id = currentScientist.returnID();
         QString gender = currentScientist.returnSex();
         QString name = currentScientist.returnName();
         QString dateBirth = currentScientist.dateofBirth();

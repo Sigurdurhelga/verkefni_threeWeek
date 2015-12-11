@@ -43,7 +43,7 @@ QVector<Scientist> Model::queryScientists(){
         QString doD = query.value("deathDate").toString();
         QString description = query.value("description").toString();
 
-        scientists.push_back(Scientist(id, name, sex, doB, doD, ""));
+        scientists.push_back(Scientist(id, name, sex, doB, doD, description));
 
     }
 
