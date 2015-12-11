@@ -30,13 +30,8 @@ bool Model::checkConnection(QSqlDatabase db){
 }
 
 QVector<Scientist> Model::queryScientists(){
-    Model db;
-    QSqlDatabase dataBase = QSqlDatabase::database();
-    dataBase.exec("CREATE TABLE people(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, name VARCHAR(40), gender BOOLEAN NOT NULL, birthDate DATE, deathDate DATE, description TEXT)");
-
-    dataBase.exec("INSERT INTO people(name, gender, birthDate, deathDate, description) VALUES('fukk', 1, '12-12-12', '12-12-12', 'please work')");
     QVector<Scientist> scientists;
-    QSqlQuery query;
+    QSqlQuery query = QSqlQuery();
     query = queryListSci(1);
 
 
@@ -48,13 +43,14 @@ QVector<Scientist> Model::queryScientists(){
         QString doD = query.value("deathDate").toString();
         QString description = query.value("description").toString();
 
-        scientists.push_back(Scientist(id, name, sex, doB, doD, description));
+        scientists.push_back(Scientist(id, name, sex, doB, doD, ""));
 
     }
 
     return scientists;
 }
 
+<<<<<<< HEAD
 void Model::remove(int ID, bool which){
     QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery query;
@@ -78,8 +74,11 @@ QVector<Scientist> Model::listOfScientists(){
     //return queryScientists(query.str());
 }
 
+=======
+>>>>>>> 5bd2da89125701c103ed4f20c87a46018a897ec6
 QSqlQuery Model::queryListSci(int way){
-    QSqlQuery ret;
+    QSqlQuery ret(QSqlDatabase::database());
+
     switch(way){
         case 1:
             ret.exec("SELECT * FROM people");
@@ -216,7 +215,7 @@ void Model::addScientistToDatabase(Scientist& guy){
         QString gender = guy.returnSex();
         QString doB = guy.dateofBirthQString();
         QString doD = guy.dateofDeathQString();
-        QString fact = guy.returnFact();
+        QString description = guy.returnDescription();
 
         if(doD == "0001-01-01"){
             doD = "ALIVE";
@@ -227,12 +226,12 @@ void Model::addScientistToDatabase(Scientist& guy){
             boolToString = "1";
 
         query.prepare("INSERT INTO people (name, gender, birthDate, deathDate, description) "
-                      "VALUES (:name, :gender, :doB, :doD, :fact)");
+                      "VALUES (:name, :gender, :doB, :doD, :description)");
         query.bindValue(":name", name);
         query.bindValue(":gender", boolToString);
         query.bindValue(":doB", doB);
         query.bindValue(":doD", doD);
-        query.bindValue(":fact", fact);
+        query.bindValue(":description", description);
         query.exec();
 
     }

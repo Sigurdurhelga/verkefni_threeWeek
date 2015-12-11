@@ -44,6 +44,8 @@ public:
     // Edit functions
     void modSci(int, QString, int);
     void modComp(int, QString, int);
+
+private:
 };
 
 #endif // MODEL_H
