@@ -36,7 +36,7 @@ QVector<Scientist> Model::queryScientists(){
 
 
     while(query.next()){
-        int id = query.value("id").toInt();
+        QString id = query.value("id").toString();
         QString name = query.value("name").toString();
         QString sex = query.value("gender").toString();
         QString doB = query.value("birthDate").toString();
@@ -69,7 +69,7 @@ QSqlQuery Model::queryListSci(int way){
 
     switch(way){
         case 1:
-            ret.exec("SELECT * FROM people");
+            ret.exec("SELECT * FROM people ORDER BY id");
             break;
         case 2:
             ret.exec("SELECT * FROM people ORDER BY id DESC");

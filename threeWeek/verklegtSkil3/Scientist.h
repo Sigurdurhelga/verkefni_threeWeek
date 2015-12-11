@@ -8,7 +8,7 @@ using namespace std;
 class Scientist
 {
 private:
-    int id;
+    QString id;
     QString name;
     QString sex;
     QString doB;
@@ -17,7 +17,7 @@ private:
 public:
     // Constructor
     Scientist();
-    Scientist(int sID, QString name, QString sex, QString doB, QString doD, QString description);
+    Scientist(QString sID, QString name, QString sex, QString doB, QString doD, QString description);
 
     // Set functions
     void setName(QString name);
@@ -27,7 +27,7 @@ public:
     void setDescription(QString Sdescription);
 
     // Get functions
-    int returnID();
+    QString returnID();
     QString returnName();
     QString returnSex();
     QString dateofBirth();

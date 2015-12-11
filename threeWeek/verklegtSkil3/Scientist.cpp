@@ -12,7 +12,7 @@ Scientist::Scientist()
 
 
 
-Scientist::Scientist(int sID, QString Sname, QString Ssex, QString SdoB, QString SdoD, QString Sfact)
+Scientist::Scientist(QString sID, QString Sname, QString Ssex, QString SdoB, QString SdoD, QString Sfact)
 
 {
     id = sID;
@@ -46,7 +46,7 @@ void Scientist::setDescription(QString Sdescription)
     description = Sdescription;
 }
 
-int Scientist::returnID(){
+QString Scientist::returnID(){
     return id;
 }
 
