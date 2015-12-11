@@ -23,6 +23,31 @@
       <height>421</height>
      </rect>
     </property>
+    <column>
+     <property name="text">
+      <string>ID</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Name</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Created</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Date created</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Type</string>
+     </property>
+    </column>
    </widget>
    <widget class="QPushButton" name="linkButton">
     <property name="geometry">
@@ -374,6 +399,36 @@
       <height>421</height>
      </rect>
     </property>
+    <column>
+     <property name="text">
+      <string>ID</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Name</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Gender</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Date of birth</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Date of death</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Description</string>
+     </property>
+    </column>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">

@@ -18,6 +18,8 @@ public:
 private slots:
     void on_addSciDone_clicked();
 
+    void on_removeCompRad_clicked(bool checked);
+
 private:
     Ui::MainWindow *ui;
 };
