@@ -3,7 +3,7 @@
 #include "Controller.h"
 #include "Scientist.h"
 #include "Computers.h"
-#include "comboBoxItemDelegate.h"
+#include "ComboBoxItemDelegate.h"
 #include <QMessageBox>
 #include <QDebug>
 #include <QTableWidget>
@@ -36,15 +36,15 @@ void MainWindow::on_addSciDone_clicked()
     QString desc;
 
     if(ui->inSciName->text() == ""){
-        box.information(0,"Warning", "Name can't be empty!");
+        errorHandle(0);
         check = false;
     }
     else if(ui->inSciBirth->date() > ui->inSciDeath->date() && !ui->inSciAlive->isChecked()){
-        box.information(0,"Warning", "Death can't have happened before birth");
+        errorHandle(2);
         check = false;
     }
     else if(ui->inSciDesc->toPlainText() == ""){
-        box.information(0,"Warning", "Description can't be empty");
+        errorHandle(1);
         check = false;
     }
     if(check){
@@ -81,19 +81,19 @@ void MainWindow::on_addCompDone_clicked()
 
     if(ui->inCompName->text() == ""){
         check = false;
-        warning.information(0, "Warning", "Computer name can't be empty");
+        errorHandle(0);
     }
     else if(ui->inCompYear->text() == ""){
         check = false;
-        warning.information(0, "Warning", "Creation year invalid");
+        errorHandle(4);
     }
     else if(ui->inCompType->currentText() == "Computer type"){
         check = false;
-        warning.information(0, "Warning", "Computer type invalid");
+        errorHandle(3);
     }
     else if(ui->inCompDesc->toPlainText() == ""){
         check = false;
-        warning.information(0, "Warning", "Description can't be empty");
+        errorHandle(1);
     }
     if(check){
         name = ui->inCompName->text();
@@ -209,6 +209,36 @@ void MainWindow::config(){
 
 }
 
+void MainWindow::errorHandle(int i){
+    QMessageBox box;
+    QString title = "Error";
+    QString content;
+
+    switch (i) {
+    case 0:
+        content = "Name can't be empty";
+        break;
+    case 1:
+        content = "Description can't be empty";
+        break;
+    case 2:
+        content = "Birth can't happen before death";
+        break;
+    case 3:
+        content = "Invalid type selected";
+        break;
+    case 4:
+        content = "Invalid creation year";
+        break;
+    case 5:
+        content = "Invalid date";
+        break;
+
+    default:
+        break;
+    }
+    box.warning(QApplication::activeWindow(), title, content);
+}
 
 void MainWindow::on_showComps_clicked()
 {
@@ -223,10 +253,37 @@ void MainWindow::on_showSci_clicked()
 void MainWindow::on_listOfSci_cellChanged(int row, int column)
 {
     Controller cont;
+    QMessageBox warning;
     if(canEdit){
-        QString id = ui->listOfSci->item(row, 0)->text();
-        QString newThing = ui->listOfSci->item(row, column)->text();
-        cont.edit(id, newThing, column, true);
+        bool check = true;
+        bool alive = false;
+        QString death = ui->listOfSci->item(row,4)->text();
+        QDate currB = QDate::fromString(ui->listOfSci->item(row, 3)->text(), "yyyy-MM-dd");
+        QDate currD = QDate::fromString(death, "yyyy-MM-dd");
+        if(death == "Alive"){
+            alive = true;
+        }
+        if(column == 1 && ui->listOfSci->item(row, column)->text() == ""){
+            errorHandle(0);
+            check = false;
+        }
+        else if((column == 3 && currB > currD || column == 4 && currB > currD) && (currB.isValid() && currD.isValid()) && !alive){
+            errorHandle(2);
+            check = false;
+        }
+        else if(!currB.isValid() || !currD.isValid() && !alive || death != "Alive" && !currD.isValid()){
+            errorHandle(5);
+            check = false;
+        }
+        else if(column == 5 && ui->listOfSci->item(row, column)->text() == ""){
+            errorHandle(1);
+            check = false;
+        }
+        if(check){
+            QString id = ui->listOfSci->item(row, 0)->text();
+            QString newThing = ui->listOfSci->item(row, column)->text();
+            cont.edit(id, newThing, column, true);
+        }
     }
 }
 

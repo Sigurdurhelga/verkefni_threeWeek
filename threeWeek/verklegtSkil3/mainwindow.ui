@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1131</width>
-    <height>595</height>
+    <width>1289</width>
+    <height>726</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,8 +18,8 @@
     <property name="geometry">
      <rect>
       <x>290</x>
-      <y>500</y>
-      <width>101</width>
+      <y>630</y>
+      <width>121</width>
       <height>23</height>
      </rect>
     </property>
@@ -33,7 +33,7 @@
       <x>10</x>
       <y>10</y>
       <width>271</width>
-      <height>521</height>
+      <height>631</height>
      </rect>
     </property>
     <property name="acceptDrops">
@@ -48,7 +48,7 @@
        <x>0</x>
        <y>0</y>
        <width>271</width>
-       <height>440</height>
+       <height>538</height>
       </rect>
      </property>
      <attribute name="label">
@@ -237,20 +237,6 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="3">
-        <widget class="QDateEdit" name="inSciBirth">
-         <property name="displayFormat">
-          <string>yyyy-MM-dd</string>
-         </property>
-         <property name="date">
-          <date>
-           <year>1752</year>
-           <month>12</month>
-           <day>24</day>
-          </date>
-         </property>
-        </widget>
-       </item>
        <item row="3" column="0" colspan="2">
         <widget class="QLabel" name="label_2">
          <property name="text">
@@ -261,7 +247,38 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="2">
+       <item row="5" column="0" colspan="4">
+        <widget class="QTextEdit" name="inSciDesc">
+         <property name="placeholderText">
+          <string>Enter a small description</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="3">
+        <widget class="QPushButton" name="addSciDone">
+         <property name="text">
+          <string>Done</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2" colspan="2">
+        <widget class="QDateEdit" name="inSciBirth">
+         <property name="displayFormat">
+          <string>yyyy-MM-dd</string>
+         </property>
+         <property name="calendarPopup">
+          <bool>true</bool>
+         </property>
+         <property name="date">
+          <date>
+           <year>1752</year>
+           <month>12</month>
+           <day>24</day>
+          </date>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
         <widget class="QCheckBox" name="inSciAlive">
          <property name="text">
           <string>Alive</string>
@@ -271,24 +288,16 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="3">
+       <item row="3" column="2" colspan="2">
         <widget class="QDateEdit" name="inSciDeath">
          <property name="enabled">
           <bool>false</bool>
          </property>
-        </widget>
-       </item>
-       <item row="4" column="0" colspan="4">
-        <widget class="QTextEdit" name="inSciDesc">
-         <property name="placeholderText">
-          <string>Enter a small description</string>
+         <property name="displayFormat">
+          <string>yyyy-MM-dd</string>
          </property>
-        </widget>
-       </item>
-       <item row="5" column="3">
-        <widget class="QPushButton" name="addSciDone">
-         <property name="text">
-          <string>Done</string>
+         <property name="calendarPopup">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -301,7 +310,7 @@
        <x>0</x>
        <y>0</y>
        <width>271</width>
-       <height>440</height>
+       <height>538</height>
       </rect>
      </property>
      <attribute name="label">
@@ -379,7 +388,7 @@
        <x>0</x>
        <y>0</y>
        <width>271</width>
-       <height>440</height>
+       <height>538</height>
       </rect>
      </property>
      <attribute name="label">
@@ -635,8 +644,8 @@
      <rect>
       <x>290</x>
       <y>10</y>
-      <width>831</width>
-      <height>481</height>
+      <width>991</width>
+      <height>611</height>
      </rect>
     </property>
     <property name="alternatingRowColors">
@@ -684,8 +693,8 @@
      <rect>
       <x>290</x>
       <y>10</y>
-      <width>831</width>
-      <height>481</height>
+      <width>991</width>
+      <height>611</height>
      </rect>
     </property>
     <property name="editTriggers">
@@ -731,9 +740,9 @@
    <widget class="QPushButton" name="showComps">
     <property name="geometry">
      <rect>
-      <x>400</x>
-      <y>500</y>
-      <width>101</width>
+      <x>420</x>
+      <y>630</y>
+      <width>131</width>
       <height>23</height>
      </rect>
     </property>
@@ -747,8 +756,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1131</width>
-     <height>21</height>
+     <width>1289</width>
+     <height>25</height>
     </rect>
    </property>
   </widget>
@@ -991,7 +1000,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_2"/>
+  <buttongroup name="buttonGroup"/>
  </buttongroups>
 </ui>

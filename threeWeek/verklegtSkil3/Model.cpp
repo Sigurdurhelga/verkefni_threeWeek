@@ -21,7 +21,7 @@ QSqlDatabase Model::openConnection(){
         return db;
     }
     else{
-        cout << "DATABASE CONNECTION FAILED!" << endl;
+        qDebug() << "Database failed";
     }
 }
 

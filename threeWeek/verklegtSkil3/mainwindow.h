@@ -16,6 +16,7 @@ public:
     ~MainWindow();
     void displayAllScientists();
     void displayAllComputers();
+    void errorHandle(int);
 
 private slots:
     void on_addSciDone_clicked();

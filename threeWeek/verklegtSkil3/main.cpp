@@ -10,7 +10,6 @@ int main(int argc, char *argv[])
     QSqlDatabase dataBase = db.openConnection();
     MainWindow w;
     w.show();
-    dataBase.close();
 
     return a.exec();
 }
