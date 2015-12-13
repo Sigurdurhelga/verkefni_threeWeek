@@ -9,8 +9,8 @@ class Controller
 {
 public:
 
-    QVector<Scientist> getScientists();
-    QVector<Computers> getComputers();
+    QVector<Scientist> getScientists(QString);
+    QVector<Computers> getComputers(QString);
 
     // List functions
     void linkFunctions();
@@ -23,11 +23,13 @@ public:
     void addFunctions();
 
     // Remove functions
+    void remove(QString, bool);
     void removeFunctions();
     void removeScientist();
     void removeComputer();
 
     // Search functions
+    void search(QString, bool);
     void searchFunctions();
     void searchScientistName();
     void searchScientistHandler(int& select);

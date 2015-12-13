@@ -16,7 +16,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     config();
-
 }
 
 
@@ -31,6 +30,7 @@ void MainWindow::on_addSciDone_clicked()
     Controller cont;
     bool check = true;
     QMessageBox box;
+    QVector<Scientist> list;
     QString name;
     QString gender = "Male";
     QString birth;
@@ -61,7 +61,8 @@ void MainWindow::on_addSciDone_clicked()
         desc = ui->inSciDesc->toPlainText();
 
         cont.add(name, gender, birth, death, desc, true);
-        displayAllScientists();
+        list = cont.getScientists("");
+        displayAllScientists(list);
         ui->inSciName->clear();
         ui->inSciAlive->setChecked(true);
         ui->inSciDesc->clear();
@@ -74,6 +75,7 @@ void MainWindow::on_addCompDone_clicked()
     Controller cont;
     bool check = true;
     QMessageBox warning;
+    QVector<Computers> list;
     QString name;
     QString created = "No";
     QString creationYear = "Never";
@@ -106,24 +108,21 @@ void MainWindow::on_addCompDone_clicked()
         type = ui->inCompType->text();
         description = ui->inCompDesc->toPlainText();
         cont.add(name, created, creationYear, type, description, false);
-        displayAllComputers();
+        list = cont.getComputers("");
+        displayAllComputers(list);
         ui->inCompDesc->clear();
         ui->inCompName->clear();
         ui->inCompCreated->setChecked(false);
     }
 }
 
-void MainWindow::displayAllScientists()
+void MainWindow::displayAllScientists(QVector<Scientist> scientists)
 {
     canEdit = false;
-    Controller cont;
-    QVector<Scientist> scientists = cont.getScientists();
     ui->listOfSci->clearContents();
-
     ui->listOfSci->setRowCount(scientists.size());
 
-
-    for (unsigned int row = 0; row < scientists.size(); row++)
+    for (int row = 0; row < scientists.size(); row++)
     {
         Scientist currentScientist = scientists.at(row);
 
@@ -133,8 +132,6 @@ void MainWindow::displayAllScientists()
         QString dateBirth = currentScientist.dateofBirth();
         QString dateDeath = currentScientist.dateofDeath();
         QString description = currentScientist.returnDescription();
-
-
 
         ui->listOfSci->setItem(row, 0, new QTableWidgetItem(id));
         ui->listOfSci->setItem(row, 1, new QTableWidgetItem(name));
@@ -148,15 +145,13 @@ void MainWindow::displayAllScientists()
 }
 
 
-void MainWindow::displayAllComputers()
+void MainWindow::displayAllComputers(QVector<Computers> computers)
 {
     canEdit = false;
-    Controller cont;
-    QVector<Computers> computers = cont.getComputers();
     ui->listOfComps->clearContents();
     ui->listOfComps->setRowCount(computers.size());
 
-    for (unsigned int row = 0; row < computers.size(); row++)
+    for (int row = 0; row < computers.size(); row++)
     {
         Computers currentComputer = computers.at(row);
 
@@ -166,7 +161,6 @@ void MainWindow::displayAllComputers()
         QString creationDate = currentComputer.returnCreationYear();
         QString type = currentComputer.returnType();
         QString description = currentComputer.returnDescription();
-
 
         ui->listOfComps->setItem(row, 0, new QTableWidgetItem(id));
         ui->listOfComps->setItem(row, 1, new QTableWidgetItem(name));
@@ -181,20 +175,19 @@ void MainWindow::displayAllComputers()
 
 void MainWindow::config(){
     ui->addCompFrame->setHidden(1);
-    ui->editCompFrame->setHidden(1);
     ui->listOfComps->setHidden(1);
     ui->listOfSci->setColumnHidden(0, true);
     ui->listOfComps->setColumnHidden(0,true);
-    ui->listOfSci->setColumnWidth(1, 120);
+    ui->listOfSci->setColumnWidth(1, 140);
     ui->listOfSci->setColumnWidth(2, 70);
-    ui->listOfSci->setColumnWidth(3, 100);
-    ui->listOfSci->setColumnWidth(4, 100);
-    ui->listOfSci->setColumnWidth(5, 410);
-    ui->listOfComps->setColumnWidth(1,120);
-    ui->listOfComps->setColumnWidth(2,60);
-    ui->listOfComps->setColumnWidth(3, 100);
-    ui->listOfComps->setColumnWidth(4, 85);
-    ui->listOfComps->setColumnWidth(5,440);
+    ui->listOfSci->setColumnWidth(3, 115);
+    ui->listOfSci->setColumnWidth(4, 115);
+    ui->listOfSci->setColumnWidth(5, 532);
+    ui->listOfComps->setColumnWidth(1,140);
+    ui->listOfComps->setColumnWidth(2,70);
+    ui->listOfComps->setColumnWidth(3, 110);
+    ui->listOfComps->setColumnWidth(4, 95);
+    ui->listOfComps->setColumnWidth(5,557);
     ComboBoxItemDelegate* sexDelegate = new ComboBoxItemDelegate(ui->listOfSci);
     sexDelegate->setColumnIndex(2);
     sexDelegate->addOption("Male");
@@ -232,8 +225,8 @@ void MainWindow::errorHandle(int i){
         content = "Invalid date";
         break;
     case 6:
-        title = "Input number";
-        box.text();
+        content = "Invalid death date must be a date \"yyyy-MM-dd\" or \"Alive\"";
+        break;
 
     default:
         break;
@@ -246,7 +239,6 @@ QString MainWindow::getNumDialog(){
     bool ok;
     QString num = QInputDialog::getText(QApplication::activeWindow(), "Creation year", "Enter creation year", QLineEdit::Normal, QDir::home().dirName(), &ok);
     if(isDigit.exactMatch(num) && ok){
-        numPopup = false;
         return num;
     }
     else{
@@ -256,12 +248,20 @@ QString MainWindow::getNumDialog(){
 
 void MainWindow::on_showComps_clicked()
 {
-    displayAllComputers();
+    whatList = false;
+    Controller cont;
+    QVector<Computers> list;
+    list = cont.getComputers("");
+    displayAllComputers(list);
 }
 
 void MainWindow::on_showSci_clicked()
 {
-    displayAllScientists();
+    whatList = true;
+    Controller cont;
+    QVector<Scientist> list;
+    list = cont.getScientists("");
+    displayAllScientists(list);
 }
 
 void MainWindow::on_listOfSci_cellChanged(int row, int column)
@@ -278,6 +278,10 @@ void MainWindow::on_listOfSci_cellChanged(int row, int column)
         }
         if(column == 1 && ui->listOfSci->item(row, column)->text() == ""){
             errorHandle(0);
+            check = false;
+        }
+        else if(column == 4 && !currD.isValid() && death != "Alive"){
+            errorHandle(6);
             check = false;
         }
         else if(((column == 3 && (currB > currD)) || (column == 4 && (currB > currD))) && (currB.isValid() && currD.isValid()) && !alive){
@@ -308,7 +312,6 @@ void MainWindow::on_listOfComps_cellChanged(int row, int column)
     if(canEdit){
         QRegExp isDigit("^[0-9]+$");
         bool check = true;
-        bool created = false;
         QString createdS = ui->listOfComps->item(row, 2)->text();
         QString newThing = ui->listOfComps->item(row, column)->text();
         if(column == 1 && ui->listOfComps->item(row, column)->text() == ""){
@@ -355,5 +358,48 @@ void MainWindow::on_listOfComps_cellChanged(int row, int column)
 
             cont.edit(id, newThing, column, false);
         }
+    }
+}
+
+void MainWindow::on_removeSelected_clicked()
+{
+    Controller cont;
+    if(whatList){
+        cont.remove(currSelectedID, whatList);
+        ui->listOfSci->removeRow(currSelectedRow);
+    }
+    else{
+        cont.remove(currSelectedID, whatList);
+        ui->listOfComps->removeRow(currSelectedRow);
+    }
+    currSelectedRow = -1;
+    currSelectedID = -1;
+}
+
+void MainWindow::on_listOfComps_cellClicked(int row, int column)
+{
+    currSelectedID = ui->listOfComps->item(row, 0)->text();
+    currSelectedRow = row;
+}
+
+void MainWindow::on_listOfSci_cellClicked(int row, int column)
+{
+    currSelectedID = ui->listOfSci->item(row, 0)->text();
+    currSelectedRow = row;
+}
+
+void MainWindow::on_searchButton_clicked()
+{
+    Controller cont;
+    QString name = ui->searchText->text();
+    if(whatList){
+        QVector<Scientist> list;
+        list = cont.getScientists(name);
+        displayAllScientists(list);
+    }
+    else{
+        QVector<Computers> list;
+        list = cont.getComputers(name);
+        displayAllComputers(list);
     }
 }

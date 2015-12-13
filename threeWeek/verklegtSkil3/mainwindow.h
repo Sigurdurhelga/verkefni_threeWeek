@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <Scientist.h>
+#include <Computers.h>
 
 namespace Ui {
 class MainWindow;
@@ -14,8 +16,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    void displayAllScientists();
-    void displayAllComputers();
+    void displayAllScientists(QVector<Scientist>);
+    void displayAllComputers(QVector<Computers>);
     void errorHandle(int);
     QString getNumDialog();
 
@@ -33,11 +35,21 @@ private slots:
 
     void on_listOfComps_cellChanged(int row, int column);
 
+    void on_removeSelected_clicked();
+
+    void on_listOfComps_cellClicked(int row, int column);
+
+    void on_listOfSci_cellClicked(int row, int column);
+
+    void on_searchButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     void config();
     bool canEdit;
-    bool numPopup;
+    bool whatList;
+    QString currSelectedID;
+    int currSelectedRow;
 };
 
 #endif // MAINWINDOW_H

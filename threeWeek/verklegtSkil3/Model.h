@@ -13,8 +13,8 @@ public:
     bool checkConnection(QSqlDatabase db);
 
     // List functions
-    QVector<Scientist> queryScientists();
-    QVector<Computers> queryComputers();
+    QVector<Scientist> queryScientists(QSqlQuery);
+    QVector<Computers> queryComputers(QSqlQuery);
 
     QSqlQuery queryListSci(int way);
     QSqlQuery queryListComp(int way);
@@ -22,11 +22,8 @@ public:
     QSqlQuery linkListComp();
 
     // Search functions
-    QSqlQuery searchSciName(QString name);
-    QSqlQuery searchSciID(int id);
-    QSqlQuery scientistConnComp(int id);
-    QSqlQuery searchCompName(QString name);
-    QSqlQuery searchCompID(int id);
+    QSqlQuery searchSci(QString name);
+    QSqlQuery searchComp(QString name);
 
     // Add functions
     void add(QString one, QString two, QString three, QString four, QString five, bool which);
@@ -34,7 +31,7 @@ public:
     void addComputerToDatabase(Computers& comp);
 
     // Reomve functions
-    void remove(int ID, bool which);
+    void remove(QString ID, bool which);
     void rmRowSci(int);
     void rmRowComp(int id);
 

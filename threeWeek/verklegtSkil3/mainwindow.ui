@@ -17,542 +17,15 @@
    <widget class="QPushButton" name="showSci">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>630</y>
-      <width>121</width>
-      <height>23</height>
+      <x>20</x>
+      <y>10</y>
+      <width>131</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
      <string>Show scientists</string>
     </property>
-   </widget>
-   <widget class="QToolBox" name="mainCont">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>271</width>
-      <height>631</height>
-     </rect>
-    </property>
-    <property name="acceptDrops">
-     <bool>false</bool>
-    </property>
-    <property name="currentIndex">
-     <number>0</number>
-    </property>
-    <widget class="QWidget" name="page">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>271</width>
-       <height>538</height>
-      </rect>
-     </property>
-     <attribute name="label">
-      <string>Add record</string>
-     </attribute>
-     <widget class="QRadioButton" name="addSciRad">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>10</y>
-        <width>131</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Add Scientist</string>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
-      </property>
-      <attribute name="buttonGroup">
-       <string notr="true">buttonGroup</string>
-      </attribute>
-     </widget>
-     <widget class="QRadioButton" name="addCompRad">
-      <property name="geometry">
-       <rect>
-        <x>140</x>
-        <y>10</y>
-        <width>111</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Add Computer</string>
-      </property>
-      <attribute name="buttonGroup">
-       <string notr="true">buttonGroup</string>
-      </attribute>
-     </widget>
-     <widget class="QWidget" name="addSciFrame" native="true">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>3</x>
-        <y>30</y>
-        <width>261</width>
-        <height>340</height>
-       </rect>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_2">
-       <item row="0" column="0" colspan="4">
-        <widget class="QLineEdit" name="inSciName">
-         <property name="inputMask">
-          <string/>
-         </property>
-         <property name="maxLength">
-          <number>32767</number>
-         </property>
-         <property name="dragEnabled">
-          <bool>false</bool>
-         </property>
-         <property name="placeholderText">
-          <string>Enter name here</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QRadioButton" name="inSciMale">
-         <property name="text">
-          <string>Male</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1" colspan="3">
-        <widget class="QRadioButton" name="inSciFemale">
-         <property name="text">
-          <string>Female</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0" colspan="2">
-        <widget class="QLabel" name="label">
-         <property name="text">
-          <string>Date of birth</string>
-         </property>
-         <property name="buddy">
-          <cstring>inSciBirth</cstring>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0" colspan="2">
-        <widget class="QLabel" name="label_2">
-         <property name="text">
-          <string>Date of death</string>
-         </property>
-         <property name="buddy">
-          <cstring>inSciDeath</cstring>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="0" colspan="4">
-        <widget class="QTextEdit" name="inSciDesc">
-         <property name="placeholderText">
-          <string>Enter a small description</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="3">
-        <widget class="QPushButton" name="addSciDone">
-         <property name="text">
-          <string>Done</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="2" colspan="2">
-        <widget class="QDateEdit" name="inSciBirth">
-         <property name="minimumDate">
-          <date>
-           <year>1752</year>
-           <month>9</month>
-           <day>14</day>
-          </date>
-         </property>
-         <property name="displayFormat">
-          <string>yyyy-MM-dd</string>
-         </property>
-         <property name="calendarPopup">
-          <bool>true</bool>
-         </property>
-         <property name="date">
-          <date>
-           <year>1752</year>
-           <month>12</month>
-           <day>24</day>
-          </date>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QCheckBox" name="inSciAlive">
-         <property name="text">
-          <string>Alive</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="2" colspan="2">
-        <widget class="QDateEdit" name="inSciDeath">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="displayFormat">
-          <string>yyyy-MM-dd</string>
-         </property>
-         <property name="calendarPopup">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="page_2">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>271</width>
-       <height>538</height>
-      </rect>
-     </property>
-     <attribute name="label">
-      <string>Remove record</string>
-     </attribute>
-     <widget class="QRadioButton" name="removeSciRad">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>20</y>
-        <width>105</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Remove Scientist</string>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="removeCompRad">
-      <property name="geometry">
-       <rect>
-        <x>150</x>
-        <y>20</y>
-        <width>112</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Remove Computer</string>
-      </property>
-     </widget>
-     <widget class="QSpinBox" name="remID">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>50</y>
-        <width>101</width>
-        <height>20</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_4">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>50</y>
-        <width>18</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>ID: </string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="remButton">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>80</y>
-        <width>75</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Remove</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="page_3">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>271</width>
-       <height>538</height>
-      </rect>
-     </property>
-     <attribute name="label">
-      <string>Edit record</string>
-     </attribute>
-     <widget class="QRadioButton" name="editSciRad">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>10</y>
-        <width>101</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Edit Scientist</string>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
-      </property>
-      <attribute name="buttonGroup">
-       <string notr="true">buttonGroup_2</string>
-      </attribute>
-     </widget>
-     <widget class="QRadioButton" name="editCompRad">
-      <property name="geometry">
-       <rect>
-        <x>150</x>
-        <y>10</y>
-        <width>111</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Edit Computer</string>
-      </property>
-      <attribute name="buttonGroup">
-       <string notr="true">buttonGroup_2</string>
-      </attribute>
-     </widget>
-     <widget class="QWidget" name="editSciFrame" native="true">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>40</y>
-        <width>274</width>
-        <height>381</height>
-       </rect>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_3">
-       <item row="5" column="0" colspan="6">
-        <widget class="QTextEdit" name="editSciDesc">
-         <property name="placeholderText">
-          <string>Enter a small description here</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_5">
-         <property name="text">
-          <string>ID: </string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="4" colspan="2">
-        <widget class="QPushButton" name="editSciGet">
-         <property name="text">
-          <string>Get</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0" colspan="2">
-        <widget class="QRadioButton" name="editSciMale">
-         <property name="text">
-          <string>Male</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0" colspan="6">
-        <widget class="QLineEdit" name="editSciName">
-         <property name="placeholderText">
-          <string>Enter name here</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="2" colspan="4">
-        <widget class="QRadioButton" name="editSciFemale">
-         <property name="text">
-          <string>Female</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0" colspan="2">
-        <widget class="QLabel" name="label_6">
-         <property name="text">
-          <string>Birthdate</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0" colspan="3">
-        <widget class="QLabel" name="label_7">
-         <property name="text">
-          <string>Deathdate</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="5">
-        <widget class="QDateEdit" name="editSciDeath">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1" colspan="3">
-        <widget class="QSpinBox" name="editSciID">
-         <property name="maximum">
-          <number>1000</number>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="3" colspan="3">
-        <widget class="QDateEdit" name="editSciBirth"/>
-       </item>
-       <item row="4" column="3" colspan="2">
-        <widget class="QCheckBox" name="editSciAlive">
-         <property name="text">
-          <string>Alive</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="0" colspan="2">
-        <widget class="QPushButton" name="editSciDone">
-         <property name="text">
-          <string>Edit</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="editCompFrame" native="true">
-      <property name="geometry">
-       <rect>
-        <x>23</x>
-        <y>40</y>
-        <width>271</width>
-        <height>401</height>
-       </rect>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_4">
-       <item row="0" column="1" colspan="2">
-        <widget class="QSpinBox" name="editCompID"/>
-       </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_8">
-         <property name="text">
-          <string>ID: </string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0" colspan="4">
-        <widget class="QComboBox" name="editCompType">
-         <property name="currentText">
-          <string>Computer type</string>
-         </property>
-         <item>
-          <property name="text">
-           <string>Computer type</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Electronical</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Transistor</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Mechanical</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Electromechanical</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="3" column="0" colspan="2">
-        <widget class="QLabel" name="label_9">
-         <property name="text">
-          <string>Creation year</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="2" colspan="2">
-        <widget class="QDateEdit" name="editCompYear">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="0" colspan="4">
-        <widget class="QTextEdit" name="editCompDesc">
-         <property name="placeholderText">
-          <string>Write a small description here</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="3">
-        <widget class="QPushButton" name="editCompGet">
-         <property name="text">
-          <string>Get</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0" colspan="3">
-        <widget class="QCheckBox" name="checkBox">
-         <property name="text">
-          <string>Was it created</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0" colspan="3">
-        <widget class="QLineEdit" name="editCompName">
-         <property name="placeholderText">
-          <string>Enter name here</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="0">
-        <widget class="QPushButton" name="editCompDone">
-         <property name="text">
-          <string>Edit</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </widget>
    </widget>
    <widget class="QTableWidget" name="listOfSci">
     <property name="geometry">
@@ -609,11 +82,14 @@
       <x>290</x>
       <y>10</y>
       <width>991</width>
-      <height>611</height>
+      <height>651</height>
      </rect>
     </property>
     <property name="editTriggers">
      <set>QAbstractItemView::AnyKeyPressed|QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed</set>
+    </property>
+    <property name="selectionBehavior">
+     <enum>QAbstractItemView::SelectRows</enum>
     </property>
     <property name="sortingEnabled">
      <bool>true</bool>
@@ -655,97 +131,306 @@
    <widget class="QPushButton" name="showComps">
     <property name="geometry">
      <rect>
-      <x>420</x>
-      <y>630</y>
-      <width>131</width>
-      <height>23</height>
+      <x>150</x>
+      <y>10</y>
+      <width>141</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
      <string>Show computers</string>
     </property>
    </widget>
-   <widget class="QWidget" name="addCompFrame" native="true">
+   <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>70</y>
-      <width>261</width>
-      <height>341</height>
+      <x>0</x>
+      <y>280</y>
+      <width>300</width>
+      <height>434</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0" colspan="3">
-      <widget class="QLineEdit" name="inCompName">
-       <property name="placeholderText">
-        <string>Enter name here</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0" colspan="2">
-      <widget class="QCheckBox" name="inCompCreated">
+    <property name="title">
+     <string>Add record</string>
+    </property>
+    <widget class="QRadioButton" name="addSciRad">
+     <property name="geometry">
+      <rect>
+       <x>17</x>
+       <y>25</y>
+       <width>120</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Add Scientist</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+     <attribute name="buttonGroup">
+      <string notr="true">buttonGroup</string>
+     </attribute>
+    </widget>
+    <widget class="QRadioButton" name="addCompRad">
+     <property name="geometry">
+      <rect>
+       <x>157</x>
+       <y>25</y>
+       <width>130</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Add Computer</string>
+     </property>
+     <attribute name="buttonGroup">
+      <string notr="true">buttonGroup</string>
+     </attribute>
+    </widget>
+    <widget class="QWidget" name="addCompFrame" native="true">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>50</y>
+       <width>274</width>
+       <height>331</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_10">
+        <property name="text">
+         <string>Type</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="inCompType">
+        <property name="placeholderText">
+         <string>Computer type</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0" colspan="2">
+       <widget class="QTextEdit" name="inCompDesc">
+        <property name="placeholderText">
+         <string>Enter a small description</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QPushButton" name="addCompDone">
+        <property name="text">
+         <string>Done</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" colspan="2">
+       <widget class="QLineEdit" name="inCompName">
+        <property name="placeholderText">
+         <string>Enter name here</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="2">
+       <widget class="QCheckBox" name="inCompCreated">
+        <property name="text">
+         <string>Was it created?</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Creation year</string>
+        </property>
+        <property name="buddy">
+         <cstring>inCompYear</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QSpinBox" name="inCompYear">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="maximum">
+         <number>9999</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="removeSelected">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>100</y>
+      <width>271</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Remove selected</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="addSciFrame" native="true">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>330</y>
+      <width>274</width>
+      <height>331</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout_2">
+     <item row="10" column="0">
+      <widget class="QCheckBox" name="inSciAlive">
        <property name="text">
-        <string>Was it created?</string>
+        <string>Alive</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
      <item row="2" column="0">
-      <widget class="QLabel" name="label_3">
+      <widget class="QRadioButton" name="inSciFemale">
        <property name="text">
-        <string>Creation year</string>
-       </property>
-       <property name="buddy">
-        <cstring>inCompYear</cstring>
+        <string>Female</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="1" colspan="2">
-      <widget class="QSpinBox" name="inCompYear">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="maximum">
-        <number>9999</number>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0" colspan="3">
-      <widget class="QTextEdit" name="inCompDesc">
+     <item row="12" column="0">
+      <widget class="QTextEdit" name="inSciDesc">
        <property name="placeholderText">
         <string>Enter a small description</string>
        </property>
       </widget>
      </item>
-     <item row="5" column="2">
-      <widget class="QPushButton" name="addCompDone">
+     <item row="9" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Date of death</string>
+       </property>
+       <property name="buddy">
+        <cstring>inSciDeath</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="0">
+      <widget class="QDateEdit" name="inSciBirth">
+       <property name="minimumDate">
+        <date>
+         <year>1752</year>
+         <month>9</month>
+         <day>14</day>
+        </date>
+       </property>
+       <property name="displayFormat">
+        <string>yyyy-MM-dd</string>
+       </property>
+       <property name="calendarPopup">
+        <bool>true</bool>
+       </property>
+       <property name="date">
+        <date>
+         <year>1752</year>
+         <month>12</month>
+         <day>24</day>
+        </date>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Date of birth</string>
+       </property>
+       <property name="buddy">
+        <cstring>inSciBirth</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLineEdit" name="inSciName">
+       <property name="inputMask">
+        <string/>
+       </property>
+       <property name="maxLength">
+        <number>32767</number>
+       </property>
+       <property name="dragEnabled">
+        <bool>false</bool>
+       </property>
+       <property name="placeholderText">
+        <string>Enter name here</string>
+       </property>
+      </widget>
+     </item>
+     <item row="13" column="0">
+      <widget class="QPushButton" name="addSciDone">
        <property name="text">
         <string>Done</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="label_10">
-       <property name="text">
-        <string>Type</string>
+     <item row="11" column="0">
+      <widget class="QDateEdit" name="inSciDeath">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="displayFormat">
+        <string>yyyy-MM-dd</string>
+       </property>
+       <property name="calendarPopup">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
-     <item row="3" column="1" colspan="2">
-      <widget class="QLineEdit" name="inCompType">
-       <property name="placeholderText">
-        <string>Computer type</string>
+     <item row="1" column="0">
+      <widget class="QRadioButton" name="inSciMale">
+       <property name="text">
+        <string>Male</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
     </layout>
    </widget>
-   <zorder>showSci</zorder>
-   <zorder>mainCont</zorder>
-   <zorder>listOfSci</zorder>
-   <zorder>listOfComps</zorder>
-   <zorder>showComps</zorder>
-   <zorder>addSciFrame</zorder>
-   <zorder>addCompFrame</zorder>
+   <widget class="QLineEdit" name="searchText">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>60</y>
+      <width>171</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="placeholderText">
+     <string>Enter name</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="searchButton">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>60</y>
+      <width>99</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Search list</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -777,12 +462,12 @@
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>217</x>
-     <y>201</y>
+     <x>72</x>
+     <y>555</y>
     </hint>
     <hint type="destinationlabel">
-     <x>304</x>
-     <y>203</y>
+     <x>261</x>
+     <y>527</y>
     </hint>
    </hints>
   </connection>
@@ -793,12 +478,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>60</x>
-     <y>151</y>
+     <x>59</x>
+     <y>461</y>
     </hint>
     <hint type="destinationlabel">
-     <x>245</x>
-     <y>177</y>
+     <x>261</x>
+     <y>494</y>
     </hint>
    </hints>
   </connection>
@@ -809,12 +494,12 @@
    <slot>setVisible(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>79</x>
-     <y>90</y>
+     <x>48</x>
+     <y>387</y>
     </hint>
     <hint type="destinationlabel">
-     <x>40</x>
-     <y>298</y>
+     <x>26</x>
+     <y>655</y>
     </hint>
    </hints>
   </connection>
@@ -825,108 +510,12 @@
    <slot>setVisible(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>281</x>
-     <y>92</y>
+     <x>270</x>
+     <y>387</y>
     </hint>
     <hint type="destinationlabel">
-     <x>293</x>
-     <y>155</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>editSciAlive</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>editSciDeath</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>168</x>
-     <y>286</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>234</x>
-     <y>288</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>checkBox</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>editCompYear</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>93</x>
-     <y>232</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>214</x>
-     <y>266</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>editSciRad</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>editCompFrame</receiver>
-   <slot>setHidden(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>122</x>
-     <y>143</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>262</x>
-     <y>225</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>editCompRad</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>editCompFrame</receiver>
-   <slot>setVisible(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>203</x>
-     <y>149</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>283</x>
-     <y>244</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>editSciRad</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>editSciFrame</receiver>
-   <slot>setVisible(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>73</x>
-     <y>144</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>307</x>
-     <y>240</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>editCompRad</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>editSciFrame</receiver>
-   <slot>setHidden(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>198</x>
-     <y>139</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>311</x>
-     <y>269</y>
+     <x>270</x>
+     <y>483</y>
     </hint>
    </hints>
   </connection>
@@ -937,8 +526,8 @@
    <slot>show()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>509</x>
-     <y>540</y>
+     <x>410</x>
+     <y>668</y>
     </hint>
     <hint type="destinationlabel">
      <x>546</x>
@@ -953,8 +542,8 @@
    <slot>hide()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>471</x>
-     <y>543</y>
+     <x>410</x>
+     <y>668</y>
     </hint>
     <hint type="destinationlabel">
      <x>481</x>
@@ -969,8 +558,8 @@
    <slot>show()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>633</x>
-     <y>542</y>
+     <x>550</x>
+     <y>668</y>
     </hint>
     <hint type="destinationlabel">
      <x>650</x>
@@ -985,8 +574,8 @@
    <slot>hide()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>597</x>
-     <y>542</y>
+     <x>550</x>
+     <y>668</y>
     </hint>
     <hint type="destinationlabel">
      <x>561</x>
