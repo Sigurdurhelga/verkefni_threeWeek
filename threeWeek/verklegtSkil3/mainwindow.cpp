@@ -5,8 +5,10 @@
 #include "Computers.h"
 #include "ComboBoxItemDelegate.h"
 #include <QMessageBox>
+#include <QInputDialog>
 #include <QDebug>
 #include <QTableWidget>
+#include <QRegExp>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -87,7 +89,7 @@ void MainWindow::on_addCompDone_clicked()
         check = false;
         errorHandle(4);
     }
-    else if(ui->inCompType->currentText() == "Computer type"){
+    else if(ui->inCompType->text() == ""){
         check = false;
         errorHandle(3);
     }
@@ -101,7 +103,7 @@ void MainWindow::on_addCompDone_clicked()
             created = "Yes";
             creationYear = ui->inCompYear->text();
         }
-        type = ui->inCompType->currentText();
+        type = ui->inCompType->text();
         description = ui->inCompDesc->toPlainText();
         cont.add(name, created, creationYear, type, description, false);
         displayAllComputers();
@@ -198,15 +200,11 @@ void MainWindow::config(){
     sexDelegate->addOption("Male");
     sexDelegate->addOption("Female");
     ui->listOfSci->setItemDelegate(sexDelegate);
-    ComboBoxItemDelegate* typeDelegate = new ComboBoxItemDelegate(ui->listOfComps);
-    typeDelegate->setColumnIndex(4);
-    typeDelegate->addOption("Electronical");
-    typeDelegate->addOption("Transistor");
-    typeDelegate->addOption("Mechanical");
-    typeDelegate->addOption("Electromechanical");
-    ui->listOfComps->setItemDelegate(typeDelegate);
-
-
+    ComboBoxItemDelegate* createdDelegate = new ComboBoxItemDelegate(ui->listOfComps);
+    createdDelegate->setColumnIndex(2);
+    createdDelegate->addOption("Yes");
+    createdDelegate->addOption("No");
+    ui->listOfComps->setItemDelegate(createdDelegate);
 }
 
 void MainWindow::errorHandle(int i){
@@ -216,10 +214,10 @@ void MainWindow::errorHandle(int i){
 
     switch (i) {
     case 0:
-        content = "Name can't be empty";
+        content = "Invalid name";
         break;
     case 1:
-        content = "Description can't be empty";
+        content = "Invalid description";
         break;
     case 2:
         content = "Birth can't happen before death";
@@ -228,16 +226,32 @@ void MainWindow::errorHandle(int i){
         content = "Invalid type selected";
         break;
     case 4:
-        content = "Invalid creation year";
+        content = "Invalid creation year. Must be a number or \"Never\"";
         break;
     case 5:
         content = "Invalid date";
         break;
+    case 6:
+        title = "Input number";
+        box.text();
 
     default:
         break;
     }
     box.warning(QApplication::activeWindow(), title, content);
+}
+
+QString MainWindow::getNumDialog(){
+    QRegExp isDigit("^[0-9]+$");
+    bool ok;
+    QString num = QInputDialog::getText(QApplication::activeWindow(), "Creation year", "Enter creation year", QLineEdit::Normal, QDir::home().dirName(), &ok);
+    if(isDigit.exactMatch(num) && ok){
+        numPopup = false;
+        return num;
+    }
+    else{
+        return "";
+    }
 }
 
 void MainWindow::on_showComps_clicked()
@@ -253,7 +267,6 @@ void MainWindow::on_showSci_clicked()
 void MainWindow::on_listOfSci_cellChanged(int row, int column)
 {
     Controller cont;
-    QMessageBox warning;
     if(canEdit){
         bool check = true;
         bool alive = false;
@@ -267,11 +280,11 @@ void MainWindow::on_listOfSci_cellChanged(int row, int column)
             errorHandle(0);
             check = false;
         }
-        else if((column == 3 && currB > currD || column == 4 && currB > currD) && (currB.isValid() && currD.isValid()) && !alive){
+        else if(((column == 3 && (currB > currD)) || (column == 4 && (currB > currD))) && (currB.isValid() && currD.isValid()) && !alive){
             errorHandle(2);
             check = false;
         }
-        else if(!currB.isValid() || !currD.isValid() && !alive || death != "Alive" && !currD.isValid()){
+        else if(((!currB.isValid() || !currD.isValid()) && !alive) || (death != "Alive" && !currD.isValid()) || (!currB.isValid() && alive)){
             errorHandle(5);
             check = false;
         }
@@ -293,8 +306,54 @@ void MainWindow::on_listOfComps_cellChanged(int row, int column)
 {
     Controller cont;
     if(canEdit){
-        QString id = ui->listOfComps->item(row, 0)->text();
+        QRegExp isDigit("^[0-9]+$");
+        bool check = true;
+        bool created = false;
+        QString createdS = ui->listOfComps->item(row, 2)->text();
         QString newThing = ui->listOfComps->item(row, column)->text();
-        cont.edit(id, newThing, column, false);
+        if(column == 1 && ui->listOfComps->item(row, column)->text() == ""){
+            errorHandle(0);
+            check = false;
+        }
+        else if(column == 3 && !isDigit.exactMatch(newThing) && newThing != "Never"){
+            errorHandle(4);
+            check = false;
+        }
+        else if(column == 4 && ui->listOfComps->item(row, column)->text() == ""){
+            errorHandle(3);
+            check = false;
+        }
+        else if(column == 5 && ui->listOfComps->item(row, column)->text() == ""){
+            errorHandle(1);
+            check = false;
+        }
+        if(check){
+
+            QString id = ui->listOfComps->item(row, 0)->text();
+
+            if(column == 2 && createdS == "No"){
+                ui->listOfComps->item(row, 3)->setText("Never");
+                cont.edit(id, "Never", 3, false);
+            }
+            else if(column == 2 && createdS == "Yes"){
+                QString newnum;
+                if(!isDigit.exactMatch(ui->listOfComps->item(row,3)->text()))
+                    newnum = getNumDialog();
+                    if(newnum != ""){
+                        ui->listOfComps->item(row, 3)->setText(newnum);
+                        cont.edit(id, newnum, 3, false);
+                    }
+            }
+            else if(column == 3 && isDigit.exactMatch(newThing)){
+                ui->listOfComps->item(row, 2)->setText("Yes");
+                cont.edit(id, "Yes", column, false);
+            }
+            else if(column == 3 && newThing == "Never"){
+                ui->listOfComps->item(row, 2)->setText("No");
+                cont.edit(id, "No", 2, false);
+            }
+
+            cont.edit(id, newThing, column, false);
+        }
     }
 }

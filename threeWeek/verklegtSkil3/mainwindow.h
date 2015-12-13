@@ -17,6 +17,7 @@ public:
     void displayAllScientists();
     void displayAllComputers();
     void errorHandle(int);
+    QString getNumDialog();
 
 private slots:
     void on_addSciDone_clicked();
@@ -36,6 +37,7 @@ private:
     Ui::MainWindow *ui;
     void config();
     bool canEdit;
+    bool numPopup;
 };
 
 #endif // MAINWINDOW_H

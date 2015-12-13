@@ -89,98 +89,6 @@
        <string notr="true">buttonGroup</string>
       </attribute>
      </widget>
-     <widget class="QWidget" name="addCompFrame" native="true">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>30</y>
-        <width>231</width>
-        <height>340</height>
-       </rect>
-      </property>
-      <layout class="QGridLayout" name="gridLayout">
-       <item row="0" column="0" colspan="3">
-        <widget class="QLineEdit" name="inCompName">
-         <property name="placeholderText">
-          <string>Enter name here</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0" colspan="2">
-        <widget class="QCheckBox" name="inCompCreated">
-         <property name="text">
-          <string>Was it created?</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_3">
-         <property name="text">
-          <string>Creation year</string>
-         </property>
-         <property name="buddy">
-          <cstring>inCompYear</cstring>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1" colspan="2">
-        <widget class="QSpinBox" name="inCompYear">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="maximum">
-          <number>9999</number>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0" colspan="3">
-        <widget class="QTextEdit" name="inCompDesc">
-         <property name="placeholderText">
-          <string>Enter a small description</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="2">
-        <widget class="QPushButton" name="addCompDone">
-         <property name="text">
-          <string>Done</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0" colspan="2">
-        <widget class="QComboBox" name="inCompType">
-         <property name="currentText">
-          <string>Computer type</string>
-         </property>
-         <item>
-          <property name="text">
-           <string>Computer type</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Electronical</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Transistor</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Mechanical</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Electromechanical</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-      </layout>
-     </widget>
      <widget class="QWidget" name="addSciFrame" native="true">
       <property name="enabled">
        <bool>true</bool>
@@ -263,6 +171,13 @@
        </item>
        <item row="2" column="2" colspan="2">
         <widget class="QDateEdit" name="inSciBirth">
+         <property name="minimumDate">
+          <date>
+           <year>1752</year>
+           <month>9</month>
+           <day>14</day>
+          </date>
+         </property>
          <property name="displayFormat">
           <string>yyyy-MM-dd</string>
          </property>
@@ -750,6 +665,87 @@
      <string>Show computers</string>
     </property>
    </widget>
+   <widget class="QWidget" name="addCompFrame" native="true">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>70</y>
+      <width>261</width>
+      <height>341</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0" colspan="3">
+      <widget class="QLineEdit" name="inCompName">
+       <property name="placeholderText">
+        <string>Enter name here</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0" colspan="2">
+      <widget class="QCheckBox" name="inCompCreated">
+       <property name="text">
+        <string>Was it created?</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Creation year</string>
+       </property>
+       <property name="buddy">
+        <cstring>inCompYear</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1" colspan="2">
+      <widget class="QSpinBox" name="inCompYear">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="maximum">
+        <number>9999</number>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0" colspan="3">
+      <widget class="QTextEdit" name="inCompDesc">
+       <property name="placeholderText">
+        <string>Enter a small description</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="2">
+      <widget class="QPushButton" name="addCompDone">
+       <property name="text">
+        <string>Done</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_10">
+       <property name="text">
+        <string>Type</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1" colspan="2">
+      <widget class="QLineEdit" name="inCompType">
+       <property name="placeholderText">
+        <string>Computer type</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <zorder>showSci</zorder>
+   <zorder>mainCont</zorder>
+   <zorder>listOfSci</zorder>
+   <zorder>listOfComps</zorder>
+   <zorder>showComps</zorder>
+   <zorder>addSciFrame</zorder>
+   <zorder>addCompFrame</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
