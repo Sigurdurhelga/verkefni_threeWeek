@@ -19,11 +19,13 @@ SOURCES += main.cpp\
         Model.cpp\
         Computers.cpp\
         Scientist.cpp\
+        ComboBoxItemDelegate.cpp
 
 HEADERS  += mainwindow.h\
             Controller.h\
             Model.h\
             Computers.h\
-            Scientist.h
+            Scientist.h\
+            ComboBoxItemDelegate.h
 
 FORMS    += mainwindow.ui
