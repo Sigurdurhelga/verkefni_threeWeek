@@ -30,10 +30,7 @@ void Scientist::setName(QString Sname){
 }
 
 void Scientist::setGender(QString Sgender){
-    if(Sgender == "1")
-        sex = "Male";
-    else
-        sex = "Female";
+    sex = Sgender;
 }
 
 void Scientist::setdoB(QString SdoB){
