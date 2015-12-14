@@ -18,8 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     config();
     on_showSci_clicked();
-    QPixmap thing("C:/Users/siggi/Documents/verkefni/verkefni_threeWeek/threeWeek/build-verklegtSkil3-Desktop_Qt_5_5_1_MinGW_32bit-Debug/pictures/imgres.jpg");
-    thing.scaled(161, 151);
+    QPixmap thing("C:/pictures/picturesSci/Alan Turing.jpg");
     ui->pictureLable->setScaledContents(true);
     ui->pictureLable->setPixmap(thing);
 }
@@ -182,6 +181,7 @@ void MainWindow::displayAllComputers(QVector<Computers> computers)
 void MainWindow::config(){
     ui->addCompFrame->setHidden(1);
     ui->listOfComps->setHidden(1);
+    ui->moreUI->setHidden(1);
     ui->listOfSci->setColumnHidden(0, true);
     ui->listOfComps->setColumnHidden(0,true);
     ui->listOfSci->setColumnWidth(1, 140);
@@ -420,4 +420,18 @@ void MainWindow::on_searchButton_clicked()
 void MainWindow::on_searchText_returnPressed()
 {
     on_searchButton_clicked();
+}
+
+void MainWindow::on_showMoreButton_clicked()
+{
+    if(currSelectedID != 0){
+        if(whatList){
+            ui->listOfSci->setHidden(1);
+        }
+        else{
+            ui->listOfComps->setHidden(1);
+        }
+        ui->moreUI->setVisible(1);
+    }
+
 }

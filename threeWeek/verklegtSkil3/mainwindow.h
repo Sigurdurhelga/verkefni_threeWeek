@@ -45,6 +45,8 @@ private slots:
 
     void on_searchText_returnPressed();
 
+    void on_showMoreButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     void config();
