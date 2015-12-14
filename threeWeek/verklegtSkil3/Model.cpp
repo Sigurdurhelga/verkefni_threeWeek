@@ -211,6 +211,24 @@ QSqlQuery Model::queryListComp(){
     return query;
 }
 
+QSqlQuery Model::queryGetNameForLinking(int id, bool which){
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query;
+    QString queryString;
+    queryString = "SELECT name FROM ";
+    if(which){
+        queryString += "people ";
+    }
+    else{
+        queryString += "computers ";
+    }
+    queryString += "WHERE id = :id";
+    query.prepare(queryString);
+    query.bindValue(":id", id);
+    query.exec();
+    return query;
+}
+
 
 void Model::linkSciToComp(int SciID, int CompID){
     QSqlQuery query;
