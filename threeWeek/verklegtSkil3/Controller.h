@@ -16,6 +16,7 @@ public:
     void remove(QString, bool);
     void search(QString, bool);
     void edit(QString id, QString newThing, int column, bool which);
+    QVector<QString> showLinks(QString id, bool which);
 };
 
 #endif // CONTROLLER_H

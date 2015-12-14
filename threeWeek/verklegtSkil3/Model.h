@@ -30,7 +30,8 @@ public:
     // Link functions
     QSqlQuery queryGetNameForLinking(int id, bool which);
     void linkSciToComp(int SciID, int CompID);
-    QSqlQuery computersConnSci(int id);
+    QSqlQuery computersConnSci(QString id);
+    QSqlQuery getLinks(QString id, bool which);
 
     // Edit functions
     void edit(QString ID, QString newThing, int column, bool which);
