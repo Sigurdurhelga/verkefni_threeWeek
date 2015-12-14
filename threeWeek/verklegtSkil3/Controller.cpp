@@ -1,14 +1,7 @@
 #include "Model.h"
 #include "Controller.h"
-#include <iostream>
-#include <vector>
-#include <string>
-#include <QDateTime>
+#include <QVector>
 #include <QString>
-#include <QFile>
-#include <QTextStream>
-#include <fstream>
-#include <algorithm>
 #include <QtSql>
 
 using namespace std;

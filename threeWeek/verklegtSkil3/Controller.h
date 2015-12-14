@@ -2,7 +2,7 @@
 #define CONTROLLER_H
 #include "Scientist.h"
 #include "Computers.h"
-#include <vector>
+#include <QVector>
 #include <QtSql>
 
 class Controller

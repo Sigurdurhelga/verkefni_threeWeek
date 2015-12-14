@@ -1,7 +1,6 @@
 #ifndef SCIENTIST_H
 #define SCIENTIST_H
-#include <QDateTime>
-#include <string>
+#include <QString>
 
 using namespace std;
 
