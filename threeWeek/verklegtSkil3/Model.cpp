@@ -77,7 +77,7 @@ QVector<Computers> Model::queryComputers(QSqlQuery query){
 void Model::add(QString one, QString two, QString three, QString four, QString five, bool which){
     QSqlDatabase db = QSqlDatabase::database();
     QString queryString;
-    QSqlQuery query;
+    QSqlQuery query(QSqlDatabase::database());
 
     queryString += "INSERT INTO ";
     if(which){
@@ -101,7 +101,7 @@ void Model::add(QString one, QString two, QString three, QString four, QString f
 
 void Model::remove(QString ID, bool which){
     QSqlDatabase db = QSqlDatabase::database();
-    QSqlQuery query;
+    QSqlQuery query(QSqlDatabase::database());
     QString queryString;
 
     queryString += "DELETE FROM ";
@@ -144,7 +144,7 @@ QSqlQuery Model::searchComp(QString name){
 
 void Model::edit(QString ID, QString newThing, int column, bool which){
     QSqlDatabase db = QSqlDatabase::database();
-    QSqlQuery query;
+    QSqlQuery query(QSqlDatabase::database());
     QString queryString = "UPDATE ";
 
     if(which){
@@ -197,6 +197,7 @@ void Model::edit(QString ID, QString newThing, int column, bool which){
 }
 
 QSqlQuery Model::queryListSci(){
+    QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery query(QSqlDatabase::database());
 
     query.exec("SELECT * FROM people ORDER BY name");
@@ -204,6 +205,7 @@ QSqlQuery Model::queryListSci(){
     return query;
 }
 QSqlQuery Model::queryListComp(){
+    QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery query(QSqlDatabase::database());
 
     query.exec("SELECT * FROM computers ORDER BY name");
@@ -213,7 +215,7 @@ QSqlQuery Model::queryListComp(){
 
 QSqlQuery Model::queryGetNameForLinking(bool which){
     QSqlDatabase db = QSqlDatabase::database();
-    QSqlQuery query;
+    QSqlQuery query(QSqlDatabase::database());
     QString queryString;
     queryString = "SELECT name FROM ";
     if(which){
@@ -230,7 +232,7 @@ QSqlQuery Model::queryGetNameForLinking(bool which){
 
 void Model::link(QString id, QString name, bool which){
     QSqlDatabase db = QSqlDatabase::database();
-    QSqlQuery query;
+    QSqlQuery query(QSqlDatabase::database());
     QString queryString = "INSERT INTO compGroups VALUES(";
     if(which){
         queryString += id + ", (SELECT id FROM computers WHERE name = '" + name + "'))";
@@ -246,7 +248,7 @@ void Model::link(QString id, QString name, bool which){
 
 QSqlQuery Model::computersConnSci(QString id){
     QSqlDatabase db = QSqlDatabase::database();
-    QSqlQuery query;
+    QSqlQuery query(QSqlDatabase::database());
     query.prepare("SELECT people.name FROM people "
                 "INNER JOIN compGroups ON people.id = compGroups.peopleID "
                 "INNER JOIN computers ON compGroups.computerID = computers.id "
@@ -259,7 +261,7 @@ QSqlQuery Model::computersConnSci(QString id){
 
 QSqlQuery Model::getLinks(QString id, bool which){
     QSqlDatabase db = QSqlDatabase::database();
-    QSqlQuery query;
+    QSqlQuery query(QSqlDatabase::database());
 
     if(which){
     query.prepare("SELECT computers.name FROM computers "
