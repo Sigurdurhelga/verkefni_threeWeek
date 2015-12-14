@@ -183,8 +183,14 @@ void MainWindow::displayAllComputers(QVector<Computers> computers)
 }
 
 void MainWindow::displayConnections(QString id){
+    Controller cont;
+    QVector<QString> list = cont.showLinks(id, whatList);
 
+    for(unsigned int row = 0; row < list.size(); row++){
+        ui->listConnections->addItem(list.at(row));
+    }
 
+    return;
 }
 
 void MainWindow::config(){
@@ -457,7 +463,9 @@ void MainWindow::on_searchText_returnPressed()
 
 void MainWindow::on_showMoreButton_clicked()
 {
-    if(currSelectedID != 0){
+        ui->listConnections->clear();
+
+        if(currSelectedID != 0){
         QString imgPath = "images/";
         QTableWidget *current = new QTableWidget;
         if(whatList){
@@ -475,6 +483,8 @@ void MainWindow::on_showMoreButton_clicked()
         QPixmap thing(imgPath);
         ui->pictureLable->setScaledContents(true);
         ui->pictureLable->setPixmap(thing);
+
+        displayConnections(currSelectedID);
 
         int row = currSelectedRow;
         ui->more1->setText(current->item(row, 1)->text());
