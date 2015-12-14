@@ -216,11 +216,11 @@ QSqlQuery Model::queryGetNameForLinking(bool which){
     QSqlQuery query;
     QString queryString;
     queryString = "SELECT name FROM ";
-    if(!which){
-        queryString += "people";
+    if(which){
+        queryString += "computers";
     }
     else{
-        queryString += "computers";
+        queryString += "people";
     }
     query.prepare(queryString);
     query.exec();

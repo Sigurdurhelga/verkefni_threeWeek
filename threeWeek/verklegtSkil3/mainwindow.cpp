@@ -208,12 +208,12 @@ void MainWindow::config(){
     ui->listOfSci->setColumnWidth(2, 70);
     ui->listOfSci->setColumnWidth(3, 115);
     ui->listOfSci->setColumnWidth(4, 115);
-    ui->listOfSci->setColumnWidth(5, 532);
+    ui->listOfSci->setColumnWidth(5, 540);
     ui->listOfComps->setColumnWidth(1,140);
     ui->listOfComps->setColumnWidth(2,70);
     ui->listOfComps->setColumnWidth(3, 110);
     ui->listOfComps->setColumnWidth(4, 95);
-    ui->listOfComps->setColumnWidth(5,557);
+    ui->listOfComps->setColumnWidth(5,565);
     ComboBoxItemDelegate* sexDelegate = new ComboBoxItemDelegate(ui->listOfSci);
     sexDelegate->setColumnIndex(2);
     sexDelegate->addOption("Male");
@@ -470,35 +470,35 @@ void MainWindow::on_showMoreButton_clicked()
 {
 
 
-        if(currSelectedID != 0){
-        QString imgPath = "images/";
-        QTableWidget *current = new QTableWidget;
-        if(whatList){
-            ui->listOfSci->setHidden(1);
-            imgPath += "scientists/";
-            current = ui->listOfSci;
-        }
-        else{
-            ui->listOfComps->setHidden(1);
-            imgPath += "computers/";
-            current = ui->listOfComps;
-        }
+        if(currSelectedID > 0){
+            QString imgPath = "images/";
+            QTableWidget *current = new QTableWidget;
+            if(whatList){
+                ui->listOfSci->setHidden(1);
+                imgPath += "scientists/";
+                current = ui->listOfSci;
+            }
+            else{
+                ui->listOfComps->setHidden(1);
+                imgPath += "computers/";
+                current = ui->listOfComps;
+            }
 
-        imgPath += currSelectedID + ".jpg";
-        QPixmap thing(imgPath);
-        ui->pictureLable->setScaledContents(true);
-        ui->pictureLable->setPixmap(thing);
+            imgPath += currSelectedID + ".jpg";
+            QPixmap thing(imgPath);
+            ui->pictureLable->setScaledContents(true);
+            ui->pictureLable->setPixmap(thing);
 
-        displayConnections(currSelectedID);
-        fillComboConn();
+            displayConnections(currSelectedID);
+            fillComboConn();
 
-        int row = currSelectedRow;
-        ui->more1->setText(current->item(row, 1)->text());
-        ui->more2->setText(current->item(row, 2)->text());
-        ui->more3->setText(current->item(row, 3)->text());
-        ui->more4->setText(current->item(row, 4)->text());
-        ui->more5->setText(current->item(row, 5)->text());
-        ui->moreUI->setVisible(1);
+            int row = currSelectedRow;
+            ui->more1->setText(current->item(row, 1)->text());
+            ui->more2->setText(current->item(row, 2)->text());
+            ui->more3->setText(current->item(row, 3)->text());
+            ui->more4->setText(current->item(row, 4)->text());
+            ui->more5->setText(current->item(row, 5)->text());
+            ui->moreUI->setVisible(1);
     }
 
     return;
@@ -521,6 +521,7 @@ void MainWindow::on_moreDoneButton_clicked()
 void MainWindow::fillComboConn(){
     Controller cont;
     QVector<QString> list;
+    ui->moreNameLink->clear();
     list = cont.getNameForLinks(whatList);
     for(int row = 0; row < list.size(); row++){
         ui->moreNameLink->addItem(list[row]);
