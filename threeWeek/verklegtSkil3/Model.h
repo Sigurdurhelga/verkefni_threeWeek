@@ -14,11 +14,8 @@ public:
     // List functions
     QVector<Scientist> queryScientists(QSqlQuery);
     QVector<Computers> queryComputers(QSqlQuery);
-
     QSqlQuery queryListSci();
     QSqlQuery queryListComp();
-    QSqlQuery linkListSci();
-    QSqlQuery linkListComp();
 
     // Search functions
     QSqlQuery searchSci(QString name);
