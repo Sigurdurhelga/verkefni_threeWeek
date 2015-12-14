@@ -18,7 +18,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     config();
     on_showSci_clicked();
-
 }
 
 
