@@ -19,7 +19,7 @@ QVector<Scientist> Controller::getScientists(QString name){
     QVector<Scientist> listSci;
     QSqlQuery query;
     if(name == ""){
-        query = db.queryListSci(1);
+        query = db.queryListSci();
     }
     else{
         query = db.searchSci(name);
@@ -34,7 +34,7 @@ QVector<Computers> Controller::getComputers(QString name){
     QVector<Computers> listComp;
     QSqlQuery query;
     if(name == ""){
-        query = db.queryListComp(1);
+        query = db.queryListComp();
     }
     else{
         query = db.searchComp(name);

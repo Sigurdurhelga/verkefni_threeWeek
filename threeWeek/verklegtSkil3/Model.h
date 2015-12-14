@@ -16,8 +16,8 @@ public:
     QVector<Scientist> queryScientists(QSqlQuery);
     QVector<Computers> queryComputers(QSqlQuery);
 
-    QSqlQuery queryListSci(int way);
-    QSqlQuery queryListComp(int way);
+    QSqlQuery queryListSci();
+    QSqlQuery queryListComp();
     QSqlQuery linkListSci();
     QSqlQuery linkListComp();
 

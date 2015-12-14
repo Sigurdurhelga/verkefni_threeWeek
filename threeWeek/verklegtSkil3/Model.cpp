@@ -174,72 +174,18 @@ void Model::edit(QString ID, QString newThing, int column, bool which){
 
 }
 
-QSqlQuery Model::queryListSci(int way){
+QSqlQuery Model::queryListSci(){
     QSqlQuery ret(QSqlDatabase::database());
 
-    switch(way){
-        case 1:
-            ret.exec("SELECT * FROM people ORDER BY name");
-            break;
-        case 2:
-            ret.exec("SELECT * FROM people ORDER BY id DESC");
-            break;
-        case 3:
-            ret.exec("SELECT * FROM people ORDER BY name");
-            break;
-        case 4:
-            ret.exec("SELECT * FROM people ORDER BY name DESC");
-            break;
-        case 5:
-            ret.exec("SELECT * FROM people ORDER BY birthDate");
-            break;
-        case 6:
-            ret.exec("SELECT * FROM people ORDER BY birthDate DESC");
-            break;
-        case 7:
-            ret.exec("SELECT * FROM people WHERE deathDate = 'ALIVE' ORDER BY id");
-            break;
-        default:
-            way = 25;
-            cin.clear();
-            cin.ignore();
-    }
+    ret.exec("SELECT * FROM people ORDER BY name");
+
     return ret;
 }
-QSqlQuery Model::queryListComp(int way){
-    QSqlQuery ret;
+QSqlQuery Model::queryListComp(){
+    QSqlQuery ret(QSqlDatabase::database());
 
-    switch(way){
-        case 1:
-            ret.exec("SELECT * FROM computers ORDER BY name");
-            break;
-        case 2:
-            ret.exec("SELECT * FROM computers ORDER BY id DESC");
-            break;
-        case 3:
-            ret.exec("SELECT * FROM computers WHERE created = 1 ORDER BY id");
-            break;
-        case 4:
-            ret.exec("SELECT * FROM computers WHERE created = 0 ORDER BY id");
-            break;
-        case 5:
-            ret.exec("SELECT * FROM computers ORDER BY creationDate");
-            break;
-        case 6:
-            ret.exec("SELECT * FROM computers ORDER BY creationDate DESC");
-            break;
-        case 7:
-            ret.exec("SELECT * FROM computers ORDER BY type");
-            break;
-        case 8:
-            ret.exec("SELECT * FROM computers ORDER BY type DESC");
-            break;
-        default:
-            way = 25;
-            cin.clear();
-            cin.ignore();
-            break;
-    }
+    ret.exec("SELECT * FROM computers ORDER BY name");
+
     return ret;
 }
 
