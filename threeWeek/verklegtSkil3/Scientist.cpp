@@ -1,5 +1,4 @@
 #include "Scientist.h"
-#include <iostream>
 #include <QString>
 
 using namespace std;

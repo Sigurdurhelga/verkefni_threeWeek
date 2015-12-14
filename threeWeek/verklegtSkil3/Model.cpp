@@ -75,6 +75,8 @@ void Model::add(QString one, QString two, QString three, QString four, QString f
     query.bindValue(":four", four);
     query.bindValue(":five", five);
     query.exec();
+
+    return;
 }
 
 void Model::remove(QString ID, bool which){
