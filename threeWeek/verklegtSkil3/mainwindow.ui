@@ -561,7 +561,7 @@
      </widget>
      <widget class="QTextEdit" name="more5">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
@@ -570,6 +570,9 @@
         <width>211</width>
         <height>101</height>
        </rect>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
     </widget>
