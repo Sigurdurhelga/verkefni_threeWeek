@@ -27,12 +27,9 @@ public:
 
     // Add functions
     void add(QString one, QString two, QString three, QString four, QString five, bool which);
-    void addScientistToDatabase(Scientist& guy);
-    void addComputerToDatabase(Computers& comp);
 
     // Reomve functions
     void remove(QString ID, bool which);
-
 
     // Link functions
     void linkSciToComp(int SciID, int CompID);
@@ -40,8 +37,6 @@ public:
 
     // Edit functions
     void edit(QString ID, QString newThing, int column, bool which);
-    void modSci(int, QString, int);
-    void modComp(int, QString, int);
 
 private:
 };
