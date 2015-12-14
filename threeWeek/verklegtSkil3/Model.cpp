@@ -9,6 +9,27 @@ QSqlDatabase Model::openConnection(){
 
     db.setHostName("localhost");
     db.setDatabaseName("data.dat");
+    db.exec("CREATE TABLE IF NOT EXISTS people("
+            "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
+            "name VARCHAR(40), "
+            "gender TEXT,  "
+            "birthDate TEXT, "
+            "deathDate TEXT, "
+            "description TEXT"
+          ");"
+          "CREATE TABLE IF NOT EXISTS compGroups("
+            "peopleID INTEGER NOT NULL, "
+            "computerID INTEGER NOT NULL"
+          ");"
+          "CREATE TABLE IF NOT EXISTS computers("
+            "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
+            "name VARCHAR(40), "
+            "created TEXT, "
+            "creationDate TEXT, "
+            "type TEXT, "
+            "description TEXT(400)"
+          ");");
+
     bool db_ok = db.open();
 
     if(db_ok){
