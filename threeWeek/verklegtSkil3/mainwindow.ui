@@ -17,9 +17,9 @@
    <widget class="QPushButton" name="showSci">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>20</x>
       <y>10</y>
-      <width>141</width>
+      <width>121</width>
       <height>31</height>
      </rect>
     </property>
@@ -133,7 +133,7 @@
      <rect>
       <x>150</x>
       <y>10</y>
-      <width>141</width>
+      <width>131</width>
       <height>31</height>
      </rect>
     </property>
@@ -145,9 +145,9 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>280</y>
-      <width>300</width>
-      <height>434</height>
+      <y>283</y>
+      <width>291</width>
+      <height>381</height>
      </rect>
     </property>
     <property name="font">
@@ -162,11 +162,17 @@
     <widget class="QRadioButton" name="addSciRad">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>20</y>
+       <x>10</x>
+       <y>30</y>
        <width>120</width>
        <height>22</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
      </property>
      <property name="text">
       <string>Add Scientist</string>
@@ -181,11 +187,17 @@
     <widget class="QRadioButton" name="addCompRad">
      <property name="geometry">
       <rect>
-       <x>157</x>
-       <y>25</y>
+       <x>130</x>
+       <y>30</y>
        <width>130</width>
        <height>22</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
      </property>
      <property name="text">
       <string>Add Computer</string>
@@ -272,9 +284,9 @@
    <widget class="QPushButton" name="removeSelected">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>20</x>
       <y>100</y>
-      <width>281</width>
+      <width>261</width>
       <height>27</height>
      </rect>
     </property>
@@ -294,33 +306,21 @@
       <height>331</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
     <layout class="QGridLayout" name="gridLayout_2">
-     <item row="10" column="0">
-      <widget class="QCheckBox" name="inSciAlive">
-       <property name="text">
-        <string>Alive</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QRadioButton" name="inSciFemale">
-       <property name="text">
-        <string>Female</string>
-       </property>
-      </widget>
-     </item>
-     <item row="12" column="0">
-      <widget class="QTextEdit" name="inSciDesc">
-       <property name="placeholderText">
-        <string>Enter a small description</string>
-       </property>
-      </widget>
-     </item>
-     <item row="9" column="0">
+     <item row="11" column="0">
       <widget class="QLabel" name="label_2">
+       <property name="font">
+        <font>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
        <property name="text">
         <string>Date of death</string>
        </property>
@@ -329,7 +329,7 @@
        </property>
       </widget>
      </item>
-     <item row="8" column="0">
+     <item row="10" column="0">
       <widget class="QDateEdit" name="inSciBirth">
        <property name="minimumDate">
         <date>
@@ -353,13 +353,10 @@
        </property>
       </widget>
      </item>
-     <item row="6" column="0">
-      <widget class="QLabel" name="label">
+     <item row="15" column="0">
+      <widget class="QPushButton" name="addSciDone">
        <property name="text">
-        <string>Date of birth</string>
-       </property>
-       <property name="buddy">
-        <cstring>inSciBirth</cstring>
+        <string>Done</string>
        </property>
       </widget>
      </item>
@@ -380,13 +377,6 @@
       </widget>
      </item>
      <item row="13" column="0">
-      <widget class="QPushButton" name="addSciDone">
-       <property name="text">
-        <string>Done</string>
-       </property>
-      </widget>
-     </item>
-     <item row="11" column="0">
       <widget class="QDateEdit" name="inSciDeath">
        <property name="enabled">
         <bool>false</bool>
@@ -399,8 +389,54 @@
        </property>
       </widget>
      </item>
+     <item row="12" column="0">
+      <widget class="QCheckBox" name="inSciAlive">
+       <property name="text">
+        <string>Alive</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="14" column="0">
+      <widget class="QTextEdit" name="inSciDesc">
+       <property name="placeholderText">
+        <string>Enter a small description</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Date of birth</string>
+       </property>
+       <property name="buddy">
+        <cstring>inSciBirth</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QRadioButton" name="inSciFemale">
+       <property name="font">
+        <font>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Female</string>
+       </property>
+      </widget>
+     </item>
      <item row="1" column="0">
       <widget class="QRadioButton" name="inSciMale">
+       <property name="font">
+        <font>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
        <property name="text">
         <string>Male</string>
        </property>
@@ -414,7 +450,7 @@
    <widget class="QLineEdit" name="searchText">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>20</x>
       <y>60</y>
       <width>181</width>
       <height>31</height>
@@ -427,9 +463,9 @@
    <widget class="QPushButton" name="searchButton">
     <property name="geometry">
      <rect>
-      <x>190</x>
+      <x>198</x>
       <y>60</y>
-      <width>99</width>
+      <width>81</width>
       <height>31</height>
      </rect>
     </property>
@@ -440,9 +476,9 @@
    <widget class="QPushButton" name="showMoreButton">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>20</x>
       <y>130</y>
-      <width>281</width>
+      <width>261</width>
       <height>31</height>
      </rect>
     </property>
@@ -651,8 +687,6 @@
   <tabstop>addSciRad</tabstop>
   <tabstop>addCompRad</tabstop>
   <tabstop>inSciName</tabstop>
-  <tabstop>inSciMale</tabstop>
-  <tabstop>inSciFemale</tabstop>
   <tabstop>inSciBirth</tabstop>
   <tabstop>inSciAlive</tabstop>
   <tabstop>inSciDeath</tabstop>
