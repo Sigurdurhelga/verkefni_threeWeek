@@ -184,6 +184,7 @@ void MainWindow::displayAllComputers(QVector<Computers> computers)
 
 void MainWindow::displayConnections(QString id){
     Controller cont;
+    ui->listConnections->clear();
     QVector<QString> list = cont.showLinks(id, whatList);
 
     for(unsigned int row = 0; row < list.size(); row++){
@@ -463,7 +464,7 @@ void MainWindow::on_searchText_returnPressed()
 
 void MainWindow::on_showMoreButton_clicked()
 {
-        ui->listConnections->clear();
+
 
         if(currSelectedID != 0){
         QString imgPath = "images/";
@@ -485,6 +486,7 @@ void MainWindow::on_showMoreButton_clicked()
         ui->pictureLable->setPixmap(thing);
 
         displayConnections(currSelectedID);
+        fillComboConn();
 
         int row = currSelectedRow;
         ui->more1->setText(current->item(row, 1)->text());
@@ -508,3 +510,21 @@ void MainWindow::on_moreDoneButton_clicked()
     ui->moreUI->setHidden(1);
 }
 
+
+void MainWindow::fillComboConn(){
+    Controller cont;
+    QVector<QString> list;
+    list = cont.getNameForLinks(whatList);
+    for(unsigned int row = 0; row < list.size(); row++){
+        ui->moreNameLink->addItem(list[row]);
+    }
+    return;
+}
+
+void MainWindow::on_moreLinkButton_clicked()
+{
+    Controller cont;
+    QString id = currSelectedID;
+    cont.link(id, ui->moreNameLink->currentText(), whatList);
+    displayConnections(id);
+}

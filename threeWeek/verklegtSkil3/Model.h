@@ -28,8 +28,9 @@ public:
     void remove(QString ID, bool which);
 
     // Link functions
-    QSqlQuery queryGetNameForLinking(int id, bool which);
-    void linkSciToComp(int SciID, int CompID);
+
+    QSqlQuery queryGetNameForLinking(bool which);
+    void link(QString id, QString name, bool which);
     QSqlQuery computersConnSci(QString id);
     QSqlQuery getLinks(QString id, bool which);
 

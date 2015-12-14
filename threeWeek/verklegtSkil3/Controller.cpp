@@ -65,6 +65,22 @@ void Controller::edit(QString id, QString newThing, int column, bool which){
     return;
 }
 
+void Controller::link(QString id, QString name, bool which){
+    Model db;
+    db.link(id, name, which);
+}
+
+QVector<QString> Controller::getNameForLinks(bool which){
+    Model db;
+    QVector<QString> list;
+    QSqlQuery query;
+    query = db.queryGetNameForLinking(which);
+    while(query.next()){
+        list.push_back(query.value("name").toString());
+    }
+    return list;
+}
+
 QVector<QString> Controller::showLinks(QString id, bool which){
     Model db;
     QVector<QString> list;
