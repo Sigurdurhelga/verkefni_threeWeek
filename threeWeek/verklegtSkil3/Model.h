@@ -2,7 +2,7 @@
 #define MODEL_H
 #include "Scientist.h"
 #include "Computers.h"
-#include <vector>
+#include <QVector>
 #include <QtSql>
 
 class Model

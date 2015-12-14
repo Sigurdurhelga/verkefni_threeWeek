@@ -1,7 +1,6 @@
 #ifndef COMPUTERS_H
 #define COMPUTERS_H
-#include <QDateTime>
-#include <string>
+#include <QString>
 
 class Computers
 {

@@ -416,3 +416,8 @@ void MainWindow::on_searchButton_clicked()
         displayAllComputers(list);
     }
 }
+
+void MainWindow::on_searchText_returnPressed()
+{
+    on_searchButton_clicked();
+}
