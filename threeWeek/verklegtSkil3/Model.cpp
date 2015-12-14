@@ -6,9 +6,11 @@ using namespace std;
 
 QSqlDatabase Model::openConnection(){
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+
     db.setHostName("localhost");
     db.setDatabaseName("data.dat");
     bool db_ok = db.open();
+
     if(db_ok){
         return db;
     }
@@ -19,6 +21,7 @@ QSqlDatabase Model::openConnection(){
 
 QVector<Scientist> Model::queryScientists(QSqlQuery query){
     QVector<Scientist> scientists;
+
     while(query.next()){
         QString id = query.value("id").toString();
         QString name = query.value("name").toString();
@@ -28,7 +31,6 @@ QVector<Scientist> Model::queryScientists(QSqlQuery query){
         QString description = query.value("description").toString();
 
         scientists.push_back(Scientist(id, name, sex, doB, doD, description));
-
     }
 
     return scientists;
@@ -46,7 +48,6 @@ QVector<Computers> Model::queryComputers(QSqlQuery query){
         QString description = query.value("description").toString();
 
         computers.push_back(Computers(id, name, created, creationYear, type, description));
-
     }
 
     return computers;
@@ -203,13 +204,14 @@ void Model::linkSciToComp(int SciID, int CompID){
 
 QSqlQuery Model::computersConnSci(int id){
     QSqlDatabase db = QSqlDatabase::database();
-    QSqlQuery ret;
-    ret.prepare("SELECT people.name FROM people "
+    QSqlQuery query;
+    query.prepare("SELECT people.name FROM people "
                 "INNER JOIN compGroups ON people.id = compGroups.peopleID "
                 "INNER JOIN computers ON compGroups.computerID = computers.id "
                 "WHERE computers.id = :id");
-    ret.bindValue(":id", id);
-    ret.exec();
-    return ret;
+    query.bindValue(":id", id);
+    query.exec();
+
+    return query;
 }
 
