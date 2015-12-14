@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1289</width>
-    <height>726</height>
+    <width>1359</width>
+    <height>1409</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralWidget">
+  <widget class="QWidget" name="mainBox">
    <widget class="QPushButton" name="showSci">
     <property name="geometry">
      <rect>
@@ -443,6 +443,29 @@
     <property name="text">
      <string>Show more of selected</string>
     </property>
+   </widget>
+   <widget class="QWidget" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>670</y>
+      <width>991</width>
+      <height>651</height>
+     </rect>
+    </property>
+    <widget class="QLabel" name="pictureLable">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>40</y>
+       <width>151</width>
+       <height>161</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QToolBar" name="mainToolBar">

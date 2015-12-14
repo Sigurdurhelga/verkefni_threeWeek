@@ -9,6 +9,7 @@
 #include <QDebug>
 #include <QTableWidget>
 #include <QRegExp>
+#include <QPixmap>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -17,6 +18,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     config();
     on_showSci_clicked();
+    QPixmap thing("C:/Users/siggi/Documents/verkefni/verkefni_threeWeek/threeWeek/build-verklegtSkil3-Desktop_Qt_5_5_1_MinGW_32bit-Debug/pictures/imgres.jpg");
+    thing.scaled(161, 151);
+    ui->pictureLable->setScaledContents(true);
+    ui->pictureLable->setPixmap(thing);
 }
 
 
@@ -313,6 +318,7 @@ void MainWindow::on_listOfComps_cellChanged(int row, int column)
     if(canEdit){
         QRegExp isDigit("^[0-9]+$");
         bool check = true;
+        bool popupCheck = true;
         QString createdS = ui->listOfComps->item(row, 2)->text();
         QString newThing = ui->listOfComps->item(row, column)->text();
         if(column == 1 && ui->listOfComps->item(row, column)->text() == ""){
@@ -347,6 +353,11 @@ void MainWindow::on_listOfComps_cellChanged(int row, int column)
                         ui->listOfComps->item(row, 3)->setText(newnum);
                         cont.edit(id, newnum, 3, false);
                     }
+                    else{
+                        popupCheck = false;
+                        ui->listOfComps->item(row, column)->setText("No");
+                        cont.edit(id, "No", 2, false);
+                    }
             }
             else if(column == 3 && isDigit.exactMatch(newThing)){
                 ui->listOfComps->item(row, 2)->setText("Yes");
@@ -356,8 +367,9 @@ void MainWindow::on_listOfComps_cellChanged(int row, int column)
                 ui->listOfComps->item(row, 2)->setText("No");
                 cont.edit(id, "No", 2, false);
             }
-
-            cont.edit(id, newThing, column, false);
+            if(popupCheck){
+                cont.edit(id, newThing, column, false);
+            }
         }
     }
 }
