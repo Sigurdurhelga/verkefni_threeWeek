@@ -60,6 +60,7 @@ void Model::add(QString one, QString two, QString three, QString four, QString f
     QSqlDatabase db = QSqlDatabase::database();
     QString queryString;
     QSqlQuery query;
+
     queryString += "INSERT INTO ";
     if(which){
         queryString += "people (name, gender, birthDate, deathDate, description) ";
@@ -67,6 +68,7 @@ void Model::add(QString one, QString two, QString three, QString four, QString f
     else{
         queryString += "computers (name, created, creationDate, type, description) ";
     }
+
     queryString += "VALUES (:one, :two, :three, :four, :five)";
     query.prepare(queryString);
     query.bindValue(":one", one);
@@ -83,6 +85,7 @@ void Model::remove(QString ID, bool which){
     QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery query;
     QString queryString;
+
     queryString += "DELETE FROM ";
     if(which){
         queryString += "people WHERE id = :ID";
@@ -90,27 +93,34 @@ void Model::remove(QString ID, bool which){
     else{
         queryString += "computers WHERE id = :ID";
     }
+
     query.prepare(queryString);
     query.bindValue(":ID", ID);
     query.exec();
+
+    return;
 }
 
 QSqlQuery Model::searchSci(QString name){
     QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery query;
     QString queryString;
+
     queryString += "SELECT * FROM people WHERE name LIKE '%"+name+"%' ORDER BY name";
     query.prepare(queryString);
     query.exec();
+
     return query;
 }
 QSqlQuery Model::searchComp(QString name){
     QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery query;
     QString queryString;
+
     queryString += "SELECT * FROM computers WHERE name LIKE '%"+name+"%' ORDER BY name";
     query.prepare(queryString);
     query.exec();
+
     return query;
 }
 
