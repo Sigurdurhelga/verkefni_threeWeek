@@ -186,7 +186,7 @@ void MainWindow::displayConnections(QString id){
     Controller cont;
     QVector<QString> list = cont.showLinks(id, whatList);
 
-    for(unsigned int row = 0; row < list.size(); row++){
+    for(int row = 0; row < list.length(); row++){
         ui->listConnections->addItem(list.at(row));
     }
 
