@@ -22,7 +22,6 @@ QVector<Scientist> Controller::getScientists(QString name){
     listSci = db.queryScientists(query);
 
     return listSci;
-
 }
 
 QVector<Computers> Controller::getComputers(QString name){

@@ -29,9 +29,9 @@ private slots:
     void on_showSci_clicked();
 
     void on_listOfSci_cellChanged(int row, int column);
-    void on_listOfSci_cellClicked(int row, int column);
+    void on_listOfSci_cellClicked(int row);
     void on_listOfComps_cellChanged(int row, int column);
-    void on_listOfComps_cellClicked(int row, int column);
+    void on_listOfComps_cellClicked(int row);
 
     void on_removeSelected_clicked();
     void on_searchButton_clicked();

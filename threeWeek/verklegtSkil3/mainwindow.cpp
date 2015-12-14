@@ -397,7 +397,7 @@ void MainWindow::on_removeSelected_clicked()
     return;
 }
 
-void MainWindow::on_listOfComps_cellClicked(int row, int column)
+void MainWindow::on_listOfComps_cellClicked(int row)
 {
     currSelectedID = ui->listOfComps->item(row, 0)->text();
     currSelectedRow = row;
@@ -405,7 +405,7 @@ void MainWindow::on_listOfComps_cellClicked(int row, int column)
     return;
 }
 
-void MainWindow::on_listOfSci_cellClicked(int row, int column)
+void MainWindow::on_listOfSci_cellClicked(int row)
 {
     currSelectedID = ui->listOfSci->item(row, 0)->text();
     currSelectedRow = row;
