@@ -146,6 +146,7 @@ void MainWindow::displayAllScientists(QVector<Scientist> scientists)
         ui->listOfSci->setItem(row, 5, new QTableWidgetItem(description));
     }
     canEdit = true;
+
     return;
 }
 
@@ -175,6 +176,7 @@ void MainWindow::displayAllComputers(QVector<Computers> computers)
         ui->listOfComps->setItem(row, 5, new QTableWidgetItem(description));
     }
     canEdit = true;
+
     return;
 }
 

@@ -176,18 +176,18 @@ void Model::edit(QString ID, QString newThing, int column, bool which){
 }
 
 QSqlQuery Model::queryListSci(){
-    QSqlQuery ret(QSqlDatabase::database());
+    QSqlQuery query(QSqlDatabase::database());
 
-    ret.exec("SELECT * FROM people ORDER BY name");
+    query.exec("SELECT * FROM people ORDER BY name");
 
-    return ret;
+    return query;
 }
 QSqlQuery Model::queryListComp(){
-    QSqlQuery ret(QSqlDatabase::database());
+    QSqlQuery query(QSqlDatabase::database());
 
-    ret.exec("SELECT * FROM computers ORDER BY name");
+    query.exec("SELECT * FROM computers ORDER BY name");
 
-    return ret;
+    return query;
 }
 
 
