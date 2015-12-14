@@ -18,9 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     config();
     on_showSci_clicked();
-    QPixmap thing("C:/pictures/picturesSci/Alan Turing.jpg");
-    ui->pictureLable->setScaledContents(true);
-    ui->pictureLable->setPixmap(thing);
+
 }
 
 
@@ -265,6 +263,7 @@ QString MainWindow::getNumDialog(){
 void MainWindow::on_showComps_clicked()
 {
     whatList = false;
+    ui->moreUI->setHidden(1);
     Controller cont;
     QVector<Computers> list;
     list = cont.getComputers("");
@@ -276,6 +275,7 @@ void MainWindow::on_showComps_clicked()
 void MainWindow::on_showSci_clicked()
 {
     whatList = true;
+    ui->moreUI->setHidden(1);
     Controller cont;
     QVector<Scientist> list;
     list = cont.getScientists("");
@@ -453,12 +453,30 @@ void MainWindow::on_searchText_returnPressed()
 void MainWindow::on_showMoreButton_clicked()
 {
     if(currSelectedID != 0){
+        QString imgPath = "images/";
+        QTableWidget *current = new QTableWidget;
         if(whatList){
             ui->listOfSci->setHidden(1);
+            imgPath += "scientists/";
+            current = ui->listOfSci;
         }
         else{
             ui->listOfComps->setHidden(1);
+            imgPath += "computers/";
+            current = ui->listOfComps;
         }
+
+        imgPath += currSelectedID + ".jpg";
+        QPixmap thing(imgPath);
+        ui->pictureLable->setScaledContents(true);
+        ui->pictureLable->setPixmap(thing);
+
+        int row = currSelectedRow;
+        ui->more1->setText(current->item(row, 1)->text());
+        ui->more2->setText(current->item(row, 2)->text());
+        ui->more3->setText(current->item(row, 3)->text());
+        ui->more4->setText(current->item(row, 4)->text());
+        ui->more5->setText(current->item(row, 5)->text());
         ui->moreUI->setVisible(1);
     }
 
