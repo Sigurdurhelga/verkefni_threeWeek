@@ -17,7 +17,6 @@ QSqlDatabase Model::openConnection(){
     }
 }
 
-
 QVector<Scientist> Model::queryScientists(QSqlQuery query){
     QVector<Scientist> scientists;
     while(query.next()){
