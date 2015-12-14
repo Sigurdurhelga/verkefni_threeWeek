@@ -117,6 +117,8 @@ void MainWindow::on_addCompDone_clicked()
         displayAllComputers(list);
         ui->inCompDesc->clear();
         ui->inCompName->clear();
+        ui->inCompType->clear();
+        ui->inCompYear->setValue(0);
         ui->inCompCreated->setChecked(false);
     }
 
@@ -189,7 +191,7 @@ void MainWindow::displayConnections(QString id){
     ui->listConnections->clear();
     QVector<QString> list = cont.showLinks(id, whatList);
 
-    for(unsigned int row = 0; row < list.size(); row++){
+    for(int row = 0; row < list.length(); row++){
         ui->listConnections->addItem(list.at(row));
     }
 
@@ -499,6 +501,7 @@ void MainWindow::on_showMoreButton_clicked()
         ui->moreUI->setVisible(1);
     }
 
+    return;
 }
 
 void MainWindow::on_moreDoneButton_clicked()
@@ -510,6 +513,8 @@ void MainWindow::on_moreDoneButton_clicked()
         ui->listOfComps->setVisible(1);
     }
     ui->moreUI->setHidden(1);
+
+    return;
 }
 
 
@@ -517,7 +522,7 @@ void MainWindow::fillComboConn(){
     Controller cont;
     QVector<QString> list;
     list = cont.getNameForLinks(whatList);
-    for(unsigned int row = 0; row < list.size(); row++){
+    for(int row = 0; row < list.size(); row++){
         ui->moreNameLink->addItem(list[row]);
     }
     return;
@@ -529,4 +534,6 @@ void MainWindow::on_moreLinkButton_clicked()
     QString id = currSelectedID;
     cont.link(id, ui->moreNameLink->currentText(), whatList);
     displayConnections(id);
+
+    return;
 }

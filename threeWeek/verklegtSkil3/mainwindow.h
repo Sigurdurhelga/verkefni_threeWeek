@@ -21,7 +21,6 @@ public:
     void displayConnections(QString id);
 
     void fillComboConn();
-
     void errorHandle(int);
     QString getNumDialog();
 

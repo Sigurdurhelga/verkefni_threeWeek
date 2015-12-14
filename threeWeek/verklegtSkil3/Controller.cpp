@@ -41,6 +41,31 @@ QVector<Computers> Controller::getComputers(QString name){
     return listComp;
 }
 
+QVector<QString> Controller::showLinks(QString id, bool which){
+    Model db;
+    QVector<QString> list;
+    QSqlQuery query;
+
+    query = db.getLinks(id, which);
+
+    while(query.next()){
+        list.push_back(query.value("name").toString());
+    }
+
+    return list;
+}
+
+QVector<QString> Controller::getNameForLinks(bool which){
+    Model db;
+    QVector<QString> list;
+    QSqlQuery query;
+    query = db.queryGetNameForLinking(which);
+    while(query.next()){
+        list.push_back(query.value("name").toString());
+    }
+    return list;
+}
+
 void Controller::add(QString one, QString two, QString three, QString four, QString five, bool which){
     Model db;
 
@@ -70,30 +95,7 @@ void Controller::link(QString id, QString name, bool which){
     db.link(id, name, which);
 }
 
-QVector<QString> Controller::getNameForLinks(bool which){
-    Model db;
-    QVector<QString> list;
-    QSqlQuery query;
-    query = db.queryGetNameForLinking(which);
-    while(query.next()){
-        list.push_back(query.value("name").toString());
-    }
-    return list;
-}
 
-QVector<QString> Controller::showLinks(QString id, bool which){
-    Model db;
-    QVector<QString> list;
-    QSqlQuery query;
-
-    query = db.getLinks(id, which);
-
-    while(query.next()){
-        list.push_back(query.value("name").toString());
-    }
-
-    return list;
-}
 
 
 
