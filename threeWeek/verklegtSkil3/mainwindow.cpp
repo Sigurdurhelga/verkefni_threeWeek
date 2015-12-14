@@ -125,6 +125,7 @@ void MainWindow::on_addCompDone_clicked()
 
 void MainWindow::displayAllScientists(QVector<Scientist> scientists)
 {
+    ui->listOfSci->setSortingEnabled(false);
     canEdit = false;
     ui->listOfSci->clearContents();
     ui->listOfSci->setRowCount(scientists.size());
@@ -148,13 +149,14 @@ void MainWindow::displayAllScientists(QVector<Scientist> scientists)
         ui->listOfSci->setItem(row, 5, new QTableWidgetItem(description));
     }
     canEdit = true;
-
+    ui->listOfSci->setSortingEnabled(true);
     return;
 }
 
 
 void MainWindow::displayAllComputers(QVector<Computers> computers)
 {
+    ui->listOfComps->setSortingEnabled(false);
     canEdit = false;
     ui->listOfComps->clearContents();
     ui->listOfComps->setRowCount(computers.size());
@@ -178,7 +180,7 @@ void MainWindow::displayAllComputers(QVector<Computers> computers)
         ui->listOfComps->setItem(row, 5, new QTableWidgetItem(description));
     }
     canEdit = true;
-
+    ui->listOfComps->setSortingEnabled(true);
     return;
 }
 
