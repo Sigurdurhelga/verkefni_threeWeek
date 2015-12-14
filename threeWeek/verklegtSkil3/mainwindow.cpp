@@ -117,6 +117,8 @@ void MainWindow::on_addCompDone_clicked()
         displayAllComputers(list);
         ui->inCompDesc->clear();
         ui->inCompName->clear();
+        ui->inCompType->clear();
+        ui->inCompYear->setValue(0);
         ui->inCompCreated->setChecked(false);
     }
 
