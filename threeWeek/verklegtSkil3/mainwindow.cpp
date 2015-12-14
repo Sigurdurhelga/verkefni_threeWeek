@@ -481,3 +481,14 @@ void MainWindow::on_showMoreButton_clicked()
     }
 
 }
+
+void MainWindow::on_moreDoneButton_clicked()
+{
+    if(whatList){
+        ui->listOfSci->setVisible(1);
+    }
+    else{
+        ui->listOfComps->setVisible(1);
+    }
+    ui->moreUI->setHidden(1);
+}
