@@ -39,12 +39,8 @@ private slots:
     void on_removeSelected_clicked();
     void on_searchButton_clicked();
     void on_searchText_returnPressed();
-
     void on_showMoreButton_clicked();
-
     void on_moreDoneButton_clicked();
-
-
     void on_moreLinkButton_clicked();
 
 private:
