@@ -1,7 +1,6 @@
 #include "Scientist.h"
 #include <iostream>
 #include <QString>
-#include <ctime>
 
 using namespace std;
 

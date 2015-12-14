@@ -1,14 +1,6 @@
 #include "Model.h"
-#include "Scientist.h"
-#include <sstream>
-#include <iostream>
-#include <string>
-#include <QFile>
 #include <QString>
-#include <QStringList>
-#include <QTextStream>
-#include <QDataStream>
-#include <vector>
+#include <QVector>
 
 using namespace std;
 
