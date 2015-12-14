@@ -18,6 +18,7 @@ public:
     ~MainWindow();
     void displayAllScientists(QVector<Scientist>);
     void displayAllComputers(QVector<Computers>);
+    void displayConnections(QString id);
     void errorHandle(int);
     QString getNumDialog();
 
@@ -38,6 +39,8 @@ private slots:
     void on_searchText_returnPressed();
 
     void on_showMoreButton_clicked();
+
+    void on_listWidget_activated(const QModelIndex &index);
 
 private:
     Ui::MainWindow *ui;

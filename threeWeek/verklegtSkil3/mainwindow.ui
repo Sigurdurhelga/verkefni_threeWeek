@@ -475,11 +475,11 @@
       <string/>
      </property>
     </widget>
-    <widget class="QListWidget" name="listWidget">
+    <widget class="QListWidget" name="linkedComputers">
      <property name="geometry">
       <rect>
-       <x>540</x>
-       <y>20</y>
+       <x>530</x>
+       <y>60</y>
        <width>256</width>
        <height>192</height>
       </rect>
