@@ -182,6 +182,11 @@ void MainWindow::displayAllComputers(QVector<Computers> computers)
     return;
 }
 
+void MainWindow::displayConnections(QString id){
+
+
+}
+
 void MainWindow::config(){
     ui->addCompFrame->setHidden(1);
     ui->listOfComps->setHidden(1);
@@ -492,3 +497,4 @@ void MainWindow::on_moreDoneButton_clicked()
     }
     ui->moreUI->setHidden(1);
 }
+
