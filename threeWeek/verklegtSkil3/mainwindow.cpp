@@ -468,7 +468,7 @@ void MainWindow::on_searchText_returnPressed()
 
 void MainWindow::on_showMoreButton_clicked()
 {
-        if(QString::number(currSelectedID) > 0){
+        if(currSelectedID.toInt() > 0){
             QString imgPath = "images/";
             QTableWidget *current = new QTableWidget;
             if(whatList){
