@@ -1,14 +1,12 @@
 #include "Computers.h"
 
-Computers::Computers()
-{
+Computers::Computers(){
 
 }
 
 
 
-Computers::Computers(QString Sid, QString Sname, QString Screated, QString ScreationYear, QString Stype, QString Sdescription)
-{
+Computers::Computers(QString Sid, QString Sname, QString Screated, QString ScreationYear, QString Stype, QString Sdescription){
     id = Sid;
     name = Sname;
     created = Screated;

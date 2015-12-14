@@ -23,36 +23,28 @@ public:
 
 private slots:
     void on_addSciDone_clicked();
-
     void on_addCompDone_clicked();
 
     void on_showComps_clicked();
-
     void on_showSci_clicked();
 
-
     void on_listOfSci_cellChanged(int row, int column);
-
+    void on_listOfSci_cellClicked(int row);
     void on_listOfComps_cellChanged(int row, int column);
+    void on_listOfComps_cellClicked(int row);
 
     void on_removeSelected_clicked();
-
-    void on_listOfComps_cellClicked(int row, int column);
-
-    void on_listOfSci_cellClicked(int row, int column);
-
     void on_searchButton_clicked();
-
     void on_searchText_returnPressed();
 
     void on_showMoreButton_clicked();
 
 private:
     Ui::MainWindow *ui;
+    QString currSelectedID;
     void config();
     bool canEdit;
     bool whatList;
-    QString currSelectedID;
     int currSelectedRow;
 };
 

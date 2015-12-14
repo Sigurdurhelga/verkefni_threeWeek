@@ -73,6 +73,8 @@ void MainWindow::on_addSciDone_clicked()
         ui->inSciDesc->clear();
 
     }
+
+    return;
 }
 
 void MainWindow::on_addCompDone_clicked()
@@ -119,6 +121,8 @@ void MainWindow::on_addCompDone_clicked()
         ui->inCompName->clear();
         ui->inCompCreated->setChecked(false);
     }
+
+    return;
 }
 
 void MainWindow::displayAllScientists(QVector<Scientist> scientists)
@@ -146,6 +150,7 @@ void MainWindow::displayAllScientists(QVector<Scientist> scientists)
         ui->listOfSci->setItem(row, 5, new QTableWidgetItem(description));
     }
     canEdit = true;
+
     return;
 }
 
@@ -175,6 +180,7 @@ void MainWindow::displayAllComputers(QVector<Computers> computers)
         ui->listOfComps->setItem(row, 5, new QTableWidgetItem(description));
     }
     canEdit = true;
+
     return;
 }
 
@@ -204,6 +210,8 @@ void MainWindow::config(){
     createdDelegate->addOption("Yes");
     createdDelegate->addOption("No");
     ui->listOfComps->setItemDelegate(createdDelegate);
+
+    return;
 }
 
 void MainWindow::errorHandle(int i){
@@ -238,6 +246,8 @@ void MainWindow::errorHandle(int i){
         break;
     }
     box.warning(QApplication::activeWindow(), title, content);
+
+    return;
 }
 
 QString MainWindow::getNumDialog(){
@@ -259,6 +269,8 @@ void MainWindow::on_showComps_clicked()
     QVector<Computers> list;
     list = cont.getComputers("");
     displayAllComputers(list);
+
+    return;
 }
 
 void MainWindow::on_showSci_clicked()
@@ -268,6 +280,8 @@ void MainWindow::on_showSci_clicked()
     QVector<Scientist> list;
     list = cont.getScientists("");
     displayAllScientists(list);
+
+    return;
 }
 
 void MainWindow::on_listOfSci_cellChanged(int row, int column)
@@ -308,6 +322,8 @@ void MainWindow::on_listOfSci_cellChanged(int row, int column)
             cont.edit(id, newThing, column, true);
         }
     }
+
+    return;
 }
 
 
@@ -372,6 +388,8 @@ void MainWindow::on_listOfComps_cellChanged(int row, int column)
             }
         }
     }
+
+    return;
 }
 
 void MainWindow::on_removeSelected_clicked()
@@ -387,18 +405,24 @@ void MainWindow::on_removeSelected_clicked()
     }
     currSelectedRow = -1;
     currSelectedID = -1;
+
+    return;
 }
 
-void MainWindow::on_listOfComps_cellClicked(int row, int column)
+void MainWindow::on_listOfComps_cellClicked(int row)
 {
     currSelectedID = ui->listOfComps->item(row, 0)->text();
     currSelectedRow = row;
+
+    return;
 }
 
-void MainWindow::on_listOfSci_cellClicked(int row, int column)
+void MainWindow::on_listOfSci_cellClicked(int row)
 {
     currSelectedID = ui->listOfSci->item(row, 0)->text();
     currSelectedRow = row;
+
+    return;
 }
 
 void MainWindow::on_searchButton_clicked()
@@ -415,11 +439,15 @@ void MainWindow::on_searchButton_clicked()
         list = cont.getComputers(name);
         displayAllComputers(list);
     }
+
+    return;
 }
 
 void MainWindow::on_searchText_returnPressed()
 {
     on_searchButton_clicked();
+
+    return;
 }
 
 void MainWindow::on_showMoreButton_clicked()

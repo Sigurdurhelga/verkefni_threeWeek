@@ -6,9 +6,11 @@ using namespace std;
 
 QSqlDatabase Model::openConnection(){
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+
     db.setHostName("localhost");
     db.setDatabaseName("data.dat");
     bool db_ok = db.open();
+
     if(db_ok){
         return db;
     }
@@ -17,12 +19,9 @@ QSqlDatabase Model::openConnection(){
     }
 }
 
-bool Model::checkConnection(QSqlDatabase db){
-    return db.open();
-}
-
 QVector<Scientist> Model::queryScientists(QSqlQuery query){
     QVector<Scientist> scientists;
+
     while(query.next()){
         QString id = query.value("id").toString();
         QString name = query.value("name").toString();
@@ -32,7 +31,6 @@ QVector<Scientist> Model::queryScientists(QSqlQuery query){
         QString description = query.value("description").toString();
 
         scientists.push_back(Scientist(id, name, sex, doB, doD, description));
-
     }
 
     return scientists;
@@ -50,7 +48,6 @@ QVector<Computers> Model::queryComputers(QSqlQuery query){
         QString description = query.value("description").toString();
 
         computers.push_back(Computers(id, name, created, creationYear, type, description));
-
     }
 
     return computers;
@@ -60,6 +57,7 @@ void Model::add(QString one, QString two, QString three, QString four, QString f
     QSqlDatabase db = QSqlDatabase::database();
     QString queryString;
     QSqlQuery query;
+
     queryString += "INSERT INTO ";
     if(which){
         queryString += "people (name, gender, birthDate, deathDate, description) ";
@@ -67,6 +65,7 @@ void Model::add(QString one, QString two, QString three, QString four, QString f
     else{
         queryString += "computers (name, created, creationDate, type, description) ";
     }
+
     queryString += "VALUES (:one, :two, :three, :four, :five)";
     query.prepare(queryString);
     query.bindValue(":one", one);
@@ -75,12 +74,15 @@ void Model::add(QString one, QString two, QString three, QString four, QString f
     query.bindValue(":four", four);
     query.bindValue(":five", five);
     query.exec();
+
+    return;
 }
 
 void Model::remove(QString ID, bool which){
     QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery query;
     QString queryString;
+
     queryString += "DELETE FROM ";
     if(which){
         queryString += "people WHERE id = :ID";
@@ -88,27 +90,34 @@ void Model::remove(QString ID, bool which){
     else{
         queryString += "computers WHERE id = :ID";
     }
+
     query.prepare(queryString);
     query.bindValue(":ID", ID);
     query.exec();
+
+    return;
 }
 
 QSqlQuery Model::searchSci(QString name){
     QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery query;
     QString queryString;
+
     queryString += "SELECT * FROM people WHERE name LIKE '%"+name+"%' ORDER BY name";
     query.prepare(queryString);
     query.exec();
+
     return query;
 }
 QSqlQuery Model::searchComp(QString name){
     QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery query;
     QString queryString;
+
     queryString += "SELECT * FROM computers WHERE name LIKE '%"+name+"%' ORDER BY name";
     query.prepare(queryString);
     query.exec();
+
     return query;
 }
 
@@ -167,18 +176,18 @@ void Model::edit(QString ID, QString newThing, int column, bool which){
 }
 
 QSqlQuery Model::queryListSci(){
-    QSqlQuery ret(QSqlDatabase::database());
+    QSqlQuery query(QSqlDatabase::database());
 
-    ret.exec("SELECT * FROM people ORDER BY name");
+    query.exec("SELECT * FROM people ORDER BY name");
 
-    return ret;
+    return query;
 }
 QSqlQuery Model::queryListComp(){
-    QSqlQuery ret(QSqlDatabase::database());
+    QSqlQuery query(QSqlDatabase::database());
 
-    ret.exec("SELECT * FROM computers ORDER BY name");
+    query.exec("SELECT * FROM computers ORDER BY name");
 
-    return ret;
+    return query;
 }
 
 
@@ -195,13 +204,14 @@ void Model::linkSciToComp(int SciID, int CompID){
 
 QSqlQuery Model::computersConnSci(int id){
     QSqlDatabase db = QSqlDatabase::database();
-    QSqlQuery ret;
-    ret.prepare("SELECT people.name FROM people "
+    QSqlQuery query;
+    query.prepare("SELECT people.name FROM people "
                 "INNER JOIN compGroups ON people.id = compGroups.peopleID "
                 "INNER JOIN computers ON compGroups.computerID = computers.id "
                 "WHERE computers.id = :id");
-    ret.bindValue(":id", id);
-    ret.exec();
-    return ret;
+    query.bindValue(":id", id);
+    query.exec();
+
+    return query;
 }
 

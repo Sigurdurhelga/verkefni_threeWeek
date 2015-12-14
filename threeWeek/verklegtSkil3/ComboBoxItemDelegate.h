@@ -21,7 +21,6 @@ class ComboBoxItemDelegate : public QStyledItemDelegate {
         void setColumnIndex(int index);
 
     private:
-
         QVector<QString> options;
         int rowIndex;
 };
