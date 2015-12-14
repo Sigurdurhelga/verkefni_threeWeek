@@ -443,6 +443,7 @@ void MainWindow::on_listOfSci_cellClicked(int row)
 
 void MainWindow::on_searchButton_clicked()
 {
+    currSelectedID = -1;
     Controller cont;
     QString name = ui->searchText->text();
     if(whatList){
