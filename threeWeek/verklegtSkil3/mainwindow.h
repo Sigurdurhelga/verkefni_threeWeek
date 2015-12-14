@@ -40,7 +40,8 @@ private slots:
 
     void on_showMoreButton_clicked();
 
-    void on_listWidget_activated(const QModelIndex &index);
+    void on_moreDoneButton_clicked();
+
 
 private:
     Ui::MainWindow *ui;
