@@ -19,6 +19,9 @@ public:
     void displayAllScientists(QVector<Scientist>);
     void displayAllComputers(QVector<Computers>);
     void displayConnections(QString id);
+
+    void fillComboConn();
+
     void errorHandle(int);
     QString getNumDialog();
 
@@ -42,6 +45,8 @@ private slots:
 
     void on_moreDoneButton_clicked();
 
+
+    void on_moreLinkButton_clicked();
 
 private:
     Ui::MainWindow *ui;

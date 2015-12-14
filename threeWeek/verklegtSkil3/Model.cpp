@@ -211,31 +211,34 @@ QSqlQuery Model::queryListComp(){
     return query;
 }
 
-QSqlQuery Model::queryGetNameForLinking(int id, bool which){
+QSqlQuery Model::queryGetNameForLinking(bool which){
     QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery query;
     QString queryString;
     queryString = "SELECT name FROM ";
-    if(which){
-        queryString += "people ";
+    if(!which){
+        queryString += "people";
     }
     else{
-        queryString += "computers ";
+        queryString += "computers";
     }
-    queryString += "WHERE id = :id";
     query.prepare(queryString);
-    query.bindValue(":id", id);
     query.exec();
     return query;
 }
 
 
-void Model::linkSciToComp(int SciID, int CompID){
+void Model::link(QString id, QString name, bool which){
+    QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery query;
-    query.prepare("INSERT INTO compGroups(peopleID, computerID) "
-                  "VALUES(:SciID, :CompID)");
-    query.bindValue(":SciID", SciID);
-    query.bindValue(":CompID", CompID);
+    QString queryString = "INSERT INTO compGroups VALUES(";
+    if(which){
+        queryString += id + ", (SELECT id FROM computers WHERE name = '" + name + "'))";
+    }
+    else{
+        queryString += "(SELECT id FROM people WHERE name = '" + name + "'), "+ id +")";
+    }
+    query.prepare(queryString);
     query.exec();
 
     return;
