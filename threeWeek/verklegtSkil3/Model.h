@@ -32,8 +32,7 @@ public:
 
     // Reomve functions
     void remove(QString ID, bool which);
-    void rmRowSci(int);
-    void rmRowComp(int id);
+
 
     // Link functions
     void linkSciToComp(int SciID, int CompID);
