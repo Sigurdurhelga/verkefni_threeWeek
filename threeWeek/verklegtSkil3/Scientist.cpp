@@ -3,16 +3,13 @@
 
 using namespace std;
 
-Scientist::Scientist()
-{
+Scientist::Scientist(){
     // empty
 }
 
 
 
-Scientist::Scientist(QString sID, QString Sname, QString Ssex, QString SdoB, QString SdoD, QString Sfact)
-
-{
+Scientist::Scientist(QString sID, QString Sname, QString Ssex, QString SdoB, QString SdoD, QString Sfact){
     id = sID;
     name = Sname;
     sex = Ssex;
@@ -39,8 +36,7 @@ void Scientist::setdoD(QString SdoD){
     doD = SdoD;
 }
 
-void Scientist::setDescription(QString Sdescription)
-{
+void Scientist::setDescription(QString Sdescription){
     description = Sdescription;
 }
 
@@ -48,38 +44,31 @@ QString Scientist::returnID(){
     return id;
 }
 
-QString Scientist::returnName()
-{
+QString Scientist::returnName(){
     return name;
 }
 
 
-QString Scientist::returnSex()
-{
+QString Scientist::returnSex(){
     return sex;
 }
 
-QString Scientist::dateofBirth()
-{
+QString Scientist::dateofBirth(){
     return doB;
 }
 
-QString Scientist::dateofDeath()
-{
+QString Scientist::dateofDeath(){
     return doD;
 }
 
-QString Scientist::dateofBirthQString()
-{
+QString Scientist::dateofBirthQString(){
     return doB;
 }
 
-QString Scientist::dateofDeathQString()
-{
+QString Scientist::dateofDeathQString(){
     return doD;
 }
 
-QString Scientist::returnDescription()
-{
+QString Scientist::returnDescription(){
     return description;
 }
