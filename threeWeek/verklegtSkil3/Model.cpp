@@ -17,9 +17,6 @@ QSqlDatabase Model::openConnection(){
     }
 }
 
-bool Model::checkConnection(QSqlDatabase db){
-    return db.open();
-}
 
 QVector<Scientist> Model::queryScientists(QSqlQuery query){
     QVector<Scientist> scientists;

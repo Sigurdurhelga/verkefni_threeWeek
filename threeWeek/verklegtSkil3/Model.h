@@ -10,7 +10,6 @@ class Model
 public:
     // Database connection functions
     QSqlDatabase openConnection();
-    bool checkConnection(QSqlDatabase db);
 
     // List functions
     QVector<Scientist> queryScientists(QSqlQuery);
