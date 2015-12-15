@@ -170,8 +170,8 @@
      </property>
      <property name="font">
       <font>
-       <weight>50</weight>
-       <bold>false</bold>
+       <weight>75</weight>
+       <bold>true</bold>
       </font>
      </property>
      <property name="text">
@@ -195,8 +195,8 @@
      </property>
      <property name="font">
       <font>
-       <weight>50</weight>
-       <bold>false</bold>
+       <weight>75</weight>
+       <bold>true</bold>
       </font>
      </property>
      <property name="text">
@@ -313,12 +313,12 @@
      </font>
     </property>
     <layout class="QGridLayout" name="gridLayout_2">
-     <item row="11" column="0">
+     <item row="14" column="0">
       <widget class="QLabel" name="label_2">
        <property name="font">
         <font>
-         <weight>50</weight>
-         <bold>false</bold>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="text">
@@ -329,7 +329,76 @@
        </property>
       </widget>
      </item>
-     <item row="10" column="0">
+     <item row="0" column="0">
+      <widget class="QLineEdit" name="inSciName">
+       <property name="inputMask">
+        <string/>
+       </property>
+       <property name="maxLength">
+        <number>32767</number>
+       </property>
+       <property name="dragEnabled">
+        <bool>false</bool>
+       </property>
+       <property name="placeholderText">
+        <string>Enter name here</string>
+       </property>
+      </widget>
+     </item>
+     <item row="15" column="0">
+      <widget class="QCheckBox" name="inSciAlive">
+       <property name="text">
+        <string>Alive</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="18" column="0">
+      <widget class="QPushButton" name="addSciDone">
+       <property name="text">
+        <string>Done</string>
+       </property>
+      </widget>
+     </item>
+     <item row="16" column="0">
+      <widget class="QDateEdit" name="inSciDeath">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="displayFormat">
+        <string>yyyy-MM-dd</string>
+       </property>
+       <property name="calendarPopup">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="17" column="0">
+      <widget class="QTextEdit" name="inSciDesc">
+       <property name="placeholderText">
+        <string>Enter a small description</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="label">
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Date of birth</string>
+       </property>
+       <property name="buddy">
+        <cstring>inSciBirth</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0">
       <widget class="QDateEdit" name="inSciBirth">
        <property name="minimumDate">
         <date>
@@ -353,88 +422,12 @@
        </property>
       </widget>
      </item>
-     <item row="15" column="0">
-      <widget class="QPushButton" name="addSciDone">
-       <property name="text">
-        <string>Done</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLineEdit" name="inSciName">
-       <property name="inputMask">
-        <string/>
-       </property>
-       <property name="maxLength">
-        <number>32767</number>
-       </property>
-       <property name="dragEnabled">
-        <bool>false</bool>
-       </property>
-       <property name="placeholderText">
-        <string>Enter name here</string>
-       </property>
-      </widget>
-     </item>
-     <item row="13" column="0">
-      <widget class="QDateEdit" name="inSciDeath">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="displayFormat">
-        <string>yyyy-MM-dd</string>
-       </property>
-       <property name="calendarPopup">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="12" column="0">
-      <widget class="QCheckBox" name="inSciAlive">
-       <property name="text">
-        <string>Alive</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="14" column="0">
-      <widget class="QTextEdit" name="inSciDesc">
-       <property name="placeholderText">
-        <string>Enter a small description</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Date of birth</string>
-       </property>
-       <property name="buddy">
-        <cstring>inSciBirth</cstring>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QRadioButton" name="inSciFemale">
-       <property name="font">
-        <font>
-         <weight>50</weight>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Female</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
+     <item row="4" column="0">
       <widget class="QRadioButton" name="inSciMale">
        <property name="font">
         <font>
-         <weight>50</weight>
-         <bold>false</bold>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="text">
@@ -442,6 +435,19 @@
        </property>
        <property name="checked">
         <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QRadioButton" name="inSciFemale">
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Female</string>
        </property>
       </widget>
      </item>
@@ -700,7 +706,6 @@
   <tabstop>addSciRad</tabstop>
   <tabstop>addCompRad</tabstop>
   <tabstop>inSciName</tabstop>
-  <tabstop>inSciBirth</tabstop>
   <tabstop>inSciAlive</tabstop>
   <tabstop>inSciDeath</tabstop>
   <tabstop>inSciDesc</tabstop>
