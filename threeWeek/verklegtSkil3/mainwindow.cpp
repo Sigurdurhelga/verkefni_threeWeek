@@ -27,6 +27,137 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::displayAllScientists(QVector<Scientist> scientists)
+{
+    ui->listOfSci->setSortingEnabled(false);
+    canEdit = false;
+    ui->listOfSci->clearContents();
+    ui->listOfSci->setRowCount(scientists.size());
+
+    for (int row = 0; row < scientists.size(); row++)
+    {
+        Scientist currentScientist = scientists.at(row);
+
+        QString id = currentScientist.returnID();
+        QString gender = currentScientist.returnSex();
+        QString name = currentScientist.returnName();
+        QString dateBirth = currentScientist.dateofBirth();
+        QString dateDeath = currentScientist.dateofDeath();
+        QString description = currentScientist.returnDescription();
+
+        ui->listOfSci->setItem(row, 0, new QTableWidgetItem(id));
+        ui->listOfSci->setItem(row, 1, new QTableWidgetItem(name));
+        ui->listOfSci->setItem(row, 2, new QTableWidgetItem(gender));
+        ui->listOfSci->setItem(row, 3, new QTableWidgetItem(dateBirth));
+        ui->listOfSci->setItem(row, 4, new QTableWidgetItem(dateDeath));
+        ui->listOfSci->setItem(row, 5, new QTableWidgetItem(description));
+    }
+    canEdit = true;
+    ui->listOfSci->setSortingEnabled(true);
+    return;
+}
+
+void MainWindow::displayAllComputers(QVector<Computers> computers)
+{
+    ui->listOfComps->setSortingEnabled(false);
+    canEdit = false;
+    ui->listOfComps->clearContents();
+    ui->listOfComps->setRowCount(computers.size());
+
+    for (int row = 0; row < computers.size(); row++)
+    {
+        Computers currentComputer = computers.at(row);
+
+        QString id = currentComputer.returnID();
+        QString name = currentComputer.returnName();
+        QString created = currentComputer.returnCreated();
+        QString creationDate = currentComputer.returnCreationYear();
+        QString type = currentComputer.returnType();
+        QString description = currentComputer.returnDescription();
+
+        ui->listOfComps->setItem(row, 0, new QTableWidgetItem(id));
+        ui->listOfComps->setItem(row, 1, new QTableWidgetItem(name));
+        ui->listOfComps->setItem(row, 2, new QTableWidgetItem(created));
+        ui->listOfComps->setItem(row, 3, new QTableWidgetItem(creationDate));
+        ui->listOfComps->setItem(row, 4, new QTableWidgetItem(type));
+        ui->listOfComps->setItem(row, 5, new QTableWidgetItem(description));
+    }
+    canEdit = true;
+    ui->listOfComps->setSortingEnabled(true);
+    return;
+}
+
+void MainWindow::displayConnections(QString id){
+    Controller cont;
+    ui->listConnections->clear();
+    QVector<QString> list = cont.showLinks(id, whatList);
+
+    for(int row = 0; row < list.length(); row++){
+        ui->listConnections->addItem(list.at(row));
+    }
+
+    return;
+}
+
+void MainWindow::fillComboConn(){
+    Controller cont;
+    QVector<QString> list;
+    ui->moreNameLink->clear();
+    list = cont.getNameForLinks(whatList);
+    for(int row = 0; row < list.size(); row++){
+        ui->moreNameLink->addItem(list[row]);
+    }
+    return;
+}
+
+void MainWindow::errorHandle(int i){
+    QMessageBox box;
+    QString title = "Error";
+    QString content;
+
+    switch (i) {
+    case 0:
+        content = "Invalid name";
+        break;
+    case 1:
+        content = "Invalid description";
+        break;
+    case 2:
+        content = "Birth can't happen before death";
+        break;
+    case 3:
+        content = "Invalid type selected";
+        break;
+    case 4:
+        content = "Invalid creation year. Must be a number or \"Never\"";
+        break;
+    case 5:
+        content = "Invalid date";
+        break;
+    case 6:
+        content = "Invalid death date must be a date \"yyyy-MM-dd\" or \"Alive\"";
+        break;
+
+    default:
+        break;
+    }
+    box.warning(QApplication::activeWindow(), title, content);
+
+    return;
+}
+
+QString MainWindow::getNumDialog(){
+    QRegExp isDigit("^[0-9]+$");
+    bool ok;
+    QString num = QInputDialog::getText(QApplication::activeWindow(), "Creation year", "Enter creation year", QLineEdit::Normal, QDir::home().dirName(), &ok);
+    if(isDigit.exactMatch(num) && ok){
+        return num;
+    }
+    else{
+        return "";
+    }
+}
+
 void MainWindow::on_addSciDone_clicked()
 {
     Controller cont;
@@ -124,157 +255,6 @@ void MainWindow::on_addCompDone_clicked()
     return;
 }
 
-void MainWindow::displayAllScientists(QVector<Scientist> scientists)
-{
-    ui->listOfSci->setSortingEnabled(false);
-    canEdit = false;
-    ui->listOfSci->clearContents();
-    ui->listOfSci->setRowCount(scientists.size());
-
-    for (int row = 0; row < scientists.size(); row++)
-    {
-        Scientist currentScientist = scientists.at(row);
-
-        QString id = currentScientist.returnID();
-        QString gender = currentScientist.returnSex();
-        QString name = currentScientist.returnName();
-        QString dateBirth = currentScientist.dateofBirth();
-        QString dateDeath = currentScientist.dateofDeath();
-        QString description = currentScientist.returnDescription();
-
-        ui->listOfSci->setItem(row, 0, new QTableWidgetItem(id));
-        ui->listOfSci->setItem(row, 1, new QTableWidgetItem(name));
-        ui->listOfSci->setItem(row, 2, new QTableWidgetItem(gender));
-        ui->listOfSci->setItem(row, 3, new QTableWidgetItem(dateBirth));
-        ui->listOfSci->setItem(row, 4, new QTableWidgetItem(dateDeath));
-        ui->listOfSci->setItem(row, 5, new QTableWidgetItem(description));
-    }
-    canEdit = true;
-    ui->listOfSci->setSortingEnabled(true);
-    return;
-}
-
-
-void MainWindow::displayAllComputers(QVector<Computers> computers)
-{
-    ui->listOfComps->setSortingEnabled(false);
-    canEdit = false;
-    ui->listOfComps->clearContents();
-    ui->listOfComps->setRowCount(computers.size());
-
-    for (int row = 0; row < computers.size(); row++)
-    {
-        Computers currentComputer = computers.at(row);
-
-        QString id = currentComputer.returnID();
-        QString name = currentComputer.returnName();
-        QString created = currentComputer.returnCreated();
-        QString creationDate = currentComputer.returnCreationYear();
-        QString type = currentComputer.returnType();
-        QString description = currentComputer.returnDescription();
-
-        ui->listOfComps->setItem(row, 0, new QTableWidgetItem(id));
-        ui->listOfComps->setItem(row, 1, new QTableWidgetItem(name));
-        ui->listOfComps->setItem(row, 2, new QTableWidgetItem(created));
-        ui->listOfComps->setItem(row, 3, new QTableWidgetItem(creationDate));
-        ui->listOfComps->setItem(row, 4, new QTableWidgetItem(type));
-        ui->listOfComps->setItem(row, 5, new QTableWidgetItem(description));
-    }
-    canEdit = true;
-    ui->listOfComps->setSortingEnabled(true);
-    return;
-}
-
-void MainWindow::displayConnections(QString id){
-    Controller cont;
-    ui->listConnections->clear();
-    QVector<QString> list = cont.showLinks(id, whatList);
-
-    for(int row = 0; row < list.length(); row++){
-        ui->listConnections->addItem(list.at(row));
-    }
-
-    return;
-}
-
-void MainWindow::config(){
-    ui->addCompFrame->setHidden(1);
-    ui->listOfComps->setHidden(1);
-    ui->moreUI->setHidden(1);
-    ui->listOfSci->setColumnHidden(0, true);
-    ui->listOfComps->setColumnHidden(0,true);
-    ui->listOfSci->setColumnWidth(1, 140);
-    ui->listOfSci->setColumnWidth(2, 70);
-    ui->listOfSci->setColumnWidth(3, 115);
-    ui->listOfSci->setColumnWidth(4, 115);
-    ui->listOfSci->setColumnWidth(5, 540);
-    ui->listOfComps->setColumnWidth(1,140);
-    ui->listOfComps->setColumnWidth(2,70);
-    ui->listOfComps->setColumnWidth(3, 110);
-    ui->listOfComps->setColumnWidth(4, 95);
-    ui->listOfComps->setColumnWidth(5,565);
-    ComboBoxItemDelegate* sexDelegate = new ComboBoxItemDelegate(ui->listOfSci);
-    sexDelegate->setColumnIndex(2);
-    sexDelegate->addOption("Male");
-    sexDelegate->addOption("Female");
-    ui->listOfSci->setItemDelegate(sexDelegate);
-    ComboBoxItemDelegate* createdDelegate = new ComboBoxItemDelegate(ui->listOfComps);
-    createdDelegate->setColumnIndex(2);
-    createdDelegate->addOption("Yes");
-    createdDelegate->addOption("No");
-    ui->listOfComps->setItemDelegate(createdDelegate);
-
-    return;
-}
-
-void MainWindow::errorHandle(int i){
-    QMessageBox box;
-    QString title = "Error";
-    QString content;
-
-    switch (i) {
-    case 0:
-        content = "Invalid name";
-        break;
-    case 1:
-        content = "Invalid description";
-        break;
-    case 2:
-        content = "Birth can't happen before death";
-        break;
-    case 3:
-        content = "Invalid type selected";
-        break;
-    case 4:
-        content = "Invalid creation year. Must be a number or \"Never\"";
-        break;
-    case 5:
-        content = "Invalid date";
-        break;
-    case 6:
-        content = "Invalid death date must be a date \"yyyy-MM-dd\" or \"Alive\"";
-        break;
-
-    default:
-        break;
-    }
-    box.warning(QApplication::activeWindow(), title, content);
-
-    return;
-}
-
-QString MainWindow::getNumDialog(){
-    QRegExp isDigit("^[0-9]+$");
-    bool ok;
-    QString num = QInputDialog::getText(QApplication::activeWindow(), "Creation year", "Enter creation year", QLineEdit::Normal, QDir::home().dirName(), &ok);
-    if(isDigit.exactMatch(num) && ok){
-        return num;
-    }
-    else{
-        return "";
-    }
-}
-
 void MainWindow::on_showComps_clicked()
 {
     whatList = false;
@@ -295,6 +275,65 @@ void MainWindow::on_showSci_clicked()
     QVector<Scientist> list;
     list = cont.getScientists("");
     displayAllScientists(list);
+
+    return;
+}
+
+void MainWindow::on_showMoreButton_clicked()
+{
+        if(currSelectedID.toInt() > 0){
+            QString imgPath = "images/";
+            QTableWidget *current = new QTableWidget;
+            if(whatList){
+                ui->listOfSci->setHidden(1);
+                imgPath += "scientists/";
+                current = ui->listOfSci;
+            }
+            else{
+                ui->listOfComps->setHidden(1);
+                imgPath += "computers/";
+                current = ui->listOfComps;
+            }
+
+            imgPath += currSelectedID + ".jpg";
+            QPixmap thing(imgPath);
+            ui->pictureLable->setScaledContents(true);
+            ui->pictureLable->setPixmap(thing);
+
+            displayConnections(currSelectedID);
+            fillComboConn();
+
+            int row = currSelectedRow;
+            ui->more1->setText(current->item(row, 1)->text());
+            ui->more2->setText(current->item(row, 2)->text());
+            ui->more3->setText(current->item(row, 3)->text());
+            ui->more4->setText(current->item(row, 4)->text());
+            ui->more5->setText(current->item(row, 5)->text());
+            ui->moreUI->setVisible(1);
+    }
+
+    return;
+}
+
+void MainWindow::on_moreDoneButton_clicked()
+{
+    if(whatList){
+        ui->listOfSci->setVisible(1);
+    }
+    else{
+        ui->listOfComps->setVisible(1);
+    }
+    ui->moreUI->setHidden(1);
+
+    return;
+}
+
+void MainWindow::on_moreLinkButton_clicked()
+{
+    Controller cont;
+    QString id = currSelectedID;
+    cont.link(id, ui->moreNameLink->currentText(), whatList);
+    displayConnections(id);
 
     return;
 }
@@ -341,7 +380,13 @@ void MainWindow::on_listOfSci_cellChanged(int row, int column)
     return;
 }
 
+void MainWindow::on_listOfSci_cellClicked(int row)
+{
+    currSelectedID = ui->listOfSci->item(row, 0)->text();
+    currSelectedRow = row;
 
+    return;
+}
 
 void MainWindow::on_listOfComps_cellChanged(int row, int column)
 {
@@ -407,23 +452,6 @@ void MainWindow::on_listOfComps_cellChanged(int row, int column)
     return;
 }
 
-void MainWindow::on_removeSelected_clicked()
-{
-    Controller cont;
-    if(whatList){
-        cont.remove(currSelectedID, whatList);
-        ui->listOfSci->removeRow(currSelectedRow);
-    }
-    else{
-        cont.remove(currSelectedID, whatList);
-        ui->listOfComps->removeRow(currSelectedRow);
-    }
-    currSelectedRow = -1;
-    currSelectedID = -1;
-
-    return;
-}
-
 void MainWindow::on_listOfComps_cellClicked(int row)
 {
     currSelectedID = ui->listOfComps->item(row, 0)->text();
@@ -432,10 +460,9 @@ void MainWindow::on_listOfComps_cellClicked(int row)
     return;
 }
 
-void MainWindow::on_listOfSci_cellClicked(int row)
+void MainWindow::on_searchText_returnPressed()
 {
-    currSelectedID = ui->listOfSci->item(row, 0)->text();
-    currSelectedRow = row;
+    on_searchButton_clicked();
 
     return;
 }
@@ -459,80 +486,79 @@ void MainWindow::on_searchButton_clicked()
     return;
 }
 
-void MainWindow::on_searchText_returnPressed()
+
+void MainWindow::on_removeSelected_clicked()
 {
-    on_searchButton_clicked();
-
-    return;
-}
-
-void MainWindow::on_showMoreButton_clicked()
-{
-        if(currSelectedID.toInt() > 0){
-            QString imgPath = "images/";
-            QTableWidget *current = new QTableWidget;
-            if(whatList){
-                ui->listOfSci->setHidden(1);
-                imgPath += "scientists/";
-                current = ui->listOfSci;
-            }
-            else{
-                ui->listOfComps->setHidden(1);
-                imgPath += "computers/";
-                current = ui->listOfComps;
-            }
-
-            imgPath += currSelectedID + ".jpg";
-            QPixmap thing(imgPath);
-            ui->pictureLable->setScaledContents(true);
-            ui->pictureLable->setPixmap(thing);
-
-            displayConnections(currSelectedID);
-            fillComboConn();
-
-            int row = currSelectedRow;
-            ui->more1->setText(current->item(row, 1)->text());
-            ui->more2->setText(current->item(row, 2)->text());
-            ui->more3->setText(current->item(row, 3)->text());
-            ui->more4->setText(current->item(row, 4)->text());
-            ui->more5->setText(current->item(row, 5)->text());
-            ui->moreUI->setVisible(1);
-    }
-
-    return;
-}
-
-void MainWindow::on_moreDoneButton_clicked()
-{
+    Controller cont;
     if(whatList){
-        ui->listOfSci->setVisible(1);
+        cont.remove(currSelectedID, whatList);
+        ui->listOfSci->removeRow(currSelectedRow);
     }
     else{
-        ui->listOfComps->setVisible(1);
+        cont.remove(currSelectedID, whatList);
+        ui->listOfComps->removeRow(currSelectedRow);
     }
+    currSelectedRow = -1;
+    currSelectedID = -1;
+
+    return;
+}
+
+
+
+
+void MainWindow::config(){
+    ui->addCompFrame->setHidden(1);
+    ui->listOfComps->setHidden(1);
     ui->moreUI->setHidden(1);
+    ui->listOfSci->setColumnHidden(0, true);
+    ui->listOfComps->setColumnHidden(0,true);
+    ui->listOfSci->setColumnWidth(1, 140);
+    ui->listOfSci->setColumnWidth(2, 70);
+    ui->listOfSci->setColumnWidth(3, 115);
+    ui->listOfSci->setColumnWidth(4, 115);
+    ui->listOfSci->setColumnWidth(5, 540);
+    ui->listOfComps->setColumnWidth(1,140);
+    ui->listOfComps->setColumnWidth(2,70);
+    ui->listOfComps->setColumnWidth(3, 110);
+    ui->listOfComps->setColumnWidth(4, 95);
+    ui->listOfComps->setColumnWidth(5,565);
+    ComboBoxItemDelegate* sexDelegate = new ComboBoxItemDelegate(ui->listOfSci);
+    sexDelegate->setColumnIndex(2);
+    sexDelegate->addOption("Male");
+    sexDelegate->addOption("Female");
+    ui->listOfSci->setItemDelegate(sexDelegate);
+    ComboBoxItemDelegate* createdDelegate = new ComboBoxItemDelegate(ui->listOfComps);
+    createdDelegate->setColumnIndex(2);
+    createdDelegate->addOption("Yes");
+    createdDelegate->addOption("No");
+    ui->listOfComps->setItemDelegate(createdDelegate);
 
     return;
 }
 
 
-void MainWindow::fillComboConn(){
-    Controller cont;
-    QVector<QString> list;
-    ui->moreNameLink->clear();
-    list = cont.getNameForLinks(whatList);
-    for(int row = 0; row < list.size(); row++){
-        ui->moreNameLink->addItem(list[row]);
-    }
-    return;
-}
 
-void MainWindow::on_moreLinkButton_clicked()
-{
-    Controller cont;
-    QString id = currSelectedID;
-    cont.link(id, ui->moreNameLink->currentText(), whatList);
-    displayConnections(id);
 
-    return;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

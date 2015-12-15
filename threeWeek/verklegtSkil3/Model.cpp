@@ -54,6 +54,103 @@ QVector<Computers> Model::queryComputers(QSqlQuery query){
     return computers;
 }
 
+QSqlQuery Model::queryListSci(){
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query(QSqlDatabase::database());
+
+    query.exec("SELECT * FROM people ORDER BY name");
+
+    return query;
+}
+
+QSqlQuery Model::queryListComp(){
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query(QSqlDatabase::database());
+
+    query.exec("SELECT * FROM computers ORDER BY name");
+
+    return query;
+}
+
+QSqlQuery Model::searchSci(QString name){
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query;
+    QString queryString;
+
+    queryString += "SELECT * FROM people WHERE name LIKE '%"+name+"%' ORDER BY name";
+    query.prepare(queryString);
+    query.exec();
+
+    return query;
+}
+QSqlQuery Model::searchComp(QString name){
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query;
+    QString queryString;
+
+    queryString += "SELECT * FROM computers WHERE name LIKE '%"+name+"%' ORDER BY name";
+    query.prepare(queryString);
+    query.exec();
+
+    return query;
+}
+
+QSqlQuery Model::queryGetNameForLinking(bool which){
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query(QSqlDatabase::database());
+    QString queryString;
+
+    queryString = "SELECT name FROM ";
+    if(which){
+        queryString += "computers";
+    }
+    else{
+        queryString += "people";
+    }
+    query.prepare(queryString);
+    query.exec();
+
+    return query;
+}
+
+QSqlQuery Model::getLinks(QString id, bool which){
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query(QSqlDatabase::database());
+
+    if(which){
+    query.prepare("SELECT computers.name FROM computers "
+                "INNER JOIN compGroups ON computers.id = compGroups.computerID "
+                "INNER JOIN people ON compGroups.peopleID = people.id "
+                "WHERE people.id = :id");
+    }
+    else{
+        query.prepare("SELECT people.name FROM people "
+                    "INNER JOIN compGroups ON people.id = compGroups.peopleID "
+                    "INNER JOIN computers ON compGroups.computerID = computers.id "
+                    "WHERE computers.id = :id");
+    }
+    query.bindValue(":id", id);
+    query.exec();
+
+    return query;
+}
+
+void Model::link(QString id, QString name, bool which){
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query(QSqlDatabase::database());
+    QString queryString = "INSERT INTO compGroups VALUES(";
+    if(which){
+        queryString += id + ", (SELECT id FROM computers WHERE name = '" + name + "'))";
+    }
+    else{
+        queryString += "(SELECT id FROM people WHERE name = '" + name + "'), "+ id +")";
+    }
+    query.prepare(queryString);
+    query.exec();
+
+    return;
+}
+
 void Model::add(QString one, QString two, QString three, QString four, QString five, bool which){
     QSqlDatabase db = QSqlDatabase::database();
     QString queryString;
@@ -97,29 +194,6 @@ void Model::remove(QString ID, bool which){
     query.exec();
 
     return;
-}
-
-QSqlQuery Model::searchSci(QString name){
-    QSqlDatabase db = QSqlDatabase::database();
-    QSqlQuery query;
-    QString queryString;
-
-    queryString += "SELECT * FROM people WHERE name LIKE '%"+name+"%' ORDER BY name";
-    query.prepare(queryString);
-    query.exec();
-
-    return query;
-}
-QSqlQuery Model::searchComp(QString name){
-    QSqlDatabase db = QSqlDatabase::database();
-    QSqlQuery query;
-    QString queryString;
-
-    queryString += "SELECT * FROM computers WHERE name LIKE '%"+name+"%' ORDER BY name";
-    query.prepare(queryString);
-    query.exec();
-
-    return query;
 }
 
 void Model::edit(QString ID, QString newThing, int column, bool which){
@@ -173,90 +247,12 @@ void Model::edit(QString ID, QString newThing, int column, bool which){
     query.bindValue(":id", ID);
     query.exec();
 
-
-}
-
-QSqlQuery Model::queryListSci(){
-    QSqlDatabase db = QSqlDatabase::database();
-    QSqlQuery query(QSqlDatabase::database());
-
-    query.exec("SELECT * FROM people ORDER BY name");
-
-    return query;
-}
-QSqlQuery Model::queryListComp(){
-    QSqlDatabase db = QSqlDatabase::database();
-    QSqlQuery query(QSqlDatabase::database());
-
-    query.exec("SELECT * FROM computers ORDER BY name");
-
-    return query;
-}
-
-QSqlQuery Model::queryGetNameForLinking(bool which){
-    QSqlDatabase db = QSqlDatabase::database();
-    QSqlQuery query(QSqlDatabase::database());
-    QString queryString;
-    queryString = "SELECT name FROM ";
-    if(which){
-        queryString += "computers";
-    }
-    else{
-        queryString += "people";
-    }
-    query.prepare(queryString);
-    query.exec();
-    return query;
-}
-
-
-void Model::link(QString id, QString name, bool which){
-    QSqlDatabase db = QSqlDatabase::database();
-    QSqlQuery query(QSqlDatabase::database());
-    QString queryString = "INSERT INTO compGroups VALUES(";
-    if(which){
-        queryString += id + ", (SELECT id FROM computers WHERE name = '" + name + "'))";
-    }
-    else{
-        queryString += "(SELECT id FROM people WHERE name = '" + name + "'), "+ id +")";
-    }
-    query.prepare(queryString);
-    query.exec();
-
     return;
 }
 
-QSqlQuery Model::computersConnSci(QString id){
-    QSqlDatabase db = QSqlDatabase::database();
-    QSqlQuery query(QSqlDatabase::database());
-    query.prepare("SELECT people.name FROM people "
-                "INNER JOIN compGroups ON people.id = compGroups.peopleID "
-                "INNER JOIN computers ON compGroups.computerID = computers.id "
-                "WHERE computers.id = :id");
-    query.bindValue(":id", id);
-    query.exec();
 
-    return query;
-}
 
-QSqlQuery Model::getLinks(QString id, bool which){
-    QSqlDatabase db = QSqlDatabase::database();
-    QSqlQuery query(QSqlDatabase::database());
 
-    if(which){
-    query.prepare("SELECT computers.name FROM computers "
-                "INNER JOIN compGroups ON computers.id = compGroups.computerID "
-                "INNER JOIN people ON compGroups.peopleID = people.id "
-                "WHERE people.id = :id");
-    }
-    else{
-        query.prepare("SELECT people.name FROM people "
-                    "INNER JOIN compGroups ON people.id = compGroups.peopleID "
-                    "INNER JOIN computers ON compGroups.computerID = computers.id "
-                    "WHERE computers.id = :id");
-    }
-    query.bindValue(":id", id);
-    query.exec();
 
-    return query;
-}
+
+

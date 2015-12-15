@@ -8,12 +8,14 @@
 class Model
 {
 public:
-    // Database connection functions
+    // Database connection
     QSqlDatabase openConnection();
 
-    // List functions
+    // Get database contents and store them in a vector
     QVector<Scientist> queryScientists(QSqlQuery);
     QVector<Computers> queryComputers(QSqlQuery);
+
+    // List functions
     QSqlQuery queryListSci();
     QSqlQuery queryListComp();
 
@@ -21,20 +23,14 @@ public:
     QSqlQuery searchSci(QString name);
     QSqlQuery searchComp(QString name);
 
-    // Add functions
-    void add(QString one, QString two, QString three, QString four, QString five, bool which);
-
-    // Reomve functions
-    void remove(QString ID, bool which);
-
-    // Link functions
-
+    // Linking functions
     QSqlQuery queryGetNameForLinking(bool which);
-    void link(QString id, QString name, bool which);
-    QSqlQuery computersConnSci(QString id);
     QSqlQuery getLinks(QString id, bool which);
+    void link(QString id, QString name, bool which);
 
-    // Edit functions
+    // Add, remove, edit
+    void add(QString one, QString two, QString three, QString four, QString five, bool which);
+    void remove(QString ID, bool which);
     void edit(QString ID, QString newThing, int column, bool which);
 
 private:
