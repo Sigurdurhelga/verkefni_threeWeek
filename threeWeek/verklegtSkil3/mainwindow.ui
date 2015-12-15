@@ -521,7 +521,7 @@
      <property name="geometry">
       <rect>
        <x>460</x>
-       <y>10</y>
+       <y>40</y>
        <width>281</width>
        <height>251</height>
       </rect>
@@ -628,7 +628,7 @@
      <property name="geometry">
       <rect>
        <x>640</x>
-       <y>280</y>
+       <y>290</y>
        <width>101</width>
        <height>41</height>
       </rect>
@@ -658,6 +658,19 @@
      </property>
      <property name="text">
       <string>Link to</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="connectedTo">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>20</y>
+       <width>201</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Connected to:</string>
      </property>
     </widget>
    </widget>

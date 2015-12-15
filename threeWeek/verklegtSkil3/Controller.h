@@ -14,6 +14,7 @@ public:
     QVector<QString> showLinks(QString id, bool which);
     QVector<QString> getNameForLinks(bool which);
 
+    // Functions that add/remove, search or edit the database
     void add(QString, QString, QString, QString, QString, bool);   
     void remove(QString, bool);
     void search(QString, bool);

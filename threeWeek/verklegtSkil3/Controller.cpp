@@ -6,7 +6,6 @@
 
 using namespace std;
 
-
 QVector<Scientist> Controller::getScientists(QString name){
     Model db;
     QVector<Scientist> listSci;
